@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './Components/login/login.component.html',
-  styleUrls: ['./Components/login/login.component.css']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'CampusTEC';
+
+  credentialsForm = new FormGroup({
+    id : new FormControl('', Validators.required),
+    password : new FormControl('', Validators.required)
+  });
+
+
+
 }
