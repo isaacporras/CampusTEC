@@ -14,6 +14,10 @@ export class AppComponent {
     password : new FormControl('', Validators.required)
   });
 
+  onLogIn(){
+    console.log(this.credentialsForm.value);
+  }
+
 
 
 }

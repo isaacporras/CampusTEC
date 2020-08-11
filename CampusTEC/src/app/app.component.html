@@ -34,7 +34,13 @@
                 formControlName  = "password"
                 required>
                 
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Iniciar sesión</button>
+                <button 
+                class="btn btn-lg btn-primary btn-block btn-signin" 
+                type="submit"
+                (click) = "onLogIn()"
+                >
+                Iniciar sesión
+              </button>
             </form><!-- /form -->
             {{credentialsForm.value | json}}
         </div><!-- /card-container -->
