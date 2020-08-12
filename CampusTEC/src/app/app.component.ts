@@ -15,7 +15,7 @@ export class AppComponent {
   });
 
   onLogIn(){
-    console.log(this.credentialsForm.value);
+    console.log(JSON.stringify(this.credentialsForm.value, null, 4));
   }
 
 
