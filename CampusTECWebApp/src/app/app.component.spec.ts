@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'CampusTEC'`, () => {
+  it(`should have as title 'CampusTECWebApp'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('CampusTEC');
+    expect(app.title).toEqual('CampusTECWebApp');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('CampusTEC app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('CampusTECWebApp app is running!');
   });
 });
