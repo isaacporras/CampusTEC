@@ -19,6 +19,9 @@
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
+    "@rxweb/reactive-form-validators": "^2.0.0",
+    "@xtream/ngx-validation-errors": "^2.1.0",
+    "bootstrap": "^4.5.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

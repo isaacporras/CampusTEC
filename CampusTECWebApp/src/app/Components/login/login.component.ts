@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +10,27 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  credentialsForm = new FormGroup({
-    id : new FormControl('', Validators.required),
-    password : new FormControl('', Validators.required)
-  });
+  credentialsForm: FormGroup;
 
   onLogIn() {
     console.log(JSON.stringify(this.credentialsForm.value, null, 4));
   }
 
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
+    this.credentialsForm =  this.formBuilder.group(
+      {
+      id : new FormControl('',
+      [Validators.minLength(8), Validators.required]
+      ),
+      password : new FormControl('', Validators.compose([Validators.minLength(4), Validators.required]))
+    });
   }
 
+
+  get id() { return this.credentialsForm.get('id'); }
+  get password() { return this.credentialsForm.get('password'); }
 }
