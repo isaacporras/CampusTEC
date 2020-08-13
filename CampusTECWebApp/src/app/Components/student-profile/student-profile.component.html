@@ -100,15 +100,11 @@
             <div class="col">
                 <h1>Cursos</h1>
                 <ul class="list-group">
-                    <li class="list-group-item">Vehicles Lifted 
-                    </li>
-                    <li class="list-group-item">Circuitos en corriente continua </li>
-                    <li class="list-group-item">Matematica  </li>
-                    <li class="list-group-item">Fisica </li>
-
-                    <li class="list-group-item">Quimica </li>
-
-                    <li class="list-group-item">Taller </li>
+                    <tr *ngFor="let curso of studentClasses">
+                        <li class="list-group-item">{{curso.nombre}} </li>
+                    </tr>
+                    
+                    
 
                 </ul>
             </div>

@@ -13,6 +13,18 @@ export class StudentProfileComponent implements OnInit {
       email1:'imanoisaaac1@gmail.com', email2: 'imanoisaaac23@gmail.com', numtelefono: '82837462',
       universidad:'X-TEC', sede: 'Cartago'
     };
+    studentClasses:any=[
+    {
+      id: '1',nombre:'Circuitos en Corriente continua'
+    },
+    {
+      id: '2',nombre:'Circuitos en Corriente alterna'
+    },
+    {
+      id: '3',nombre:'Matematica'
+    }
+  
+  ];
   constructor() { }
 
   ngOnInit() {
