@@ -1,3 +1,49 @@
+/* NAVBAR STYLE */
+
+.navbar
+        {
+            border:1px solid #C1272D;
+        }
+
+
+.logo-image{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.navbar-custom {
+    background-color: #FFFF;
+    border-color: #C1272D;
+
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #001636;
+    font-size: 30px;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #C1272D;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:focus .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #C1272D;
+}
+
+/* END NAVBAR STYLE */
+
 /*
  * Specific styles of signin component
  */
@@ -145,42 +191,3 @@
 
 
 
-
-
-
-
-.logo-image{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: -6px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-
-.navbar-custom {
-    background-color: #FFFF;
-    border-color: #C1272D;
-    border-width: 5px;
-}
-/* change the brand and text color */
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
-    color: #001636;
-    font-size: 30px;
-}
-/* change the link color */
-.navbar-custom .navbar-nav .nav-link {
-    color: #C1272D;
-    font-size: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-/* change the color of active or hovered links */
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:focus .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
-    color: #C1272D;
-}

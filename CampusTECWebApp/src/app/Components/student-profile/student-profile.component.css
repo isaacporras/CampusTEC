@@ -1,93 +1,44 @@
+/* NAVBAR STYLE */
 
-body {
-    padding-top: 100px;
-    color: white;
-  }
-  nav.navbar .navbar-collapse ul.navbar-right li.active a {
-    color: #001636;
-    background: #c1272d;
-  }
-
-  .navbar-inverse {
-       background-color: #ffff;
-       border-color: #c1272d;
-  }
-  nav .navbar-brand {
-    font-size: 30px;
-    
-  }
-  nav .navbar-toggle {
-    
-    margin: 20px 15px 13px 0;
-    color: #001636;
-  }
-  nav a {
-    font-size: 18px;
-    min-height: 100px;
-    min-width: 150px;
-    margin-top: 10 px;
-    padding-bottom: 20px !important;
-    padding-top: 20px !important;
-    border-color: #c1272d;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-  nav.navbar.shrink {
-    min-height: 35px;
-    color: #c1272d;
-  }
-  nav.navbar.shrink .navbar-brand {
-    font-size: 25px;
-    color: #c1272d;
-  }
-  nav.navbar.shrink a {
-    font-size: 35px;
-    padding-bottom: 10px !important;
-    padding-top: 10px !important;
-    color: #001636;
-  }
-  nav.navbar.shrink .navbar-toggle {
-    margin: 8px 15px 8px 0;
-    padding: 4px 5px;color: #001636;
-  }
-  .logo-image{
-    float: left;
-    border-radius: 20%;
-    overflow: hidden;
-    margin-top: 0px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
+.navbar
+        {
+            border:1px solid #C1272D;
+        }
 
 .logo-image{
-    float: left;
     width: 100px;
     height: 100px;
-    border-radius: 20%;
+    border-radius: 50%;
     overflow: hidden;
-    margin-top: 0px;
+    margin-top: -6px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.navbar-custom {
+    background-color: #FFFF;
+    border-color: #C1272D;
+
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #001636;
+    font-size: 30px;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #C1272D;
+    font-size: 20px;
     margin-left: 10px;
     margin-right: 10px;
 }
-
-
-.navbar-nav>li:hover{
-    color: #001636;
-    background-color:#da393f;
-    }
-    .navbar-default .navbar-brand {
-        color: #001636;
-    }
-.navbar .brand, .navbar .nav > li > a {
-        color: #001636;
-}
-.navbar .brand, .navbar .nav > li > a:hover {
-        color: #001636;
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:focus .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #C1272D;
 }
 
-.navbar-inverse .navbar-brand {
-    margin-top: 0px;
-    color:#001636;
-    font-size: 40px;
-    text-align: center
-}
+/* END NAVBAR STYLE */
