@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
+import {Router} from '@angular/router'
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,10 +18,11 @@ export class LoginComponent implements OnInit {
 
   onLogIn() {
     console.log(JSON.stringify(this.credentialsForm.value, null, 4));
+    this.router.navigate(['/studentProfile']);
   }
 
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router:Router) { }
 
   ngOnInit() {
 

@@ -8,21 +8,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
+import { StudentProfileComponent } from './Components/student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    StudentProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+
     RouterModule.forRoot([
       {
         path: '',
         component: LoginComponent
+      },
+      {
+        path: 'studentProfile',
+        component: StudentProfileComponent
       }
     ])
   ],
