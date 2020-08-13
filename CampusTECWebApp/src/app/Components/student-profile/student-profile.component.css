@@ -42,3 +42,23 @@
 }
 
 /* END NAVBAR STYLE */
+
+
+.infoContainer{
+    margin-top: 70px;
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.input-group-append{
+    width: 10px;
+    height: 10px;
+}
+
+.btn-secondary{
+    width: 25px;
+    height: 25px;
+}
