@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentProfileComponent implements OnInit {
 
+  studentData:any=
+    {
+      type: 'Estudent', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo',
+      email1:'imanoisaaac1@gmail.com', email2: 'imanoisaaac23@gmail.com', numtelefono: '82837462',
+      universidad:'X-TEC', sede: 'Cartago'
+    };
   constructor() { }
 
   ngOnInit() {
