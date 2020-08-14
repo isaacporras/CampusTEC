@@ -36,66 +36,100 @@
       <div class="col">
         <div class="container">
           <div class="picture-container">
-              <div class="picture">
-                  <img src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg" class="picture-src" id="wizardPicturePreview" title="">
-                  <input type="file" id="wizard-picture" class="">
-              </div>
-               <h6 class="">Cambiar Imagen de Pefil</h6>
-      
+            <div class="picture">
+              <img
+                src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg"
+                class="picture-src" id="wizardPicturePreview" title="">
+              <input type="file" id="wizard-picture" class="">
+            </div>
+            <h6 class="">Cambiar Imagen de Pefil</h6>
+
           </div>
-      </div>
-        
-        <h3>{{studentBaseData.type}} </h3>
-        <h5>{{studentBaseData.nombre}} {{studentBaseData.apellido}} </h5>
-        <h5>{{studentBaseData.id}} </h5>
+        </div>
+
+        <h2>{{studentBaseData.type}} </h2>
+        <h3>{{studentBaseData.nombre}} {{studentBaseData.apellido}} </h3>
+        <h3>{{studentBaseData.id}} </h3>
         <h5>{{studentBaseData.activo}} </h5>
         <form class="form-signin" [formGroup]="studentDataForm">
 
           <div class="input-group">
             <h5>Email 1: </h5>
-            <input formControlName="email1" type="text" class="form-control" placeholder="{{studentDataForm.email1}} "
+            <input formControlName="email1" type="email" class="form-control" placeholder="{{studentDataForm.email1}} "
               (input)="changeEditingStatus()">
+              
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+          <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
+
+            <div *ngIf="email1.errors.required">
+              Debe indicar su correo principal.
+            </div>
+            
+          </div>
+
+          
 
           <div class="input-group">
             <h5>Email 2: </h5>
-            <input formControlName="email2" type="text" class="form-control" placeholder="{{studentDataForm.email2}}">
+            <input formControlName="email2" type="email" class="form-control" placeholder="{{studentDataForm.email2}}">
+            
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+          <div *ngIf="email2.invalid && (email2.dirty || email2.touched)" class="alert alert-danger">
+
+            <div *ngIf="email2.errors.required">
+              Debe indicar su correo secundario.
+            </div>
+            
+          </div>
 
           <div class="input-group">
             <h5>Teléfono: </h5>
-            <input formControlName="telNumber" type="text" class="form-control"
+            <input formControlName="telNumber" type="tel" class="form-control"
               placeholder="{{studentDataForm.telNumber}}">
+              
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+          <div *ngIf="telNumber.invalid && (telNumber.dirty || telNumber.touched)" class="alert alert-danger">
 
+            <div *ngIf="telNumber.errors.required">
+              Debe ingresar un numero telefonico.
+            </div>
+            
+          </div>
           <div class="input-group">
             <h5>Universidad: </h5>
             <input formControlName="university" type="text" class="form-control"
               placeholder="{{studentDataForm.university}}">
+              
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+          <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
 
+            <div *ngIf="university.errors.required">
+              Debe ingresar una universidad.
+            </div>
+            
+          </div>
           <div class="input-group">
-            <h5>Sede de </h5>
+            <h5>Sede de  </h5>
             <input formControlName="campus" type="text" class="form-control" placeholder="{{studentDataForm.campus}}">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(5)">

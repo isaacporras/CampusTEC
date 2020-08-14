@@ -115,5 +115,12 @@ export class StudentProfileComponent implements OnInit {
     this.editing = false;
   }
 
+  get email1() { return this.studentDataForm.get('email1'); }
+  get email2() { return this.studentDataForm.get('email2'); }
+  get telNumber() { return this.studentDataForm.get('telNumber'); }
+  get university() { return this.studentDataForm.get('university'); }
+  get campus() { return this.studentDataForm.get('campus'); }
+
+
 
 }
