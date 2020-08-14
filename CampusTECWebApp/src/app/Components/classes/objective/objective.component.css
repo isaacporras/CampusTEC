@@ -50,3 +50,8 @@ textarea {
     color: white;
 
 }
+.md-dialog-container {
+    background-color: #000;
+    height: '330px';
+    width: '580px';
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ObjectiveComponent } from './objective/objective.component';
 
 
@@ -43,33 +43,22 @@ interface ExampleFlatNode {
   styleUrls: ['./classes.component.css']
 })
 export class ClassesComponent implements OnInit {
-  private _transformer = (node: FoodNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  }
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
-    node => node.level, node => node.expandable);
-  treeFlattener = new MatTreeFlattener(
-    this._transformer, node => node.level, node => node.expandable, node => node.children);
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+  
+
   objectives: any = [
     {
       id: '1', description: 'Evaluar la conveniencia en el uso de un cierto método en lan solución de un problema numérico específico.'
     },
     {
-      id: '2', description: 'Implementar programas de cálculo relacionado con los tópicos estudiados independientemente del lenguaje y de la plataforma computacional disponible.'
+      id: '2',
+      description: 'Implementar programas de cálculo relacionado con los tópicos estudiados independientemente del lenguaje y de la plataforma computacional disponible.'
     },
     {
       id: '3', description: 'Aplicar conceptos de distintos paradigmas de programación en la solución de problemas numéricos'
     }
 
   ];
-
-
-
 
   activities: any = [
     {
@@ -89,15 +78,37 @@ export class ClassesComponent implements OnInit {
 
   ];
 
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
+  }
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level, node => node.expandable);
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
 
 
 
-  onCreateObjective(){
-    this.dialog.open(ObjectiveComponent, {
-      height: '330px',
-      width: '580px',
-    });
+
+
+
+
+
+
+  onCreateObjective() {
+    const classData = new MatDialogConfig();
+
+    classData.disableClose = true;
+    classData.autoFocus = true;
+
+    classData.data = 29;
+
+    this.dialog.open(ObjectiveComponent, classData);
   }
 
 

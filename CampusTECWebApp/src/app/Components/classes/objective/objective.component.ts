@@ -12,16 +12,22 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class ObjectiveComponent implements OnInit {
   objectiveForm: FormGroup;
-
+  classId: number;
 
   constructor(
     public dialogRef: MatDialogRef<ObjectiveComponent>,
-    @Inject(MAT_DIALOG_DATA) public message:string,
+    @Inject(MAT_DIALOG_DATA) data,
     private formBuilder: FormBuilder
 
-  ) { }
+  ) {
 
-  onClickSave(){
+    this.classId = data;
+   }
+
+  onClickSave()
+  {
+
+    this.objectiveForm.controls.id.setValue(this.classId);
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
   }
@@ -34,12 +40,12 @@ export class ObjectiveComponent implements OnInit {
 
 
     this.objectiveForm = this.formBuilder.group({
-      description: new FormControl('',
-      [Validators.required,
-      Validators.minLength(500)])
-      
+      id: new FormControl(''),
+      description: new FormControl('',[Validators.required, Validators.maxLength(500)])
     });
   }
+
+
   onClickCancel(): void {
     this.dialogRef.close();
   }

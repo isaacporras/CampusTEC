@@ -73,20 +73,21 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
 
     this.studentDataForm = this.formBuilder.group({
-      email1: new FormControl({value:'', disable: true},
-      [Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      email2: new FormControl({value:'', disable: true}, 
-      [Validators.required, 
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      telNumber: new FormControl({value:'', disable: true}, [Validators.required, Validators.minLength(8),Validators.pattern("^[0-9]*$")]),
-      university: new FormControl({value:'', disable: true}, Validators.required),
-      campus: new FormControl({value:'', disable: true}, Validators.required),
-      
+      email1: new FormControl({ value: '', disable: true },
+        [Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      email2: new FormControl({ value: '', disable: true },
+        [Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      telNumber: new FormControl({ value: '', disable: true },
+        [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$")]),
+      university: new FormControl({ value: '', disable: true }, Validators.required),
+      campus: new FormControl({ value: '', disable: true }, Validators.required),
+
     });
 
 
-    this.studentBaseData = {type: 'Estudiante', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo'};
+    this.studentBaseData = { type: 'Estudiante', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo' };
 
 
 
@@ -111,7 +112,7 @@ export class StudentProfileComponent implements OnInit {
 
   }
 
-  onDismiss(){
+  onDismiss() {
     this.studentDataForm.controls['email1'].disable();
     this.studentDataForm.controls['email2'].disable();
     this.studentDataForm.controls['telNumber'].disable();

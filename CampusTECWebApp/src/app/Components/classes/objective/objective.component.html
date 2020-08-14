@@ -2,7 +2,7 @@
 
     <h2>Nuevo Objetivo</h2>
     <h3>Descripción</h3>
-    <textarea formControlName="description" placeholder="el objetivo del curso es..."></textarea>
+    <textarea formControlName = "description" placeholder="el objetivo del curso es..."></textarea>
     <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
 
         <div *ngIf="description.errors.required">
