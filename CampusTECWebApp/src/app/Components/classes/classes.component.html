@@ -52,38 +52,42 @@
             </div>
 
         </div>
-        <hr class = "line">
+        <hr class="line">
         <div class="row">
             <div class="col">
-                <h2 >Retos</h2>
-                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-                    <!-- This is the tree node template for leaf nodes -->
-                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                        <!-- use a disabled button to provide padding for tree leaf -->
-                        <button mat-icon-button disabled></button>
-                        {{node.name}}
-                    </mat-tree-node>
-                    <!-- This is the tree node template for expandable nodes -->
-                    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-                        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-                            <mat-icon class="mat-icon-rtl-mirror">
-                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                            </mat-icon>
-                        </button>
-                        {{node.name}}
-                    </mat-tree-node>
-                </mat-tree>
+                <h2>Retos</h2>
+
+
+            </div>
+            <div class="col-md-3 ml-md-auto">
+                <button type="button" class="btn btn-addChanllenge">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span class="addButton">Añadir Reto</span>
+                </button>
             </div>
             <div class="col">
                 <h2>Actividades</h2>
-                
+
+            </div>
+            <div class="col-md-3 ml-md-auto">
+                <button type="button" class="btn btn-addActivity">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span class="addButton">Añadir Actividad</span>
+                </button>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="col">
                 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                     <!-- This is the tree node template for leaf nodes -->
                     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
                         <!-- use a disabled button to provide padding for tree leaf -->
                         <button mat-icon-button disabled></button>
+                        
                         {{node.name}}
+                        <button mat-icon-button (click)="addNewItem(node)"><mat-icon>visibility</mat-icon></button>
                     </mat-tree-node>
+                    <button mat-icon-button disabled></button>
                     <!-- This is the tree node template for expandable nodes -->
                     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
                         <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
@@ -92,9 +96,25 @@
                             </mat-icon>
                         </button>
                         {{node.name}}
+                        <button mat-icon-button (click)="addNewItem(node)"><mat-icon>visibility</mat-icon></button>
                     </mat-tree-node>
                 </mat-tree>
             </div>
+            <div class="col">
+
+                <ul class="list-group">
+                    <tr *ngFor="let activity of activities">
+                       
+                            
+                            <li class="list-group-item"> {{activity.name}} <button class="btn eyeButtonActivity"><i class="glyphicon glyphicon-eye-open"></i></button></li>
+                            
+                        
+                        
+                    </tr>
+
+                </ul>
+            </div>
+
         </div>
     </div>
 

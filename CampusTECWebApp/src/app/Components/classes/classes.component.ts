@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {FlatTreeControl} from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
 
 
 interface FoodNode {
@@ -12,16 +12,16 @@ const TREE_DATA: FoodNode[] = [
   {
     name: 'Completar todas las asignaciones',
     children: [
-      {name: 'Hacer tarea 1'},
-      {name: 'Hacer tarea 2'},
-      {name: 'Hacer tarea 3'},
+      { name: 'Hacer tarea 1' },
+      { name: 'Hacer tarea 2' },
+      { name: 'Hacer tarea 3' },
     ]
   }, {
     name: 'Ir a todas las tutorias',
     children: [
-      {name: 'Ir a la tutoria 1'},
-      {name: 'Ir a la tutoria 2'},
-      {name: 'Ir a la tutoria 3'},
+      { name: 'Ir a la tutoria 1' },
+      { name: 'Ir a la tutoria 2' },
+      { name: 'Ir a la tutoria 3' },
     ]
   }
 ];
@@ -50,9 +50,9 @@ export class ClassesComponent implements OnInit {
   }
   treeControl = new FlatTreeControl<ExampleFlatNode>(
     node => node.level, node => node.expandable);
-    treeFlattener = new MatTreeFlattener(
-      this._transformer, node => node.level, node => node.expandable, node => node.children);
-      dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
   objectives: any = [
     {
       id: '1', description: 'Evaluar la conveniencia en el uso de un cierto método en lan solución de un problema numérico específico.'
@@ -69,8 +69,35 @@ export class ClassesComponent implements OnInit {
 
 
 
-  constructor() { this.dataSource.data = TREE_DATA;}
+activities: any = [
+  {
+  id: '1', name: 'Hacer tutoria 1'
+},
+{
+  id: '2', name: 'Hacer tutoria 2'
+},
+
+{
+  id: '3', name: 'Hacer tutoria 3'
+},
+{
+  id: '4', name: 'Hacer tutoria 4'
+},
+
+
+];
+
+
+
+
+
+
+
   
+
+
+  constructor() { this.dataSource.data = TREE_DATA; }
+
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {
   }
