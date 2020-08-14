@@ -92,3 +92,12 @@ h6 {
 .addButton{
     font-size: 13px;
 }
+.mat-form-field {
+  margin-right: 4px;
+}
+
+hr.line {
+  border-top: 5px solid red;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
