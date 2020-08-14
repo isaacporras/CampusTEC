@@ -14,6 +14,8 @@ import { ClassesComponent } from './Components/classes/classes.component';
 import { MatTreeModule} from '@angular/material/tree';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ObjectiveComponent } from './Components/classes/objective/objective.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     StudentProfileComponent,
     TeacherProfileComponent,
     ClassesComponent,
+    ObjectiveComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatTreeModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     BrowserAnimationsModule,
 
     RouterModule.forRoot([
@@ -58,6 +62,7 @@ import { MatButtonModule } from '@angular/material/button';
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ObjectiveComponent]
 })
 export class AppModule { }

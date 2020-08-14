@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatDialog } from '@angular/material/dialog';
+import { ObjectiveComponent } from './objective/objective.component';
 
 
 interface FoodNode {
@@ -69,34 +71,41 @@ export class ClassesComponent implements OnInit {
 
 
 
-activities: any = [
-  {
-  id: '1', name: 'Hacer tutoria 1'
-},
-{
-  id: '2', name: 'Hacer tutoria 2'
-},
+  activities: any = [
+    {
+      id: '1', name: 'Hacer tutoria 1'
+    },
+    {
+      id: '2', name: 'Hacer tutoria 2'
+    },
 
-{
-  id: '3', name: 'Hacer tutoria 3'
-},
-{
-  id: '4', name: 'Hacer tutoria 4'
-},
-
-
-];
+    {
+      id: '3', name: 'Hacer tutoria 3'
+    },
+    {
+      id: '4', name: 'Hacer tutoria 4'
+    },
 
 
+  ];
 
 
 
 
 
-  
+  onCreateObjective(){
+    this.dialog.open(ObjectiveComponent);
+  }
 
 
-  constructor() { this.dataSource.data = TREE_DATA; }
+
+
+  constructor(
+    private dialog: MatDialog
+  ) {
+
+    this.dataSource.data = TREE_DATA;
+  }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {
