@@ -16,6 +16,8 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ObjectiveComponent } from './Components/classes/objective/objective.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { ObjectiveComponent } from './Components/classes/objective/objective.com
     MatButtonModule,
     MatDialogModule,
     BrowserAnimationsModule,
-
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forRoot([
       {
         path: '',

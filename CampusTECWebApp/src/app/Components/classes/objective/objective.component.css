@@ -1,0 +1,52 @@
+
+textarea {
+    width: 500px;
+    height: 150px;
+  }
+
+.mat-button.mat-create:hover{
+    color: #f0fff3;
+  background-color: red;
+}
+
+.mat-button.mat-cancel:hover{
+    color: #f0fff3;
+    background-color: red;
+    border-color: darkblue;
+  }
+  .btn.btn-danger{
+    
+    color: #f0fff3;
+
+
+    font-size: 15px;
+    height: 16;
+    width: 30;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+
+    background-color: #C1272D;
+    /* Green */
+    border: none;
+    color: white;
+
+}
+.btn.btn-dark{
+    
+    color: #f0fff3;
+
+
+    font-size: 15px;
+    height: 16;
+    width: 30;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    background-color: #001636;
+
+    /* Green */
+    border: none;
+    color: white;
+
+}

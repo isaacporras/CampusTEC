@@ -94,7 +94,10 @@ export class ClassesComponent implements OnInit {
 
 
   onCreateObjective(){
-    this.dialog.open(ObjectiveComponent);
+    this.dialog.open(ObjectiveComponent, {
+      height: '330px',
+      width: '580px',
+    });
   }
 
 
