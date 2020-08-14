@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-student-profile',
@@ -73,11 +73,16 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
 
     this.studentDataForm = this.formBuilder.group({
-      email1: new FormControl({value:'', disable: true}, Validators.required),
-      email2: new FormControl({value:'', disable: true}, Validators.required),
-      telNumber: new FormControl({value:'', disable: true}, Validators.required),
+      email1: new FormControl({value:'', disable: true},
+      [Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      email2: new FormControl({value:'', disable: true}, 
+      [Validators.required, 
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      telNumber: new FormControl({value:'', disable: true}, [Validators.required, Validators.minLength(8),Validators.pattern("^[0-9]*$")]),
       university: new FormControl({value:'', disable: true}, Validators.required),
       campus: new FormControl({value:'', disable: true}, Validators.required),
+      
     });
 
 

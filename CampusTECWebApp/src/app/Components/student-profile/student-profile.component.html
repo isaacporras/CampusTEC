@@ -69,6 +69,9 @@
             <div *ngIf="email1.errors.required">
               Debe indicar su correo principal.
             </div>
+            <div *ngIf="email1.errors.pattern">
+              Debe ser un email valido.
+            </div>
             
           </div>
 
@@ -89,6 +92,9 @@
             <div *ngIf="email2.errors.required">
               Debe indicar su correo secundario.
             </div>
+            <div *ngIf="email2.errors.pattern">
+              Debe ser un email valido.
+            </div>
             
           </div>
 
@@ -107,6 +113,9 @@
 
             <div *ngIf="telNumber.errors.required">
               Debe ingresar un numero telefonico.
+            </div>
+            <div *ngIf="telNumber.errors.pattern && telNumber.errors.minlength ">
+              Debe ingresar dato valido.
             </div>
             
           </div>
@@ -138,8 +147,8 @@
             </div>
           </div>
           <div *ngIf="editing==true">
-            <button type="button" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
-            <button type="button" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
+            <button type="submit" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
+            <button type="submit" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
 
           </div>
         </form>
