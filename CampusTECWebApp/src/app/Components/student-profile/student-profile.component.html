@@ -3,110 +3,119 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="logo-image">
-            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
-        </div>
-        <a class="navbar-brand" href="#"> CampusTEC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link active " href="#">Planificador <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link disabled" href="#">Mi Perfil</a>
-                <a class="nav-item nav-link disabled" href="#">Cerrar Sesión</a>
-
-            </div>
-        </div>
-    </nav>
-
-
-
-
-
-
-
-
-
-
-    <div class="container infoContainer">
-        <div class="row">
-            <div class="col">
-                
-                <img class="img-thumbnail"
-                    width="50px"
-                    height="50px"
-                    
-                    src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg"
-                    style="width:60%;">
-
-                <h3>{{studentData.type}} </h3>
-                <h5>{{studentData.nombre}} {{studentData.apellido}} </h5>
-                <h5>{{studentData.id}} </h5>
-                <h5>{{studentData.activo}} </h5>
-                
-                <div class="input-group">
-                    <h5>Email 1: </h5>
-                    <input type="text" class="form-control" placeholder="{{studentData.email1}} ">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary" type="button">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                      </button>
-                    </div>
-                  </div>
-                
-                <div class="input-group">
-                    <h5>Email 2: </h5>
-                    <input type="text" class="form-control" placeholder="{{studentData.email2}}">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary" type="button">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                      </button>
-                    </div>
-                  </div>
-                
-                <div class="input-group">
-                    <h5>Teléfono: </h5>
-                    <input type="text" class="form-control" placeholder="{{studentData.numtelefono}}">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary" type="button">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                      </button>
-                    </div>
-                  </div>
-                
-                <div class="input-group">
-                    <h5>Universidad: </h5>
-                    <input type="text" class="form-control" placeholder="{{studentData.universidad}}">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary" type="button">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                      </button>
-                    </div>
-                  </div>
-               
-                <div class="input-group">
-                    <h5>Sede de </h5>
-                    <input type="text" class="form-control" placeholder="{{studentData.sede}}">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary" type="button">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                      </button>
-                    </div>
-                  </div>
-            </div>
-            <div class="col">
-                <h1>Cursos</h1>
-                <ul class="list-group">
-                    <tr *ngFor="let curso of studentClasses">
-                        <li class="list-group-item">{{curso.nombre}} </li>
-                    </tr>
-                    
-                    
-
-                </ul>
-            </div>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="logo-image">
+      <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
     </div>
+    <a class="navbar-brand" href="#"> CampusTEC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link active " href="#">Planificador <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link disabled" href="#">Mi Perfil</a>
+        <a class="nav-item nav-link disabled" href="#">Cerrar Sesión</a>
+
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+  <div class="container infoContainer">
+    <div class="row">
+      <div class="col">
+
+        <img class="img-thumbnail" width="50px" height="50px"
+          src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg"
+          style="width:60%;">
+
+        <h3>{{studentBaseData.type}} </h3>
+        <h5>{{studentBaseData.nombre}} {{studentBaseData.apellido}} </h5>
+        <h5>{{studentBaseData.id}} </h5>
+        <h5>{{studentBaseData.activo}} </h5>
+        <form class="form-signin" [formGroup]="studentDataForm">
+
+          <div class="input-group">
+            <h5>Email 1: </h5>
+            <input formControlName="email1" type="text" class="form-control" placeholder="{{studentDataForm.email1}} "
+               (input)="changeEditingStatus()">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <h5>Email 2: </h5>
+            <input formControlName="email2" type="text" class="form-control" placeholder="{{studentDataForm.email2}}"
+             >
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <h5>Teléfono: </h5>
+            <input formControlName="telNumber" type="text" class="form-control" placeholder="{{studentDataForm.telNumber}}"
+             >
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <h5>Universidad: </h5>
+            <input formControlName="university" type="text" class="form-control"
+            placeholder="{{studentDataForm.university}}" >
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <h5>Sede de </h5>
+            <input formControlName="campus" type="text" class="form-control" placeholder="{{studentDataForm.campus}}"
+              >
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(5)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="editing==true">
+            <button type="button" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
+            <button type="button" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
+
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <h1>Cursos</h1>
+        <ul class="list-group">
+          <tr *ngFor="let curso of studentClasses">
+            <li class="list-group-item">{{curso.nombre}} </li>
+          </tr>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</body>
