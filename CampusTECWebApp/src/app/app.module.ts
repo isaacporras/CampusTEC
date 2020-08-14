@@ -11,9 +11,9 @@ import { LoginComponent } from './Components/login/login.component';
 import { StudentProfileComponent } from './Components/student-profile/student-profile.component';
 import { TeacherProfileComponent } from './Components/teacher-profile/teacher-profile.component';
 import { ClassesComponent } from './Components/classes/classes.component';
-import { MatTreeModule, MatIconModule, MatButtonModule } from '@angular/material';
-
-
+import { MatTreeModule} from '@angular/material/tree';
+import { MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
