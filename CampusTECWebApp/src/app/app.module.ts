@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { StudentProfileComponent } from './Components/student-profile/student-profile.component';
 import { TeacherProfileComponent } from './Components/teacher-profile/teacher-profile.component';
+import { ClassesComponent } from './Components/classes/classes.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { TeacherProfileComponent } from './Components/teacher-profile/teacher-pr
     LoginComponent,
     StudentProfileComponent,
     TeacherProfileComponent,
+    ClassesComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,10 @@ import { TeacherProfileComponent } from './Components/teacher-profile/teacher-pr
       {
         path: 'teacherProfile',
         component: TeacherProfileComponent
+      },
+      {
+        path: 'classes',
+        component: ClassesComponent
       }
     ])
   ],

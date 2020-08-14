@@ -1,0 +1,72 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="logo-image">
+            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+        </div>
+        <a class="navbar-brand" href="#"> CampusTEC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+
+                <a class="nav-item nav-link active" href="/teacherProfile">Mi Perfil</a>
+                <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Analisis Numerico para Ingenieria</h1>
+            <h2>Grupo 1</h2>
+            
+          </div>
+        </div>
+        <div class = "row objetiveRow">
+            <div class = "col">
+                <h3>Objetivos del curso</h3>
+                <ul class="list-group">
+                    <tr *ngFor="let objetive of objectives">
+                    <li class="list-group-item"> {{objetive.description}}</li>
+                    </tr>
+
+                  </ul>
+            </div>
+            <div class="col col-lg-2">
+                
+                <button type="button" class="btn btn-addObjective">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span class = "addButton">Añadir Objetivo</span>  
+                </button>
+                
+              </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
