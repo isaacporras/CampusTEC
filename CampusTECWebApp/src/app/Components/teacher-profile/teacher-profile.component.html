@@ -1,0 +1,160 @@
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="logo-image">
+            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+        </div>
+        <a class="navbar-brand" href="#"> CampusTEC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link active " href="#">Inicio <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link disabled" href="#">Acerca de nosotros</a>
+                <a class="nav-item nav-link disabled" href="#">Más</a>
+
+            </div>
+        </div>
+    </nav>
+
+
+  
+  
+  <div class="container infoContainer">
+    <div class="row">
+      <div class="col">
+        <div class="container">
+          <div class="picture-container">
+            <div class="picture">
+              <img
+                src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg"
+                class="picture-src" id="wizardPicturePreview" title="">
+              <input type="file" id="wizard-picture" class="">
+            </div>
+            <h6 class="">Cambiar Imagen de Pefil</h6>
+
+          </div>
+        </div>
+
+        <h2>{{teacherBaseData.type}} </h2>
+        <h3>{{teacherBaseData.nombre}} {{teacherBaseData.apellido}} </h3>
+        <h3>{{teacherBaseData.id}} </h3>
+        <h5>{{teacherBaseData.activo}} </h5>
+        <form class="form-signin" [formGroup]="teacherDataForm">
+
+          <div class="input-group">
+            <h5>Email 1: </h5>
+            <input formControlName="email1" type="email" class="form-control" placeholder="{{teacherDataForm.email1}} "
+              (input)="changeEditingStatus()">
+              
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
+
+            <div *ngIf="email1.errors.required">
+              Debe indicar su correo principal.
+            </div>
+            <div *ngIf="email1.errors.pattern">
+              Debe ser un email valido.
+            </div>
+            
+          </div>
+
+          
+
+          <div class="input-group">
+            <h5>Email 2: </h5>
+            <input formControlName="email2" type="email" class="form-control" placeholder="{{teacherDataForm.email2}}">
+            
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="email2.invalid && (email2.dirty || email2.touched)" class="alert alert-danger">
+
+            <div *ngIf="email2.errors.required">
+              Debe indicar su correo secundario.
+            </div>
+            <div *ngIf="email2.errors.pattern">
+              Debe ser un email valido.
+            </div>
+            
+          </div>
+
+          <div class="input-group">
+            <h5>Teléfono: </h5>
+            <input formControlName="telNumber" type="tel" class="form-control"
+              placeholder="{{teacherDataForm.telNumber}}">
+              
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="telNumber.invalid && (telNumber.dirty || telNumber.touched)" class="alert alert-danger">
+
+            <div *ngIf="telNumber.errors.required">
+              Debe ingresar un numero telefonico.
+            </div>
+            <div *ngIf="telNumber.errors.pattern && telNumber.errors.minlength ">
+              Debe ingresar dato valido.
+            </div>
+            
+          </div>
+          <div class="input-group">
+            <h5>Universidad: </h5>
+            <input formControlName="university" type="text" class="form-control"
+              placeholder="{{teacherDataForm.university}}">
+              
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
+
+            <div *ngIf="university.errors.required">
+              Debe ingresar una universidad.
+            </div>
+            
+          </div>
+          <div class="input-group">
+            <h5>Sede de  </h5>
+            <input formControlName="campus" type="text" class="form-control" placeholder="{{teacherDataForm.campus}}">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="onEdit(5)">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="editing==true">
+            <button type="submit" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
+            <button type="submit" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
+
+          </div>
+        </form>
+      </div>
+      <div class="col">
+        <h1>Cursos</h1>
+        <ul class="list-group">
+          <tr *ngFor="let curso of teacherClasses">
+            <li class="list-group-item">{{curso.nombre}} </li>
+          </tr>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</body>

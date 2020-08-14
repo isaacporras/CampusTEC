@@ -9,12 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { StudentProfileComponent } from './Components/student-profile/student-profile.component';
+import { TeacherProfileComponent } from './Components/teacher-profile/teacher-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     StudentProfileComponent,
+    TeacherProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,10 @@ import { StudentProfileComponent } from './Components/student-profile/student-pr
       },
       {
         path: 'studentProfile',
+        component: StudentProfileComponent
+      },
+      {
+        path: 'teacherProfile',
         component: StudentProfileComponent
       }
     ])
