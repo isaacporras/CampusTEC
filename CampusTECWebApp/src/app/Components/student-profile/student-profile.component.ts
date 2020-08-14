@@ -86,7 +86,7 @@ export class StudentProfileComponent implements OnInit {
     });
 
 
-    this.studentBaseData = {type: 'Estudent', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo'};
+    this.studentBaseData = {type: 'Estudiante', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo'};
 
 
 

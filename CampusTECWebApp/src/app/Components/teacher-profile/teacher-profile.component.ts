@@ -25,13 +25,16 @@ export class TeacherProfileComponent implements OnInit {
 
   teacherClasses: any = [
     {
-      id: '1', nombre: 'Circuitos en Corriente continua'
+      id: '1', nombre: 'Matematica General'
     },
     {
-      id: '2', nombre: 'Circuitos en Corriente alterna'
+      id: '2', nombre: 'Calculo diferencial'
     },
     {
-      id: '3', nombre: 'Matematica'
+      id: '3', nombre: 'Matematica para administracion'
+    },
+    {
+      id: '4', nombre: 'Analisis numerico para ingeniería'
     }
 
   ];
@@ -88,14 +91,14 @@ export class TeacherProfileComponent implements OnInit {
     });
 
 
-    this.teacherBaseData = {type: 'Eteacher', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo'};
+    this.teacherBaseData = {type: 'Teacher', nombre: 'Liley', apellido: 'Cartin', id: '201098756', activo: 'Activo'};
 
 
 
 
     this.teacherDataForm.setValue({
-      email1: 'imanoisaaac1@gmail.com', email2: 'imanoisaaac23@gmail.com', telNumber: '82837462',
-      university: 'X-TEC', campus: 'Cartago'
+      email1: 'liley1@gmail.com', email2: 'liley2@gmail.com', telNumber: '88764536',
+      university: 'X-TEC', campus: 'San Jose'
     });
 
 

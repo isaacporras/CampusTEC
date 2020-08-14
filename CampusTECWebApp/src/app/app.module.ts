@@ -31,12 +31,16 @@ import { TeacherProfileComponent } from './Components/teacher-profile/teacher-pr
         component: LoginComponent
       },
       {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
         path: 'studentProfile',
         component: StudentProfileComponent
       },
       {
         path: 'teacherProfile',
-        component: StudentProfileComponent
+        component: TeacherProfileComponent
       }
     ])
   ],

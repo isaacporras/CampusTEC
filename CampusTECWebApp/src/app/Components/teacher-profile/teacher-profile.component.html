@@ -1,24 +1,27 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
 <body>
 
 
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="logo-image">
-            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+          <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
         </div>
         <a class="navbar-brand" href="#"> CampusTEC</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link active " href="#">Inicio <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link disabled" href="#">Acerca de nosotros</a>
-                <a class="nav-item nav-link disabled" href="#">Más</a>
-
-            </div>
+          <div class="navbar-nav ml-auto">
+            
+            <a class="nav-item nav-link active" href="/teacherProfile">Mi Perfil</a>
+            <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
+    
+          </div>
         </div>
-    </nav>
+      </nav>
 
 
   
@@ -149,7 +152,8 @@
         <h1>Cursos</h1>
         <ul class="list-group">
           <tr *ngFor="let curso of teacherClasses">
-            <li class="list-group-item">{{curso.nombre}} </li>
+            <li class="list-group-item"><a href="/teacherProfile">{{curso.nombre}}</a></li>
+           
           </tr>
         </ul>
       </div>
