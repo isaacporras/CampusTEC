@@ -34,11 +34,17 @@
   <div class="container infoContainer">
     <div class="row">
       <div class="col">
-
-        <img class="img-thumbnail" width="50px" height="50px"
-          src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg"
-          style="width:60%;">
-
+        <div class="container">
+          <div class="picture-container">
+              <div class="picture">
+                  <img src="https://www.hindustantimes.com/rf/image_size_640x362/HT/p1/2015/03/18/Incoming/Pictures/1327679_Wallpaper2.jpg" class="picture-src" id="wizardPicturePreview" title="">
+                  <input type="file" id="wizard-picture" class="">
+              </div>
+               <h6 class="">Cambiar Imagen de Pefil</h6>
+      
+          </div>
+      </div>
+        
         <h3>{{studentBaseData.type}} </h3>
         <h5>{{studentBaseData.nombre}} {{studentBaseData.apellido}} </h5>
         <h5>{{studentBaseData.id}} </h5>
@@ -48,7 +54,7 @@
           <div class="input-group">
             <h5>Email 1: </h5>
             <input formControlName="email1" type="text" class="form-control" placeholder="{{studentDataForm.email1}} "
-               (input)="changeEditingStatus()">
+              (input)="changeEditingStatus()">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -58,8 +64,7 @@
 
           <div class="input-group">
             <h5>Email 2: </h5>
-            <input formControlName="email2" type="text" class="form-control" placeholder="{{studentDataForm.email2}}"
-             >
+            <input formControlName="email2" type="text" class="form-control" placeholder="{{studentDataForm.email2}}">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -69,8 +74,8 @@
 
           <div class="input-group">
             <h5>Teléfono: </h5>
-            <input formControlName="telNumber" type="text" class="form-control" placeholder="{{studentDataForm.telNumber}}"
-             >
+            <input formControlName="telNumber" type="text" class="form-control"
+              placeholder="{{studentDataForm.telNumber}}">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -81,7 +86,7 @@
           <div class="input-group">
             <h5>Universidad: </h5>
             <input formControlName="university" type="text" class="form-control"
-            placeholder="{{studentDataForm.university}}" >
+              placeholder="{{studentDataForm.university}}">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -91,8 +96,7 @@
 
           <div class="input-group">
             <h5>Sede de </h5>
-            <input formControlName="campus" type="text" class="form-control" placeholder="{{studentDataForm.campus}}"
-              >
+            <input formControlName="campus" type="text" class="form-control" placeholder="{{studentDataForm.campus}}">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(5)">
                 <i class="glyphicon glyphicon-pencil"></i>
