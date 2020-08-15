@@ -21,14 +21,18 @@ export class ActivitiesComponent implements OnInit {
   objectives: Array<any>;
   objectivesResponse: Array<any>;
   objectiveSelected: string;
+  commentForm: FormGroup;
 
-  wasFileUploaded: boolean;
+  wasFileUploadedAct: boolean;
+  wasFileUploadedCom: boolean;
   atLeastOnObjective: boolean = false;
+
 
   uploadPercent: Observable<number>;
   urlActivityFile: Observable<string>;
 
-  fileChangedEvent: Event;
+  fileChangedEventAct: Event;
+  fileChangedEventComm: Event;
 
 
   constructor(
@@ -46,11 +50,13 @@ export class ActivitiesComponent implements OnInit {
 
   uploadActivityFile(e) {
     console.log('subir', e)
-    this.fileChangedEvent = e.target.files[0];
-    this.wasFileUploaded = true;
+    this.fileChangedEventAct = e.target.files[0];
+    this.wasFileUploadedAct = true;
   }
-  uploadCommentFile() {
-
+  uploadCommentFile(e) {
+    console.log('subir', e)
+    this.fileChangedEventComm = e.target.files[0];
+    this.wasFileUploadedCom = true;
   }
   onClickSave() {
     console.log('Se quiere subir el archivo');
@@ -63,10 +69,10 @@ export class ActivitiesComponent implements OnInit {
     this.activityForm.addControl('fileURL', this.formBuilder.control(''));
 
 
-    if (this.wasFileUploaded) {
+    if (this.wasFileUploadedAct) {
       //Se hace la carga del archivo //
       const id = Math.random().toString(36).substring(2);
-      const file = this.fileChangedEvent;
+      const file = this.fileChangedEventAct;
       const filepath = `activityImages/activity_${id}`;
       const reference = this.storage.ref(filepath);
       const task = this.storage.upload(filepath, file).then(rst => {
@@ -105,11 +111,23 @@ export class ActivitiesComponent implements OnInit {
       date: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
     });
+
+    this.commentForm =  this.formBuilder.group({
+      id: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+ 
+    });
+
+
+
+
     this.objectivesResponse = []
 
     this.objectives = this.http.getObjectives();
 
-    this.wasFileUploaded = false;
+    this.wasFileUploadedAct = false;
+
+    this.wasFileUploadedCom = false;
 
   }
 
@@ -145,6 +163,42 @@ export class ActivitiesComponent implements OnInit {
 
   onClickComentar() {
     console.log('Se quiere comentar')
+    
+    this.commentForm.controls.id.setValue(this.classId);
+    this.commentForm.removeControl('objective');
+
+    this.commentForm.addControl('fileURL', this.formBuilder.control(''));
+
+
+    if (this.wasFileUploadedCom) {
+      //Se hace la carga del archivo //
+      const id = Math.random().toString(36).substring(2);
+      const file = this.fileChangedEventComm;
+      const filepath = `commentImages/comment_${id}`;
+      const reference = this.storage.ref(filepath);
+      const task = this.storage.upload(filepath, file).then(rst => {
+        rst.ref.getDownloadURL().then(url => {
+
+          this.commentForm.get('fileURL').setValue(url);
+          console.log(this.commentForm.value);
+          this.dialogRef.close();
+
+        });
+      });
+
+    }
+    else {
+      this.commentForm.get('fileURL').setValue('Null');
+      console.log(this.commentForm.value);
+
+      this.dialogRef.close();
+    }
+
+
+
+
+
+
   }
 
   get name() { return this.activityForm.get('name'); }

@@ -178,7 +178,7 @@
 
         </div>
     </div>
-    <div class="row">
+    <div class="row" [formGroup]="commentForm">
         <div class="panel panel-default widget">
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span>
@@ -186,15 +186,15 @@
                     Crear Comentario</h3>
                 <span class="label label-info">
                 </span>
-
+                {{commentForm.value | json}}
                 <div>
-                    <textarea placeholder=""></textarea>
+                    <textarea placeholder="" formControlName = "description"></textarea>
                 </div>
                 <div class="row justify-content-right">
                     <div class="col-10">
 
                         <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                            (change)="uploadCommentFile($event.target.files)">
+                            (change)="uploadCommentFile($event)">
 
 
                     </div>
