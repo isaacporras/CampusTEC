@@ -22,6 +22,7 @@ export class ActivitiesComponent implements OnInit {
   objectivesResponse: Array<any>;
   objectiveSelected: string;
   commentForm: FormGroup;
+  comments: Array<any>;
 
   wasFileUploadedAct: boolean;
   wasFileUploadedCom: boolean;
@@ -99,37 +100,7 @@ export class ActivitiesComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  ngOnInit() {
-
-
-    this.activityForm = this.formBuilder.group({
-      id: new FormControl(''),
-      name: new FormControl(''),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-      evaluable: new FormControl(false, [Validators.required]),
-      week: new FormControl('', [Validators.required]),
-      date: new FormControl('', [Validators.required]),
-      objective: new FormControl('', [Validators.required]),
-    });
-
-    this.commentForm =  this.formBuilder.group({
-      id: new FormControl(''),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
- 
-    });
-
-
-
-
-    this.objectivesResponse = []
-
-    this.objectives = this.http.getObjectives();
-
-    this.wasFileUploadedAct = false;
-
-    this.wasFileUploadedCom = false;
-
-  }
+  
 
 
   onClickCancel(): void {
@@ -206,5 +177,43 @@ export class ActivitiesComponent implements OnInit {
   get week() { return this.activityForm.get('week'); }
   get date() { return this.activityForm.get('date'); }
   get objective() { return this.atLeastOnObjective }
+
+
+
+
+
+  ngOnInit() {
+
+
+    this.activityForm = this.formBuilder.group({
+      id: new FormControl(''),
+      name: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      evaluable: new FormControl(false, [Validators.required]),
+      week: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
+    });
+
+    this.commentForm =  this.formBuilder.group({
+      id: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+
+ 
+    });
+
+
+    this.comments = this.http.getComments();
+
+
+    this.objectivesResponse = []
+
+    this.objectives = this.http.getObjectives();
+
+    this.wasFileUploadedAct = false;
+
+    this.wasFileUploadedCom = false;
+
+  }
 
 }

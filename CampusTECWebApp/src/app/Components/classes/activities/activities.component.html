@@ -210,20 +210,17 @@
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                        <div class="row" *ngFor="let comment of comments">
+                            
                             <div class="col-xs-10 col-md-11">
                                 <div>
-                                    <a
-                                        href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
-                                        Google Style Login Page Design Using Bootstrap</a>
+                                    
                                     <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                                        Por: <a href="#">{{comment.user}}</a> , A las: {{comment.time}} {{comment.date}}
                                     </div>
                                 </div>
                                 <div class="comment-text">
-                                    Awesome design
+                                    {{comment.description}}
                                 </div>
                                 <div class="action">
                                     <span class="label label-info">rubrica.pdf</span>
