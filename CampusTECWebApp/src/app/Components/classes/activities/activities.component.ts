@@ -35,8 +35,11 @@ export class ActivitiesComponent implements OnInit {
     console.log('Se quiere subir el archivo');
     this.activityForm.controls.id.setValue(this.classId);
     this.activityForm.removeControl('objective');
-    console.log(JSON.stringify(this.activityForm.value, null, 4));
     
+    this.activityForm.addControl('objectives', this.formBuilder.control(''));
+    this.activityForm.get('objectives').setValue(this.objectivesResponse);
+
+    console.log(JSON.stringify(this.activityForm.value, null, 4));
     this.dialogRef.close();
   }
   onClickClose() {
@@ -88,6 +91,10 @@ export class ActivitiesComponent implements OnInit {
     console.log(this.objectivesResponse)
 
 
+  }
+
+  onClickComentar(){
+    console.log('Se quiere comentar')
   }
 
 
