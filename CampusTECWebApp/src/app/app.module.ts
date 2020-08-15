@@ -29,6 +29,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { environment } from '../environments/environment';
 import { PlannerComponent } from './Components/planner/planner.component';
 
@@ -60,6 +62,9 @@ import { PlannerComponent } from './Components/planner/planner.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+
+    HttpClientModule,
+
     RouterModule.forRoot([
       {
         path: '',

@@ -6,8 +6,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ActivitiesService } from './activities.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable'
-
+import { Observable } from 'rxjs/internal/Observable';
+import { FirebaseApp } from '@angular/fire';
+import { GlobalService } from '../../globalServices/global.service';
 
 @Component({
   selector: 'app-activities',
@@ -41,7 +42,8 @@ export class ActivitiesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data,
     private formBuilder: FormBuilder,
     private http: ActivitiesService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private downloader: GlobalService,
 
   ) {
 
@@ -100,7 +102,7 @@ export class ActivitiesComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  
+
 
 
   onClickCancel(): void {
@@ -134,7 +136,7 @@ export class ActivitiesComponent implements OnInit {
 
   onClickComentar() {
     console.log('Se quiere comentar')
-    
+
     this.commentForm.controls.id.setValue(this.classId);
     this.commentForm.removeControl('objective');
 
@@ -179,46 +181,62 @@ export class ActivitiesComponent implements OnInit {
   get objective() { return this.atLeastOnObjective }
 
 
-  onDownloadFile(url){
-    console.log(url)
-  }
+  onDownloadFile(url) {
+
+    console.log(url);
+
+    this.downloader.downloadFile(url).subscribe(
+      (response: any) => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+        
+        downloadLink.setAttribute('download', 'messageFile');
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      }
+    );
+
+}
 
 
-  ngOnInit() {
+ngOnInit() {
 
 
-    this.activityForm = this.formBuilder.group({
-      id: new FormControl(''),
-      name: new FormControl(''),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-      evaluable: new FormControl(false, [Validators.required]),
-      week: new FormControl('', [Validators.required]),
-      date: new FormControl('', [Validators.required]),
-      objective: new FormControl('', [Validators.required]),
-    });
+  this.activityForm = this.formBuilder.group({
+    id: new FormControl(''),
+    name: new FormControl(''),
+    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+    evaluable: new FormControl(false, [Validators.required]),
+    week: new FormControl('', [Validators.required]),
+    date: new FormControl('', [Validators.required]),
+    objective: new FormControl('', [Validators.required]),
+  });
 
-    this.commentForm =  this.formBuilder.group({
-      id: new FormControl(''),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-
- 
-    });
-
-    
+  this.commentForm = this.formBuilder.group({
+    id: new FormControl(''),
+    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
 
 
-    this.comments = this.http.getComments();
+  });
 
 
-    this.objectivesResponse = []
 
-    this.objectives = this.http.getObjectives();
 
-    this.wasFileUploadedAct = false;
+  this.comments = this.http.getComments();
 
-    this.wasFileUploadedCom = false;
 
-    
-  }
+  this.objectivesResponse = []
+
+  this.objectives = this.http.getObjectives();
+
+  this.wasFileUploadedAct = false;
+
+  this.wasFileUploadedCom = false;
+
+
+}
 
 }
