@@ -68,7 +68,7 @@
         <div class="col-3">
             <h3>Fecha de entrega:</h3>
         </div>
-        <div class="col-3">
+        <div class="col-5">
             <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
         </div>
 
@@ -150,6 +150,20 @@
 
                 <div>
                     <textarea placeholder=""></textarea>
+                </div>
+                <div class="row justify-content-right">
+                    <div class="col-10">
+            
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                        (change)="handleFileInput($event.target.files)">
+            
+            
+                    </div>
+                    <div class="col-2">
+            
+                        <button type="button" class="btn btn-dark" (click)="onClickComentar()">Comentar</button>
+            
+                    </div>
                 </div>
                 <h3 class="panel-title">
                     Comentarios</h3>
