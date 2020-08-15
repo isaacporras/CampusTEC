@@ -179,7 +179,9 @@ export class ActivitiesComponent implements OnInit {
   get objective() { return this.atLeastOnObjective }
 
 
-
+  onDownloadFile(url){
+    console.log(url)
+  }
 
 
   ngOnInit() {
@@ -202,6 +204,8 @@ export class ActivitiesComponent implements OnInit {
  
     });
 
+    
+
 
     this.comments = this.http.getComments();
 
@@ -214,6 +218,7 @@ export class ActivitiesComponent implements OnInit {
 
     this.wasFileUploadedCom = false;
 
+    
   }
 
 }

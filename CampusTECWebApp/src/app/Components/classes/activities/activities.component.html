@@ -223,8 +223,8 @@
                                     {{comment.description}}
                                 </div>
                                 <div class="action">
-                                    <span class="label label-info">rubrica.pdf</span>
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
+                                    <span class="label label-info">Descargar archivo adjunto</span>
+                                    <button type="button" class="btn btn-primary btn-xs" title="Edit" (click) = "onDownloadFile(comment.fileURL)">
                                         <span class="glyphicon glyphicon-save"></span>
                                     </button>
 
