@@ -6,6 +6,7 @@ import { ObjectiveComponent } from './objective/objective.component';
 import { ClassesService } from './classesService/classes.service';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ChallengeComponent } from './challenge/challenge.component';
+import { TreeDataNodeFlattener } from '@angular/cdk/collections';
 
 
 
@@ -15,7 +16,7 @@ interface FoodNode {
   children?: FoodNode[];
 }
 
-const TREE_DATA: FoodNode[] = [
+var TREE_DATA: FoodNode[] = [
   {
     name: 'Ir a todas las tutorias',
     id: 1,
@@ -71,8 +72,7 @@ export class ClassesComponent implements OnInit {
   classData: any;
   activities: any;
   objectives: any;
-
-
+  TREE_DATA: Array<FoodNode>;
 
 
   private _transformer = (node: FoodNode, level: number) => {
@@ -161,7 +161,7 @@ export class ClassesComponent implements OnInit {
   ngOnInit() {
 
 
-
+   this.TREE_DATA = this.http.getActivitiesAndChallenges();
 
 
     this.classData = this.http.getClassBaseData();
