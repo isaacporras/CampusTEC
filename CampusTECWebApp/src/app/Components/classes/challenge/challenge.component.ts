@@ -4,6 +4,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ChallengeService } from './challenge.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+
 @Component({
   selector: 'app-challenge',
   templateUrl: './challenge.component.html',
@@ -18,12 +21,19 @@ classId: number;
 atLeastOnObjective: boolean = false;
 objectivesResponse: Array<any>;
 
+
+fileChangedEventChallenge: Event;
+wasFileUploadedChallenge = false;
+
+
+
+
   constructor(
     public dialogRef: MatDialogRef<ChallengeComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private formBuilder: FormBuilder,
     private http: ChallengeService,
-
+    private storage: AngularFireStorage,
   ) {
 
     this.classId = data;
@@ -34,6 +44,42 @@ objectivesResponse: Array<any>;
     this.objectiveForm.controls.id.setValue(this.classId);
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
+
+
+    console.log('Se quiere subir el archivo');
+    this.challengeForm.controls.id.setValue(this.classId);
+    this.challengeForm.removeControl('objective');
+
+    this.challengeForm.addControl('objectives', this.formBuilder.control(''));
+    this.challengeForm.get('objectives').setValue(this.objectivesResponse);
+
+    this.challengeForm.addControl('fileURL', this.formBuilder.control(''));
+
+
+    if (this.wasFileUploadedChallenge) {
+      //Se hace la carga del archivo //
+      const id = Math.random().toString(36).substring(2);
+      const file = this.fileChangedEventChallenge;
+      const filepath = `activityImages/activity_${id}`;
+      const reference = this.storage.ref(filepath);
+      const task = this.storage.upload(filepath, file).then(rst => {
+        rst.ref.getDownloadURL().then(url => {
+
+          this.challengeForm.get('fileURL').setValue(url);
+          console.log(this.challengeForm.value)
+          this.dialogRef.close();
+
+        });
+      });
+
+    }
+    
+    else {
+      this.challengeForm.get('fileURL').setValue('Null');
+      console.log(this.challengeForm.value)
+      this.dialogRef.close();
+    }
+
   }
   onClickClose() {
 
@@ -60,6 +106,13 @@ objectivesResponse: Array<any>;
     this.objectivesResponse = []
 
   }
+  
+  uploadChallengeFile(e) {
+    console.log('subir', e)
+    this.fileChangedEventChallenge = e.target.files[0];
+    this.wasFileUploadedChallenge = true;
+  }
+
 
   addObjective() {
     this.atLeastOnObjective = true;
