@@ -16,6 +16,7 @@ export class ChallengeComponent implements OnInit {
 challengeForm: FormGroup;
 objectiveForm: FormGroup;
 objectives: Array<any>;
+students: Array<any>;
 
 classId: number;
 atLeastOnObjective: boolean = false;
@@ -86,26 +87,7 @@ wasFileUploadedChallenge = false;
     this.dialogRef.close();
   }
 
-  ngOnInit() {
-    this.challengeForm = this.formBuilder.group({
-      id: new FormControl(''),
-      name: new FormControl(''),
-      payment: new FormControl('',[Validators.required]),
-      date: new FormControl('', [Validators.required]),
-      objective: new FormControl('', [Validators.required]),
-    });
-
-    this.objectiveForm = this.formBuilder.group({
-      id: new FormControl(''),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500)])
-    });
-
-
-    this.objectives = this.http.getObjectives();
-
-    this.objectivesResponse = []
-
-  }
+  
   
   uploadChallengeFile(e) {
     console.log('subir', e)
@@ -134,6 +116,31 @@ wasFileUploadedChallenge = false;
   onClickCancel(): void {
     this.dialogRef.close();
   }
+
+
+
+  ngOnInit() {
+    this.challengeForm = this.formBuilder.group({
+      id: new FormControl(''),
+      name: new FormControl(''),
+      payment: new FormControl('',[Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
+    });
+
+    this.objectiveForm = this.formBuilder.group({
+      id: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)])
+    });
+
+
+    this.objectives = this.http.getObjectives();
+    this.students = this.http.getStudents();
+
+    this.objectivesResponse = [];
+
+  }
+
 
   get description() { return this.objectiveForm.get('description'); }
 

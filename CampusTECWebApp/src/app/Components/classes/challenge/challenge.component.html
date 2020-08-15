@@ -146,16 +146,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let student of students">
 
-                        <td>Bootstrap 4 CDN and Starter Template</td>
-                        <td>Cristina</td>
-                        <td>913</td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.lastname}}</td>
+                        <td>{{student.id}}</td>
 
                         <td>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                <label class="custom-control-label" for="customCheck1">1</label>
+                                <label class="custom-control-label" for="customCheck1"></label>
                             </div>
                         </td>
                     </tr>

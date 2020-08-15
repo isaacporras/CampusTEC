@@ -31,4 +31,29 @@ export class ChallengeService {
     ];
   }
 
+
+  getStudents(){
+    return [
+      {
+        id: 201710856,
+        name: 'Marco',
+        lastname: 'Herrera',
+
+      },
+      {
+        id: 2017111111,
+        name: 'Kenneth',
+        lastname: 'Hernandez',
+
+      },
+      {
+        id: 201777777,
+        name: 'Jasson',
+        lastname: 'Rodriguez',
+
+      }
+
+    ]
+  }
+
 }
