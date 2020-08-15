@@ -21,6 +21,16 @@ import {MatInputModule} from '@angular/material/input';
 import { ActivitiesComponent } from './Components/classes/activities/activities.component';
 import { ChallengeComponent } from './Components/classes/challenge/challenge.component';
 
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +55,9 @@ import { ChallengeComponent } from './Components/classes/challenge/challenge.com
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -68,7 +81,7 @@ import { ChallengeComponent } from './Components/classes/challenge/challenge.com
       }
     ])
   ],
-  providers: [],
+  providers: [AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent],
   entryComponents: [ObjectiveComponent]
 })
