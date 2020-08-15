@@ -45,8 +45,13 @@ interface ExampleFlatNode {
   templateUrl: './classes.component.html',
   styleUrls: ['./classes.component.css']
 })
+
+
+
+
 export class ClassesComponent implements OnInit {
   challenges_activities: any;
+  classData: any;
   activities: any;
 
   studentClasses: any = [
@@ -164,6 +169,29 @@ export class ClassesComponent implements OnInit {
       {
         id: 'R-2', name: 'Completar todas las asignaciones'
       }
+    ];
+
+
+    this.classData = {
+      id: 1,
+      name: 'Analisis Numerico para ingeniería',
+      group: 5
+    };
+
+    this.activities = [
+      {
+        id: '1', name: 'Hacer tutoria 1'
+      },
+      {
+        id: '2', name: 'Hacer tutoria 2'
+      },
+  
+      {
+        id: '3', name: 'Hacer tutoria 3'
+      },
+      {
+        id: '4', name: 'Hacer tutoria 4'
+      },
     ];
   }
 

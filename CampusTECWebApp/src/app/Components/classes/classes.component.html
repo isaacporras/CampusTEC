@@ -27,8 +27,8 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 style="margin-top: 20px;">Analisis Numerico para Ingenieria</h1>
-                <h2>Grupo 1</h2>
+                <h1 style="margin-top: 20px;">{{classData.name}}</h1>
+                <h2>Grupo : {{classData.group}}</h2>
 
             </div>
         </div>
@@ -106,10 +106,8 @@
                     <tr *ngFor="let activity of activities">
                        
                             
-                            <li class="list-group-item"> {{getActivity_Challenge(node.name)}}{{activity.name}} <button class="btn eyeButtonActivity"><mat-icon>visibility</mat-icon></button></li>
-                            
-                        
-                        
+                            <li class="list-group-item"> {{activity.name}} <button class="btn eyeButtonActivity"><mat-icon>visibility</mat-icon></button></li>
+
                     </tr>
 
                 </ul>
