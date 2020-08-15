@@ -34,7 +34,9 @@ export class ActivitiesComponent implements OnInit {
   onClickSave() {
     console.log('Se quiere subir el archivo');
     this.activityForm.controls.id.setValue(this.classId);
+    this.activityForm.removeControl('objective');
     console.log(JSON.stringify(this.activityForm.value, null, 4));
+    
     this.dialogRef.close();
   }
   onClickClose() {
@@ -76,7 +78,7 @@ export class ActivitiesComponent implements OnInit {
   addObjective() {
     var id_new =  Number(this.activityForm.get('objective').value.charAt(0));
     var description_new = this.activityForm.get('objective').value.substr(2);
-    
+
     this.objectivesResponse.push({
       id: id_new,
       description: description_new
