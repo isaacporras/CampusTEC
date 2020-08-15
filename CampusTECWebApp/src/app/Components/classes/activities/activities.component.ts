@@ -23,6 +23,7 @@ export class ActivitiesComponent implements OnInit {
   objectiveSelected: string;
 
   wasFileUploaded: boolean;
+  atLeastOnObjective: boolean = false;
 
   uploadPercent: Observable<number>;
   urlActivityFile: Observable<string>;
@@ -47,8 +48,6 @@ export class ActivitiesComponent implements OnInit {
     console.log('subir', e)
     this.fileChangedEvent = e.target.files[0];
     this.wasFileUploaded = true;
-
-
   }
   uploadCommentFile() {
 
@@ -64,28 +63,28 @@ export class ActivitiesComponent implements OnInit {
     this.activityForm.addControl('fileURL', this.formBuilder.control(''));
 
 
-    if(this.wasFileUploaded){
-    //Se hace la carga del archivo //
-    const id = Math.random().toString(36).substring(2);
-    const file = this.fileChangedEvent;
-    const filepath = `activityImages/activity_${id}`;
-    const reference = this.storage.ref(filepath);
-    const task = this.storage.upload(filepath, file).then(rst => {
-      rst.ref.getDownloadURL().then(url => {
-        
-        this.activityForm.get('fileURL').setValue(url);
-        console.log(this.activityForm.value)
-        this.dialogRef.close();
+    if (this.wasFileUploaded) {
+      //Se hace la carga del archivo //
+      const id = Math.random().toString(36).substring(2);
+      const file = this.fileChangedEvent;
+      const filepath = `activityImages/activity_${id}`;
+      const reference = this.storage.ref(filepath);
+      const task = this.storage.upload(filepath, file).then(rst => {
+        rst.ref.getDownloadURL().then(url => {
 
+          this.activityForm.get('fileURL').setValue(url);
+          console.log(this.activityForm.value)
+          this.dialogRef.close();
+
+        });
       });
-    });
 
-  }
-  else {
-    this.activityForm.get('fileURL').setValue('Null');
-    console.log(this.activityForm.value)
-    this.dialogRef.close();
-  }
+    }
+    else {
+      this.activityForm.get('fileURL').setValue('Null');
+      console.log(this.activityForm.value)
+      this.dialogRef.close();
+    }
 
 
   }
@@ -123,12 +122,13 @@ export class ActivitiesComponent implements OnInit {
     this.fileToUpload = files.item(0);
   }
 
-  get description() { return this.activityForm.get('description'); }
+
 
   uploadFileToActivity() {
 
   }
   addObjective() {
+    this.atLeastOnObjective = true;
     var id_new = Number(this.activityForm.get('objective').value.charAt(0));
     var description_new = this.activityForm.get('objective').value.substr(2);
 
@@ -147,5 +147,10 @@ export class ActivitiesComponent implements OnInit {
     console.log('Se quiere comentar')
   }
 
+  get name() { return this.activityForm.get('name'); }
+  get description() { return this.activityForm.get('description'); }
+  get week() { return this.activityForm.get('week'); }
+  get date() { return this.activityForm.get('date'); }
+  get objective() { return this.atLeastOnObjective }
 
 }

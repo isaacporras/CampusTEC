@@ -19,6 +19,14 @@
             <input type="text" formControlName="name" class="form-control">
         </div>
     </div>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+        <div *ngIf="name.errors.required">
+            Debe ingresar un nombre para la actividad.
+        </div>
+
+
+    </div>
     <div class="row">
         <div class="col-4">
             <h3>Descripción:</h3>
@@ -26,6 +34,17 @@
         <div class="col-8">
             <textarea formControlName="description" placeholder=""></textarea>
         </div>
+    </div>
+    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+
+        <div *ngIf="description.errors.required">
+            Debe ingresar una descripción para la actividad.
+        </div>
+        <div *ngIf="description.errors?.maxlength">
+            La descripción no puede exceder los 500 caracteres.
+        </div>
+
+
     </div>
     <div class="row">
         <div class="col-4">
@@ -73,17 +92,29 @@
         </div>
 
     </div>
+    <div *ngIf="week.invalid && (week.dirty || week.touched)" class="alert alert-danger">
+
+        <div *ngIf="week.errors.required">
+            Debe ingresar semana para la actividad.
+        </div>
+    </div>
+    <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
+
+        <div *ngIf="week.errors.required">
+            Debe ingresar fecha para la actividad.
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-4">
             <h3>Objetivos:</h3>
         </div>
         <div class="col-7">
-            <select id="inputState" class="form-control" formControlName = "objective">
+            <select id="inputState" class="form-control" formControlName="objective">
                 <option selected disabled></option>
                 <ng-container *ngFor="let objective of objectives">
-                    
-                    <option >{{objective.id}}) {{objective.description}}</option>
+
+                    <option>{{objective.id}}) {{objective.description}}</option>
 
                 </ng-container>
             </select>
@@ -92,6 +123,12 @@
             <button class="btn" (click)="addObjective()"><i class="glyphicon glyphicon-plus"></i></button>
         </div>
 
+    </div>
+    <div *ngIf="objective == false" class="alert alert-danger">
+
+        
+            Debe ingresar al menos un objetivo.
+        
     </div>
 
     <div class="row">
@@ -107,6 +144,12 @@
                 </tbody>
             </table>
         </div>
+        <div *ngIf="activityForm.invalid" class="alert alert-danger">
+
+        
+            Los datos ingresados son invalidos.
+        
+    </div>
     </div>
     <div class="row">
         <div class="col-4">
@@ -120,7 +163,7 @@
                         (change)="uploadActivityFile($event)">
 
                 </div>
-                
+
             </form>
         </div>
     </div>
@@ -154,16 +197,16 @@
                 </div>
                 <div class="row justify-content-right">
                     <div class="col-10">
-            
+
                         <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                        (change)="uploadCommentFile($event.target.files)">
-            
-            
+                            (change)="uploadCommentFile($event.target.files)">
+
+
                     </div>
                     <div class="col-2">
-            
+
                         <button type="button" class="btn btn-dark" (click)="onClickComentar()">Comentar</button>
-            
+
                     </div>
                 </div>
                 <h3 class="panel-title">
