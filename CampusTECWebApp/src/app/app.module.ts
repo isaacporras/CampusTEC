@@ -18,6 +18,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ObjectiveComponent } from './Components/classes/objective/objective.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { ActivitiesComponent } from './Components/classes/activities/activities.component';
+import { ChallengeComponent } from './Components/classes/challenge/challenge.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import {MatInputModule} from '@angular/material/input';
     TeacherProfileComponent,
     ClassesComponent,
     ObjectiveComponent,
+    ActivitiesComponent,
+    ChallengeComponent,
   ],
   imports: [
     BrowserModule,

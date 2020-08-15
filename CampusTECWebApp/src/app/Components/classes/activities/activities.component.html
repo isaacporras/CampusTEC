@@ -1,0 +1,194 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
+
+<div [formGroup]="activityForm">
+
+    <div class="row">
+        <div class="col-4">
+            <h1>Actividad</h1>
+        </div>
+        {{activityForm.value | json}}
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-4">
+            <h3>Nombre:</h3>
+        </div>
+        <div class="col-8">
+            <input type="text" formControlName="name" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>Descripción:</h3>
+        </div>
+        <div class="col-8">
+            <textarea formControlName="description" placeholder=""></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>Evaluable:</h3>
+        </div>
+        <div class="col col-6 col-md-4">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="evaluable">
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <h3>Semana:</h3>
+        </div>
+        <div class="col-2">
+            <select id="inputState" class="form-control" formControlName="week">
+                <option selected>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+            </select>
+        </div>
+        <div class="col-3">
+            <h3>Fecha de entrega:</h3>
+        </div>
+        <div class="col-3">
+            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <h3>Objetivos:</h3>
+        </div>
+        <div class="col-7">
+            <select id="inputState" class="form-control" formControlName = "objective">
+                <option selected disabled></option>
+                <ng-container *ngFor="let objective of objectives">
+                    
+                    <option >{{objective.id}}) {{objective.description}}</option>
+
+                </ng-container>
+            </select>
+        </div>
+        <div class="col-1">
+            <button class="btn" (click)="addObjective()"><i class="glyphicon glyphicon-plus"></i></button>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <table class="table table-bordered">
+
+                <tbody>
+                    <tr *ngFor="let objective of objectivesResponse">
+                        <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
+                        <td>{{objective.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>Archivo:</h3>
+        </div>
+        <div class="col-8">
+            <form>
+                <div class="form-group">
+
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                        (change)="handleFileInput($event.target.files)">
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="row justify-content-end">
+        <div class="col-4">
+
+            <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
+
+
+        </div>
+        <div class="col-4">
+
+            <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-default widget">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-comment"></span>
+                <h3 class="panel-title">
+                    Crear Comentario</h3>
+                <span class="label label-info">
+                </span>
+
+                <div>
+                    <textarea placeholder=""></textarea>
+                </div>
+                <h3 class="panel-title">
+                    Comentarios</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                    <a
+                                        href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
+                                        Google Style Login Page Design Using Bootstrap</a>
+                                    <div class="mic-info">
+                                        By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+                                    Awesome design
+                                </div>
+                                <div class="action">
+                                    <span class="label label-info">rubrica.pdf</span>
+                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
+                                        <span class="glyphicon glyphicon-save"></span>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span
+                        class="glyphicon glyphicon-refresh"></span> More</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>

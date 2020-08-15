@@ -54,6 +54,9 @@ export class ClassesService {
       },
       {
         id: '3', description: 'Aplicar conceptos de distintos paradigmas de programación en la solución de problemas numéricos'
+      },
+      {
+        id: '4', description: 'Mejorar las habilidades matematicas de los estudiantes.'
       }
 
     ];
