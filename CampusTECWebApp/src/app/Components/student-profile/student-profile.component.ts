@@ -40,17 +40,17 @@ export class StudentProfileComponent implements OnInit {
       this.studentDataForm.controls['email1'].enable();
 
     }
-    else if (id == 2) {
+    else if (id === 2) {
       this.studentDataForm.controls['email2'].enable();
     }
 
-    else if (id == 3) {
+    else if (id === 3) {
       this.studentDataForm.controls['telNumber'].enable();
     }
-    else if (id == 4) {
+    else if (id === 4) {
       this.studentDataForm.controls['university'].enable();
     }
-    else if (id == 5) {
+    else if (id === 5) {
       this.studentDataForm.controls['campus'].enable();
     }
   }

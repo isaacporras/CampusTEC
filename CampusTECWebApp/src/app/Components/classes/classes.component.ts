@@ -12,21 +12,24 @@ interface FoodNode {
 
 const TREE_DATA: FoodNode[] = [
   {
-    name: 'Completar todas las asignaciones',
+    name: 'R-1',
     children: [
-      { name: 'Hacer tarea 1' },
-      { name: 'Hacer tarea 2' },
-      { name: 'Hacer tarea 3' },
+      { name: 'A-1'},
+      { name: 'A-2' },
+      { name: 'A-3' },
     ]
   }, {
-    name: 'Ir a todas las tutorias',
+    name: 'R-2',
     children: [
-      { name: 'Ir a la tutoria 1' },
-      { name: 'Ir a la tutoria 2' },
-      { name: 'Ir a la tutoria 3' },
+      { name: 'A-4' },
+      { name: 'A-5' },
+      { name: 'A-6' },
     ]
   }
 ];
+
+
+
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -43,6 +46,19 @@ interface ExampleFlatNode {
   styleUrls: ['./classes.component.css']
 })
 export class ClassesComponent implements OnInit {
+  challenges_activities: any;
+
+  studentClasses: any = [
+    {
+      id: '1', nombre: 'Circuitos en Corriente continua'
+    },
+    {
+      id: '2', nombre: 'Circuitos en Corriente alterna'
+    },
+    {
+      id: '3', nombre: 'Matematica'
+    }
+  ];
 
   
 
@@ -60,23 +76,7 @@ export class ClassesComponent implements OnInit {
 
   ];
 
-  activities: any = [
-    {
-      id: '1', name: 'Hacer tutoria 1'
-    },
-    {
-      id: '2', name: 'Hacer tutoria 2'
-    },
-
-    {
-      id: '3', name: 'Hacer tutoria 3'
-    },
-    {
-      id: '4', name: 'Hacer tutoria 4'
-    },
-
-
-  ];
+  
 
   private _transformer = (node: FoodNode, level: number) => {
     return {
@@ -95,7 +95,10 @@ export class ClassesComponent implements OnInit {
 
 
 
-
+getActivity_Challenge(id: string){
+  const resultado = this.challenges_activities.find( element => element.id === id );
+  return resultado.name;
+}
 
 
 
@@ -123,6 +126,40 @@ export class ClassesComponent implements OnInit {
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {
+
+    this.challenges_activities = [
+      {
+        id: 'A-1', name: 'Hacer tutoria 1'
+      },
+      {
+        id: 'A-2', name: 'Hacer tutoria 2'
+      },
+  
+      {
+        id: 'A-3', name: 'Hacer tutoria 3'
+      },
+      {
+        id: 'A-4', name: 'Hacer tutoria 4'
+      },
+      {
+        id: 'A-5', name: 'Hacer tarea 1'
+      },
+      {
+        id: 'A-6', name: 'Hacer tarea 2'
+      },
+      {
+        id: 'A-7', name: 'Hacer tarea 3'
+      },
+      {
+        id: 'A-8', name: 'Hacer tarea 4'
+      },
+      {
+        id: 'R-1', name: 'Ir a todas las tutorias'
+      },
+      {
+        id: 'R-2', name: 'Completar todas las asignaciones'
+      }
+    ];
   }
 
 }
