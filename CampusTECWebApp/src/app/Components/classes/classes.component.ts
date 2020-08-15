@@ -3,7 +3,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ObjectiveComponent } from './objective/objective.component';
-
+import {ClassesService} from './classesService/classes.service';
 
 interface FoodNode {
   name: string;
@@ -61,34 +61,8 @@ export class ClassesComponent implements OnInit {
   challenges_activities: any;
   classData: any;
   activities: any;
+  objectives: any;
 
-  studentClasses: any = [
-    {
-      id: '1', nombre: 'Circuitos en Corriente continua'
-    },
-    {
-      id: '2', nombre: 'Circuitos en Corriente alterna'
-    },
-    {
-      id: '3', nombre: 'Matematica'
-    }
-  ];
-
-
-
-  objectives: any = [
-    {
-      id: '1', description: 'Evaluar la conveniencia en el uso de un cierto método en lan solución de un problema numérico específico.'
-    },
-    {
-      id: '2',
-      description: 'Implementar programas de cálculo relacionado con los tópicos estudiados independientemente del lenguaje y de la plataforma computacional disponible.'
-    },
-    {
-      id: '3', description: 'Aplicar conceptos de distintos paradigmas de programación en la solución de problemas numéricos'
-    }
-
-  ];
 
 
 
@@ -132,7 +106,7 @@ export class ClassesComponent implements OnInit {
 
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog, private http: ClassesService
   ) {
 
     this.dataSource.data = TREE_DATA;
@@ -150,71 +124,15 @@ export class ClassesComponent implements OnInit {
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {
 
-    this.challenges_activities = [
-      {
-        id: 'A-1', name: 'Hacer tutoria 1'
-      },
-      {
-        id: 'A-2', name: 'Hacer tutoria 2'
-      },
-
-      {
-        id: 'A-3', name: 'Hacer tutoria 3'
-      },
-      {
-        id: 'A-4', name: 'Hacer tutoria 4'
-      },
-      {
-        id: 'A-5', name: 'Hacer tarea 1'
-      },
-      {
-        id: 'A-6', name: 'Hacer tarea 2'
-      },
-      {
-        id: 'A-7', name: 'Hacer tarea 3'
-      },
-      {
-        id: 'A-8', name: 'Hacer ejercicio el lunes'
-      },
-      {
-        id: 'A-9', name: 'Hacer ejercicio el martes'
-      },
-      {
-        id: 'A-10', name: 'Hacer ejercicio el miercoles'
-      },
-      {
-        id: 'R-1', name: 'Ir a todas las tutorias'
-      },
-      {
-        id: 'R-2', name: 'Completar todas las asignaciones'
-      },
-      {
-        id: 'R-3', name: 'Hacer ejercicio todos los dias'
-      }
-    ];
 
 
-    this.classData = {
-      id: 1,
-      name: 'Analisis Numerico para ingeniería',
-      group: 5
-    };
+    this.challenges_activities = this.http.getActivitiesAndChallenges();
 
-    this.activities = [
-      {
-        id: '1', name: 'Hacer tutoria 1'
-      },
-      {
-        id: '2', name: 'Hacer tutoria 2'
-      },
-  
-      {
-        id: '3', name: 'Hacer tutoria 3'
-      },
-      {
-        id: '4', name: 'Hacer tutoria 4'
-      },
-    ];
+    this.classData = this.http.getClassBaseData();
+
+    this.activities = this.http.getActivities();
+
+    this.objectives =  this.http.getObjectives();
   }
 
 }
