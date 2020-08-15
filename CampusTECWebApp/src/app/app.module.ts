@@ -30,6 +30,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 
 import { environment } from '../environments/environment';
+import { PlannerComponent } from './Components/planner/planner.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { environment } from '../environments/environment';
     ObjectiveComponent,
     ActivitiesComponent,
     ChallengeComponent,
+    PlannerComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,10 @@ import { environment } from '../environments/environment';
       {
         path: 'classes',
         component: ClassesComponent
+      },
+      {
+        path: 'planner',
+        component: PlannerComponent
       }
     ])
   ],

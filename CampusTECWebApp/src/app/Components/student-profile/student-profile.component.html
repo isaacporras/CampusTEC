@@ -14,7 +14,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link  " href="">Planificador <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link  " href="/planner">Planificador <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link active" href="/studentProfile">Mi Perfil</a>
         <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
 
@@ -57,7 +57,7 @@
             <h5>Email 1: </h5>
             <input formControlName="email1" type="email" class="form-control" placeholder="{{studentDataForm.email1}} "
               (input)="changeEditingStatus()">
-              
+
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -72,15 +72,15 @@
             <div *ngIf="email1.errors.pattern">
               Debe ser un email valido.
             </div>
-            
+
           </div>
 
-          
+
 
           <div class="input-group">
             <h5>Email 2: </h5>
             <input formControlName="email2" type="email" class="form-control" placeholder="{{studentDataForm.email2}}">
-            
+
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -95,14 +95,14 @@
             <div *ngIf="email2.errors.pattern">
               Debe ser un email valido.
             </div>
-            
+
           </div>
 
           <div class="input-group">
             <h5>Teléfono: </h5>
             <input formControlName="telNumber" type="tel" class="form-control"
               placeholder="{{studentDataForm.telNumber}}">
-              
+
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -117,13 +117,13 @@
             <div *ngIf="telNumber.errors.pattern && telNumber.errors.minlength ">
               Debe ingresar dato valido.
             </div>
-            
+
           </div>
           <div class="input-group">
             <h5>Universidad: </h5>
             <input formControlName="university" type="text" class="form-control"
               placeholder="{{studentDataForm.university}}">
-              
+
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
                 <i class="glyphicon glyphicon-pencil"></i>
@@ -135,7 +135,7 @@
             <div *ngIf="university.errors.required">
               Debe ingresar una universidad.
             </div>
-            
+
           </div>
           <div class="input-group">
             <h5>Sede de  </h5>
