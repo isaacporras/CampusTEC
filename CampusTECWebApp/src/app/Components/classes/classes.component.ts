@@ -14,7 +14,7 @@ const TREE_DATA: FoodNode[] = [
   {
     name: 'R-1',
     children: [
-      { name: 'A-1'},
+      { name: 'A-1' },
       { name: 'A-2' },
       { name: 'A-3' },
     ]
@@ -47,6 +47,7 @@ interface ExampleFlatNode {
 })
 export class ClassesComponent implements OnInit {
   challenges_activities: any;
+  activities: any;
 
   studentClasses: any = [
     {
@@ -60,7 +61,7 @@ export class ClassesComponent implements OnInit {
     }
   ];
 
-  
+
 
   objectives: any = [
     {
@@ -76,7 +77,7 @@ export class ClassesComponent implements OnInit {
 
   ];
 
-  
+
 
   private _transformer = (node: FoodNode, level: number) => {
     return {
@@ -95,10 +96,10 @@ export class ClassesComponent implements OnInit {
 
 
 
-getActivity_Challenge(id: string){
-  const resultado = this.challenges_activities.find( element => element.id === id );
-  return resultado.name;
-}
+  getActivity_Challenge(id: string) {
+    const resultado = this.challenges_activities.find(element => element.id === id);
+    return resultado.name;
+  }
 
 
 
@@ -124,6 +125,10 @@ getActivity_Challenge(id: string){
     this.dataSource.data = TREE_DATA;
   }
 
+  viewNode(id: string) {
+    console.log(id);
+  }
+
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   ngOnInit() {
 
@@ -134,7 +139,7 @@ getActivity_Challenge(id: string){
       {
         id: 'A-2', name: 'Hacer tutoria 2'
       },
-  
+
       {
         id: 'A-3', name: 'Hacer tutoria 3'
       },

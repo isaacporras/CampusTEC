@@ -85,7 +85,7 @@
                         <button mat-icon-button disabled></button>
                         
                         {{getActivity_Challenge(node.name)}}
-                        <button mat-icon-button (click)="addNewItem(node)"><mat-icon>visibility</mat-icon></button>
+                        <button mat-icon-button (click)="viewNode(node.name)"><mat-icon>visibility</mat-icon></button>
                     </mat-tree-node>
                     <button mat-icon-button disabled></button>
                     <!-- This is the tree node template for expandable nodes -->
@@ -96,7 +96,7 @@
                             </mat-icon>
                         </button>
                         {{getActivity_Challenge(node.name)}}
-                        <button mat-icon-button (click)="addNewItem(node)"><mat-icon>visibility</mat-icon></button>
+                        <button mat-icon-button (click)="viewNode(node.name)"><mat-icon>visibility</mat-icon></button>
                     </mat-tree-node>
                 </mat-tree>
             </div>
@@ -106,7 +106,7 @@
                     <tr *ngFor="let activity of activities">
                        
                             
-                            <li class="list-group-item"> {{activity.name}} <button class="btn eyeButtonActivity"><mat-icon>visibility</mat-icon></button></li>
+                            <li class="list-group-item"> {{getActivity_Challenge(node.name)}}{{activity.name}} <button class="btn eyeButtonActivity"><mat-icon>visibility</mat-icon></button></li>
                             
                         
                         
