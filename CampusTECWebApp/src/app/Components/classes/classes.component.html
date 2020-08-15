@@ -46,7 +46,7 @@
 
                 <button type="button" class="btn btn-addObjective">
                     <i class="glyphicon glyphicon-plus"></i>
-                    <span class="addButton" (click) = "onCreateObjective()">Añadir Objetivo</span>
+                    <span class="addButton" (click)="onCreateObjective()">Añadir Objetivo</span>
                 </button>
 
             </div>
@@ -76,16 +76,18 @@
                 </button>
             </div>
         </div>
-        <div class ="row">
+        <div class="row">
             <div class="col">
                 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                     <!-- This is the tree node template for leaf nodes -->
                     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
                         <!-- use a disabled button to provide padding for tree leaf -->
                         <button mat-icon-button disabled></button>
-                        
+
                         {{getActivity_Challenge(node.name)}}
-                        <button mat-icon-button (click)="viewNode(node.name)"><mat-icon>visibility</mat-icon></button>
+                        <button mat-icon-button (click)="viewActivity(node.name)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
                     </mat-tree-node>
                     <button mat-icon-button disabled></button>
                     <!-- This is the tree node template for expandable nodes -->
@@ -96,7 +98,9 @@
                             </mat-icon>
                         </button>
                         {{getActivity_Challenge(node.name)}}
-                        <button mat-icon-button (click)="viewNode(node.name)"><mat-icon>visibility</mat-icon></button>
+                        <button mat-icon-button (click)="viewChallenge(node.name)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
                     </mat-tree-node>
                 </mat-tree>
             </div>
@@ -104,9 +108,13 @@
 
                 <ul class="list-group">
                     <tr *ngFor="let activity of activities">
-                       
-                            
-                            <li class="list-group-item"> {{activity.name}} <button class="btn eyeButtonActivity"><mat-icon>visibility</mat-icon></button></li>
+
+
+                        <li class="list-group-item"> {{activity.name}}
+                            <button class="btn eyeButtonActivity" (click)="viewActivity(activity.id)">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                        </li>
 
                     </tr>
 

@@ -25,6 +25,14 @@ const TREE_DATA: FoodNode[] = [
       { name: 'A-5' },
       { name: 'A-6' },
     ]
+  },
+  {
+    name: 'R-3',
+    children: [
+      { name: 'A-7' },
+      { name: 'A-8' },
+      { name: 'A-9' },
+    ]
   }
 ];
 
@@ -130,7 +138,12 @@ export class ClassesComponent implements OnInit {
     this.dataSource.data = TREE_DATA;
   }
 
-  viewNode(id: string) {
+  viewChallenge(id: string) {
+    console.log('Es un reto');
+    console.log(id);
+  }
+  viewActivity(id: string) {
+    console.log('Es una actividad');
     console.log(id);
   }
 
@@ -161,13 +174,22 @@ export class ClassesComponent implements OnInit {
         id: 'A-7', name: 'Hacer tarea 3'
       },
       {
-        id: 'A-8', name: 'Hacer tarea 4'
+        id: 'A-8', name: 'Hacer ejercicio el lunes'
+      },
+      {
+        id: 'A-9', name: 'Hacer ejercicio el martes'
+      },
+      {
+        id: 'A-10', name: 'Hacer ejercicio el miercoles'
       },
       {
         id: 'R-1', name: 'Ir a todas las tutorias'
       },
       {
         id: 'R-2', name: 'Completar todas las asignaciones'
+      },
+      {
+        id: 'R-3', name: 'Hacer ejercicio todos los dias'
       }
     ];
 
