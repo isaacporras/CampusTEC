@@ -84,8 +84,10 @@
                         <!-- use a disabled button to provide padding for tree leaf -->
                         <button mat-icon-button disabled></button>
 
-                        {{getActivity_Challenge(node.name)}}
-                        <button mat-icon-button (click)="viewActivity(node.name)">
+
+                        {{node.name}}
+                        
+                        <button mat-icon-button (click)="viewActivity(node.id)">
                             <mat-icon>visibility</mat-icon>
                         </button>
                     </mat-tree-node>
@@ -97,8 +99,8 @@
                                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                             </mat-icon>
                         </button>
-                        {{getActivity_Challenge(node.name)}}
-                        <button mat-icon-button (click)="viewChallenge(node.name)">
+                        {{node.name}}
+                        <button mat-icon-button (click)="viewChallenge(node.id)">
                             <mat-icon>visibility</mat-icon>
                         </button>
                     </mat-tree-node>
