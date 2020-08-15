@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="api" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4f6853fa-a100-4bbb-a1cb-2032bae176c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CampusTEC_API_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/LoginHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CampusTEC-API.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CampusTEC-API.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectId" id="1g95secjHUpWjRl6uLQfckTYbap" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RunManager">
+    <configuration name="GlassFish 5.0.0" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 5.0.0" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/CampusTEC_API_war_exploded" />
+      <option name="BROWSER_ID" value="b2a9dca7-9d0b-4e1e-98a8-afb19c1328d2" />
+      <deployment>
+        <artifact name="CampusTEC_API_war_exploded">
+          <settings />
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="DOMAIN" value="domain1" />
+        <option name="PRESERVE" value="false" />
+        <option name="COMPATIBILITY" value="false" />
+        <option name="VIRTUAL_SERVER" />
+        <option name="USERNAME" value="admin" />
+        <option name="CREDENTIAL_ALIAS" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="GlassFish" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="9009" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="CampusTEC_API_war_exploded" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4f6853fa-a100-4bbb-a1cb-2032bae176c9" name="Default Changelist" comment="" />
+      <created>1597514175028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597514175028</updated>
+      <workItem from="1597514177116" duration="574000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1400" y="275" key="#Project_Structure" timestamp="1597514641109">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1400" y="275" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1597514641109" />
+    <state x="1374" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597514664086">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1374" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1597514664086" />
+    <state x="1339" y="218" width="851" height="963" key="#com.intellij.j2ee.appServerIntegrations.ApplicationServersConfigurable" timestamp="1597514563651">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1339" y="218" width="851" height="963" key="#com.intellij.j2ee.appServerIntegrations.ApplicationServersConfigurable/0.0.2560.1400@0.0.2560.1400" timestamp="1597514563651" />
+    <state x="1699" y="441" key="FileChooserDialogImpl" timestamp="1597514529319">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1699" y="441" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1597514529319" />
+    <state width="1013" height="398" key="GridCell.Tab.0.bottom" timestamp="1597514755060">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755060" />
+    <state width="1013" height="398" key="GridCell.Tab.0.center" timestamp="1597514755060">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755060" />
+    <state width="1013" height="398" key="GridCell.Tab.0.left" timestamp="1597514755060">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755060" />
+    <state width="1013" height="398" key="GridCell.Tab.0.right" timestamp="1597514755060">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755060" />
+    <state width="1013" height="398" key="GridCell.Tab.1.bottom" timestamp="1597514755061">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755061" />
+    <state width="1013" height="398" key="GridCell.Tab.1.center" timestamp="1597514755061">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755061" />
+    <state width="1013" height="398" key="GridCell.Tab.1.left" timestamp="1597514755061">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755061" />
+    <state width="1013" height="398" key="GridCell.Tab.1.right" timestamp="1597514755061">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1013" height="398" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1597514755061" />
+  </component>
+</project>
