@@ -103,7 +103,7 @@ export class ClassesComponent implements OnInit {
     classData.disableClose = true;
     classData.autoFocus = true;
 
-    classData.data = 29;
+    classData.data = this.classData.id;
 
     this.dialog.open(ObjectiveComponent, classData);
   }
@@ -132,7 +132,7 @@ export class ClassesComponent implements OnInit {
 
 
 
-    this.challenges_activities = this.http.getActivitiesAndChallenges();
+    
 
     this.classData = this.http.getClassBaseData();
 

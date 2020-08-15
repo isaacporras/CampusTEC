@@ -10,58 +10,12 @@ export class ClassesService {
   constructor() { }
 
 
-  getActivitiesAndChallenges() {
-    return [
-      {
-        id: 'A-1', name: 'Hacer tutoria 1'
-      },
-      {
-        id: 'A-2', name: 'Hacer tutoria 2'
-      },
-
-      {
-        id: 'A-3', name: 'Hacer tutoria 3'
-      },
-      {
-        id: 'A-4', name: 'Hacer tutoria 4'
-      },
-      {
-        id: 'A-5', name: 'Hacer tarea 1'
-      },
-      {
-        id: 'A-6', name: 'Hacer tarea 2'
-      },
-      {
-        id: 'A-7', name: 'Hacer tarea 3'
-      },
-      {
-        id: 'A-8', name: 'Hacer ejercicio el lunes'
-      },
-      {
-        id: 'A-9', name: 'Hacer ejercicio el martes'
-      },
-      {
-        id: 'A-10', name: 'Hacer ejercicio el miercoles'
-      },
-      {
-        id: 'R-1', name: 'Ir a todas las tutorias'
-      },
-      {
-        id: 'R-2', name: 'Completar todas las asignaciones'
-      },
-      {
-        id: 'R-3', name: 'Hacer ejercicio todos los dias'
-      }
-    ];
-  }
-
-
 
 
 
   getClassBaseData() {
     return {
-      id: 1,
+      id: 11,
       name: 'Analisis Numerico para ingeniería',
       group: 5
     };
