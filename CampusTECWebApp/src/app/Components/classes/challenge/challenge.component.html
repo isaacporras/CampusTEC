@@ -1,23 +1,23 @@
-
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 
 
-<div [formGroup]="objectiveForm">
+<div [formGroup]="challengeForm">
 
     <div class="row">
         <div class="col-4">
             <h1>Reto</h1>
         </div>
-        
+
     </div>
+    {{challengeForm.value | json}}
     <hr>
     <div class="row">
         <div class="col-4">
             <h3>Nombre:</h3>
         </div>
         <div class="col-8">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="name">
         </div>
     </div>
     <div class="row">
@@ -25,7 +25,7 @@
             <h3>Fecha de entrega:</h3>
         </div>
         <div class="col-8">
-            <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
         </div>
     </div>
     <div class="row">
@@ -33,7 +33,7 @@
             <h3>Remuneración:</h3>
         </div>
         <div class="col col-6 col-md-4">
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" formControlName="payment">
         </div>
         <div class="col-6 col-md-4">
             <h3>TEColones</h3>
@@ -44,14 +44,26 @@
             <h3>Objetivos:</h3>
         </div>
         <div class="col-7">
-            <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+            <select id="inputState" class="form-control" formControlName="objective">
+                <option selected disabled></option>
+                <ng-container *ngFor="let objective of objectives">
+
+                    <option>{{objective.id}}) {{objective.description}}</option>
+
+                </ng-container>
             </select>
         </div>
         <div class="col-1">
-            <button class="btn"><i class="glyphicon glyphicon-plus"></i></button>
+            <button class="btn" (click)="addObjective()"><i class="glyphicon glyphicon-plus"></i></button>
         </div>
+
+    </div>
+
+    
+    <div *ngIf="objective == false" class="alert alert-danger">
+
+
+        Debe ingresar al menos un objetivo.
 
     </div>
 
@@ -61,16 +73,14 @@
             <table class="table table-bordered">
 
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let objective of objectivesResponse">
                         <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
-                        <td>Mejorar las herramientas para programar de cada uno de los estuiantes de la generacion
-                            numero</td>
-
+                        <td>{{objective.description}}</td>
                     </tr>
-
                 </tbody>
             </table>
         </div>
+        
     </div>
     <div class="row">
         <div class="col-4">
@@ -79,11 +89,13 @@
         <div class="col-8">
             <form>
                 <div class="form-group">
-                  
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                  
+
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                        (change)="uploadActivityFile($event)">
+
                 </div>
-              </form>
+
+            </form>
         </div>
     </div>
 
@@ -125,48 +137,48 @@
         <div class="col-8">
             <table class="table table-bordered">
                 <thead>
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Carnet</th>
-                    <th scope="col">Completado</th>
-                   
-                  </tr>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Carnet</th>
+                        <th scope="col">Completado</th>
+
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    
-                    <td>Bootstrap 4 CDN and Starter Template</td>
-                    <td>Cristina</td>
-                    <td>913</td>
-                    
-                    <td>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                            <label class="custom-control-label" for="customCheck1">1</label>
-                        </div>
-                      </td>
-                  </tr>
-                  <tr>
-                    
+                    <tr>
+
+                        <td>Bootstrap 4 CDN and Starter Template</td>
+                        <td>Cristina</td>
+                        <td>913</td>
+
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+                                <label class="custom-control-label" for="customCheck1">1</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+
                 </tbody>
-              </table>
-              
-              
+            </table>
+
+
         </div>
     </div>
 
     <div class="row justify-content-end">
         <div class="col-4">
-            
-                <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
-           
-            
+
+            <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
+
+
         </div>
         <div class="col-4">
-            
-                <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
-            
+
+            <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
+
         </div>
     </div>
 

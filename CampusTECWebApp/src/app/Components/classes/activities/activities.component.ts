@@ -228,7 +228,7 @@ ngOnInit() {
   this.comments = this.http.getComments();
 
 
-  this.objectivesResponse = []
+  this.objectivesResponse = [];
 
   this.objectives = this.http.getObjectives();
 
