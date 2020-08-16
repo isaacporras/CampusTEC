@@ -61,9 +61,8 @@ interface ExampleFlatNode {
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit {
-
-  classes: Array<any>;
-
+  challengesSources: Array<any> = [];
+  activities: Array<any>;
   locale: string = 'es';
   viewDate: Date = new Date();
   showMarker = false;
@@ -78,7 +77,6 @@ export class PlannerComponent implements OnInit {
   };
 
 
-
   private _transformer = (node: FoodNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -87,18 +85,12 @@ export class PlannerComponent implements OnInit {
       level: level,
     };
   }
+
   treeControl = new FlatTreeControl<ExampleFlatNode>(
     node => node.level, node => node.expandable);
   treeFlattener = new MatTreeFlattener(
     this._transformer, node => node.level, node => node.expandable, node => node.children);
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-
-
-
-
-
-
+  // dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
 
   actions: CalendarEventAction[] = [
@@ -124,11 +116,6 @@ export class PlannerComponent implements OnInit {
   events: CalendarEvent[] = [];
 
   constructor(private http: HttpServicesService, private dialog: MatDialog,) {
-
-
-    this.TREE_DATA = this.http.getActivitiesAndChallenges();
-    this.dataSource.data = this.TREE_DATA;
-    console.log(this.TREE_DATA);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -136,9 +123,9 @@ export class PlannerComponent implements OnInit {
     // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  updateEvents(): void{
+  updateAssignments(): void{
     let receivedEvents;
-    this.http.getTareas(this.week).subscribe((data) => {
+    this.http.getAssignments(this.week).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(data);
 
@@ -205,7 +192,7 @@ export class PlannerComponent implements OnInit {
     console.log(id);
 
     this.dialog.open(ViewChallengeComponent, classData);
-    
+
   }
   viewActivity(id: number) {
     console.log('Es una actividad');
@@ -225,12 +212,26 @@ export class PlannerComponent implements OnInit {
     this.dialog.open(ViewActivityComponent, classData);
   }
 
-  ngOnInit(): void {
+  updateChallenges(): void{
+    let challenges = this.http.getChallenges();
+    challenges.forEach((value) => {
+        let course = Array<any>();
+        course["name"] = value["name"];
+        course["dataSource"] = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+        course["dataSource"].data = value["children"];
+        this.challengesSources.push(course);
+    })
+  }
 
-    this.TREE_DATA = this.http.getActivitiesAndChallenges();
-    this.dataSource.data = this.TREE_DATA;
-    this.updateEvents();
+  updateActivities(): void{
+    this.activities = this.http.getActivities();
+    console.log(this.activities);
+  }
+
+  ngOnInit(): void {
+    this.updateAssignments();
     this.refresh.next();
-    this.classes = this.http.getClasses(); // = [1,2,3]
+    this.updateChallenges();
+    this.updateActivities();
   }
 }

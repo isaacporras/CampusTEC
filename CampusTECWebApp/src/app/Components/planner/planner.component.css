@@ -1,3 +1,10 @@
+body.window-size{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column;
+}
+
 h3 {
   margin: 0 0 10px;
 }
@@ -8,31 +15,65 @@ pre {
 }
 
 .grid-container{
+  overflow: hidden;
+  flex-grow: 1;
+  width: 100%;
   padding: 50px;
   display: grid;
-  grid-gap: 50px 100px;
+  grid-gap: 50px 50px;
   grid-template-areas:
-    'header header header-r'
-    'main main right'
-    'main main right';
+    'calendar calendar calendar challenges'
+    'calendar calendar calendar activities';
 }
 
 .grid-calendar{
-  grid-area: main;
+  grid-area: calendar;
+  min-height: 0;
+  display: flex;
+  flex-flow: column;
 }
 
-.grid-right{
-  grid-area: right;
+.calendar{
+  border: 1px solid #ADADAD;
+  padding: 10px;
+  flex-grow: 1;
 }
 
-.grid-header{
-  grid-area: header;
+.grid-challenges{
+  grid-area: challenges;
+  min-height: 0;
+  display: flex;
+  flex-flow: column;
 }
 
-.calendar-title{
+.challenges{
+  border: 1px solid #ADADAD;
+  padding: 10px;
+  flex-grow: 1;
+}
 
+.grid-activities{
+  grid-area: activities;
+  min-height: 0;
+  display: flex;
+  flex-flow: column;
+}
+
+.activities{
+  border: 1px solid #ADADAD;
+  padding: 10px;
+  flex-grow: 1;
 }
 
 .week-selector{
   background: #f9f9f9;
+}
+
+div.scrollable{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.activity-node{
+  font-size: 0.9em;
 }

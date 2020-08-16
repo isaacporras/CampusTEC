@@ -55,8 +55,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: #c1272d;
   color: white;
   padding: 16px 32px;
-  border-radius: 100%;
+  border-radius: 100px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19);
+  min-width: 100px;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.secondary-btn{
+  background: none;
+  color: #c1272d;
+  border: 1px solid #c1272d;
+  padding: 16px 32px;
+  border-radius: 100px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19);
+  min-width: 100px;
+  width: auto;
+  white-space: nowrap;
 }
 
 .icon-btn{
