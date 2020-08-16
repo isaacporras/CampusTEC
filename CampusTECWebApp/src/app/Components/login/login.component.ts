@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
 
 
 
@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   onLogIn() {
     console.log(JSON.stringify(this.credentialsForm.value, null, 4));
-    this.router.navigate(['/studentProfile']);
+    this.router.navigate(['/studentProfile',133]);
+    //this.router.navigate(['studentProfile/']);
   }
 
 

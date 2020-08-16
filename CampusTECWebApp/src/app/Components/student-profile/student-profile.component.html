@@ -14,8 +14,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link  " href="/planner">Planificador <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link active" href="/studentProfile">Mi Perfil</a>
+        <a class="nav-item nav-link " [routerLink]="['/planner', studentId]" >Planificador </a>
+        <a class="nav-item nav-link active" [routerLink]="['/studentProfile', studentId]" >Mi Perfil</a>
         <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
 
       </div>

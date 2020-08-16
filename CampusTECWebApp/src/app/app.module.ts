@@ -93,19 +93,19 @@ registerLocaleData(localeEs);
         component: LoginComponent
       },
       {
-        path: 'studentProfile',
+        path: 'studentProfile/:id',
         component: StudentProfileComponent
       },
       {
-        path: 'teacherProfile',
+        path: 'teacherProfile/:id',
         component: TeacherProfileComponent
       },
       {
-        path: 'classes',
+        path: 'classes/:id',
         component: ClassesComponent
       },
       {
-        path: 'planner',
+        path: 'planner/:id',
         component: PlannerComponent
       }
     ]),

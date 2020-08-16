@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-student-profile',
@@ -8,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./student-profile.component.css']
 })
 export class StudentProfileComponent implements OnInit {
-
+  studentId: string;
   email1Disable: boolean = true;
   email2Disable: boolean = true;
   telNumberDisable: boolean = true;
@@ -32,7 +35,10 @@ export class StudentProfileComponent implements OnInit {
     }
 
   ];
+  goToPlanner() {
+    return this.router.navigate(['/planner', this.studentId]);
 
+  }
 
   onEdit(id) {
     this.editing = true;
@@ -68,7 +74,13 @@ export class StudentProfileComponent implements OnInit {
     this.editing = false;
 
   }
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
+    this.activatedroute.params.subscribe(data => {
+
+      console.log('La data que le llegó a student-profile es:' + data.id);
+      this.studentId = data.id;
+    })
+  }
 
   ngOnInit() {
 
