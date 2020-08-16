@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
       console.log(error);
     });
     console.log(JSON.stringify(this.credentialsForm.value, null, 4));
-    this.router.navigate(['/studentProfile',133]);
+    //this.router.navigate(['/studentProfile', 1009]);
+    this.router.navigate(['/teacherProfile', 9999]);
     //this.router.navigate(['studentProfile/']);
   }
 

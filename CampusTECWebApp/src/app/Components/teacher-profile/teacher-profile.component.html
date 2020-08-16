@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
             
-            <a class="nav-item nav-link active" href="/teacherProfile">Mi Perfil</a>
+            <a class="nav-item nav-link active" [routerLink]="['/teacherProfile', teacherId]">Mi Perfil</a>
             <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
     
           </div>
@@ -152,7 +152,7 @@
         <h1>Cursos</h1>
         <ul class="list-group">
           <tr *ngFor="let curso of teacherClasses">
-            <li class="list-group-item"><a href="/teacherProfile">{{curso.nombre}}</a></li>
+            <li class="list-group-item"><a [routerLink]="['/classes',curso.id, teacherId]">{{curso.nombre}}</a></li>
            
           </tr>
         </ul>

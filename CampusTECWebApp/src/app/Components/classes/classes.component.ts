@@ -10,7 +10,8 @@ import { TreeDataNodeFlattener } from '@angular/cdk/collections';
 import {ViewActivityComponent} from './viewOnly/view-activity/view-activity.component';
 import {ViewChallengeComponent} from './viewOnly/view-challenge/view-challenge.component';
 
-
+import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router';
 
 interface FoodNode {
   name: string;
@@ -43,6 +44,8 @@ export class ClassesComponent implements OnInit {
   activities: any;
   objectives: any;
   TREE_DATA: FoodNode[];
+  teacherId: any;
+  classId:any;
 
 
   private _transformer = (node: FoodNode, level: number) => {
@@ -78,7 +81,7 @@ export class ClassesComponent implements OnInit {
     classData.autoFocus = true;
 
     classData.data = {id: this.classData.id, cameFrom : 'classes'};
-    
+
 
     this.dialog.open(ObjectiveComponent, classData);
   }
@@ -113,10 +116,17 @@ export class ClassesComponent implements OnInit {
 
 
   constructor(
-    private dialog: MatDialog, private http: ClassesService
+    private dialog: MatDialog, private http: ClassesService, private activatedroute: ActivatedRoute, private router: Router
   ) {
     this.TREE_DATA = this.http.getActivitiesAndChallenges();
     this.dataSource.data = this.TREE_DATA;
+    this.activatedroute.params.subscribe(data => {
+
+      console.log('La data que le llegó a student-profile es:' + data.id);
+      this.classId = data.id;
+      this.teacherId = data.teacherId;
+    })
+    
   }
 
   viewChallenge(id: number) {
@@ -135,7 +145,7 @@ export class ClassesComponent implements OnInit {
     console.log(id);
 
     this.dialog.open(ViewChallengeComponent, classData);
-    
+
   }
   viewActivity(id: number) {
     console.log('Es una actividad');
