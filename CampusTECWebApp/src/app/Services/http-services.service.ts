@@ -47,6 +47,9 @@ export class HttpServicesService {
       }
     ];
   }
+  getClasses(){
+    return [1, 2, 3]
+  }
 
   
 }

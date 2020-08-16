@@ -17,8 +17,9 @@ import {HttpServicesService} from "../../Services/http-services.service";
 
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
-
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {ViewActivityComponent} from '../classes/viewOnly/view-activity/view-activity.component';
+import {ViewChallengeComponent} from '../classes/viewOnly/view-challenge/view-challenge.component';
 
 const colors: any = {
   red: {
@@ -59,6 +60,9 @@ interface ExampleFlatNode {
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit {
+
+  classes: Array<any>;
+
   locale: string = 'es';
   viewDate: Date = new Date();
   showMarker = false;
@@ -118,7 +122,7 @@ export class PlannerComponent implements OnInit {
 
   events: CalendarEvent[] = [];
 
-  constructor(private http: HttpServicesService) {
+  constructor(private http: HttpServicesService, private dialog: MatDialog,) {
 
 
     this.TREE_DATA = this.http.getActivitiesAndChallenges();
@@ -170,11 +174,48 @@ export class PlannerComponent implements OnInit {
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
+  viewChallenge(id: number) {
+    console.log('Es un reto');
+    console.log(id);
+    console.log(id);
+    const classData = new MatDialogConfig();
+
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data = id;
+    console.log('En ventana principal el id es de:')
+    console.log(id);
+
+    this.dialog.open(ViewChallengeComponent, classData);
+    
+  }
+  viewActivity(id: number) {
+    console.log('Es una actividad');
+    console.log(id);
+    console.log(id);
+    const classData = new MatDialogConfig();
+
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data = id;
+    console.log('En ventana principal el id es de:')
+    console.log(id);
+
+    this.dialog.open(ViewActivityComponent, classData);
+  }
+
   ngOnInit(): void {
 
     this.TREE_DATA = this.http.getActivitiesAndChallenges();
     this.dataSource.data = this.TREE_DATA;
     this.updateEvents();
     this.refresh.next();
+    this.classes = this.http.getClasses(); // = [1,2,3]
   }
 }

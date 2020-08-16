@@ -1,138 +1,123 @@
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-custom">
-  <div class="logo-image">
-    <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
-  </div>
-  <a class="navbar-brand" href="#"> CampusTEC</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link active">Planificador <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link " href="/studentProfile">Mi Perfil</a>
-      <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
-
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="logo-image">
+      <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
     </div>
-  </div>
-</nav>
+    <a class="navbar-brand" href="#"> CampusTEC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link active">Planificador <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link " href="/studentProfile">Mi Perfil</a>
+        <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
 
-
-<div class="grid-container">
-  <div class="grid-calendar">
-
-    <!--   This is the title of the calendar   -->
-    <div class="row text-center">
-      <div class="col calendar-title">
-        <button (click)="lastWeek()" type="button" class="btn icon-btn">
-          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-          </svg>
-        </button>
-
-      </div>
-      <div id="current-week-label" class="col calendar-title">
-        <button type="button" class="btn btn-lg btn-block week-selector">Semana {{week}}</button>
-      </div>
-      <div class="col calendar-title">
-        <button (click)="nextWeek()" type="button" class="btn icon-btn">
-        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
-             xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-        </svg>
-        </button>
       </div>
     </div>
+  </nav>
 
-    <br/>
 
-    <!--    This is the calendar    -->
-    <ng-template
-      #currentTimeMarkerTemplate
-      let-columnDate="columnDate"
-      let-dayStartHour="dayStartHour"
-      let-dayStartMinute="dayStartMinute"
-      let-dayEndHour="dayEndHour"
-      let-dayEndMinute="dayEndMinute"
-      let-isVisible="isVisible"
-      let-topPx="topPx"
-    >
-      <div
-        class="cal-current-time-marker"
-        *ngIf="isVisible && showMarker"
-        [style.top.px]="topPx"
-      ></div>
-    </ng-template>
-    <mwl-calendar-week-view
-      [viewDate]="viewDate"
-      [currentTimeMarkerTemplate]="currentTimeMarkerTemplate"
-      [events]="events"
-      [refresh]="refresh"
-      [locale]="locale"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-    >
-    </mwl-calendar-week-view>
-  </div>
-  <div class="grid-right">
-    <div class = "row">
-      <div class="col">
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <div class="grid-container">
+    <div class="grid-calendar">
+
+      <!--   This is the title of the calendar   -->
+      <div class="row text-center">
+        <div class="col calendar-title">
+          <button (click)="lastWeek()" type="button" class="btn icon-btn">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+            </svg>
+          </button>
+
+        </div>
+        <div id="current-week-label" class="col calendar-title">
+          <button type="button" class="btn btn-lg btn-block week-selector">Semana {{week}}</button>
+        </div>
+        <div class="col calendar-title">
+          <button (click)="nextWeek()" type="button" class="btn icon-btn">
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <br />
+
+      <!--    This is the calendar    -->
+      <ng-template #currentTimeMarkerTemplate let-columnDate="columnDate" let-dayStartHour="dayStartHour"
+        let-dayStartMinute="dayStartMinute" let-dayEndHour="dayEndHour" let-dayEndMinute="dayEndMinute"
+        let-isVisible="isVisible" let-topPx="topPx">
+        <div class="cal-current-time-marker" *ngIf="isVisible && showMarker" [style.top.px]="topPx"></div>
+      </ng-template>
+      <mwl-calendar-week-view [viewDate]="viewDate" [currentTimeMarkerTemplate]="currentTimeMarkerTemplate"
+        [events]="events" [refresh]="refresh" [locale]="locale" (eventClicked)="handleEvent('Clicked', $event.event)">
+      </mwl-calendar-week-view>
+    </div>
+    <div class="grid-right">
+      <div class="row">
+        <div *ngFor="let class of classes">
+          <h2>MATERIA A</h2>
+          
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
             <!-- This is the tree node template for leaf nodes -->
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                <!-- use a disabled button to provide padding for tree leaf -->
-                <button mat-icon-button disabled></button>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
 
 
-                {{node.name}}
-                
-                <button mat-icon-button (click)="viewActivity(node.id)">
-                    <mat-icon>visibility</mat-icon>
-                </button>
+              {{node.name}}
+
+              <button mat-icon-button (click)="viewActivity(node.id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
             </mat-tree-node>
             <button mat-icon-button disabled></button>
             <!-- This is the tree node template for expandable nodes -->
             <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-                    <mat-icon class="mat-icon-rtl-mirror">
-                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                    </mat-icon>
-                </button>
-                {{node.name}}
-                <button mat-icon-button (click)="viewChallenge(node.id)">
-                    <mat-icon>visibility</mat-icon>
-                </button>
+              <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              {{node.name}}
+              <button mat-icon-button (click)="viewChallenge(node.id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
             </mat-tree-node>
-        </mat-tree>
-    </div>
-    <div class="col">
+          </mat-tree>
+        </div>
+        <div class="col">
 
-        <ul class="list-group">
+          <ul class="list-group">
             <tr *ngFor="let activity of activities">
 
 
-                <li class="list-group-item"> {{activity.name}}
-                    <button class="btn eyeButtonActivity" (click)="viewActivity(activity.id)">
-                        <mat-icon>visibility</mat-icon>
-                    </button>
-                </li>
+              <li class="list-group-item"> {{activity.name}}
+                <button class="btn eyeButtonActivity" (click)="viewActivity(activity.id)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </li>
 
             </tr>
 
-        </ul>
-    </div>
+          </ul>
+        </div>
 
 
-    </div>
-    <div class = "row">
+      </div>
+      <div class="row">
 
 
 
+      </div>
     </div>
   </div>
-</div>
 </body>
