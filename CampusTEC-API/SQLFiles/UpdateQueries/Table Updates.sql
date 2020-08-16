@@ -10,4 +10,10 @@ UPDATE persona  SET
 UPDATE actividadpersona SET
 Completado = ? WHERE IdActividad = ? AND IdPersona=?;
 
-update
+
+UPDATE personareto SET
+Completado = ? WHERE IdRetoAcademico = ? AND IdPersona=?;
+
+UPDATE tarea SET
+Hora = ?, semana = ?, NumDia = ?
+WHERE tarea.IdTarea =?;
