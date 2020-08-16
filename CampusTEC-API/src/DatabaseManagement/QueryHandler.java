@@ -1,5 +1,8 @@
 package DatabaseManagement;
 
+import RequestObjects.Credentials;
+import RequestObjects.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,6 +36,12 @@ public class QueryHandler {
             default:
                 return null;
         }
+    }
+
+    public static User getUser(Credentials credentials) {
+        User user = new User("Estudiante", "2017107550", "Oscar Porras", "Activo",
+                "imanoisaac1.gmail.com", "imanoisaac23.gmail.com", "82837462", "XTEC", "Cartago");
+        return user;
     }
 
 }
