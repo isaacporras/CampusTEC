@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class HttpServicesService {
 
   constructor(private http: HttpClient) {
@@ -120,6 +122,13 @@ export class HttpServicesService {
         ]
       }
     ];
+  }
+
+  
+
+  autenticate(credentials: JSON) {
+    console.log(this.server + "/CampusTEC_API_war_exploded/login")
+    return this.http.post(this.server + "/CampusTEC_API_war_exploded/login", credentials)
   }
 
 }
