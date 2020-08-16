@@ -178,66 +178,7 @@
 
         </div>
     </div>
-    <div class="row" [formGroup]="commentForm">
-        <div class="panel panel-default widget">
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-comment"></span>
-                <h3 class="panel-title">
-                    Crear Comentario</h3>
-                <span class="label label-info">
-                </span>
-                {{commentForm.value | json}}
-                <div>
-                    <textarea placeholder="" formControlName = "description"></textarea>
-                </div>
-                <div class="row justify-content-right">
-                    <div class="col-10">
-
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                            (change)="uploadCommentFile($event)">
-
-
-                    </div>
-                    <div class="col-2">
-
-                        <button type="button" class="btn btn-dark" (click)="onClickComentar()">Comentar</button>
-
-                    </div>
-                </div>
-                <h3 class="panel-title">
-                    Comentarios</h3>
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="row" *ngFor="let comment of comments">
-                            
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    
-                                    <div class="mic-info">
-                                        Por: <a href="#">{{comment.user}}</a> , A las: {{comment.time}} {{comment.date}}
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    {{comment.description}}
-                                </div>
-                                <div class="action">
-                                    <span class="label label-info">Descargar archivo adjunto</span>
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit" (click) = "onDownloadFile(comment.fileURL)">
-                                        <span class="glyphicon glyphicon-save"></span>
-                                    </button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
-                
-            </div>
-        </div>
-    </div>
+    
 
 
 </div>
