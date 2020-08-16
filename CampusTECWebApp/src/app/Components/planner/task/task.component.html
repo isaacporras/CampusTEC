@@ -1,10 +1,11 @@
-<div>
+<div [formGroup]="taskForm">
     <div class="col">
         <div class="row">
             <h1>Tarea</h1>
 
         </div>
         <hr>
+        {{taskForm.value | json}}
         <div class="row">
 
             <div class="col-4">
@@ -19,7 +20,7 @@
             <div *ngIf="name.errors.required">
                 Debe indicar un nombre para la tarea.
             </div>
-
+            
 
         </div>
         <div class="row">
@@ -49,27 +50,35 @@
                 </select>
             </div>
         </div>
+        <div *ngIf="week.invalid && (week.dirty || week.touched)" class="alert alert-danger">
+            <div *ngIf="week.errors.required ">
+                Debe ingresar una semana.
+            </div>
+            
+        </div>
         <div class="row">
             <div class="col-4">
                 <h3>Actividades:</h3>
             </div>
             <div class="col-7">
-                <select id="inputState" class="form-control" formControlName="objective">
+                <select id="inputState" class="form-control" >
                     <option selected disabled></option>
-                    <ng-container *ngFor="let objective of objectives">
+                    <ng-container *ngFor="let activity of activities">
 
-                        <option>{{objective.id}}) {{objective.description}}</option>
+                        <option> {{activity.description}}</option>
 
                     </ng-container>
                 </select>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-1">
                 <h3>Día:</h3>
             </div>
             <div class="col-3">
-                <select id="inputState" class="form-control" formControlName="week">
+                <select id="inputState" class="form-control" formControlName="day" style="width: 120px; ">
+                    
                     <option selected>Lunes</option>
                     <option>Martes</option>
                     <option>Miercoles</option>
@@ -80,13 +89,19 @@
 
                 </select>
             </div>
+            <div *ngIf="day.invalid && (day.dirty || day.touched)" class="alert alert-danger">
+                <div *ngIf="day.errors.required ">
+                    Debe un dia de la semana.
+                </div>
+                
+            </div>
             <div class="col-1">
                 <h3>Hora:</h3>
             </div>
             <div class="col-7">
                 <div class="row">
                     <div class="col-4">
-                        <input type="number" class="form-control" formControlName="name" style="width: 75px;  "
+                        <input type="number" class="form-control" min="1" max="12" formControlName="hour" style="width: 75px;  "
                             placeholder="HH">
 
                     </div>
@@ -95,26 +110,25 @@
 
 
                     <div class="col-4">
-                        <input type="number" class="form-control" formControlName="name" style="width: 75px; ;"
+                        <input type="number" class="form-control" min="0" max="60" formControlName="minute" style="width: 75px; ;"
                             placeholder="MM">
                     </div>
                     <div class="col-3">
-                        <select id="inputState" class="form-control" formControlName="week" style="width: 75px; ">
+                        <select id="inputState" class="form-control" formControlName="period" style="width: 75px; ">
                             <option selected>AM</option>
                             <option>PM</option>
                         </select>
                     </div>
-
-
-
-
-
-
                 </div>
-
             </div>
-
-
+        </div>
+        <div *ngIf="hour.invalid && (hour.dirty || hour.touched) || minute.invalid && (minute.dirty || minute.touched)" class="alert alert-danger">
+            
+            <div >
+                Debe ingresar una hora valida.
+            </div>
+               
+            
         </div>
 
         <div class="row">
@@ -123,6 +137,14 @@
             </div>
             <div class="col-8">
                 <textarea formControlName="description" placeholder="" style="height: 150px; width: 300px;"></textarea>
+            </div>
+        </div>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+            <div *ngIf="description.errors.required ">
+                Debe indicar una descripción
+            </div>
+            <div *ngIf="hour.error.min || hour.error.max">
+                Debe indicar un nombre para la tarea.
             </div>
         </div>
         <div class="row">
