@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { FormGroup, FormControl, Validators ,FormBuilder} from '@angular/forms';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {RxwebValidators} from '@rxweb/reactive-form-validators';
 
-import {Router} from '@angular/router';
-
+import {Router} from '@angular/router'
+import {HttpServicesService} from "../../Services/http-services.service";
 
 
 @Component({
@@ -17,26 +17,36 @@ export class LoginComponent implements OnInit {
   credentialsForm: FormGroup;
 
   onLogIn() {
+    this.http.autenticate(this.credentialsForm.value).subscribe((data) => {console.log(data)
+    }, (error) => {
+      console.log(error);
+    });
     console.log(JSON.stringify(this.credentialsForm.value, null, 4));
     this.router.navigate(['/studentProfile',133]);
     //this.router.navigate(['studentProfile/']);
   }
 
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private http: HttpServicesService) {
+  }
 
   ngOnInit() {
 
-    this.credentialsForm =  this.formBuilder.group(
+    this.credentialsForm = this.formBuilder.group(
       {
-      id : new FormControl('',
-      [Validators.minLength(8), Validators.required]
-      ),
-      password : new FormControl('', Validators.compose([Validators.minLength(4), Validators.required]))
-    });
+        id: new FormControl('',
+          [Validators.minLength(8), Validators.required]
+        ),
+        password: new FormControl('', Validators.compose([Validators.minLength(4), Validators.required]))
+      });
   }
 
 
-  get id() { return this.credentialsForm.get('id'); }
-  get password() { return this.credentialsForm.get('password'); }
+  get id() {
+    return this.credentialsForm.get('id');
+  }
+
+  get password() {
+    return this.credentialsForm.get('password');
+  }
 }

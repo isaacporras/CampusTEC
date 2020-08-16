@@ -3,7 +3,10 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
+*:not(i):not(.fa):not(.mat-icon){
+  font-family: Arial !important;
+}
 
 /* NAVBAR STYLE */
 
