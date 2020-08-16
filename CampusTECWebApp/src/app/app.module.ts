@@ -39,6 +39,7 @@ import { PlannerComponent } from './Components/planner/planner.component';
 import { ViewActivityComponent } from './Components/classes/viewOnly/view-activity/view-activity.component';
 import { ViewChallengeComponent } from './Components/classes/viewOnly/view-challenge/view-challenge.component';
 import { TaskComponent } from './Components/planner/task/task.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -107,7 +108,8 @@ registerLocaleData(localeEs);
         path: 'planner',
         component: PlannerComponent
       }
-    ])
+    ]),
+    NgbModule
   ],
   providers: [AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent],
