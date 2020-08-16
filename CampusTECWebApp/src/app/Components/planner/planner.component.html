@@ -61,6 +61,9 @@
         [events]="events" [refresh]="refresh" [locale]="locale" (eventClicked)="handleEvent('Clicked', $event.event)">
       </mwl-calendar-week-view>
     </div>
+    <button class="btn btn-secondary" type="button" (click)="addTask(99)">
+      <i class="glyphicon glyphicon-pencil"> Añadir Tarea</i>
+    </button>
     <div class="grid-right">
       <div class="row">
         <div *ngFor="let class of classes">

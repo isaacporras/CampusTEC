@@ -1,0 +1,91 @@
+<div>
+    <div class="col">
+        <div class="row">
+            <h1>Tarea</h1>
+
+        </div>
+        <hr>
+        <div class="row">
+
+            <div class="col-4">
+                <h3>Nombre:</h3>
+            </div>
+            <div class="col-8">
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+        </div>
+        <div class="row" *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+            <div *ngIf="name.errors.required">
+                Debe un nombre para el reto.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Semana:</h3>
+            </div>
+            <div class="col-4">
+                <select id="inputState" class="form-control" formControlName="week">
+                    <option selected>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Actividades:</h3>
+            </div>
+            <div class="col-7">
+                <select id="inputState" class="form-control" formControlName="objective">
+                    <option selected disabled></option>
+                    <ng-container *ngFor="let objective of objectives">
+    
+                        <option>{{objective.id}}) {{objective.description}}</option>
+    
+                    </ng-container>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <h3>Día:</h3>
+            </div>
+            <div class="col-3">
+                <select id="inputState" class="form-control" formControlName="week">
+                    <option selected>Lunes</option>
+                    <option>Martes</option>
+                    <option>Miercoles</option>
+                    <option>Jueves</option>
+                    <option>Viernes</option>
+                    <option>Sabado</option>
+                    <option>Domingo</option>
+    
+                </select>
+            </div>
+            <div class="col-4">
+                <h3>Hora:</h3>
+            </div>
+            <div class="col-4">
+                <ngb-timepicker></ngb-timepicker>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

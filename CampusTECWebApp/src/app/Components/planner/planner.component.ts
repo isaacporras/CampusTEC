@@ -20,6 +20,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {ViewActivityComponent} from '../classes/viewOnly/view-activity/view-activity.component';
 import {ViewChallengeComponent} from '../classes/viewOnly/view-challenge/view-challenge.component';
+import { TaskComponent } from './task/task.component';
 
 const colors: any = {
   red: {
@@ -154,6 +155,20 @@ export class PlannerComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+  addTask(id){
+
+    const classData = new MatDialogConfig();
+
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data = id;
+    console.log('En ventana principal el id es de:')
+    console.log(id);
+    this.dialog.open(TaskComponent, classData);
   }
 
   lastWeek(): void{

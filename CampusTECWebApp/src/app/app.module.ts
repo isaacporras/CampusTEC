@@ -38,6 +38,7 @@ import { environment } from '../environments/environment';
 import { PlannerComponent } from './Components/planner/planner.component';
 import { ViewActivityComponent } from './Components/classes/viewOnly/view-activity/view-activity.component';
 import { ViewChallengeComponent } from './Components/classes/viewOnly/view-challenge/view-challenge.component';
+import { TaskComponent } from './Components/planner/task/task.component';
 
 
 
@@ -56,6 +57,7 @@ registerLocaleData(localeEs);
     PlannerComponent,
     ViewActivityComponent,
     ViewChallengeComponent,
+    TaskComponent,
 
   ],
   imports: [
