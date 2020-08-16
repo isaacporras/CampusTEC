@@ -164,7 +164,9 @@ export class ClassesComponent implements OnInit {
     classData.height = '700px';
     classData.width = '600px';
 
-    classData.data = this.classData.id;
+    classData.data = id;
+    console.log('En ventana principal el id es de:')
+    console.log(id);
 
     this.dialog.open(ViewActivityComponent, classData);
   }

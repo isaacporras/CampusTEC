@@ -48,7 +48,8 @@ export class ViewActivityComponent implements OnInit {
     private downloader: GlobalService,
 
   ) {
-
+    console.log('El dato en vista es:');
+    console.log(data);
     this.classId = data;
   }
 
@@ -218,7 +219,7 @@ ngOnInit() {
   });
 
   this.commentForm = this.formBuilder.group({
-    id: new FormControl(''),
+    id: new FormControl(this.classId),
     description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
 
 
