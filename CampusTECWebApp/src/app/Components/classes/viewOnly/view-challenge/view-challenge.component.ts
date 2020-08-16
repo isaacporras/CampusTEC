@@ -18,6 +18,7 @@ export class ViewChallengeComponent implements OnInit {
   objectiveForm: FormGroup;
   objectives: Array<any>;
   students: Array<any>;
+  statusChanged: boolean = false;
 
   classId: number;
   atLeastOnObjective: boolean = false;
@@ -48,46 +49,11 @@ export class ViewChallengeComponent implements OnInit {
 
   onClickSave() {
 
-    this.objectiveForm.controls.id.setValue(this.classId);
-    console.log(JSON.stringify(this.objectiveForm.value, null, 4));
-    this.dialogRef.close();
+    console.log(this.students);
+    this.statusChanged = false;
 
-
-    console.log('Se quiere subir el archivo');
-    this.challengeForm.controls.id.setValue(this.classId);
-    this.challengeForm.removeControl('objective');
-
-    this.challengeForm.addControl('objectives', this.formBuilder.control(''));
-    this.challengeForm.get('objectives').setValue(this.objectivesResponse);
-
-    this.challengeForm.addControl('fileURL', this.formBuilder.control(''));
-
-
-    console.log(this.students)
-    if (this.wasFileUploadedChallenge) {
-      //Se hace la carga del archivo //
-      const id = Math.random().toString(36).substring(2);
-      const file = this.fileChangedEventChallenge;
-      const filepath = `activityImages/activity_${id}`;
-      const reference = this.storage.ref(filepath);
-      const task = this.storage.upload(filepath, file).then(rst => {
-        rst.ref.getDownloadURL().then(url => {
-
-          this.challengeForm.get('fileURL').setValue(url);
-          console.log(this.challengeForm.value);
-          this.dialogRef.close();
-
-        });
-      });
-
-    }
-
-    else {
-      this.challengeForm.get('fileURL').setValue('Null');
-      console.log(this.challengeForm.value)
-      this.dialogRef.close();
-    }
-
+    
+    //call push students status
   }
   onClickClose() {
 

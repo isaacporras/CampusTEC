@@ -175,21 +175,21 @@ export class ViewActivityComponent implements OnInit {
     this.commentForm.addControl('date', this.formBuilder.control(''));
     this.commentForm.addControl('activityId', this.formBuilder.control(''));
     this.commentForm.addControl('user', this.formBuilder.control(''));
-    
+
     var id = 4;//tenemos que obtener el id del usuario
     let date = new Date();
-   
+
     this.commentForm.get('time').setValue(date.getHours() + ':' + date.getMinutes());
-    let currentDate =date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + ('0' + date.getDate()).slice(-2);
+    let currentDate = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() ;
     this.commentForm.get('date').setValue(currentDate);
     this.commentForm.get('user').setValue(this.http.getUserName(id).user);
     this.commentForm.get('activityId').setValue(this.classId);
 
     console.log(this.commentForm.value);
     
-    this.comments.push(this.commentForm);
+    this.comments.push(this.commentForm.value);
     console.log(this.commentForm.value);
-    this.dialogRef.close();
+    //this.dialogRef.close();
 
   }
 
