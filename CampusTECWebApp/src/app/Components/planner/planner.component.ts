@@ -41,6 +41,7 @@ const colors: any = {
 interface FoodNode {
   name: string;
   id: number;
+  newComments: boolean;
   children?: FoodNode[];
 }
 
@@ -49,6 +50,7 @@ interface ExampleFlatNode {
   expandable: boolean;
   name: string;
   id: number;
+  newComments: boolean;
   level: number;
 }
 
@@ -82,6 +84,7 @@ export class PlannerComponent implements OnInit {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
       id: node.id,
+      newComments: node.newComments,
       level: level,
     };
   }
