@@ -25,6 +25,7 @@ export class ChallengeComponent implements OnInit {
 
   classId: number;
   atLeastOnObjective: boolean = false;
+  atLeastOnActivity: boolean = false;
   objectivesResponse: Array<any>;
 
 
@@ -126,9 +127,11 @@ export class ChallengeComponent implements OnInit {
 
     console.log(this.objectivesResponse);
 
-
+    this.removeObjective(this.challengeForm.get('objective').value.charAt(0));
   }
-
+  getObjectivesLength(){
+    return this.objectives.length===0;
+  }
 
   onClickCancel(): void {
     this.dialogRef.close();
@@ -145,17 +148,23 @@ export class ChallengeComponent implements OnInit {
 
     this.activityDialog.open(ActivitiesComponent, classData).afterClosed().subscribe(
       data => {console.log("La data recibida en el dialog de reto es:", data);
-      this.activities.push(data);}
+      this.activities.push(data);
+      this.atLeastOnActivity = true;
+    }
   );    
     
 
   }
-
+  removeObjective(id){
+    this.objectives.forEach( (item, index) => {
+      if(item.id === id) this.objectives.splice(index,1);
+    });
+ }
 
   ngOnInit() {
     this.challengeForm = this.formBuilder.group({
-      id: new FormControl(''),
-      name: new FormControl(''),
+      id: new FormControl('',[Validators.required]),
+      name: new FormControl('',[Validators.required]),
       payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
@@ -166,6 +175,7 @@ export class ChallengeComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.maxLength(500)])
     });
 
+    
 
 
     this.objectives = this.http.getObjectives();
@@ -205,11 +215,14 @@ export class ChallengeComponent implements OnInit {
   }
 
   getCheckboxName(id: number){
-    return 'checkbox_'+String(id)
+    return 'checkbox_'+ String(id)
   }
 
 
 
-get description() { return this.objectiveForm.get('description'); }
+get description() { return this.challengeForm.get('description'); }
+get name() { return this.challengeForm.get('name'); }
+get date() { return this.challengeForm.get('date'); }
+get payment() { return this.challengeForm.get('payment'); }
 
 }

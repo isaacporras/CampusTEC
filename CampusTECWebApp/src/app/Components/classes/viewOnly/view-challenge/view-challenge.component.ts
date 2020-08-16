@@ -139,8 +139,9 @@ export class ViewChallengeComponent implements OnInit {
     this.objectivesResponse = [];
 
   }
+  
   changeStudentStatus(id: number, status: boolean) {
-
+    this.statusChanged = true;
     console.log(id);
 
     if (status === true) {

@@ -25,7 +25,8 @@
             <h3>Fecha de entrega:</h3>
         </div>
         <div class="col-8">
-            <input class="form-control" type="text" value="2011-08-19" id="example-date-input" formControlName="date" placeholder="{{challengeInfo.date}}">
+            <input class="form-control" type="text" value="2011-08-19" id="example-date-input" formControlName="date"
+                placeholder="{{challengeInfo.date}}">
         </div>
     </div>
     <div class="row">
@@ -59,7 +60,7 @@
                 </tbody>
             </table>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-4">
@@ -68,7 +69,8 @@
         <div class="col-8">
             <div class="action">
                 <span class="label label-info">Descargar archivo adjunto</span>
-                <button type="button" class="btn btn-primary btn-xs" title="Edit" (click) = "onDownloadFile(challengeInfo.fileURL)">
+                <button type="button" class="btn btn-primary btn-xs" title="Edit"
+                    (click)="onDownloadFile(challengeInfo.fileURL)">
                     <span class="glyphicon glyphicon-save"></span>
                 </button>
 
@@ -83,7 +85,7 @@
         <div class="col-4">
 
         </div>
-        
+
     </div>
 
     <div class="row">
@@ -108,7 +110,7 @@
         <div class="col-4">
             Estudiantes
         </div>
-        
+
         <div class="col-8">
             <table class="table table-bordered">
                 <thead>
@@ -129,7 +131,8 @@
 
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="form-check-input" [checked] = "student.status" id="exampleCheck1" (change) = "changeStudentStatus(student.id,student.status)">
+                                <input type="checkbox" class="form-check-input" [checked]="student.status"
+                                    id="exampleCheck1" (change)="changeStudentStatus(student.id,student.status)">
                                 <label class="form-check-label" for="exampleCheck1"></label>
                             </div>
                         </td>
@@ -142,19 +145,24 @@
 
         </div>
     </div>
+    
+        <div class="row justify-content-end">
 
-    <div class="row justify-content-end">
-        <div class="col-4">
+            <div class="col-4">
 
-            <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="onClickClose()">Salir</button>
 
 
+            </div>
+            <div *ngIf="statusChanged">
+            <div class="col-4">
+
+
+                <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
+
+            </div>
         </div>
-        <div class="col-4">
-
-            <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
-
-        </div>
+        
     </div>
 
 

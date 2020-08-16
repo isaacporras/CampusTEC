@@ -101,7 +101,7 @@ export class ClassesComponent implements OnInit {
 
     classData.disableClose = true;
     classData.autoFocus = true;
-    classData.height = '700px';
+    classData.height = '500px';
     classData.width = '600px';
 
     classData.data = this.classData.id;

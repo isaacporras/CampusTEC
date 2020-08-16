@@ -20,12 +20,24 @@
             <input type="text" class="form-control" formControlName="name">
         </div>
     </div>
+    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+        <div *ngIf="name.errors.required">
+            Debe un nombre para el reto.
+        </div>
+    </div>
     <div class="row">
         <div class="col-4">
             <h3>Fecha de entrega:</h3>
         </div>
         <div class="col-8">
             <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
+        </div>
+    </div>
+    <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
+
+        <div *ngIf="date.errors.required">
+            Debe una fecha para el reto.
         </div>
     </div>
     <div class="row">
@@ -37,6 +49,12 @@
         </div>
         <div class="col-6 col-md-4">
             <h3>TEColones</h3>
+        </div>
+    </div>
+    <div *ngIf="payment.invalid && (payment.dirty || payment.touched)" class="alert alert-danger">
+
+        <div *ngIf="payment.errors.required">
+            Debe una remuneración.
         </div>
     </div>
     <div class="row">
@@ -58,14 +76,12 @@
         </div>
 
     </div>
+    <div *ngIf="!atLeastOnObjective" class="alert alert-danger">
 
-    
-    <div *ngIf="objective == false" class="alert alert-danger">
-
-
-        Debe ingresar al menos un objetivo.
-
+        Debe seleccionar al menos un objetivo.
+        
     </div>
+
 
     <div class="row">
         <div class="col-4"></div>
@@ -109,6 +125,11 @@
         <div class="col-4">
             <button class="btn-addActivity" (click) = "addActivity()">Crear actividad</button>
         </div>
+    </div>
+    <div *ngIf="!atLeastOnActivity" class="alert alert-danger">
+
+        Debe seleccionar al menos una actividad.
+        
     </div>
 
     <div class="row">
