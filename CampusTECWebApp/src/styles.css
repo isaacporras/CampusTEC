@@ -49,3 +49,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 /* END NAVBAR STYLE */
+
+
+.primary-btn{
+  background: #c1272d;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 100%;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19);
+}
+
+.icon-btn{
+  background: #c1272d;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 100%;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 4px 4px 0 rgba(0,0,0,0.19);
+}
+
+.icon-btn:hover{
+  color: white;
+}
+
+.icon-btn:active{
+  color: #ADADAD;
+  box-shadow: none;
+}

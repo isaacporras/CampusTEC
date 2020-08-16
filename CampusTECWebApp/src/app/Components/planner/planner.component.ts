@@ -14,7 +14,6 @@ import {
 } from 'angular-calendar';
 import {HttpServicesService} from "../../Services/http-services.service";
 
-
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -32,16 +31,17 @@ const colors: any = {
 
 @Component({
   selector: 'app-planner',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './planner.component.html',
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit {
   locale: string = 'es';
   viewDate: Date = new Date();
+  showMarker = false;
   weekStart: Date = startOfWeek(this.viewDate);
   receivedEvents;
-  semana = 1;
+  week = 1;
 
   modalData: {
     action: string;
@@ -77,10 +77,9 @@ export class PlannerComponent implements OnInit {
     // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-
   updateEvents(): void{
     let receivedEvents;
-    this.http.getTareas(this.semana).subscribe((data) => {
+    this.http.getTareas(this.week).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(data);
 
@@ -99,8 +98,24 @@ export class PlannerComponent implements OnInit {
     });
   }
 
+  lastWeek(): void{
+    if(this.week > 1){
+      this.week -= 1;
+    }else{
+      this.week = 1;
+    }
+  }
+
+  nextWeek(): void{
+    if(this.week < 16){
+      this.week += 1;
+    }else{
+      this.week = 16;
+    }
+  }
 
   ngOnInit(): void {
     this.updateEvents();
+    this.refresh.next();
   }
 }
