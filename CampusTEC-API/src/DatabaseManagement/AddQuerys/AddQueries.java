@@ -102,7 +102,7 @@ public class AddQueries {
         return statement.executeQuery();
     }
 
-    public static ResultSet CreateRespuestaPregunta(ArrayList<String> parameters, Connection con) throws SQLException {
+    public static ResultSet createAnswerQuestion(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO respuestapregunta(idresultado, " +
                 "idpreguntapsico, idrespuesta) VALUES (?,?,?);");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
@@ -110,17 +110,14 @@ public class AddQueries {
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
         return statement.executeQuery();
     }
-    public static ResultSet CreateResult(ArrayList<String> parameters, Connection con) throws SQLException {
+    public static ResultSet createResult(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultado( idretopsicologico)" +
                 " VALUES (?);" +
                 "SELECT LAST_INSERT_ID();");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
-
-
-
-    public static ResultSet CreateResultadoPersona(ArrayList<String> parameters, Connection con) throws SQLException {
+    public static ResultSet createResultadoPersona(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultadopersona(idpersona, " +
                 "idresultado) VALUES (?,?);");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
@@ -128,11 +125,11 @@ public class AddQueries {
         return statement.executeQuery();
     }
 
-    public static ResultSet CreateResultadoPersona(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("INSERT INTO resultadopersona(idpersona, " +
-                "idresultado) VALUES (?,?);");
-        statement.setInt(1, Integer.parseInt(parameters.get(0)));
-        statement.setInt(2, Integer.parseInt(parameters.get(1)));
+    public static ResultSet createFile(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("INSERT INTO file(fileurl, filename, valid) " +
+                "VALUES (?,?,TRUE)");
+        statement.setString(1, parameters.get(0));
+        statement.setString(2, parameters.get(1));
         return statement.executeQuery();
     }
 

@@ -28,5 +28,10 @@ public class ProfileSelectQueries {
         return statement.executeQuery();
     }
 
+    public ResultSet getTecColonesInfo(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM cuenta where cuenta.IdPersona = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
 
 }

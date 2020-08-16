@@ -12,4 +12,6 @@ INSERT INTO respuestapregunta(idresultado, idpreguntapsico, idrespuesta) VALUES 
 INSERT INTO resultado( idretopsicologico) VALUES (?);
 SELECT LAST_INSERT_ID();
 INSERT INTO resultadopersona(idpersona, idresultado) VALUES (?,?);
-INSERT INTO 
+INSERT INTO file(fileurl, filename, valid) VALUES (?,?,?);
+INSERT INTO actividadretoacademico(idretoacademico, idactividad) VALUES (?,?);
+SELECT * FROM cuenta where cuenta.IdPersona = ?;
