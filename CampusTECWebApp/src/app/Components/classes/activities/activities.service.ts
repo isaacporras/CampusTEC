@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-declare var require: any
+declare var require: any;
 const FileSaver = require('file-saver');
 
 @Injectable({

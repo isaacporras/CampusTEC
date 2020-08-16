@@ -134,6 +134,7 @@
         <div class="col-4">
             Estudiantes
         </div>
+        
         <div class="col-8">
             <table class="table table-bordered">
                 <thead>
@@ -154,8 +155,9 @@
 
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                                <label class="custom-control-label" for="customCheck1"></label>
+                                <input type="checkbox" class="form-check-input" [checked] = "student.status" id="exampleCheck1" (change) = "changeStudentStatus(student.id,student.status)">
+                                <label class="form-check-label" for="exampleCheck1"></label>
+                                
                             </div>
                         </td>
                     </tr>

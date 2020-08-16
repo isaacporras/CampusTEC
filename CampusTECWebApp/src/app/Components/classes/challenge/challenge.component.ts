@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ChallengeService } from './challenge.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { stat } from 'fs';
 
 
 @Component({
@@ -13,18 +14,21 @@ import { AngularFireStorage } from '@angular/fire/storage';
   styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-challengeForm: FormGroup;
-objectiveForm: FormGroup;
-objectives: Array<any>;
-students: Array<any>;
+  challengeForm: FormGroup;
+  objectiveForm: FormGroup;
+  objectives: Array<any>;
+  students: Array<any>;
 
-classId: number;
-atLeastOnObjective: boolean = false;
-objectivesResponse: Array<any>;
+  classId: number;
+  atLeastOnObjective: boolean = false;
+  objectivesResponse: Array<any>;
 
 
-fileChangedEventChallenge: Event;
-wasFileUploadedChallenge = false;
+
+
+
+  fileChangedEventChallenge: Event;
+  wasFileUploadedChallenge = false;
 
 
 
@@ -57,6 +61,7 @@ wasFileUploadedChallenge = false;
     this.challengeForm.addControl('fileURL', this.formBuilder.control(''));
 
 
+    console.log(this.students)
     if (this.wasFileUploadedChallenge) {
       //Se hace la carga del archivo //
       const id = Math.random().toString(36).substring(2);
@@ -67,14 +72,14 @@ wasFileUploadedChallenge = false;
         rst.ref.getDownloadURL().then(url => {
 
           this.challengeForm.get('fileURL').setValue(url);
-          console.log(this.challengeForm.value)
+          console.log(this.challengeForm.value);
           this.dialogRef.close();
 
         });
       });
 
     }
-    
+
     else {
       this.challengeForm.get('fileURL').setValue('Null');
       console.log(this.challengeForm.value)
@@ -87,8 +92,8 @@ wasFileUploadedChallenge = false;
     this.dialogRef.close();
   }
 
-  
-  
+
+
   uploadChallengeFile(e) {
     console.log('subir', e)
     this.fileChangedEventChallenge = e.target.files[0];
@@ -107,7 +112,7 @@ wasFileUploadedChallenge = false;
     });
     console.log(this.objectives)
 
-    console.log(this.objectivesResponse)
+    console.log(this.objectivesResponse);
 
 
   }
@@ -123,7 +128,7 @@ wasFileUploadedChallenge = false;
     this.challengeForm = this.formBuilder.group({
       id: new FormControl(''),
       name: new FormControl(''),
-      payment: new FormControl('',[Validators.required]),
+      payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
     });
@@ -134,14 +139,48 @@ wasFileUploadedChallenge = false;
     });
 
 
+
     this.objectives = this.http.getObjectives();
     this.students = this.http.getStudents();
+
+    console.log(this.students)
 
     this.objectivesResponse = [];
 
   }
+  changeStudentStatus(id: number, status: boolean) {
+    
+    console.log(id);
+
+    if (status === true) {
+      console.log('es true y se cambiará a false')
+      for (let student of this.students) {
+        if (student.id === id) {
+          student.status = false;
+        }
+
+      }
+    }
+
+    else {
+      console.log('es false y se cambiará a true')
+      for (let student of this.students) {
+        
+        if (student.id === id) {
+          student.status = true;
+        }
+
+      }
+
+    }
+  }
+
+  getCheckboxName(id: number){
+    return 'checkbox_'+String(id)
+  }
 
 
-  get description() { return this.objectiveForm.get('description'); }
+
+get description() { return this.objectiveForm.get('description'); }
 
 }

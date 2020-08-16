@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { animationFrameScheduler } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,18 +39,21 @@ export class ChallengeService {
         id: 201710856,
         name: 'Marco',
         lastname: 'Herrera',
+        status: true
 
       },
       {
         id: 2017111111,
         name: 'Kenneth',
         lastname: 'Hernandez',
+        status: true
 
       },
       {
         id: 201777777,
         name: 'Jasson',
         lastname: 'Rodriguez',
+        status: false
 
       }
 
