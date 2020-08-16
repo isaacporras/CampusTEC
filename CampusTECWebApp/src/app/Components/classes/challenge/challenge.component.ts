@@ -5,7 +5,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ChallengeService } from './challenge.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-// import { stat } from 'fs';
 
 
 @Component({

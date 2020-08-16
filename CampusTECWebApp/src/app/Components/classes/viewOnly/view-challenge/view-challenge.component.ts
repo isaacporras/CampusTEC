@@ -5,7 +5,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ViewChallengeService } from './view-challenge.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { stat } from 'fs';
 
 
 @Component({
@@ -149,7 +148,7 @@ export class ViewChallengeComponent implements OnInit {
 
   }
   changeStudentStatus(id: number, status: boolean) {
-    
+
     console.log(id);
 
     if (status === true) {
@@ -165,7 +164,7 @@ export class ViewChallengeComponent implements OnInit {
     else {
       console.log('es false y se cambiará a true')
       for (let student of this.students) {
-        
+
         if (student.id === id) {
           student.status = true;
         }
