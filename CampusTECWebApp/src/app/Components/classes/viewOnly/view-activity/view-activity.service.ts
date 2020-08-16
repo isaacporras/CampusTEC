@@ -32,7 +32,7 @@ export class ViewActivityService {
 
     ];
   }
-  getActivityInfo(){
+  getActivityInfo() {
     return {
       id: 55,
       name: 'Ir a todas las tutorias',

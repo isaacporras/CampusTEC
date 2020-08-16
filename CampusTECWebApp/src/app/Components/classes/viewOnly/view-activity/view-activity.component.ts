@@ -179,6 +179,7 @@ export class ViewActivityComponent implements OnInit {
 
   get name() { return this.activityForm.get('name'); }
   get description() { return this.activityForm.get('description'); }
+  
   get week() { return this.activityForm.get('week'); }
   get date() { return this.activityForm.get('date'); }
   get objective() { return this.atLeastOnObjective }
@@ -195,8 +196,8 @@ export class ViewActivityComponent implements OnInit {
         binaryData.push(response);
         let downloadLink = document.createElement('a');
         downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
-        
-        downloadLink.setAttribute('download', 'messageFile');
+
+        downloadLink.setAttribute('download', 'ArchivoAdjunto');
         document.body.appendChild(downloadLink);
         downloadLink.click();
       }
