@@ -5,6 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ChallengeService } from './challenge.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivitiesComponent } from '../activities/activities.component';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -17,6 +20,8 @@ export class ChallengeComponent implements OnInit {
   objectiveForm: FormGroup;
   objectives: Array<any>;
   students: Array<any>;
+  activities: Array<any>;
+  activity: any;
 
   classId: number;
   atLeastOnObjective: boolean = false;
@@ -38,6 +43,7 @@ export class ChallengeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: ChallengeService,
     private storage: AngularFireStorage,
+    private activityDialog: MatDialog,
   ) {
 
     this.classId = data;
@@ -59,6 +65,8 @@ export class ChallengeComponent implements OnInit {
 
     this.challengeForm.addControl('fileURL', this.formBuilder.control(''));
 
+    this.challengeForm.addControl('activities', this.formBuilder.control(''));
+    this.challengeForm.get('activities').setValue(this.activities);
 
     console.log(this.students)
     if (this.wasFileUploadedChallenge) {
@@ -71,8 +79,11 @@ export class ChallengeComponent implements OnInit {
         rst.ref.getDownloadURL().then(url => {
 
           this.challengeForm.get('fileURL').setValue(url);
+
+          console.log('-----------------------------------------------------------------')
           console.log(this.challengeForm.value);
           this.dialogRef.close();
+          console.log('-----------------------------------------------------------------')
 
         });
       });
@@ -80,9 +91,11 @@ export class ChallengeComponent implements OnInit {
     }
 
     else {
+      console.log('-----------------------------------------------------------------')
       this.challengeForm.get('fileURL').setValue('Null');
       console.log(this.challengeForm.value)
       this.dialogRef.close();
+      console.log('-----------------------------------------------------------------')
     }
 
   }
@@ -120,7 +133,23 @@ export class ChallengeComponent implements OnInit {
   onClickCancel(): void {
     this.dialogRef.close();
   }
+  addActivity(){
+    const classData = new MatDialogConfig();
 
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data = {activity: this.activity, cameFrom : 'challenge'};
+
+    this.activityDialog.open(ActivitiesComponent, classData).afterClosed().subscribe(
+      data => {console.log("La data recibida en el dialog de reto es:", data);
+      this.activities.push(data);}
+  );    
+    
+
+  }
 
 
   ngOnInit() {
@@ -145,6 +174,7 @@ export class ChallengeComponent implements OnInit {
     console.log(this.students)
 
     this.objectivesResponse = [];
+    this.activities = [];
 
   }
   changeStudentStatus(id: number, status: boolean) {

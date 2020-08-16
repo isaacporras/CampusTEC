@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ViewChallengeService } from './view-challenge.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-
+import { GlobalService } from '../../../globalServices/global.service';
 
 @Component({
   selector: 'app-view-challenge',
@@ -39,6 +39,8 @@ export class ViewChallengeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: ViewChallengeService,
     private storage: AngularFireStorage,
+    private downloader: GlobalService,
+
   ) {
 
     this.classId = data;
@@ -121,6 +123,26 @@ export class ViewChallengeComponent implements OnInit {
   onClickCancel(): void {
     this.dialogRef.close();
   }
+
+  onDownloadFile(url) {
+
+    console.log(url);
+
+    this.downloader.downloadFile(url).subscribe(
+      (response: any) => {
+        let dataType = response.type;
+        let binaryData = [];
+        binaryData.push(response);
+        let downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
+        
+        downloadLink.setAttribute('download', 'messageFile');
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      }
+    );
+
+}
 
 
 

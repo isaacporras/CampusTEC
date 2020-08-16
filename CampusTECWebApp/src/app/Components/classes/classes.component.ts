@@ -109,7 +109,8 @@ export class ClassesComponent implements OnInit {
     classData.disableClose = true;
     classData.autoFocus = true;
 
-    classData.data = this.classData.id;
+    classData.data = {id: this.classData.id, cameFrom : 'classes'};
+    
 
     this.dialog.open(ObjectiveComponent, classData);
   }
