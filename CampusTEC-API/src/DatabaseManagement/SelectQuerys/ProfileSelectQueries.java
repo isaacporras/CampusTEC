@@ -10,6 +10,7 @@ public class ProfileSelectQueries {
                 "FROM curso AS cur  " +
                 "         INNER JOIN (  " +
                 "             SELECT * FROM cursopersona AS p WHERE p.IdPersona = ?   " +
+
                 "             ) AS c on cur.IdCurso = c.IdCurso;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
@@ -51,5 +52,5 @@ public class ProfileSelectQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
-    
+
 }

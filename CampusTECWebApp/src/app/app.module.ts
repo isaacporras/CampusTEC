@@ -101,7 +101,7 @@ registerLocaleData(localeEs);
         component: TeacherProfileComponent
       },
       {
-        path: 'classes/:id',
+        path: 'classes/:id/:teacherId',
         component: ClassesComponent
       },
       {

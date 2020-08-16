@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class TeacherProfileComponent implements OnInit {
   universityDisable: boolean = true;
   campusDisable: boolean = true;
   editing: boolean = false;
+  teacherId:any;
 
   teacherBaseData: any;
 
@@ -59,6 +61,10 @@ export class TeacherProfileComponent implements OnInit {
       this.teacherDataForm.controls['campus'].enable();
     }
   }
+  goToClass(id) {
+    return this.router.navigate(['/classes', id, this.teacherId]);
+
+  }
 
   onSave() {
 
@@ -73,7 +79,15 @@ export class TeacherProfileComponent implements OnInit {
     this.editing = false;
 
   }
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
+    this.activatedroute.params.subscribe(data => {
+
+      console.log('La data que le llegó a student-profile es:' + data.id);
+      this.teacherId = data.id;
+    })
+
+
+   }
 
   ngOnInit() {
 

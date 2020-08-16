@@ -22,6 +22,9 @@ import {ViewActivityComponent} from '../classes/viewOnly/view-activity/view-acti
 import {ViewChallengeComponent} from '../classes/viewOnly/view-challenge/view-challenge.component';
 import { TaskComponent } from './task/task.component';
 
+import {Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -63,6 +66,7 @@ interface ExampleFlatNode {
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent implements OnInit {
+  studentId: any;
   challengesSources: Array<any> = [];
   activities: Array<any>;
   locale: string = 'es';
@@ -118,7 +122,12 @@ export class PlannerComponent implements OnInit {
 
   events: CalendarEvent[] = [];
 
-  constructor(private http: HttpServicesService, private dialog: MatDialog,) {
+  constructor(private http: HttpServicesService, private dialog: MatDialog, private activatedroute: ActivatedRoute, private router: Router) {
+    this.activatedroute.params.subscribe(data => {
+
+      console.log('La data que le llegó a student-profile es:' + data.id);
+      this.studentId = data.id;
+    })
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -126,7 +135,7 @@ export class PlannerComponent implements OnInit {
     // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  updateAssignments(): void{
+  updateAssignments(): void {
     let receivedEvents;
     this.http.getAssignments(this.week).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
@@ -146,7 +155,7 @@ export class PlannerComponent implements OnInit {
       console.log(error);
     });
   }
-  addTask(id){
+  addTask(id) {
 
     const classData = new MatDialogConfig();
 
