@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS CampusTecDB;
-USE  CampusTecDB;
+USE CampusTecDB;
 CREATE TABLE IF NOT EXISTS Persona
 (
     IdPersona   INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS ActividadPersona
 (
     IdActividad INTEGER NOT NULL,
     IdPersona   INTEGER NOT NULL,
-    Completado BOOLEAN NOT NULL DEFAULT FALSE,
+    Completado  BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS RetoAcademicoPersona
 (
     IdRetoAcademico INTEGER NOT NULL,
     IdPersona       INTEGER NOT NULL,
-    Completado BOOLEAN DEFAULT FALSE,
+    Completado      BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (IdRetoAcademico) REFERENCES RetoAcademico (IdRetoAcademico),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );
@@ -201,9 +201,10 @@ CREATE TABLE IF NOT EXISTS Tarea
     IdPersona   INTEGER                            NOT NULL,
     IdActividad INTEGER                            NOT NULL,
     Titulo      CHAR(50)                           NOT NULL,
-    Fecha       CHAR(10) DEFAULT '12/12/2020'      NOT NULL,
+    semana      INTEGER                            NOT NULL,
+    NumDia      INTEGER                            NOT NULL,
     Descripcion TEXT(300)                          NOT NULL,
-    Hora        CHAR(10)                           NOT NULL,
+    Hora        INTEGER                            NOT NULL,
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona),
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad)
 );
@@ -220,4 +221,12 @@ CREATE TABLE IF NOT EXISTS Comentario
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona),
     FOREIGN KEY (IdFile) REFERENCES File (IdFile)
+);
+
+CREATE TABLE IF NOT EXISTS PersonaReto(
+        IdRetoAcademico INTEGER NOT NULL,
+    IdPersona   INTEGER NOT NULL,
+    Completado  BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (IdRetoAcademico) REFERENCES RetoAcademico (IdRetoAcademico),
+    FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );

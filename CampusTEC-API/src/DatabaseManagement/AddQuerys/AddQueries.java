@@ -91,6 +91,7 @@ public class AddQueries {
         statement.setInt(2, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet createHomework(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO tarea(idpersona, idactividad, titulo," +
                 " descripcion, hora) VALUES (?,?,?,?,?);");
@@ -110,6 +111,7 @@ public class AddQueries {
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
         return statement.executeQuery();
     }
+
     public static ResultSet createResult(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultado( idretopsicologico)" +
                 " VALUES (?);" +
@@ -117,6 +119,7 @@ public class AddQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet createResultadoPersona(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultadopersona(idpersona, " +
                 "idresultado) VALUES (?,?);");
@@ -132,7 +135,5 @@ public class AddQueries {
         statement.setString(2, parameters.get(1));
         return statement.executeQuery();
     }
-
-
 
 }
