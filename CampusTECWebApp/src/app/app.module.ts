@@ -55,7 +55,7 @@ registerLocaleData(localeEs);
     ChallengeComponent,
     PlannerComponent,
     ViewActivityComponent,
-     ViewChallengeComponent,
+    ViewChallengeComponent,
 
   ],
   imports: [
