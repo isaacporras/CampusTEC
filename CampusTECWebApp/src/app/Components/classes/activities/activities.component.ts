@@ -24,6 +24,7 @@ export class ActivitiesComponent implements OnInit {
   objectiveSelected: string;
   commentForm: FormGroup;
   comments: Array<any>;
+  activityForChallenge: any;
 
   wasFileUploadedAct: boolean;
   wasFileUploadedCom: boolean;
@@ -47,7 +48,21 @@ export class ActivitiesComponent implements OnInit {
 
   ) {
 
-    this.classId = data;
+
+    if (data.cameFrom === 'classes') {
+      console.log('Viene de classes')
+      this.classId = data.id;
+    }
+    else if(data.cameFrom === 'challenge'){
+      console.log('Viene de challenge')
+      this.classId = -1;
+      this.activityForChallenge = data.activity;
+    }
+    else{
+      console.log('Viene de classes')
+      this.classId = data.id;
+    }
+
   }
 
 
@@ -70,7 +85,7 @@ export class ActivitiesComponent implements OnInit {
     this.activityForm.get('objectives').setValue(this.objectivesResponse);
 
     this.activityForm.addControl('fileURL', this.formBuilder.control(''));
-
+    
 
     if (this.wasFileUploadedAct) {
       //Se hace la carga del archivo //
@@ -82,17 +97,25 @@ export class ActivitiesComponent implements OnInit {
         rst.ref.getDownloadURL().then(url => {
 
           this.activityForm.get('fileURL').setValue(url);
-          console.log(this.activityForm.value)
-          this.dialogRef.close();
+          console.log(this.activityForm.value);
+
+
+
+          this.activityForChallenge = this.activityForm.value;
+
+          this.dialogRef.close(this.activityForm.value);
 
         });
       });
-
     }
     else {
       this.activityForm.get('fileURL').setValue('Null');
-      console.log(this.activityForm.value)
-      this.dialogRef.close();
+      console.log(this.activityForm.value);
+
+
+
+
+      this.dialogRef.close(this.activityForm.value);
     }
 
 
@@ -192,51 +215,51 @@ export class ActivitiesComponent implements OnInit {
         binaryData.push(response);
         let downloadLink = document.createElement('a');
         downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
-        
+
         downloadLink.setAttribute('download', 'messageFile');
         document.body.appendChild(downloadLink);
         downloadLink.click();
       }
     );
 
-}
+  }
 
 
-ngOnInit() {
+  ngOnInit() {
 
 
-  this.activityForm = this.formBuilder.group({
-    id: new FormControl(''),
-    name: new FormControl(''),
-    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-    evaluable: new FormControl(false, [Validators.required]),
-    week: new FormControl('', [Validators.required]),
-    date: new FormControl('', [Validators.required]),
-    objective: new FormControl('', [Validators.required]),
-  });
+    this.activityForm = this.formBuilder.group({
+      id: new FormControl(''),
+      name: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      evaluable: new FormControl(false, [Validators.required]),
+      week: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
+    });
 
-  this.commentForm = this.formBuilder.group({
-    id: new FormControl(''),
-    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-
-
-  });
+    this.commentForm = this.formBuilder.group({
+      id: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
 
 
+    });
 
 
-  this.comments = this.http.getComments();
 
 
-  this.objectivesResponse = [];
-
-  this.objectives = this.http.getObjectives();
-
-  this.wasFileUploadedAct = false;
-
-  this.wasFileUploadedCom = false;
+    this.comments = this.http.getComments();
 
 
-}
+    this.objectivesResponse = [];
+
+    this.objectives = this.http.getObjectives();
+
+    this.wasFileUploadedAct = false;
+
+    this.wasFileUploadedCom = false;
+
+
+  }
 
 }

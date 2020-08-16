@@ -107,7 +107,7 @@
 
         </div>
         <div class="col-4">
-            <button class="btn-addActivity">Crear actividad</button>
+            <button class="btn-addActivity" (click) = "addActivity()">Crear actividad</button>
         </div>
     </div>
 
@@ -117,10 +117,9 @@
             <table class="table table-bordered">
 
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let activity of activities">
                         <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
-                        <td>Mejorar las herramientas para programar de cada uno de los estuiantes de la generacion
-                            numero</td>
+                        <td>{{activity.description}}</td>
 
                     </tr>
 
