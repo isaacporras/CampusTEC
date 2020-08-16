@@ -26,6 +26,7 @@
     "@rxweb/reactive-form-validators": "^2.0.0",
     "@xtream/ngx-validation-errors": "^2.1.0",
     "angular-calendar": "^0.28.16",
+    "angular-resizable-element": "^3.3.3",
     "bootstrap": "^4.5.2",
     "date-fns": "^2.15.0",
     "file-saver": "^2.0.2",
