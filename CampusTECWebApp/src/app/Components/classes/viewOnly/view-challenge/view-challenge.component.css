@@ -1,0 +1,91 @@
+textarea {
+    width: 500px;
+    height: 150px;
+  }
+
+.mat-button.mat-create:hover{
+    color: #f0fff3;
+  background-color: red;
+}
+
+.mat-button.mat-cancel:hover{
+    color: #f0fff3;
+    background-color: red;
+    border-color: darkblue;
+  }
+  .btn.btn-danger{
+    
+    color: #f0fff3;
+
+
+    font-size: 15px;
+    height: 16;
+    width: 30;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+
+    background-color: #C1272D;
+    /* Green */
+    border: none;
+    color: white;
+
+}
+.btn.btn-dark{
+    
+    color: #f0fff3;
+
+
+    font-size: 15px;
+    height: 16;
+    width: 30;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    background-color: #001636;
+
+    /* Green */
+    border: none;
+    color: white;
+
+}
+.md-dialog-container {
+    background-color: #000;
+    height: '1000px';
+    width: '800px';
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.btn-addActivity{
+    background-color: #001636;
+    /* Green */
+    border: none;
+    color: white;
+    height: 20px;
+    width:150px ;
+    
+    /*text-align: center;*/
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+  }
