@@ -52,4 +52,4 @@ VALUES (1, 1, TRUE),
        (1, 5, TRUE),
        (2, 5, TRUE);
 
-INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
+# INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
