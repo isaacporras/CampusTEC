@@ -145,9 +145,10 @@ export class ViewActivityComponent implements OnInit {
 
     this.commentForm.addControl('fileURL', this.formBuilder.control(''));
 
+    
 
     if (this.wasFileUploadedCom) {
-      //Se hace la carga del archivo //
+
       const id = Math.random().toString(36).substring(2);
       const file = this.fileChangedEventComm;
       const filepath = `commentImages/comment_${id}`;
@@ -156,8 +157,9 @@ export class ViewActivityComponent implements OnInit {
         rst.ref.getDownloadURL().then(url => {
 
           this.commentForm.get('fileURL').setValue(url);
-          console.log(this.commentForm.value);
-          this.dialogRef.close();
+
+          this.setCommentFormat();
+
 
         });
       });
@@ -165,21 +167,34 @@ export class ViewActivityComponent implements OnInit {
     }
     else {
       this.commentForm.get('fileURL').setValue('Null');
-      console.log(this.commentForm.value);
-
-      this.dialogRef.close();
+      this.setCommentFormat();
     }
+  }
+  setCommentFormat() {
+    this.commentForm.addControl('time', this.formBuilder.control(''));
+    this.commentForm.addControl('date', this.formBuilder.control(''));
+    this.commentForm.addControl('activityId', this.formBuilder.control(''));
+    this.commentForm.addControl('user', this.formBuilder.control(''));
+    
+    var id = 4;//tenemos que obtener el id del usuario
+    let date = new Date();
+   
+    this.commentForm.get('time').setValue(date.getHours() + ':' + date.getMinutes());
+    let currentDate =date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + ('0' + date.getDate()).slice(-2);
+    this.commentForm.get('date').setValue(currentDate);
+    this.commentForm.get('user').setValue(this.http.getUserName(id).user);
+    this.commentForm.get('activityId').setValue(this.classId);
 
-
-
-
-
+    console.log(this.commentForm.value);
+    
+    this.comments.push(this.commentForm);
+    console.log(this.commentForm.value);
+    this.dialogRef.close();
 
   }
 
   get name() { return this.activityForm.get('name'); }
   get description() { return this.activityForm.get('description'); }
-  
   get week() { return this.activityForm.get('week'); }
   get date() { return this.activityForm.get('date'); }
   get objective() { return this.atLeastOnObjective }
@@ -203,48 +218,48 @@ export class ViewActivityComponent implements OnInit {
       }
     );
 
-}
+  }
 
 
-ngOnInit() {
+  ngOnInit() {
 
 
-  this.activityForm = this.formBuilder.group({
-    id: new FormControl(''),
-    name: new FormControl(''),
-    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-    evaluable: new FormControl(false, [Validators.required]),
-    week: new FormControl('', [Validators.required]),
-    date: new FormControl('', [Validators.required]),
-    objective: new FormControl('', [Validators.required]),
-  });
+    this.activityForm = this.formBuilder.group({
+      id: new FormControl(''),
+      name: new FormControl(''),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      evaluable: new FormControl(false, [Validators.required]),
+      week: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      objective: new FormControl('', [Validators.required]),
+    });
 
-  this.commentForm = this.formBuilder.group({
-    id: new FormControl(this.classId),
-    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-
-
-  });
+    this.commentForm = this.formBuilder.group({
+      id: new FormControl(this.classId),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
 
 
+    });
 
 
-  this.comments = this.http.getComments();
-
-  this.activity = this.http.getActivityInfo();
-
-  this.objectivesResponse = this.http.getObjectives();
 
 
-  this.objectivesResponse = [];
+    this.comments = this.http.getComments();
 
-  this.objectivesResponse = this.http.getObjectives();
+    this.activity = this.http.getActivityInfo();
 
-  this.wasFileUploadedAct = false;
-
-  this.wasFileUploadedCom = false;
+    this.objectivesResponse = this.http.getObjectives();
 
 
-}
+    this.objectivesResponse = [];
+
+    this.objectivesResponse = this.http.getObjectives();
+
+    this.wasFileUploadedAct = false;
+
+    this.wasFileUploadedCom = false;
+
+
+  }
 
 }

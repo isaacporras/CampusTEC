@@ -67,7 +67,7 @@ export class ViewActivityService {
         id: 1,
         description: 'diagrama de fluko mio',
         time: '3:45',
-        date:'23/6/1999',
+        date: '23/6/1999',
         user: 'Oscar Isaac',
         activityId: 2,
         fileURL: 'https://firebasestorage.googleapis.com/v0/b/campustec-12a23.appspot.com/o/activityImages%2Factivity_1aqsad2bty1?alt=media&token=f643ceb6-ff95-4caa-a09a-c942e27e5ed2'
@@ -82,6 +82,12 @@ export class ViewActivityService {
         fileURL: 'https://firebasestorage.googleapis.com/v0/b/campustec-12a23.appspot.com/o/activityImages%2Factivity_1aqsad2bty1?alt=media&token=f643ceb6-ff95-4caa-a09a-c942e27e5ed2'
       },
     ]
+  }
+  getUserName(id){
+    return {
+      id:1,
+      user:'Pamela Jimenez'
+    }
   }
 
   downloadFile(id){
