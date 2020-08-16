@@ -14,6 +14,12 @@ import {
 } from 'angular-calendar';
 import {HttpServicesService} from "../../Services/http-services.service";
 
+
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
+
+
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -29,6 +35,23 @@ const colors: any = {
   },
 };
 
+
+interface FoodNode {
+  name: string;
+  id: number;
+  children?: FoodNode[];
+}
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  id: number;
+  level: number;
+}
+
+
+
 @Component({
   selector: 'app-planner',
   changeDetection: ChangeDetectionStrategy.Default,
@@ -42,11 +65,36 @@ export class PlannerComponent implements OnInit {
   weekStart: Date = startOfWeek(this.viewDate);
   receivedEvents;
   week = 1;
+  TREE_DATA: FoodNode[];
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
+
+
+
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      id: node.id,
+      level: level,
+    };
+  }
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level, node => node.expandable);
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+
+
+
+
+
+
+
 
   actions: CalendarEventAction[] = [
     {
@@ -70,7 +118,13 @@ export class PlannerComponent implements OnInit {
 
   events: CalendarEvent[] = [];
 
-  constructor(private http: HttpServicesService) {}
+  constructor(private http: HttpServicesService) {
+
+
+    this.TREE_DATA = this.http.getActivitiesAndChallenges();
+    this.dataSource.data = this.TREE_DATA;
+    console.log(this.TREE_DATA);
+  }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
@@ -114,7 +168,12 @@ export class PlannerComponent implements OnInit {
     }
   }
 
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+
   ngOnInit(): void {
+
+    this.TREE_DATA = this.http.getActivitiesAndChallenges();
+    this.dataSource.data = this.TREE_DATA;
     this.updateEvents();
     this.refresh.next();
   }
