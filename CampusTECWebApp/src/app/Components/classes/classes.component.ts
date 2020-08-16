@@ -18,38 +18,6 @@ interface FoodNode {
   children?: FoodNode[];
 }
 
-var TREE_DATA: FoodNode[] = [
-  {
-    name: 'Ir a todas las tutorias',
-    id: 1,
-    children: [
-      { name: 'Hacer tutoria 1', id: 1 },
-      { name: 'Hacer tutoria 2', id: 2 },
-      { name: 'Hacer tutoria 3', id: 3 },
-    ]
-  }, {
-    name: 'Completar todas las asignaciones',
-    id: 2,
-    children: [
-      { name: 'Hacer tarea 1', id: 4 },
-      { name: 'Hacer tarea 2', id: 5 },
-      { name: 'Hacer tarea 3', id: 6 },
-    ]
-  },
-  {
-    name: 'Hacer ejercicio todos los dias',
-    id: 3,
-    children: [
-      { name: 'Hacer ejercicio el lunes', id: 7 },
-      { name: 'Hacer ejercicio el lunes', id: 8 },
-      { name: 'Hacer ejercicio el lunes', id: 9 },
-    ]
-  }
-];
-
-
-
-
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
   expandable: boolean;
@@ -74,7 +42,7 @@ export class ClassesComponent implements OnInit {
   classData: any;
   activities: any;
   objectives: any;
-  TREE_DATA: Array<FoodNode>;
+  TREE_DATA: FoodNode[];
 
 
   private _transformer = (node: FoodNode, level: number) => {
@@ -147,8 +115,8 @@ export class ClassesComponent implements OnInit {
   constructor(
     private dialog: MatDialog, private http: ClassesService
   ) {
-
-    this.dataSource.data = TREE_DATA;
+    this.TREE_DATA = this.http.getActivitiesAndChallenges();
+    this.dataSource.data = this.TREE_DATA;
   }
 
   viewChallenge(id: number) {
