@@ -11,6 +11,7 @@ import {ViewActivityComponent} from './viewOnly/view-activity/view-activity.comp
 import {ViewChallengeComponent} from './viewOnly/view-challenge/view-challenge.component';
 
 
+
 interface FoodNode {
   name: string;
   id: number;
@@ -151,6 +152,20 @@ export class ClassesComponent implements OnInit {
 
   viewChallenge(id: number) {
     console.log('Es un reto');
+    console.log(id);
+    console.log(id);
+    const classData = new MatDialogConfig();
+
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data = id;
+    console.log('En ventana principal el id es de:')
+    console.log(id);
+
+    this.dialog.open(ViewChallengeComponent, classData);
     
   }
   viewActivity(id: number) {

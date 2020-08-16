@@ -50,7 +50,7 @@ import { ViewChallengeComponent } from './Components/classes/viewOnly/view-chall
     ChallengeComponent,
     PlannerComponent,
     ViewActivityComponent,
-     ViewChallengeComponent,
+    ViewChallengeComponent,
 
   ],
   imports: [
