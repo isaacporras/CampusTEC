@@ -8,7 +8,7 @@
         <div class="col-4">
             <h1>Actividad</h1>
         </div>
-        
+
     </div>
     <hr>
     <div class="row">
@@ -19,7 +19,7 @@
             <input type="text" formControlName="name" class="form-control" placeholder="{{activity.name}}">
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-4">
             <h3>Descripción:</h3>
@@ -28,17 +28,18 @@
             <textarea formControlName="description" placeholder="{{activity.description}}"></textarea>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-4">
             <h3>Evaluable:</h3>
         </div>
         <div class="col col-6 col-md-4">
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" [checked] = "activity.evaluable" id="exampleCheck1" disabled>
+                <input type="checkbox" class="form-check-input" [checked]="activity.evaluable" id="exampleCheck1"
+                    disabled>
                 <label class="form-check-label" for="exampleCheck1"></label>
-                
-                
+
+
             </div>
         </div>
 
@@ -50,18 +51,19 @@
         <div class="col-2">
             <select id="inputState" class="form-control" formControlName="week">
                 <option selected>{{activity.week}}</option>
-                
+
             </select>
         </div>
         <div class="col-3">
             <h3>Fecha de entrega:</h3>
         </div>
         <div class="col-5">
-            <input class="form-control" type="text" placeholder="{{activity.date}}" value="{{activity.date}}" id="example-date-input" formControlName="date">
+            <input class="form-control" type="text" placeholder="{{activity.date}}" value="{{activity.date}}"
+                id="example-date-input" formControlName="date">
         </div>
 
     </div>
-    
+
 
     <div class="row">
         <div class="col-4">
@@ -81,16 +83,17 @@
                 </tbody>
             </table>
         </div>
-        
+
     </div>
-    
+
     <div class="row">
         <div class="col-4">
             <h3>Archivo:</h3>
         </div>
         <div class="action">
             <span class="label label-info">Descargar archivo adjunto</span>
-            <button type="button" class="btn btn-primary btn-xs" title="Edit" (click) = "onDownloadFile(activity.fileURL)">
+            <button type="button" class="btn btn-primary btn-xs" title="Edit"
+                (click)="onDownloadFile(activity.fileURL)">
                 <span class="glyphicon glyphicon-save"></span>
             </button>
 
@@ -122,7 +125,7 @@
                 </span>
                 {{commentForm.value | json}}
                 <div>
-                    <textarea placeholder="" formControlName = "description"></textarea>
+                    <textarea placeholder="" formControlName="description"></textarea>
                 </div>
                 <div class="row justify-content-right">
                     <div class="col-10">
@@ -141,14 +144,15 @@
                 <h3 class="panel-title">
                     Comentarios</h3>
             </div>
-            <div class="panel-body">
+            <div class="col-12">
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="row" *ngFor="let comment of comments">
+                    <div class="row" *ngFor="let comment of comments">
+                        <li class="list-group-item">
+
                             
                             <div class="col-xs-10 col-md-11">
                                 <div>
-                                    
+
                                     <div class="mic-info">
                                         Por: <a href="#">{{comment.user}}</a> , A las: {{comment.time}} {{comment.date}}
                                     </div>
@@ -158,18 +162,20 @@
                                 </div>
                                 <div class="action">
                                     <span class="label label-info">Descargar archivo adjunto</span>
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit" (click) = "onDownloadFile(comment.fileURL)">
+                                    <button type="button" class="btn btn-primary btn-xs" title="Edit"
+                                        (click)="onDownloadFile(comment.fileURL)">
                                         <span class="glyphicon glyphicon-save"></span>
                                     </button>
 
                                 </div>
-                                
+
                             </div>
-                        </div>
-                    </li>
+
+                        </li>
+                    </div>
 
                 </ul>
-                
+
             </div>
         </div>
     </div>

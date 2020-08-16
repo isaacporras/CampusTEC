@@ -146,7 +146,7 @@ export class ClassesComponent implements OnInit {
     classData.disableClose = true;
     classData.autoFocus = true;
     classData.height = '700px';
-    classData.width = '600px';
+    classData.width = '650px';
 
     classData.data = id;
     console.log('En ventana principal el id es de:')
