@@ -14,6 +14,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 })
 export class ViewChallengeComponent implements OnInit {
   challengeForm: FormGroup;
+  challengeInfo: any;
   objectiveForm: FormGroup;
   objectives: Array<any>;
   students: Array<any>;
@@ -142,6 +143,9 @@ export class ViewChallengeComponent implements OnInit {
     this.objectives = this.http.getObjectives();
     this.students = this.http.getStudents();
 
+
+    this.challengeInfo =this.http.getChallengeInfo();
+
     console.log(this.students)
 
     this.objectivesResponse = [];
@@ -174,12 +178,12 @@ export class ViewChallengeComponent implements OnInit {
     }
   }
 
-  getCheckboxName(id: number){
-    return 'checkbox_'+String(id)
+  getCheckboxName(id: number) {
+    return 'checkbox_' + String(id)
   }
 
 
 
-get description() { return this.objectiveForm.get('description'); }
+  get description() { return this.objectiveForm.get('description'); }
 
 }

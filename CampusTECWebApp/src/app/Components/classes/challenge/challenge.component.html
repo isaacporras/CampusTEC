@@ -130,45 +130,7 @@
     </div>
 
 
-    <div class="row">
-        <div class="col-4">
-            Estudiantes
-        </div>
-        
-        <div class="col-8">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Carnet</th>
-                        <th scope="col">Completado</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let student of students">
-
-                        <td>{{student.name}}</td>
-                        <td>{{student.lastname}}</td>
-                        <td>{{student.id}}</td>
-
-                        <td>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="form-check-input" [checked] = "student.status" id="exampleCheck1" (change) = "changeStudentStatus(student.id,student.status)">
-                                <label class="form-check-label" for="exampleCheck1"></label>
-                                
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-
-                </tbody>
-            </table>
-
-
-        </div>
-    </div>
+    
 
     <div class="row justify-content-end">
         <div class="col-4">
