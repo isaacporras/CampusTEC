@@ -173,6 +173,7 @@ CREATE TABLE IF NOT EXISTS ActividadPersona
 (
     IdActividad INTEGER NOT NULL,
     IdPersona   INTEGER NOT NULL,
+    Completado BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );
@@ -181,6 +182,7 @@ CREATE TABLE IF NOT EXISTS RetoAcademicoPersona
 (
     IdRetoAcademico INTEGER NOT NULL,
     IdPersona       INTEGER NOT NULL,
+    Completado BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (IdRetoAcademico) REFERENCES RetoAcademico (IdRetoAcademico),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );
@@ -218,6 +220,4 @@ CREATE TABLE IF NOT EXISTS Comentario
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona),
     FOREIGN KEY (IdFile) REFERENCES File (IdFile)
-
-
 );
