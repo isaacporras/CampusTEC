@@ -7,7 +7,8 @@ import { ClassesService } from './classesService/classes.service';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ChallengeComponent } from './challenge/challenge.component';
 import { TreeDataNodeFlattener } from '@angular/cdk/collections';
-
+import {ViewActivityComponent} from './viewOnly/view-activity/view-activity.component';
+import {ViewChallengeComponent} from './viewOnly/view-challenge/view-challenge.component';
 
 
 interface FoodNode {
@@ -150,11 +151,22 @@ export class ClassesComponent implements OnInit {
 
   viewChallenge(id: number) {
     console.log('Es un reto');
-    console.log(id);
+    
   }
   viewActivity(id: number) {
     console.log('Es una actividad');
     console.log(id);
+    console.log(id);
+    const classData = new MatDialogConfig();
+
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data = this.classData.id;
+
+    this.dialog.open(ViewActivityComponent, classData);
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
