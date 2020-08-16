@@ -20,7 +20,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivitiesComponent } from './Components/classes/activities/activities.component';
 import { ChallengeComponent } from './Components/classes/challenge/challenge.component';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -37,6 +40,8 @@ import { ViewActivityComponent } from './Components/classes/viewOnly/view-activi
 import { ViewChallengeComponent } from './Components/classes/viewOnly/view-challenge/view-challenge.component';
 
 
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -69,9 +74,12 @@ import { ViewChallengeComponent } from './Components/classes/viewOnly/view-chall
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-
     HttpClientModule,
-
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     RouterModule.forRoot([
       {
         path: '',
