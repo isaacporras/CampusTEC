@@ -16,8 +16,9 @@ export class LoginComponent implements OnInit {
 
   credentialsForm: FormGroup;
 
+  wrongCredentials = false;
+
   onLogIn() {
-    console.log(this.credentialsForm.value)
     this.http.authenticate(this.credentialsForm.value).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse.status);
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
         }
       }else{
         console.log("Carné o contraseña incorrectos")
+        this.wrongCredentials = true;
       }
     }, (error) => {
       console.log(error);
