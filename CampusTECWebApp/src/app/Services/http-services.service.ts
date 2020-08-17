@@ -148,7 +148,13 @@ export class HttpServicesService {
   }
 
   getProfile(token: string){
-    return this.http.get(this.server + '/profile/' + token);
+    let url =this.server + '/profile/';
+    console.log('El url es:')
+    console.log(url);
+    let json = {
+      token: token
+    }
+    return this.http.post(this.server + '/profile/', json);
   }
 
 }
