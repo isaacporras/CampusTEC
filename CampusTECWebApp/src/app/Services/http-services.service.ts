@@ -149,7 +149,6 @@ export class HttpServicesService {
   }
 
   authenticate(credentials: JSON) {
-    console.log(this.server + '/login');
     return this.http.post(this.server + '/login', credentials);
   }
 

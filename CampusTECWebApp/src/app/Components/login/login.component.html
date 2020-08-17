@@ -1,73 +1,74 @@
 <body>
 
 
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="logo-image">
-            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="logo-image">
+    <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+  </div>
+  <a class="navbar-brand" href="#"> CampusTEC</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+      <a class="nav-item nav-link active " href="#">Inicio <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link disabled" href="#">Acerca de nosotros</a>
+      <a class="nav-item nav-link disabled" href="#">Más</a>
+
+    </div>
+  </div>
+</nav>
+
+
+<!--
+you can substitue the span of reauth email for a input with the email and
+include the remember me checkbox
+-->
+<div class="container">
+  <div class="card card-container">
+    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+    <img id="profile-img" class="profile-img-card" src="../../../assets/Files/CampusTecLogo.jpeg"/>
+    <p id="profile-name" class="profile-name-card"></p>
+    <h1 class="text-center">CampusTEC</h1>
+    <form class="form-signin" [formGroup]="credentialsForm">
+      <span id="reauth-email" class="reauth-email"></span>
+      <h3>Carnet:</h3>
+      <input type="text" id="id" class="form-control" placeholder="Carnet" formControlName="id" required>
+
+      <div *ngIf="id.invalid && (id.dirty || id.touched)" class="alert alert-danger">
+
+        <div *ngIf="id.errors.required">
+          Debe indicar su carnet.
         </div>
-        <a class="navbar-brand" href="#"> CampusTEC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link active " href="#">Inicio <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link disabled" href="#">Acerca de nosotros</a>
-                <a class="nav-item nav-link disabled" href="#">Más</a>
-
-            </div>
+        <div *ngIf="id.errors.minlength">
+          Largo de carnet incorrecto.
         </div>
-    </nav>
+      </div>
 
+      <h3>Contraseña:</h3>
+      <input type="password" id="password" class="form-control" placeholder="Contraseña"
+             formControlName="password">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
 
-
-
-    <!--
-    you can substitue the span of reauth email for a input with the email and
-    include the remember me checkbox
-    -->
-    <div class="container">
-        <div class="card card-container">
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="../../../assets/Files/CampusTecLogo.jpeg" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <h1 class="text-center">CampusTEC</h1>
-            <form class="form-signin" [formGroup]="credentialsForm">
-                <span id="reauth-email" class="reauth-email"></span>
-                <h3>Carnet:</h3>
-                <input type="text" id="id" class="form-control" placeholder="Carnet" formControlName="id" required>
-
-                <div *ngIf="id.invalid && (id.dirty || id.touched)" class="alert alert-danger">
-
-                    <div *ngIf="id.errors.required">
-                        Debe indicar su carnet.
-                    </div>
-                    <div *ngIf="id.errors.minlength">
-                        Largo de carnet incorrecto.
-                    </div>
-                </div>
-
-                <h3>Contraseña:</h3>
-                <input type="password" id="password" class="form-control" placeholder="Contraseña"
-                    formControlName="password">
-                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-
-                    <div *ngIf="password.errors.required">
-                        Debe indicar su contraseña.
-                    </div>
-                    <div *ngIf="password.errors.minlength">
-                        El largo de la contraseña es incorrecto
-                    </div>
-                </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="button"
-                    (click)="credentialsForm.valid? onLogIn() : null">
-                    Iniciar sesión
-                </button>
-            </form><!-- /form -->
-            {{credentialsForm.value | json}}
-        </div><!-- /card-container -->
-    </div><!-- /container -->
+        <div *ngIf="password.errors.required">
+          Debe indicar su contraseña.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          El largo de la contraseña es incorrecto
+        </div>
+      </div>
+      <div *ngIf="wrongCredentials" class="alert alert-danger">
+        El carnet o la contraseña son incorrectos
+      </div>
+      <button class="btn primary-btn login-btn" type="button"
+              (click)="credentialsForm.valid? onLogIn() : null">
+        Iniciar sesión
+      </button>
+    </form><!-- /form -->
+    {{credentialsForm.value | json}}
+  </div><!-- /card-container -->
+</div><!-- /container -->
 
 
 </body>

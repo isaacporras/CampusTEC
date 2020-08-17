@@ -20,10 +20,10 @@ export class TaskComponent implements OnInit {
 
   studentId: any;
 
+  submitted: boolean = false;
 
 
-
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<TaskComponent>,
      private http: TaskService,
      @Inject(MAT_DIALOG_DATA) data,) {
@@ -39,7 +39,6 @@ export class TaskComponent implements OnInit {
     }
 
     this.studentId = data.id;
-
 
     this.activities = this.http.getActivities();
 
@@ -76,20 +75,21 @@ export class TaskComponent implements OnInit {
   }
 
 
-
   onClickSave() {
-
-    console.log(this.taskForm.get('activity').value);
-    console.log();
-    let id = this.taskForm.get('activity').value.split(')')[0];
-    this.taskForm.get('activity').setValue(Number(id));
-    console.log(this.taskForm);
-    this.dialogRef.close();
+    this.submitted = true;
+    if(this.taskForm.valid) {
+      console.log(this.taskForm.get('activity').value);
+      console.log();
+      let id = this.taskForm.get('activity').value.split(')')[0];
+      this.taskForm.get('activity').setValue(Number(id));
+      console.log(this.taskForm);
+      this.dialogRef.close();
+    }
   }
   onClickClose() {
     this.dialogRef.close();
-
   }
+
   ngOnInit(): void {
   }
 
