@@ -77,38 +77,39 @@ export class TeacherProfileComponent implements OnInit {
           this.teacherDataForm.get('ppurl').setValue(url);
           console.log(this.teacherBaseData.value);
 
-          this.http.postUpdateProfile(this.teacherDataForm.value).subscribe((data) => {
-            var jsonResponse = JSON.parse(JSON.stringify(data));
-            console.log(jsonResponse.status);
-            if(jsonResponse.status == 1){
-              alert('Se actualizó correctamente la información');
-              window.location.reload();
-              }
-            else{
-              console.log("Carné o contraseña incorrectos")
-              alert('Ocurrio un error al actualizar la información.')
-            }
-          }, (error) => {
-            console.log(error);
-          });
+          
           console.log(JSON.stringify(this.teacherDataForm.value, null, 4));
       
           this.editing = false;
+
+
+          this.sendNewData();
+
         });
       });
-
-      
     }
-
-
-
-
-
-
-
-    
-
+    else{
+      this.sendNewData();
+    }
   }
+  sendNewData() {
+    this.http.postUpdateProfile(this.teacherDataForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+      if(jsonResponse.status == 1){
+        alert('Se actualizó correctamente la información');
+        window.location.reload();
+        }
+      else{
+        console.log("Carné o contraseña incorrectos")
+        alert('Ocurrio un error al actualizar la información.')
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+
   constructor(private http: HttpServicesService,
      private formBuilder: FormBuilder, 
      private activatedroute: ActivatedRoute,
