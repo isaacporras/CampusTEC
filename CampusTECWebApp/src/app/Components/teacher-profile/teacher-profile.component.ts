@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { HttpServicesService } from '../../Services/http-services.service';
-
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -27,6 +27,16 @@ export class TeacherProfileComponent implements OnInit {
   teacherDataForm: FormGroup;
 
   teacherClasses: Array<any>;
+
+  fileChangedEvent: Event;
+  wasFileUploaded: boolean;
+
+  uploadProfileFile(e) {
+    console.log('subir', e)
+    this.fileChangedEvent = e.target.files[0];
+    this.wasFileUploaded = true;
+    this.editing =  true;
+  }
 
 
   onEdit(id) {
@@ -54,31 +64,53 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   onSave() {
+    if (this.wasFileUploaded) {
+      console.log('Se va a hacer una carga de foto de perfil')
+      //Se hace la carga del archivo //
+      const id = Math.random().toString(36).substring(2);
+      const file = this.fileChangedEvent;
+      const filepath = `profilePictures/activity_${id}`;
+      const reference = this.storage.ref(filepath);
+      const task = this.storage.upload(filepath, file).then(rst => {
+        rst.ref.getDownloadURL().then(url => {
+
+          this.teacherDataForm.get('ppurl').setValue(url);
+          console.log(this.teacherBaseData.value);
+
+          this.http.postUpdateProfile(this.teacherDataForm.value).subscribe((data) => {
+            var jsonResponse = JSON.parse(JSON.stringify(data));
+            console.log(jsonResponse.status);
+            if(jsonResponse.status == 1){
+              alert('Se actualizó correctamente la información');
+              }
+            else{
+              console.log("Carné o contraseña incorrectos")
+              alert('Ocurrio un error al actualizar la información.')
+            }
+          }, (error) => {
+            console.log(error);
+          });
+          console.log(JSON.stringify(this.teacherDataForm.value, null, 4));
+      
+          this.editing = false;
+        });
+      });
+    }
 
 
-    this.http.postUpdateProfile(this.teacherDataForm.value).subscribe((data) => {
-      var jsonResponse = JSON.parse(JSON.stringify(data));
-      console.log(jsonResponse.status);
-      if(jsonResponse.status == 1){
-        alert('Se actualizó correctamente la información');
-        }
-      else{
-        console.log("Carné o contraseña incorrectos")
-      }
-    }, (error) => {
-      console.log(error);
-    });
-    console.log(JSON.stringify(this.teacherDataForm.value, null, 4));
 
-    this.teacherDataForm.controls['email1'].disable();
-    this.teacherDataForm.controls['email2'].disable();
-    this.teacherDataForm.controls['telNumber'].disable();
-    this.teacherDataForm.controls['university'].disable();
-    this.teacherDataForm.controls['campus'].disable();
-    this.editing = false;
+
+
+
+
+    
 
   }
-  constructor(private http: HttpServicesService, private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpServicesService,
+     private formBuilder: FormBuilder, 
+     private activatedroute: ActivatedRoute,
+      private router: Router,
+      private storage: AngularFireStorage,) {
     this.activatedroute.params.subscribe(data => {
 
       console.log('La data que le llegó a student-profile es:' + data.id);
@@ -169,4 +201,5 @@ export class TeacherProfileComponent implements OnInit {
   get campus() { return this.teacherDataForm.get('campus'); }
   get name(){return  this.teacherDataForm.get('name');}
   get lastname(){return  this.teacherDataForm.get('lastname');}
+  get ppurl() {return  this.teacherDataForm.get('ppurl');}
 }

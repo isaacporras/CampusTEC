@@ -91,19 +91,9 @@ export class StudentProfileComponent implements OnInit {
           }, (error) => {
             console.log(error);
           });
-
-
-
-
-
-
-
         });
       });
     }
-
-
-    
 
 
 
