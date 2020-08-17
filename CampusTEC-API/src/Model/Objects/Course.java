@@ -7,4 +7,6 @@ public class Course {
     public String name = "";
     public String group = "";
     public ArrayList<Challenge> challenges = new ArrayList<>();
+    public ArrayList<Activity> activities = new ArrayList<>();
+
 }

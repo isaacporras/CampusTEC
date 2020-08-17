@@ -19,12 +19,8 @@ export class ClassesService {
     return this.http.get(this.server + '/classes/challenges/' + id);
   }
 
-  getClassBaseData() {
-    return {
-      id: 11,
-      name: 'Analisis Numerico para ingeniería',
-      group: 5
-    };
+  getClassBaseData(id) {
+    return this.http.get(this.server + '/classes/info/' + id);
   }
 
 

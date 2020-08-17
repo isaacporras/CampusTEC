@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         }
       }else{
         console.log("Carné o contraseña incorrectos")
+        
         this.wrongCredentials = true;
       }
     }, (error) => {
