@@ -99,6 +99,7 @@ export class TeacherProfileComponent implements OnInit {
 
 
     this.http.getProfile(this.teacherId).subscribe((data) => {
+      console.log(data)
       this.teacherBaseData = data;
       this.teacherClasses = data["classes"];
     });
