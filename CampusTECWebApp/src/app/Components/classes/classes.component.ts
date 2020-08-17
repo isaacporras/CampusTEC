@@ -201,7 +201,7 @@ export class ClassesComponent implements OnInit {
    this.TREE_DATA = this.http.getActivitiesAndChallenges(this.classId)['treeview'];
 
 
-    this.classData = this.http.getClassBaseData();
+    this.classData = this.http.getClassBaseData(this.classId);
 
     //this.activities = this.http.getActivities();
 
