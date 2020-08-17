@@ -119,3 +119,5 @@ FROM (SELECT X.IdPersona,
 
 
 SELECT logininfo.Carne FROM logininfo WHERE logininfo.IdPersona = ?;
+
+SELECT retoacademico.* FROM retoacademico WHERE retoacademico.IdCurso = ?;

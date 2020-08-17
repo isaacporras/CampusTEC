@@ -36,5 +36,10 @@ public class GetCourseInfo {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
-
+    public static ResultSet getCourseChallenges(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT retoacademico.* FROM retoacademico WHERE " +
+                "retoacademico.IdCurso = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
 }

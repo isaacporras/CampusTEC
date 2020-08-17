@@ -32,6 +32,7 @@ public class Profile {
                 user.university = resultUser.getString("Universidadnombre");
                 user.campus = resultUser.getString("sedeNombre");
                 user.ppurl = resultUser.getString("PpUrl");
+                user.id = resultUser.getString("Carne");
 
             }
             ArrayList<String> paramTecolones = new ArrayList<>();
