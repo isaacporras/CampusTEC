@@ -55,7 +55,18 @@ export class StudentProfileComponent implements OnInit {
 
   onSave() {
 
-    this.http.postUpdateProfile(this.studentDataForm.value)
+    this.http.postUpdateProfile(this.studentDataForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+      if(jsonResponse.status == 1){
+        alert('Se actualizó correctamente la información');
+        }
+      else{
+        console.log("Carné o contraseña incorrectos")
+      }
+    }, (error) => {
+      console.log(error);
+    });
     this.studentDataForm.controls['email1'].disable();
     this.studentDataForm.controls['email2'].disable();
     this.studentDataForm.controls['telNumber'].disable();
@@ -78,6 +89,7 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
 
     this.studentDataForm = this.formBuilder.group({
+      token: new FormControl(this.studentId),
       name: new FormControl(''),
       lastname: new FormControl(''),
       id: new FormControl(''),
@@ -124,14 +136,6 @@ export class StudentProfileComponent implements OnInit {
 
     });
 
-
-
-
-    this.studentDataForm.controls['email1'].disable();
-    this.studentDataForm.controls['email2'].disable();
-    this.studentDataForm.controls['telNumber'].disable();
-    this.studentDataForm.controls['university'].disable();
-    this.studentDataForm.controls['campus'].disable();
 
 
   }
