@@ -82,6 +82,7 @@ export class TeacherProfileComponent implements OnInit {
             console.log(jsonResponse.status);
             if(jsonResponse.status == 1){
               alert('Se actualizó correctamente la información');
+              window.location.reload();
               }
             else{
               console.log("Carné o contraseña incorrectos")
@@ -95,6 +96,8 @@ export class TeacherProfileComponent implements OnInit {
           this.editing = false;
         });
       });
+
+      
     }
 
 
