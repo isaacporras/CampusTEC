@@ -54,8 +54,8 @@ VALUES ('PrimerSemestre 2020');
 INSERT INTO curso(nombre, teccolones, idsemestre,numero)
 VALUES ('Espe', 90000, 1,1),
        ('Arquitectura de Computadores', 90000, 1,5);
-INSERT INTO curso(idcurso, nombre, teccolones, idsemestre)
-VALUES (0, '', 0, 1);
+INSERT INTO curso(idcurso, nombre, teccolones, idsemestre,Numero)
+VALUES (0, '', 0, 1,0);
 INSERT INTO cursopersona(idcurso, idpersona, valid)
 VALUES (1, 2, TRUE),
        (1, 3, TRUE),
@@ -121,11 +121,12 @@ VALUES (9, 2, true),
        (10, 4, TRUE),
        (10, 5, FALSE);
 INSERT INTO personareto(IDRETOACADEMICO, IDPERSONA, COMPLETADO)
-VALUES (1, 2),
-       (1, 3),
-       (2, 4),
-       (2, 5);
+VALUES (1, 2,FALSE),
+       (1, 3,TRUE),
+       (2, 4,TRUE),
+       (2, 5,FALSE);
 
+IN
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
