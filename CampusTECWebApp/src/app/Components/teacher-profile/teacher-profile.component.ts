@@ -71,7 +71,7 @@ export class TeacherProfileComponent implements OnInit {
 
       console.log('La data que le llegó a student-profile es:' + data.id);
       this.teacherId = data.id;
-    })
+    });
 
 
    }
@@ -79,6 +79,12 @@ export class TeacherProfileComponent implements OnInit {
   ngOnInit() {
 
     this.teacherDataForm = this.formBuilder.group({
+      name: new FormControl(''),
+      lastname: new FormControl(''),
+      id: new FormControl(''),
+      status: new FormControl(''),
+      ppurl: new FormControl(''),
+      tecolones: new FormControl(''),
       email1: new FormControl({value:'', disable: true},
       [Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
