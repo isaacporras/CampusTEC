@@ -38,7 +38,7 @@ export class TaskComponent implements OnInit {
       periodValue = 'AM';
     }
 
-    this.studentId = data.studentId;
+    this.studentId = data.id;
 
 
     this.activities = this.http.getActivities();
@@ -68,21 +68,22 @@ export class TaskComponent implements OnInit {
         period: new FormControl(periodValue,
           [Validators.required]
         ),
-        activity: new FormControl(periodValue,
+        activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
           [Validators.required]
         ),
       });
-      this.taskForm.get('activity').setValue(this.activities[0]);
+      //this.taskForm.get('activity').setValue(this.activities[0]);
   }
-  setActivityValue(activity){
+
+
+
+  onClickSave() {
+
     console.log(this.taskForm.get('activity').value);
     console.log();
     let id = this.taskForm.get('activity').value.split(')')[0];
     this.taskForm.get('activity').setValue(Number(id));
-  }
-
-
-  onClickSave() {
+    console.log(this.taskForm);
     this.dialogRef.close();
   }
   onClickClose() {
