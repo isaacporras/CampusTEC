@@ -109,5 +109,23 @@ public class ClassesHandler {
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
 
+    @POST
+    @Path("/objectives/new")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newObjective(Objective obj) throws Exception {
+        Boolean result = Teacher.newObjective(obj);
+
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("status", result);
+        JsonObject resp = respBuilder.build();
+
+        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
 
 }

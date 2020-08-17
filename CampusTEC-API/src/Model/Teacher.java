@@ -1,5 +1,6 @@
 package Model;
 
+import DatabaseManagement.AddQuerys.AddQueries;
 import DatabaseManagement.DBConnection;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import DatabaseManagement.SelectQuerys.GetCourseInfo;
@@ -127,6 +128,22 @@ public class Teacher {
             e.printStackTrace();
         }
         return course;
+    }
+
+    public static Boolean newObjective(Objective objective) {
+
+        ArrayList<String> param = new ArrayList<>();
+        param.add(objective.classId);
+        param.add(objective.description);
+        try {
+            AddQueries.createObjective(param, DBConnection.getConnection());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }
