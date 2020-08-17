@@ -54,7 +54,8 @@ VALUES ('PrimerSemestre 2020');
 INSERT INTO curso(nombre, teccolones, idsemestre)
 VALUES ('Espe', 90000, 1),
        ('Arquitectura de Computadores', 90000, 1);
-INSERT INTO curso(idcurso, nombre, teccolones, idsemestre) VALUES (0,'',0,1);
+INSERT INTO curso(idcurso, nombre, teccolones, idsemestre)
+VALUES (0, '', 0, 1);
 INSERT INTO cursopersona(idcurso, idpersona, valid)
 VALUES (1, 2, TRUE),
        (1, 3, TRUE),
@@ -92,17 +93,27 @@ VALUES ('', '', TRUE),
        ('', 'Ejemplo4.pdf', TRUE),
        ('', 'Ejemplo5.pdf', TRUE);
 
-INSERT INTO actividad( IDFILE, NUMSEMANA, TECCOLONES, FECHA, DESCRIPCION, IDCURSO)
-VALUES (1,4,0,'5/12/2020','Realizar simulacion de procesador GENU5',2),
-       (1,4,0,'14/12/2020','Realizar simulacion de procesador PARSEC',2),
-       (1,4,0,'12/12/2020','Realizar simulacion de multisim de un DAC',2),
-       (1,4,0,'12/12/2020','Realizar simulacion en QUARTUS',2),
-       (1,4,0,'12/11/2020','Realizar pruebas en JUNIT',1),
-       (1,4,0,'1/10/2020','Verificar una covertura del 98%',1),
-       (1,4,0,'8/9/2020','Realizar pruebas unitarias de C++',1),
-       (1,4,0,'10/11/2020','Realizar pruebas Unitarias Javascript',1),
-       (1,4,0,'8/12/2020','Investigar sobre el uso de procesadores vectoriales',2),
-       (1,4,0,'12/12/2020','Investigar la herramienta Lapiz Lazury de microhard',1);
+INSERT INTO actividad(IDFILE, NUMSEMANA, TECCOLONES, FECHA, DESCRIPCION, IDCURSO,Titulo)
+VALUES (1, 4, 0, '5/12/2020', 'Realizar simulacion de procesador GENU5', 2,'Actividad1'),
+       (1, 1, 0, '14/12/2020', 'Realizar simulacion de procesador PARSEC', 2,'Actividad2'),
+       (3, 3, 0, '12/12/2020', 'Realizar simulacion de multisim de un DAC', 2,'Actividad3'),
+       (4, 4, 0, '12/12/2020', 'Realizar simulacion en QUARTUS', 2,'Actividad4'),
+       (1, 7, 0, '12/11/2020', 'Realizar pruebas en JUNIT', 1,'Actividad5'),
+       (5, 8, 0, '1/10/2020', 'Verificar una covertura del 98%', 1,'Actividad6'),
+       (2, 12, 0, '8/9/2020', 'Realizar pruebas unitarias de C++', 1,'Actividad7'),
+       (1, 13, 0, '10/11/2020', 'Realizar pruebas Unitarias Javascript', 1,'Actividad8'),
+       (1, 3, 100, '8/12/2020', 'Investigar sobre el uso de procesadores vectoriales', 2,'Actividad9'),
+       (1, 2, 150, '12/12/2020', 'Investigar la herramienta Lapiz Lazury de microhard', 1,'Actividad10');
 
+INSERT INTO actividadretoacademico(IDRETOACADEMICO, IDACTIVIDAD)
+VALUES (2,1),
+       (2,2),
+       (2,3),
+       (2,4),
+       (1,5),
+       (1,6),
+       (1,7),
+       (1,8);
 
+INSERT INTO
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
