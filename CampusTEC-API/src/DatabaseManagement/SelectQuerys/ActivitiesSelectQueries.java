@@ -79,7 +79,7 @@ public class ActivitiesSelectQueries {
 
     public static ResultSet getFileFromURL(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" SELECT * FROM file WHERE FileURL=?;");
-        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setString(1, parameters.get(0));
         return statement.executeQuery();
     }
 

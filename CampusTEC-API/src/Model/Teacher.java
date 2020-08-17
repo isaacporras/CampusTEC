@@ -146,4 +146,38 @@ public class Teacher {
         return true;
     }
 
+    public static Boolean newActivity(Activity activity) throws SQLException, ClassNotFoundException {
+        String fileId = "1";
+        System.out.println(activity.fileurl);
+        if (!activity.fileurl.equals("null")) {
+            ArrayList<String> param = new ArrayList<>();
+            param.add(activity.fileurl);
+            param.add("archivo adjunto");
+            AddQueries.createFile(param, DBConnection.getConnection());
+            param = new ArrayList<>();
+            param.add(activity.fileurl);
+            ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
+            result.next();
+            fileId = result.getString("IdFile");
+        }
+        ArrayList<String> paramActivity = new ArrayList<>();
+        paramActivity.add(fileId);
+        paramActivity.add(activity.week.toString());
+        paramActivity.add("0");
+        paramActivity.add(activity.date);
+        paramActivity.add(activity.description);
+        paramActivity.add(activity.idClass);
+        paramActivity.add(activity.name);
+
+        try {
+            AddQueries.createActivity(paramActivity, DBConnection.getConnection());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

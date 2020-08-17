@@ -15,7 +15,7 @@ public class Activity {
     public String date = "";
     public ArrayList<Objective> objectives = new ArrayList<>();
     public ArrayList<Comment> comments = new ArrayList<>();
-    public String fileurl = "";
+    public String fileurl = "null";
     public Boolean newComents = false;
 
 
