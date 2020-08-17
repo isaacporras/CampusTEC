@@ -2,7 +2,12 @@ package Model;
 
 import DatabaseManagement.DBConnection;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
+import DatabaseManagement.SelectQuerys.GetCourseInfo;
+import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
+import Model.Objects.Activity;
 import Model.Objects.Assignment;
+import Model.Objects.Challenge;
+import Model.Objects.Course;
 
 import javax.json.JsonObject;
 import java.sql.ResultSet;
@@ -13,8 +18,8 @@ public class Planner {
 
     public static ArrayList<Assignment> getAssignments(JsonObject req) throws SQLException, ClassNotFoundException {
         ArrayList<String> param = new ArrayList<>();
-        param.add(req.getString("tokenUsuario"));
-        ResultSet result = ActivitiesSelectQueries.getHomeworkFromPerson(param, DBConnection.getConnection());
+        param.add(req.getString("token"));
+        ResultSet result = ActivitiesSelectQueries.getHomeworkFromActivitiesAndPerson(param, DBConnection.getConnection());
         ArrayList<Assignment> assignments = new ArrayList<>();
         while (result.next()) {
             if (req.getString("semana").equals(result.getString("semana"))) {
@@ -26,11 +31,45 @@ public class Planner {
             assignment.day = result.getString("NumDia");
             assignment.description = result.getString("Descripcion");
             assignment.time = result.getString("Hora");
-            assignment.activity = result.getString("NombreActividad");
+            assignment.activity = result.getString("actividad.Titulo");
 
             assignments.add(assignment);
         }
         return assignments;
     }
 
+    public static ArrayList<Course> getChallenges(JsonObject req) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(req.getString("token"));
+        ResultSet result = ProfileSelectQueries.getCourses(param, DBConnection.getConnection());
+        ArrayList<Course> courses = new ArrayList<>();
+        while (result.next()) {
+            Course course = new Course();
+            course.id = result.getString("IdCurso");
+            course.name = result.getString("Nombre");
+            course.group = result.getString("Numero");
+
+            ArrayList<String> paramChallenge = new ArrayList<>();
+            paramChallenge.add(course.id);
+            ResultSet resultChallenges = GetCourseInfo.getCourseChallenges(paramChallenge, DBConnection.getConnection());
+            while (resultChallenges.next()) {
+                Challenge challenge = new Challenge();
+                challenge.id = resultChallenges.getString("IdRetoAcademico");
+                challenge.name = resultChallenges.getString("Titulo");
+                ArrayList<String> paramActivity = new ArrayList<>();
+                paramActivity.add(course.id);
+                ResultSet resultActivities = ActivitiesSelectQueries.getActivitiesFromChallenge(paramActivity, DBConnection.getConnection());
+                while (resultActivities.next()) {
+                    Activity activity = new Activity();
+                    activity.id = resultActivities.getString("IdActividad");
+                    activity.name = resultActivities.getString("Titulo");
+                    challenge.children.add(activity);
+                }
+                course.challenges.add(challenge);
+            }
+            courses.add(course);
+        }
+        return courses;
+    }
 }
+

@@ -86,6 +86,12 @@ export class HttpServicesService {
         ]
       }];
   }
+  postUpdateProfile(json){
+    let url = this.server + '/profile/edit';
+    console.log(url);
+    return this.http.post(url,json)
+  }
+
   getActivitiesTask() {
     return [
       {
