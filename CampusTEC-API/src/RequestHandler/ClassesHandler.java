@@ -1,9 +1,6 @@
 package RequestHandler;
 
-import Model.Objects.Activity;
-import Model.Objects.Course;
-import Model.Objects.Objective;
-import Model.Objects.User;
+import Model.Objects.*;
 import Model.Profile;
 import Model.Teacher;
 
@@ -34,7 +31,7 @@ public class ClassesHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getActivities(@PathParam("class") String course) throws Exception {
         System.out.println(course);
-        ArrayList<Activity> activities =  Teacher.getActivities(course);
+        ArrayList<Activity> activities = Teacher.getActivities(course);
 
         return Response.ok(activities).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
@@ -47,12 +44,25 @@ public class ClassesHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getObjectives(@PathParam("class") String course) throws Exception {
         System.out.println(course);
-        ArrayList<Objective> objectives =  Teacher.getObjectives(course);
+        ArrayList<Objective> objectives = Teacher.getObjectives(course);
 
         return Response.ok(objectives).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
+
+    @GET
+    @Path("/challenges/{class}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getActivitiesAndChallenges(@PathParam("class") String course) throws Exception {
+        ArrayList<Challenge> objectives = Teacher.getActivitiesAndChallenges(course);
+
+        return Response.ok(objectives).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
 
 }

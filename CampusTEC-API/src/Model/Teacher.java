@@ -57,7 +57,35 @@ public class Teacher {
         }
         return activities;
     }
-    
+
+    public static ArrayList<Challenge> getActivitiesAndChallenges(String course) {
+        ArrayList<Challenge> challenges = new ArrayList<>();
+        ArrayList<String> param = new ArrayList<>();
+        param.add(course);
+        try {
+            ResultSet result = GetCourseInfo.getCourseChallenges(param, DBConnection.getConnection());
+
+            while (result.next()) {
+                Challenge challenge = new Challenge();
+                challenge.id = result.getString("IdRetoAcademico");
+                challenge.name = result.getString("Titulo");
+                ResultSet resultActivities = ActivitiesSelectQueries.getActivitiesFromChallenge(param, DBConnection.getConnection());
+                while (resultActivities.next()) {
+                    Activity activity = new Activity();
+                    activity.id = resultActivities.getString("IdActividad");
+                    activity.name = resultActivities.getString("Titulo");
+                    challenge.children.add(activity);
+                }
+                challenges.add(challenge);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return challenges;
+    }
 
     public static ArrayList<Objective> getObjectives(String course) {
         ArrayList<Objective> objectives = new ArrayList<>();
