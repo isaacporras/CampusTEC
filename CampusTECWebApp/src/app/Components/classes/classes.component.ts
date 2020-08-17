@@ -45,7 +45,7 @@ export class ClassesComponent implements OnInit {
   objectives: any;
   TREE_DATA: FoodNode[];
   teacherId: any;
-  classId:any;
+  classId: any;
 
 
   private _transformer = (node: FoodNode, level: number) => {
@@ -81,7 +81,6 @@ export class ClassesComponent implements OnInit {
     classData.autoFocus = true;
 
     classData.data = {id: this.classData.id, cameFrom : 'classes'};
-
 
     this.dialog.open(ObjectiveComponent, classData);
   }

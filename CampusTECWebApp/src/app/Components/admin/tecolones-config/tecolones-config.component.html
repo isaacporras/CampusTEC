@@ -26,12 +26,13 @@
             <h1 style="margin-top: 30px;">Configuración de CampusTEC</h1>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-3" >
                 <h3 style="margin-top: 30px;">Cantidad de TEColones por curso:</h3>
               </div>
-              <div class="col-4">
+              <div class="col-4" [formGroup]="tecolonesForm">
+                {{tecolonesForm.value | json}}
                 <input type="number" id="password" class="form-control" 
-                formControlName="password" style="margin-top: 15px;">
+                formControlName="tecolones" style="margin-top: 15px;">
               </div>
               <div class="col-3">
                 <h3 style="margin-top: 30px;">TEColones</h3>
@@ -40,9 +41,9 @@
         </div>
         <div class="row">
             <div class="col-3"></div>
-            <div class="col-3">
+            <div class="col-3" x>
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="button"
-                    (click)="credentialsForm.valid? onLogIn() : null">
+                    (click)="onSaveTecolones()">
                     Guardar Información
                 </button>
             </div>
