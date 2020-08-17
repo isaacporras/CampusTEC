@@ -27,7 +27,7 @@ export class ObjectiveComponent implements OnInit {
   onClickSave()
   {
 
-    this.objectiveForm.controls.id.setValue(this.classId);
+    this.objectiveForm.controls.idClass.setValue(this.classId);
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
   }
@@ -38,9 +38,8 @@ export class ObjectiveComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.objectiveForm = this.formBuilder.group({
-      id: new FormControl(''),
+      idClass: new FormControl(''),
       description: new FormControl('',[Validators.required, Validators.maxLength(500)])
     });
   }

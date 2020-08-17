@@ -7,11 +7,11 @@ import { ClassesService } from './classesService/classes.service';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ChallengeComponent } from './challenge/challenge.component';
 import { TreeDataNodeFlattener } from '@angular/cdk/collections';
-import {ViewActivityComponent} from './viewOnly/view-activity/view-activity.component';
-import {ViewChallengeComponent} from './viewOnly/view-challenge/view-challenge.component';
+import { ViewActivityComponent } from './viewOnly/view-activity/view-activity.component';
+import { ViewChallengeComponent } from './viewOnly/view-challenge/view-challenge.component';
 
 import { ActivatedRoute } from '@angular/router';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 interface FoodNode {
   name: string;
@@ -80,7 +80,7 @@ export class ClassesComponent implements OnInit {
     classData.disableClose = true;
     classData.autoFocus = true;
 
-    classData.data = {id: this.classData.id, cameFrom : 'classes'};
+    classData.data = { id: this.classData.id, cameFrom: 'classes' };
 
     this.dialog.open(ObjectiveComponent, classData);
   }
@@ -98,7 +98,7 @@ export class ClassesComponent implements OnInit {
     this.dialog.open(ActivitiesComponent, classData);
   }
 
-  onCreateChallenge(){
+  onCreateChallenge() {
     const classData = new MatDialogConfig();
 
     classData.disableClose = true;
@@ -119,7 +119,7 @@ export class ClassesComponent implements OnInit {
   ) {
 
 
-    
+
     this.activatedroute.params.subscribe(data => {
 
       console.log('La data que le llegó a classes es:' + data.id);
@@ -141,7 +141,7 @@ export class ClassesComponent implements OnInit {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse);
       this.activities = jsonResponse.treeview;
-      
+
     }, (error) => {
       console.log(error);
     });
@@ -151,11 +151,11 @@ export class ClassesComponent implements OnInit {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse);
       this.objectives = jsonResponse.treeview;
-      
+
     }, (error) => {
       console.log(error);
     });
-    
+
   }
 
   viewChallenge(id: number) {
@@ -198,10 +198,18 @@ export class ClassesComponent implements OnInit {
   ngOnInit() {
 
 
-   this.TREE_DATA = this.http.getActivitiesAndChallenges(this.classId)['treeview'];
+    this.TREE_DATA = this.http.getActivitiesAndChallenges(this.classId)['treeview'];
 
 
-    this.classData = this.http.getClassBaseData(this.classId);
+    this.classData = this.http.getClassBaseData(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.classData = jsonResponse;
+
+    }, (error) => {
+      console.log(error);
+    });
+    
 
     //this.activities = this.http.getActivities();
 
