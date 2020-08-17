@@ -74,4 +74,14 @@ VALUES ('Aprender de diseño de aplicaciones', 1),
        ('Aprender sobre niveles de cache', 2);
 
 
+INSERT INTO retoacademico (Descripcion, Titulo, TecColones, IdCurso)
+VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing', 1000, 1),
+       ('Realizar pruebas en un procesador vectorial de 2.1GHz', 'Procesador Vectorial', 800, 2);
+
+INSERT INTO objetivoreto(IDOBJETIVO, IDRETO)
+VALUES (),
+       (),
+       (),
+       ();
+
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);

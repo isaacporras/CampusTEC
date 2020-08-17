@@ -115,4 +115,7 @@ FROM (SELECT X.IdPersona,
                      INNER JOIN sedepersona ON A.IdPersona = sedepersona.IdPersona
             WHERE sedepersona.IdPersona = ?) X
                INNER JOIN sede ON X.IdSede = sede.IdSede) X
-         INNER JOIN logininfo on logininfo.IdPersona = x.IdPersona
+         INNER JOIN logininfo on logininfo.IdPersona = x.IdPersona;
+
+
+SELECT logininfo.Carne FROM logininfo WHERE logininfo.IdPersona = ?;
