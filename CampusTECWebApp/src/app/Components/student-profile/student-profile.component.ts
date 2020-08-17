@@ -96,6 +96,7 @@ export class StudentProfileComponent implements OnInit {
     });
 
     this.http.getProfile(this.studentId).subscribe((data) => {
+      console.log(data)
       this.studentBaseData = data;
       this.studentClasses = data["classes"];
       console.log(data["classes"])
