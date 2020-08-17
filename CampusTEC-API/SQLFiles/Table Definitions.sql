@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS CursoPersona
 CREATE TABLE IF NOT EXISTS Objetivo
 (
     IdObjetivo  INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    Descripcion CHAR(50)                           NOT NULL,
+    Descripcion CHAR(200)                           NOT NULL,
     IdCurso     INTEGER                            NOT NULL,
     FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso)
 );

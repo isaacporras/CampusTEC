@@ -93,7 +93,16 @@ VALUES ('', '', TRUE),
        ('', 'Ejemplo5.pdf', TRUE);
 
 INSERT INTO actividad( IDFILE, NUMSEMANA, TECCOLONES, FECHA, DESCRIPCION, IDCURSO)
-VALUES (1,4,0,'12/12/2020','Realizar simulacion de procesador GENU5',0);
+VALUES (1,4,0,'5/12/2020','Realizar simulacion de procesador GENU5',2),
+       (1,4,0,'14/12/2020','Realizar simulacion de procesador PARSEC',2),
+       (1,4,0,'12/12/2020','Realizar simulacion de multisim de un DAC',2),
+       (1,4,0,'12/12/2020','Realizar simulacion en QUARTUS',2),
+       (1,4,0,'12/11/2020','Realizar pruebas en JUNIT',1),
+       (1,4,0,'1/10/2020','Verificar una covertura del 98%',1),
+       (1,4,0,'8/9/2020','Realizar pruebas unitarias de C++',1),
+       (1,4,0,'10/11/2020','Realizar pruebas Unitarias Javascript',1),
+       (1,4,0,'8/12/2020','Investigar sobre el uso de procesadores vectoriales',2),
+       (1,4,0,'12/12/2020','Investigar la herramienta Lapiz Lazury de microhard',1);
 
 
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
