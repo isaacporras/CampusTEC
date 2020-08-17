@@ -107,7 +107,7 @@ public class AddQueries {
 
     public static ResultSet createHomework(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO tarea(idpersona, idactividad, " +
-                "titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);");
+                "titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?);");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setString(3, parameters.get(2));

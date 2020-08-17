@@ -10,10 +10,7 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -46,6 +43,20 @@ public class PlannerHandler {
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
 
+    @GET
+    @Path("/assignment/{assignment}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAssignment(@PathParam("assignment") String id) throws Exception {
+
+        Assignment assignment = Planner.getAssignment(id);
+
+        return Response.ok(assignment).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
+
     @POST
     @Path("/challenges")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -77,5 +88,45 @@ public class PlannerHandler {
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
 
+    @POST
+    @Path("/activities")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getActivities(JsonObject request) throws Exception {
+        ArrayList<Course> courses = Planner.getActivities(request);
 
+        JsonArrayBuilder array = Json.createArrayBuilder();
+        for (Course course : courses) {
+            JsonArrayBuilder activitiesArray = Json.createArrayBuilder();
+            for (Activity activity : course.activities) {
+                activitiesArray.add(Json.createObjectBuilder().add("id", activity.id)
+                        .add("name", activity.name)
+                        .add("newComments", activity.newComents).build());
+            }
+            array.add(Json.createObjectBuilder().add("name", course.name)
+                    .add("children", activitiesArray));
+        }
+        JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
+        return Response.ok(root).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
+    @POST
+    @Path("/newAssignment")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response newAssignment(Assignment assignment) throws Exception {
+
+        Boolean result = Planner.newAssignment(assignment);
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("status", result);
+        JsonObject resp = respBuilder.build();
+        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
 }

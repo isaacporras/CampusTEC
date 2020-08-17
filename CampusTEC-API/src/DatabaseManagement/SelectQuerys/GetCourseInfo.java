@@ -30,15 +30,24 @@ public class GetCourseInfo {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet getCourseActivities(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("SELECT * FROM actividad LEFT JOIN actividadretoacademico" +
                 " ON actividad.IdActividad = actividadretoacademico.IdActividad WHERE actividad.IdCurso = ?;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet getCourseChallenges(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("SELECT retoacademico.* FROM retoacademico WHERE " +
                 "retoacademico.IdCurso = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
+
+    public static ResultSet getInfo(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM curso WHERE " +
+                "IdCurso = ?;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
