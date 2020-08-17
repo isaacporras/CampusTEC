@@ -15,6 +15,7 @@ public class RequestHandler extends Application {
         h.add(LoginHandler.class);
         h.add(ProfileHandler.class);
         h.add(ClassesHandler.class);
+        h.add(ClassesHandler.class);
         return h;
     }
 
