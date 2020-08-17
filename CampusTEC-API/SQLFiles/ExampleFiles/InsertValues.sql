@@ -54,7 +54,7 @@ VALUES ('PrimerSemestre 2020');
 INSERT INTO curso(nombre, teccolones, idsemestre)
 VALUES ('Espe', 90000, 1),
        ('Arquitectura de Computadores', 90000, 1);
-
+INSERT INTO curso(idcurso, nombre, teccolones, idsemestre) VALUES (0,'',0,1);
 INSERT INTO cursopersona(idcurso, idpersona, valid)
 VALUES (1, 2, TRUE),
        (1, 3, TRUE),
@@ -70,7 +70,7 @@ VALUES ('Aprender de diseño de aplicaciones', 1),
        ('Aprender sobre herramientas Scrum', 1),
        ('Aprender sobre Amdal', 2),
        ('Aprender sobre Procesadores vectoriales', 2),
-       ('Aprender sobre MISD', 2),
+       ('Aprender sobre MIMD', 2),
        ('Aprender sobre niveles de cache', 2);
 
 
@@ -79,9 +79,21 @@ VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing
        ('Realizar pruebas en un procesador vectorial de 2.1GHz', 'Procesador Vectorial', 800, 2);
 
 INSERT INTO objetivoreto(IDOBJETIVO, IDRETO)
-VALUES (),
-       (),
-       (),
-       ();
+VALUES (3, 1),
+       (1, 1),
+       (6, 2),
+       (7, 2),
+       (5, 2);
+
+INSERT INTO file(FileURL, Filename, Valid)
+VALUES ('', '', TRUE),
+       ('', 'Ejemplo2.pdf', TRUE),
+       ('', 'Ejemplo3.pdf', TRUE),
+       ('', 'Ejemplo4.pdf', TRUE),
+       ('', 'Ejemplo5.pdf', TRUE);
+
+INSERT INTO actividad( IDFILE, NUMSEMANA, TECCOLONES, FECHA, DESCRIPCION, IDCURSO)
+VALUES (1,4,0,'12/12/2020','Realizar simulacion de procesador GENU5',0);
+
 
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);

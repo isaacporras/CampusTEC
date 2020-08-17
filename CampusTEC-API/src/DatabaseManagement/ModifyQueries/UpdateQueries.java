@@ -25,8 +25,8 @@ public class UpdateQueries {
         statement.setString(5, parameters.get(4));
         statement.setString(6, parameters.get(5));
         statement.setInt(7, Integer.parseInt(parameters.get(6)));
-
-        return statement.executeQuery();
+        statement.executeUpdate();
+        return null;
     }
 
     public static ResultSet updateActivityPerson(ArrayList<String> parameters, Connection con) throws SQLException {
@@ -36,7 +36,8 @@ public class UpdateQueries {
         statement.setBoolean(1, Boolean.parseBoolean(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
-        return statement.executeQuery();
+        statement.executeUpdate();
+        return null;
     }
     public static ResultSet updateChallengePerson(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("UPDATE personareto SET" +
@@ -44,7 +45,8 @@ public class UpdateQueries {
         statement.setBoolean(1, Boolean.parseBoolean(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
-        return statement.executeQuery();
+        statement.executeUpdate();
+        return null;
     }
 
     public static ResultSet updateHomework(ArrayList<String> parameters, Connection con) throws SQLException {
@@ -55,7 +57,8 @@ public class UpdateQueries {
         statement.setInt(2, Integer.parseInt(parameters.get(2)));
         statement.setInt(3, Integer.parseInt(parameters.get(3)));
         statement.setInt(4, Integer.parseInt(parameters.get(4)));
-        return statement.executeQuery();
+        statement.executeUpdate();
+        return null;
     }
 
     
