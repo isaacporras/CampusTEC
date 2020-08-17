@@ -20,7 +20,7 @@ public class LoginHandler {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response autenticate(Credentials credentials) throws Exception {
+    public Response authenticate(Credentials credentials) throws Exception {
         User user = login(credentials);
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
@@ -29,7 +29,7 @@ public class LoginHandler {
         } else {
             respBuilder.add("status", 1);
             respBuilder.add("token", user.token);
-            respBuilder.add("rol", user.rol);
+            respBuilder.add("role", user.role);
         }
         JsonObject resp = respBuilder.build();
         return Response.ok(resp).header("Access-Control-Allow-Origin", "*")

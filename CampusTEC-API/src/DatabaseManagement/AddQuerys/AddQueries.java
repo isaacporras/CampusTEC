@@ -22,13 +22,15 @@ public class AddQueries {
 
     public static ResultSet createActivity(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO actividad( IdFile, NumSemana, TecColones, " +
-                "Fecha, Descripcion, IdCurso) VALUES (?,?,?,?,?,?);");
+                "Fecha, Descripcion, IdCurso,Titulo) VALUES (?,?,?,?,?,?,?);");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
         statement.setString(4, parameters.get(3));
         statement.setString(5, parameters.get(4));
         statement.setInt(6, Integer.parseInt(parameters.get(5)));
+        statement.setString(7, parameters.get(6));
+
         return statement.executeQuery();
     }
 

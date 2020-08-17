@@ -6,11 +6,10 @@ import java.util.ArrayList;
 
 public class ProfileSelectQueries {
     public static ResultSet getCourses(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("SELECT cur.IdCurso,cur.Nombre  " +
+        PreparedStatement statement = con.prepareStatement("SELECT cur.IdCurso,cur.Nombre,cur.Numero  " +
                 "FROM curso AS cur  " +
                 "         INNER JOIN (  " +
                 "             SELECT * FROM cursopersona AS p WHERE p.IdPersona = ?   " +
-
                 "             ) AS c on cur.IdCurso = c.IdCurso;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
@@ -92,6 +91,12 @@ public class ProfileSelectQueries {
                 "FROM universidadpersona  " +
                 "         INNER JOIN universidad s on universidadpersona.IdUniversidad = s.IdUniversidad  " +
                 "WHERE universidadpersona.IdPersona = ?;;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
+    public static ResultSet getIdFromPersonID(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT logininfo.Carne FROM " +
+                "logininfo WHERE logininfo.IdPersona = ?;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }

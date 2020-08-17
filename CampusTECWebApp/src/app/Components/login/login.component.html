@@ -36,8 +36,7 @@
             <form class="form-signin" [formGroup]="credentialsForm">
                 <span id="reauth-email" class="reauth-email"></span>
                 <h3>Carnet:</h3>
-                <input type="text" id="id" class="form-control" placeholder="Carnet" formControlName="id"
-                    data-error="Bruh, that email address is invalid" required>
+                <input type="text" id="id" class="form-control" placeholder="Carnet" formControlName="id" required>
 
                 <div *ngIf="id.invalid && (id.dirty || id.touched)" class="alert alert-danger">
 

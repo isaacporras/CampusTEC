@@ -222,7 +222,7 @@ export class PlannerComponent implements OnInit {
     this.dialog.open(ViewActivityComponent, classData);
   }
 
-  updateChallenges(): void{
+  updateChallenges(): void {
     let challenges = this.http.getChallenges();
     challenges.forEach((value) => {
         let course = Array<any>();
