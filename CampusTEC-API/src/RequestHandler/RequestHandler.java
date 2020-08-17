@@ -14,7 +14,7 @@ public class RequestHandler extends Application {
         HashSet h = new HashSet<Class<?>>();
         h.add(LoginHandler.class);
         h.add(ProfileHandler.class);
-        h.add(Assignment.class);
+        h.add(ClassesHandler.class);
         return h;
     }
 
