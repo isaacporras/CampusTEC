@@ -125,8 +125,7 @@ export class ClassesComponent implements OnInit {
       console.log('La data que le llegó a classes es:' + data.id);
       this.classId = data.id;
       this.teacherId = data.teacherId;
-    })
-
+    });
 
     console.log('Los challenges son:');
     this.http.getActivitiesAndChallenges(this.classId).subscribe((data) => {
@@ -134,6 +133,25 @@ export class ClassesComponent implements OnInit {
       console.log(jsonResponse);
       this.TREE_DATA = jsonResponse.treeview;
       this.dataSource.data = this.TREE_DATA;
+    }, (error) => {
+      console.log(error);
+    });
+
+    this.http.getActivities(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.activities = jsonResponse.treeview;
+      
+    }, (error) => {
+      console.log(error);
+    });
+
+
+    this.http.getObjectives(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.objectives = jsonResponse.treeview;
+      
     }, (error) => {
       console.log(error);
     });
@@ -185,9 +203,9 @@ export class ClassesComponent implements OnInit {
 
     this.classData = this.http.getClassBaseData();
 
-    this.activities = this.http.getActivities();
+    //this.activities = this.http.getActivities();
 
-    this.objectives = this.http.getObjectives();
+    //this.objectives = this.http.getObjectives();
   }
 
 }
