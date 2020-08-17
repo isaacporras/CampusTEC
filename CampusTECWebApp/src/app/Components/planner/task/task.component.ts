@@ -77,12 +77,14 @@ export class TaskComponent implements OnInit {
 
   onClickSave() {
     this.submitted = true;
-    console.log(this.taskForm.get('activity').value);
-    console.log();
-    let id = this.taskForm.get('activity').value.split(')')[0];
-    this.taskForm.get('activity').setValue(Number(id));
-    console.log(this.taskForm);
-    this.dialogRef.close();
+    if(this.taskForm.valid) {
+      console.log(this.taskForm.get('activity').value);
+      console.log();
+      let id = this.taskForm.get('activity').value.split(')')[0];
+      this.taskForm.get('activity').setValue(Number(id));
+      console.log(this.taskForm);
+      this.dialogRef.close();
+    }
   }
   onClickClose() {
     this.dialogRef.close();
