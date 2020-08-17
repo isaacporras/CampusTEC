@@ -10,12 +10,6 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.io.*;
-//VERY IMPORTANT.  SOME OF THESE EXIST IN MORE THAN ONE PACKAGE!
-import java.security.GeneralSecurityException;
-import java.security.KeyStore;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
 
 public class TwitterPublisher {
     static final String CONSUMER_KEY = "Dlbo2wvekv6uwupbm2BJIW4Uj";
