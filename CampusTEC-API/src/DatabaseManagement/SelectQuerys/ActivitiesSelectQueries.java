@@ -75,4 +75,11 @@ public class ActivitiesSelectQueries {
 
         return statement.executeQuery();
     }
+
+    public static ResultSet getHomeworkFromID(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT tarea.*, a.Titulo FROM tarea INNER JOIN actividad a on " +
+                "tarea.IdActividad = a.IdActividad WHERE tarea.IdTarea = ?; ");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
 }

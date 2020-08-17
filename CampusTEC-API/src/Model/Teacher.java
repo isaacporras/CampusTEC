@@ -108,4 +108,25 @@ public class Teacher {
         }
         return objectives;
     }
+
+    public static Course getCourse(String id) {
+
+        Course course = new Course();
+        ArrayList<String> param = new ArrayList<>();
+        param.add(id);
+        try {
+            ResultSet result = GetCourseInfo.getInfo(param, DBConnection.getConnection());
+            result.next();
+            course.id = result.getString("IdCurso");
+            course.name = result.getString("Nombre");
+            course.group = result.getString("Numero");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return course;
+    }
+
 }

@@ -1,5 +1,6 @@
 package Model;
 
+import DatabaseManagement.AddQuerys.AddQueries;
 import DatabaseManagement.DBConnection;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import DatabaseManagement.SelectQuerys.GetCourseInfo;
@@ -71,5 +72,59 @@ public class Planner {
         }
         return courses;
     }
+
+    public static ArrayList<Course> getActivities(JsonObject req) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(req.getString("token"));
+        param.add(req.getString("week"));
+        ResultSet result = ActivitiesSelectQueries.getActivitiesByPersonAndWeek(param, DBConnection.getConnection());
+        ArrayList<Course> courses = new ArrayList<>();
+        while (result.next()) {
+            System.out.println("ENTRÖ");
+            Course course = new Course();
+            course.id = result.getString("IdCurso");
+            course.name = result.getString("Nombre");
+//            course.group = result.getString("Numero");
+
+            Activity activity = new Activity();
+            activity.id = result.getString("IdActividad");
+            activity.name = result.getString("Titulo");
+            course.activities.add(activity);
+            courses.add(course);
+        }
+        return courses;
+    }
+
+    public static Assignment getAssignment(String id) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(id);
+        ResultSet result = ActivitiesSelectQueries.getHomeworkFromID(param, DBConnection.getConnection());
+        result.next();
+        Assignment assignment = new Assignment();
+        assignment.name = result.getString("Titulo");
+        assignment.week = result.getInt("Semana");
+        assignment.day = result.getString("NumDia");
+        assignment.time = result.getString("Hora");
+        assignment.description = result.getString("Descripcion");
+        assignment.activity = result.getString("a.Titulo");
+
+        return assignment;
+    }
+
+    public static Boolean newAssignment(Assignment assignment) throws SQLException, ClassNotFoundException {
+        ArrayList<String> params = new ArrayList<>();
+        params.add(assignment.token);
+        params.add(assignment.activity);
+        params.add(assignment.name);
+        params.add(assignment.week.toString());
+        params.add(assignment.day);
+        params.add(assignment.description);
+        params.add(assignment.time);
+        AddQueries.createHomework(params, DBConnection.getConnection());
+
+        return true;
+    }
+
 }
+
 

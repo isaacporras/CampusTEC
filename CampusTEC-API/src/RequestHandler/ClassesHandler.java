@@ -97,5 +97,17 @@ public class ClassesHandler {
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
 
+    @GET
+    @Path("/info/{class}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getInfo(@PathParam("class") String id) throws Exception {
+        Course course = Teacher.getCourse(id);
+
+        return Response.ok(course).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
 
 }
