@@ -21,8 +21,15 @@ public class ClassesHandler {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getClasses(JsonObject token) throws Exception {
-        ArrayList<Course> course = Teacher.getClasses(token.getString("token"));
-        return Response.ok(course).header("Access-Control-Allow-Origin", "*")
+        ArrayList<Course> courses = Teacher.getClasses(token.getString("token"));
+
+        JsonArrayBuilder array = Json.createArrayBuilder();
+        for (Course course : courses) {
+            array.add(Json.createObjectBuilder().add("id", course.id).add("name", course.name).add("group", course.group));
+        }
+        JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
+
+        return Response.ok(root).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
