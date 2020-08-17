@@ -89,8 +89,6 @@ export class ClassesComponent implements OnInit {
       data => {console.log("La data recibida en el class de objetivo es:", data);
       if (data === 0){
         window.location.reload()
-      }else {
-        window.location.reload()
       }
     }
   );    
