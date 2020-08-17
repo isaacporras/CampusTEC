@@ -5,3 +5,17 @@ CampusTEC-API/CampusTEC-API.iml
 CampusTEC-API/out
 
 *.class
+.idea/inspectionProfiles/Project_Default.xml
+.idea/libraries/javax_json_1_0.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+CampusTEC-API/SQLFiles/.idea/dataSources.local.xml
+CampusTEC-API/SQLFiles/.idea/dataSources.xml
+CampusTEC-API/SQLFiles/.idea/dataSources/855ec797-9908-448f-9837-7653b15914fd.xml
+CampusTEC-API/SQLFiles/.idea/dataSources/855ec797-9908-448f-9837-7653b15914fd/storage_v2/_src_/schema/campustecdb.kVb0rw.meta
+CampusTEC-API/SQLFiles/.idea/dataSources/855ec797-9908-448f-9837-7653b15914fd/storage_v2/_src_/schema/information_schema.FNRwLQ.meta
+CampusTEC-API/SQLFiles/.idea/modules.xml
+CampusTEC-API/SQLFiles/.idea/SQLFiles.iml
+CampusTEC-API/SQLFiles/.idea/workspace.xml
+CampusTEC.iml
