@@ -23,14 +23,14 @@ public class Profile {
             if (resultUser.next()) {
 
                 user.token = resultUser.getString("IdPersona");
-                user.nombre = resultUser.getString("Nombre");
-                user.apellido = resultUser.getString("Apellido");
-                user.estado = resultUser.getString("Activo");
-                user.telefono = resultUser.getString("NumTelefono");
+                user.name = resultUser.getString("Nombre");
+                user.lastname = resultUser.getString("Apellido");
+                user.status = resultUser.getString("Activo");
+                user.telNumber = resultUser.getString("NumTelefono");
                 user.email1 = resultUser.getString("Email1");
                 user.email2 = resultUser.getString("Email2");
-                user.universidad = resultUser.getString("Universidadnombre");
-                user.sede = resultUser.getString("sedeNombre");
+                user.university = resultUser.getString("Universidadnombre");
+                user.campus = resultUser.getString("sedeNombre");
                 user.ppurl = resultUser.getString("PpUrl");
 
             }
@@ -50,7 +50,7 @@ public class Profile {
                 Course course = new Course();
                 course.id = resultCursos.getString("IdCurso");
                 course.nombre = resultCursos.getString("Nombre");
-                user.courses.add(course);
+                user.classes.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,9 +63,9 @@ public class Profile {
 
     public static Boolean editUser(User user) {
         ArrayList<String> param = new ArrayList<>();
-        param.add(user.nombre);
-        param.add(user.apellido);
-        param.add(user.telefono);
+        param.add(user.name);
+        param.add(user.lastname);
+        param.add(user.telNumber);
         param.add(user.email1);
         param.add(user.email2);
         param.add(user.ppurl);
@@ -96,11 +96,11 @@ public class Profile {
                 ResultSet resultUser = ProfileSelectQueries.getProfileInfo(param, DBConnection.getConnection());
                 resultUser.next();
                 if (result.getBoolean("type")) {
-                    user.rol = "administrador";
+                    user.role = "administrador";
                 } else if (resultUser.getBoolean("Puesto")) {
-                    user.rol = "profesor";
+                    user.role = "profesor";
                 } else {
-                    user.rol = "estudiante";
+                    user.role = "estudiante";
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {

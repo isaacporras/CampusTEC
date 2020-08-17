@@ -2,7 +2,6 @@ package RequestHandler;
 
 import Model.Objects.User;
 import Model.Profile;
-import RequestObjects.Token;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -20,8 +19,8 @@ public class ProfileHandler {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(Token token) throws Exception {
-        User user = Profile.getUser(token.token);
+    public Response getUser(JsonObject token) throws Exception {
+        User user = Profile.getUser(token.getString("token"));
         return Response.ok(user).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
                 .header("Access-Control-Allow-Credentials", "true")

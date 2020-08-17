@@ -8,14 +8,14 @@ public class Activity {
     public String userToken;
     public String id;
 
-    public String nombre;
-    public String descripcion;
-    public Bool evaluable;
-    public Integer semana;
-    public String fechaEntrega;
-    public ArrayList<Objective> objetivos;
-    public ArrayList<Comment> comentarios;
-    public String linkArchivo;
+    public String name;
+    public String description;
+    public Bool gradable;
+    public Integer week;
+    public String date;
+    public ArrayList<Objective> objectives;
+    public ArrayList<Comment> comments;
+    public String fileLink;
 
 
 }
