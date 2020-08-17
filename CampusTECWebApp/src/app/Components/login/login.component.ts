@@ -3,8 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {RxwebValidators} from '@rxweb/reactive-form-validators';
 
-import {Router} from '@angular/router'
-import {HttpServicesService} from "../../Services/http-services.service";
+import {Router} from '@angular/router';
+import {HttpServicesService} from '../../Services/http-services.service';
 
 
 @Component({
@@ -17,14 +17,26 @@ export class LoginComponent implements OnInit {
   credentialsForm: FormGroup;
 
   onLogIn() {
-    this.http.autenticate(this.credentialsForm.value).subscribe((data) => {console.log(data)
+    this.http.authenticate(this.credentialsForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      if(jsonResponse.status = 1){
+        switch (jsonResponse.rol) {
+          case "estudiante":
+            this.router.navigate(['/studentProfile', jsonResponse.token]);
+            break;
+          case "profesor":
+            this.router.navigate(['/teacherProfile', jsonResponse.token]);
+            break;
+          case "administrador":
+            this.router.navigate(['/administrator', jsonResponse.token]);
+            break;
+        }
+      }else{
+        console.log("Carné o contraseña incorrectos")
+      }
     }, (error) => {
       console.log(error);
     });
-    console.log(JSON.stringify(this.credentialsForm.value, null, 4));
-    //this.router.navigate(['/studentProfile', 1009]);
-    this.router.navigate(['/teacherProfile', 9999]);
-    //this.router.navigate(['studentProfile/']);
   }
 
 
