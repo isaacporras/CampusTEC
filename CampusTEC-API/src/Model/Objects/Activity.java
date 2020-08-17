@@ -15,7 +15,7 @@ public class Activity {
     public String date;
     public ArrayList<Objective> objectives;
     public ArrayList<Comment> comments;
-    public String fileLink;
+    public String fileurl;
 
 
 }

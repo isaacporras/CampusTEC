@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS CampusTecDB;
 CREATE DATABASE IF NOT EXISTS CampusTecDB;
 USE CampusTecDB;
 CREATE TABLE IF NOT EXISTS Persona
@@ -110,6 +111,7 @@ CREATE TABLE IF NOT EXISTS Curso
 (
     IdCurso    INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     Nombre     CHAR(50)                           NOT NULL,
+    Numero     INTEGER                            NOT NULL,
     TecColones INTEGER                            NOT NULL DEFAULT 0,
     IdSemestre INTEGER                            NOT NULL,
     FOREIGN KEY (IdSemestre) REFERENCES Semestre (IdSemestre)
@@ -205,6 +207,7 @@ CREATE TABLE IF NOT EXISTS Tarea
     semana      INTEGER                            NOT NULL,
     NumDia      INTEGER                            NOT NULL,
     Descripcion TEXT(300)                          NOT NULL,
+    Completado  BOOLEAN                            NOT NULL DEFAULT FALSE,
     Hora        INTEGER                            NOT NULL,
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona),
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad)

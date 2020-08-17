@@ -49,7 +49,7 @@ public class Profile {
             while (resultCursos.next()) {
                 Course course = new Course();
                 course.id = resultCursos.getString("IdCurso");
-                course.nombre = resultCursos.getString("Nombre");
+                course.name = resultCursos.getString("Nombre");
                 user.classes.add(course);
             }
         } catch (SQLException e) {
