@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       console.log(jsonResponse.status);
       if(jsonResponse.status == 1){
         console.log('ENTRO')
-        switch (jsonResponse.rol) {
+        switch (jsonResponse.role) {
           case "estudiante":
             this.router.navigate(['/studentProfile', jsonResponse.token]);
             break;
