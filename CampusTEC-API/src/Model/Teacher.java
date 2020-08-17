@@ -4,9 +4,7 @@ import DatabaseManagement.DBConnection;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import DatabaseManagement.SelectQuerys.GetCourseInfo;
 import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
-import Model.Objects.Activity;
-import Model.Objects.Course;
-import Model.Objects.User;
+import Model.Objects.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,5 +56,28 @@ public class Teacher {
             e.printStackTrace();
         }
         return activities;
+    }
+    
+
+    public static ArrayList<Objective> getObjectives(String course) {
+        ArrayList<Objective> objectives = new ArrayList<>();
+        ArrayList<String> param = new ArrayList<>();
+        param.add(course);
+        try {
+            ResultSet result = GetCourseInfo.getCourseObjectives(param, DBConnection.getConnection());
+
+            while (result.next()) {
+                Objective objective = new Objective();
+                objective.id = result.getString("IdObjetivo");
+                objective.description = result.getString("Descripcion");
+                objectives.add(objective);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return objectives;
     }
 }
