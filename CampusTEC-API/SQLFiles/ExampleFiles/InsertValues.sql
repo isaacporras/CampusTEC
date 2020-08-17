@@ -126,14 +126,26 @@ VALUES (1, 2, FALSE),
        (2, 4, TRUE),
        (2, 5, FALSE);
 
-INSERT INTO comentario( IDFILE, IDACTIVIDAD, COMENTARIO, IDPERSONA, FECHA, HORA)
-VALUES (1,1,'Hola encontre algo muy lindo',2),
-       (2,1,'Buenas me ha costado mucho esto',3),
-       (3,2,'Me costo mucho hacer esto',2),
-       (4,2,'Miren este ejemplo en el documento',3),
-       (5,2,'Que saico, encontre este documento',3);
+INSERT INTO comentario(IDFILE, IDACTIVIDAD, COMENTARIO, IDPERSONA, FECHA, HORA)
+VALUES (1, 1, 'Hola encontre algo muy lindo', 2,'22/1/2020','9:00'),
+       (2, 1, 'Buenas me ha costado mucho esto', 2,'9/05/2020','7:00'),
+       (3, 2, 'Me costo mucho hacer esto', 3,'12/12/2020','2:00'),
+       (4, 2, 'Miren este ejemplo en el documento', 3,'10/10/2020','3:50'),
+       (5, 2, 'Que saico, encontre este documento', 3,'8/8/2020','2:30');
+
+INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, completado, hora)
+VALUES (2, 9, 'Trabajar', 3, 2, 'Trabajar en la actividad del simulador', FALSE, 4),
+       (3, 9, 'Compilar', 8, 1, 'Compilar trabajos', FALSE, 9),
+       (2, 10, 'Resolver problemas', 1, 6, 'Resolver problemas de implementacion', FALSE, 1),
+       (2, 10, 'Revisar informe', 1, 2, 'Revisar informe de la actividad', FALSE, 3);
 
 
+
+INSERT INTO actividadpersona(IDACTIVIDAD, IDPERSONA, COMPLETADO)
+VALUES (9, 2, true),
+       (9, 3, FALSE),
+       (10, 4, TRUE),
+       (10, 5, FALSE);
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);

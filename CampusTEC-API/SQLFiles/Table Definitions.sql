@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Persona
     NumTelefono INTEGER                            NOT NULL DEFAULT 0,
     Email1      CHAR(50)                           NOT NULL DEFAULT 'None',
     Email2      CHAR(50)                           NOT NULL DEFAULT 'None',
-    PpUrl       CHAR(100)                          NOT NULL,
+    PpUrl       text(500)                          NOT NULL,
     Puesto      BOOLEAN                            NOT NULL DEFAULT FALSE
 );
 

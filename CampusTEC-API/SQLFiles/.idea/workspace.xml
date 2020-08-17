@@ -4,7 +4,7 @@
     <list default="true" id="ad993b09-26ac-4b84-b656-6ef741e96bcd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ExampleFiles/InsertValues.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ExampleFiles/InsertValues.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SelectionQuerys/SelectionOfCourses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SelectionQuerys/SelectionOfCourses.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Table Definitions.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Table Definitions.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,4 +31,26 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="WindowStateProjectService">
+    <state width="1293" height="282" key="GridCell.Tab.0.bottom" timestamp="1597653212184">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597653212184" />
+    <state width="1293" height="282" key="GridCell.Tab.0.center" timestamp="1597653212184">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597653212184" />
+    <state width="1293" height="282" key="GridCell.Tab.0.left" timestamp="1597653212184">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597653212184" />
+    <state width="1293" height="282" key="GridCell.Tab.0.right" timestamp="1597653212184">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597653212184" />
+    <state x="826" y="407" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1597653158036">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="826" y="407" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1040@0.0.1920.1040" timestamp="1597653158036" />
+  </component>
 </project>
