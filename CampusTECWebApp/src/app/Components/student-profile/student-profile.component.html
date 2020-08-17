@@ -40,7 +40,7 @@
               <img
                 src="{{studentBaseData.ppurl}}"
                 class="picture-src" id="wizardPicturePreview" title="">
-              <input type="file" id="wizard-picture" class="">
+              <input type="file" id="wizard-picture" class="" (change)="uploadProfileFile($event)">
             </div>
             <h6 class="">Cambiar Imagen de Pefil</h6>
 

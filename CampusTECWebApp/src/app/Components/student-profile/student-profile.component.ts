@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
 import {HttpServicesService} from '../../Services/http-services.service';
-
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-student-profile',
@@ -26,6 +26,17 @@ export class StudentProfileComponent implements OnInit {
   studentDataForm: FormGroup;
 
   studentClasses: any = [];
+
+  fileChangedEvent: Event;
+  wasFileUploaded: boolean;
+
+  uploadProfileFile(e) {
+    console.log('subir', e)
+    this.fileChangedEvent = e.target.files[0];
+    this.wasFileUploaded = true;
+    this.editing =  true;
+  }
+
 
   goToPlanner() {
     return this.router.navigate(['/planner', this.studentId]);
@@ -54,31 +65,57 @@ export class StudentProfileComponent implements OnInit {
   }
 
   onSave() {
+    console.log('Se quiere guardar')
+    if (this.wasFileUploaded) {
+      console.log('Se va a hacer una carga de foto de perfil')
+      //Se hace la carga del archivo //
+      const id = Math.random().toString(36).substring(2);
+      const file = this.fileChangedEvent;
+      const filepath = `profilePictures/activity_${id}`;
+      const reference = this.storage.ref(filepath);
+      const task = this.storage.upload(filepath, file).then(rst => {
+        rst.ref.getDownloadURL().then(url => {
 
-    this.http.postUpdateProfile(this.studentDataForm.value).subscribe((data) => {
-      var jsonResponse = JSON.parse(JSON.stringify(data));
-      console.log(jsonResponse.status);
-      if(jsonResponse.status == 1){
-        alert('Se actualizó correctamente la información');
-        }
-      else{
-        console.log("Carné o contraseña incorrectos")
-      }
-    }, (error) => {
-      console.log(error);
-    });
-    this.studentDataForm.controls['email1'].disable();
-    this.studentDataForm.controls['email2'].disable();
-    this.studentDataForm.controls['telNumber'].disable();
-    this.studentDataForm.controls['university'].disable();
-    this.studentDataForm.controls['campus'].disable();
+          this.studentDataForm.get('ppurl').setValue(url);
+          console.log(this.studentDataForm.value);
+
+          this.http.postUpdateProfile(this.studentDataForm.value).subscribe((data) => {
+            var jsonResponse = JSON.parse(JSON.stringify(data));
+            console.log(jsonResponse.status);
+            if(jsonResponse.status == 1){
+              alert('Se actualizó correctamente la información');
+              }
+            else{
+              console.log("Carné o contraseña incorrectos")
+            }
+          }, (error) => {
+            console.log(error);
+          });
+
+
+
+
+
+
+
+        });
+      });
+    }
+
+
+    
+
 
 
     console.log(JSON.stringify(this.studentDataForm.value, null, 4));
     this.editing = false;
 
   }
-  constructor(private http: HttpServicesService, private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpServicesService, 
+    private formBuilder: FormBuilder,
+     private activatedroute: ActivatedRoute, 
+     private router: Router,
+     private storage: AngularFireStorage,) {
     this.activatedroute.params.subscribe(data => {
 
       console.log('La data que le llegó a student-profile es:' + data.id);
@@ -146,11 +183,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   onDismiss() {
-    this.studentDataForm.controls['email1'].disable();
-    this.studentDataForm.controls['email2'].disable();
-    this.studentDataForm.controls['telNumber'].disable();
-    this.studentDataForm.controls['university'].disable();
-    this.studentDataForm.controls['campus'].disable();
+
     this.editing = false;
   }
 
