@@ -77,14 +77,19 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
 
     this.studentDataForm = this.formBuilder.group({
+      name: new FormControl(''),
+      lastname: new FormControl(''),
+      id: new FormControl(''),
+      status: new FormControl(''),
+      ppurl: new FormControl(''),
+      tecolones: new FormControl(''),
       email1: new FormControl({ value: '', disable: true },
         [Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
       email2: new FormControl({ value: '', disable: true },
         [Validators.required,
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      telNumber: new FormControl({ value: '', disable: true },
-        [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$")]),
+      telNumber: new FormControl({ value: '', disable: true }, [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$")]),
       university: new FormControl({ value: '', disable: true }, Validators.required),
       campus: new FormControl({ value: '', disable: true }, Validators.required),
 
@@ -93,12 +98,31 @@ export class StudentProfileComponent implements OnInit {
     this.http.getProfile(this.studentId).subscribe((data) => {
       this.studentBaseData = data;
       this.studentClasses = data["classes"];
+      console.log(data["classes"])
+
+      if(this.studentBaseData.status === '1') {
+        this.studentBaseData.status = 'Activo';
+      }
+      else if (this.studentBaseData.status === '0') {
+        this.studentBaseData.status = 'Inactivo';
+      }
+      this.studentDataForm.controls['name'].setValue(data['name']);
+      this.studentDataForm.controls['lastname'].setValue(data['lastname']);
+      this.studentDataForm.controls['id'].setValue(data['id']);
+      this.studentDataForm.controls['status'].setValue(data['status']);
+      this.studentDataForm.controls['ppurl'].setValue(data['ppurl']);
+      this.studentDataForm.controls['tecolones'].setValue(data['tecolones']);
+      this.studentDataForm.controls['email1'].setValue(data['email1']);
+      this.studentDataForm.controls['email2'].setValue(data['email2']);
+      this.studentDataForm.controls['telNumber'].setValue(data['telNumber']);
+      this.studentDataForm.controls['university'].setValue(data['university']);
+      this.studentDataForm.controls['campus'].setValue(data['campus']);
+
+
+
     });
 
-    this.studentDataForm.setValue({
-      email1: 'imanoisaaac1@gmail.com', email2: 'imanoisaaac23@gmail.com', telNumber: '82837462',
-      university: 'X-TEC', campus: 'Cartago'
-    });
+
 
 
     this.studentDataForm.controls['email1'].disable();

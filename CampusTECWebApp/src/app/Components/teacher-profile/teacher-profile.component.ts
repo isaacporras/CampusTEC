@@ -26,7 +26,7 @@ export class TeacherProfileComponent implements OnInit {
 
   teacherDataForm: FormGroup;
 
-  teacherClasses: any = [];
+  teacherClasses: Array<any>;
 
 
   onEdit(id) {
@@ -101,6 +101,13 @@ export class TeacherProfileComponent implements OnInit {
     this.http.getProfile(this.teacherId).subscribe((data) => {
       console.log(data)
       this.teacherBaseData = data;
+
+      if(this.teacherBaseData.status === '1'){
+        this.teacherBaseData.status = 'Activo';
+      }
+      else if (this.teacherBaseData.status === '0') {
+        this.teacherBaseData.status = 'Inactivo';
+      }
       this.teacherDataForm.controls['name'].setValue(data['name']);
       this.teacherDataForm.controls['lastname'].setValue(data['lastname']);
       this.teacherDataForm.controls['id'].setValue(data['id']);
@@ -113,6 +120,7 @@ export class TeacherProfileComponent implements OnInit {
       this.teacherDataForm.controls['university'].setValue(data['university']);
       this.teacherDataForm.controls['campus'].setValue(data['campus']);
 
+      console.log(data["classes"])
 
       this.teacherClasses = data["classes"];
     });
