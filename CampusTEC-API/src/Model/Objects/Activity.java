@@ -8,6 +8,7 @@ public class Activity {
 
     public String id = "";
     public String name = "";
+    public String idClass = "";
     public String description = "";
     public Boolean gradable = false;
     public Integer week = 1;
