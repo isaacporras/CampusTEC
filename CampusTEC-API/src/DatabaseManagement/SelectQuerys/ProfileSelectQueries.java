@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ProfileSelectQueries {
     public static ResultSet getCourses(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("SELECT cur.IdCurso,cur.Nombre  " +
+        PreparedStatement statement = con.prepareStatement("SELECT cur.IdCurso,cur.Nombre,cur.Numero  " +
                 "FROM curso AS cur  " +
                 "         INNER JOIN (  " +
                 "             SELECT * FROM cursopersona AS p WHERE p.IdPersona = ?   " +
