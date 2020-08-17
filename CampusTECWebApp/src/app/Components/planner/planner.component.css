@@ -65,6 +65,9 @@ pre {
   flex-grow: 1;
 }
 
+.activity-node{
+}
+
 .week-selector{
   background: #f9f9f9;
 }
@@ -74,6 +77,4 @@ div.scrollable{
   overflow-x: hidden;
 }
 
-.activity-node{
-  font-size: 0.9em;
-}
+

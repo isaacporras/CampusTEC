@@ -1,144 +1,135 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
 
 
 <body>
 
 
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="logo-image">
-            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
-        </div>
-        <a class="navbar-brand" href="#"> CampusTEC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="logo-image">
+    <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+  </div>
+  <a class="navbar-brand" href="#"> CampusTEC</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
 
-                <a class="nav-item nav-link active" [routerLink]="['/teacherProfile', teacherId]">Mi Perfil</a>
-                <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
+      <a class="nav-item nav-link active" [routerLink]="['/teacherProfile', teacherId]">Mi Perfil</a>
+      <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
 
-            </div>
-        </div>
-    </nav>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 style="margin-top: 20px;">{{classData.name}}</h1>
-                <h2>Grupo : {{classData.group}}</h2>
-
-            </div>
-        </div>
-        <div class="row objetiveRow">
-            <div class="col">
-                <h3>Objetivos del curso</h3>
-                <ul class="list-group">
-                    <tr *ngFor="let objetive of objectives">
-                        <li class="list-group-item"> {{objetive.description}}</li>
-                    </tr>
-
-                </ul>
-            </div>
-            <div class="col col-lg-2">
-
-                <button type="button" class="btn btn-addObjective">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <span class="addButton" (click)="onCreateObjective()">Añadir Objetivo</span>
-                </button>
-
-            </div>
-
-        </div>
-        <hr class="line">
-        <div class="row">
-            <div class="col">
-                <h2>Retos</h2>
+    </div>
+  </div>
+</nav>
 
 
-            </div>
-            <div class="col-md-3 ml-md-auto">
-                <button type="button" class="btn btn-addChanllenge" (click) = "onCreateChallenge()">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <span class="addButton">Añadir Reto</span>
-                </button>
-            </div>
-            <div class="col">
-                <h2>Actividades</h2>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 style="margin-top: 20px;">{{classData.name}}</h1>
+      <h2>Grupo : {{classData.group}}</h2>
+    </div>
+  </div>
+  <div class="row objetiveRow">
+    <div class="col">
+      <h3>Objetivos del curso</h3>
+    </div>
+    <div class="col col-lg-2">
+      <button type="button" class="btn primary-btn" (click)="onCreateObjective()">
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+        </svg>
+        Añadir Objetivo
+      </button>
 
-            </div>
-            <div class="col-md-3 ml-md-auto">
-                <button type="button" class="btn btn-addActivity" (click)="onCreateActivity()">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <span class="addButton">Añadir Actividad</span>
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-                    <!-- This is the tree node template for leaf nodes -->
-                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                        <!-- use a disabled button to provide padding for tree leaf -->
-                        <button mat-icon-button disabled></button>
+    </div>
+  </div>
+  <ul class="list-group">
+    <tr *ngFor="let objetive of objectives">
+      <li class="objetive-list"> {{objetive.description}}</li>
+    </tr>
+  </ul>
 
+  <hr class="line">
 
-                        {{node.name}}
-                        
-                        <button mat-icon-button (click)="viewActivity(node.id)">
-                            <mat-icon>visibility</mat-icon>
-                        </button>
-                    </mat-tree-node>
-                    <button mat-icon-button disabled></button>
-                    <!-- This is the tree node template for expandable nodes -->
-                    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-                        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
-                            <mat-icon class="mat-icon-rtl-mirror">
-                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                            </mat-icon>
-                        </button>
-                        {{node.name}}
-                        <button mat-icon-button (click)="viewChallenge(node.id)">
-                            <mat-icon>visibility</mat-icon>
-                        </button>
-                    </mat-tree-node>
-                </mat-tree>
-            </div>
-            <div class="col">
-
-                <ul class="list-group">
-                    <tr *ngFor="let activity of activities">
+  <div class="row">
+    <div class="col">
+      <h2>Retos</h2>
 
 
-                        <li class="list-group-item"> {{activity.name}}
-                            <button class="btn eyeButtonActivity" (click)="viewActivity(activity.id)">
-                                <mat-icon>visibility</mat-icon>
-                            </button>
-                        </li>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn primary-btn" (click)="onCreateChallenge()">
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+        </svg>
+        Añadir Reto
+      </button>
+    </div>
+    <div class="col">
+      <h2>Actividades</h2>
 
-                    </tr>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn primary-btn" (click)="onCreateActivity()">
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+        </svg>
+        Añadir Actividad
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+          <!-- use a disabled button to provide padding for tree leaf -->
+          <button mat-icon-button disabled></button>
 
-                </ul>
-            </div>
+          {{node.name}}
 
-        </div>
+          <button mat-icon-button (click)="viewActivity(node.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-tree-node>
+        <button mat-icon-button disabled></button>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          {{node.name}}
+          <button mat-icon-button (click)="viewChallenge(node.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-tree-node>
+      </mat-tree>
     </div>
 
 
+    <div class="col">
+      <ul>
+        <tr *ngFor="let activity of activities">
+          <li class="activity-node">
+            {{activity.name}}
+            <button mat-icon-button class="btn" (click)="viewActivity(activity.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
 
+          </li>
+        </tr>
+      </ul>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
+  </div>
+</div>
 
 
 </body>

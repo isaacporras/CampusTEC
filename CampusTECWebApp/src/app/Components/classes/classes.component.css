@@ -21,32 +21,10 @@ h6 {
 }
 
 
-.list-group-item {
-  font-size: 15px;
-}
-
-.btn-addObjective {
-
-  background-color: #001636;
-  /* Green */
-  border: none;
-  color: white;
-  height: 40px;
-  width:140px ;
-
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-
-
-}
 .glyphicon-plus{
     float: left;
 }
-.addButton{
-    font-size: 13px;
-}
+
 .mat-form-field {
   margin-right: 4px;
 }
@@ -57,42 +35,26 @@ hr.line {
   margin-bottom: 20px;
 }
 
-.btn-addActivity{
-  background-color: #C1272D;
-  /* Green */
-  border: none;
-  color: white;
-  height: 40px;
-  width:140px ;
-
-  text-align: right;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-.btn-addChanllenge{
-  background-color: #C1272D;
-  /* Green */
-  border: none;
-  color: white;
-  height: 40px;
-  width:140px ;
-
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
 .eyeButtonActivity{
   height: 30px;
   width:30px ;
-  float: right;
-  float: center;
 }
 .glyphicon-eye-open{
   height: 30px;
   width:30px ;
   font-size: 17px;
   float: center;
+}
+
+.activity-node{
+
+}
+
+.objetive-list{
+  margin-left: 10px;
+}
+
+.row{
+  margin-right: 30px;
+  column-gap: 60px;
 }
