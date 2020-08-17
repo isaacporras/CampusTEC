@@ -18,11 +18,6 @@ public class Profile {
     }
 
     public static User login(Credentials credentials) {
-//        User user = new User();
-//        user.token = "ljasdkhfas";
-//        user.rol = "estudiante";
-//        return user;
-
         ArrayList<String> list = new ArrayList<>();
         list.add(credentials.id);
         list.add(credentials.password);
@@ -43,7 +38,7 @@ public class Profile {
                     user.rol = "profesor";
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
