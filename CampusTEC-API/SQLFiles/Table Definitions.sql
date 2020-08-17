@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS CursoPersona
 CREATE TABLE IF NOT EXISTS Objetivo
 (
     IdObjetivo  INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    Descripcion CHAR(200)                           NOT NULL,
+    Descripcion CHAR(200)                          NOT NULL,
     IdCurso     INTEGER                            NOT NULL,
     FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso)
 );
@@ -163,6 +163,7 @@ CREATE TABLE IF NOT EXISTS Actividad
     NumSemana   INTEGER                            NOT NULL DEFAULT 1,
     TecColones  INTEGER                            NOT NULL DEFAULT 0,
     Fecha       CHAR(30)                           NOT NULL DEFAULT '12/12/2020',
+    Titulo      CHAR(100)                          not null,
     Descripcion TEXT(500)                          NOT NULL,
     IdCurso     INTEGER                            NOT NULL,
     FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso),
@@ -223,10 +224,11 @@ CREATE TABLE IF NOT EXISTS Comentario
     FOREIGN KEY (IdFile) REFERENCES File (IdFile)
 );
 
-CREATE TABLE IF NOT EXISTS PersonaReto(
-        IdRetoAcademico INTEGER NOT NULL,
-    IdPersona   INTEGER NOT NULL,
-    Completado  BOOLEAN NOT NULL DEFAULT FALSE,
+CREATE TABLE IF NOT EXISTS PersonaReto
+(
+    IdRetoAcademico INTEGER NOT NULL,
+    IdPersona       INTEGER NOT NULL,
+    Completado      BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (IdRetoAcademico) REFERENCES RetoAcademico (IdRetoAcademico),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );
