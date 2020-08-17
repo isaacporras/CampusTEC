@@ -126,7 +126,7 @@ VALUES (1, 2,FALSE),
        (2, 4,TRUE),
        (2, 5,FALSE);
 
-IN
+# IN
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);

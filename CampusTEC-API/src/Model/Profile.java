@@ -50,6 +50,7 @@ public class Profile {
                 Course course = new Course();
                 course.id = resultCursos.getString("IdCurso");
                 course.name = resultCursos.getString("Nombre");
+                course.group = resultCursos.getString("Numero");
                 user.classes.add(course);
             }
         } catch (SQLException e) {
