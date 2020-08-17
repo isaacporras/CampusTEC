@@ -51,11 +51,11 @@ VALUES (1, 1),
 INSERT INTO semestre(Nombre)
 VALUES ('PrimerSemestre 2020');
 
-INSERT INTO curso(nombre, teccolones, idsemestre,numero)
-VALUES ('Espe', 90000, 1,1),
-       ('Arquitectura de Computadores', 90000, 1,5);
-INSERT INTO curso(idcurso, nombre, teccolones, idsemestre,Numero)
-VALUES (0, '', 0, 1,0);
+INSERT INTO curso(nombre, teccolones, idsemestre, numero)
+VALUES ('Espe', 90000, 1, 1),
+       ('Arquitectura de Computadores', 90000, 1, 5);
+INSERT INTO curso(idcurso, nombre, teccolones, idsemestre, Numero)
+VALUES (0, '', 0, 1, 0);
 INSERT INTO cursopersona(idcurso, idpersona, valid)
 VALUES (1, 2, TRUE),
        (1, 3, TRUE),
@@ -121,12 +121,19 @@ VALUES (9, 2, true),
        (10, 4, TRUE),
        (10, 5, FALSE);
 INSERT INTO personareto(IDRETOACADEMICO, IDPERSONA, COMPLETADO)
-VALUES (1, 2,FALSE),
-       (1, 3,TRUE),
-       (2, 4,TRUE),
-       (2, 5,FALSE);
+VALUES (1, 2, FALSE),
+       (1, 3, TRUE),
+       (2, 4, TRUE),
+       (2, 5, FALSE);
 
-IN
+INSERT INTO comentario( IDFILE, IDACTIVIDAD, COMENTARIO, IDPERSONA, FECHA, HORA)
+VALUES (1,1,'Hola encontre algo muy lindo',2),
+       (2,1,'Buenas me ha costado mucho esto',3),
+       (3,2,'Me costo mucho hacer esto',2),
+       (4,2,'Miren este ejemplo en el documento',3),
+       (5,2,'Que saico, encontre este documento',3);
+
+
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
