@@ -42,24 +42,30 @@
           </div>
         </div>
 
-        <h2> Profesor </h2>
-        {{teacherDataForm.value | json}}
-        <h3>{{teacherBaseData.name}} {{teacherBaseData.lastname}} </h3>
+        <h2>Profesor</h2>
+        {{teacherBaseData.value | json}}
+        <h2>{{teacherBaseData.name}} {{teacherBaseData.lastname}} </h2>
         <h3>{{teacherBaseData.id}} </h3>
-        <h5>{{teacherBaseData.status}} </h5>
+        <h3>{{teacherBaseData.status}} </h3>
+
+
         <form class="form-signin" [formGroup]="teacherDataForm">
 
-          <div class="input-group">
-            <h5>Email 1: </h5>
-            <input formControlName="email1" type="email" class="form-control" placeholder="{{teacherDataForm.email1}} "
-              (input)="changeEditingStatus()">
-
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
+          <div class="input-group row">
+            <div class="col field-label">Email 1:</div>
+            <div class="input-field-col">
+              <input formControlName="email1" type="email" class="form-control input-field"
+                     placeholder="{{teacherDataForm.email1}} "
+                     (input)="changeEditingStatus()">
+            </div>
+            <div class="col-1">
+              <button class="btn icon-btn" type="button" (click)="onEdit(1)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+
+
           <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
 
             <div *ngIf="email1.errors.required">
@@ -72,19 +78,20 @@
           </div>
 
 
-
-          <div class="input-group">
-            <h5>Email 2: </h5>
-            <input formControlName="email2" type="email" class="form-control" placeholder="{{teacherDataForm.email2}}">
-
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
+          <div class="input-group row">
+            <div class="col field-label">Email 2:</div>
+            <div class="input-field-col">
+              <input formControlName="email2" type="email" class="form-control input-field"
+                     placeholder="{{teacherDataForm.email2}}">
+            </div>
+            <div class="col-1">
+              <button class="btn icon-btn" type="button" (click)="onEdit(2)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
-          <div *ngIf="email2.invalid && (email2.dirty || email2.touched)" class="alert alert-danger">
 
+          <div *ngIf="email2.invalid && (email2.dirty || email2.touched)" class="alert alert-danger">
             <div *ngIf="email2.errors.required">
               Debe indicar su correo secundario.
             </div>
@@ -94,17 +101,19 @@
 
           </div>
 
-          <div class="input-group">
-            <h5>Teléfono: </h5>
-            <input formControlName="telNumber" type="tel" class="form-control"
-              placeholder="{{teacherDataForm.telNumber}}">
-
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
+          <div class="input-group row">
+            <div class="col field-label">Teléfono:</div>
+            <div class="input-field-col">
+              <input formControlName="telNumber" type="tel" class="form-control input-field"
+                     placeholder="{{teacherDataForm.telNumber}}">
+            </div>
+            <div class="col-1">
+              <button class="btn icon-btn" type="button" (click)="onEdit(3)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+
           <div *ngIf="telNumber.invalid && (telNumber.dirty || telNumber.touched)" class="alert alert-danger">
 
             <div *ngIf="telNumber.errors.required">
@@ -115,17 +124,20 @@
             </div>
 
           </div>
-          <div class="input-group">
-            <h5>Universidad: </h5>
-            <input formControlName="university" type="text" class="form-control"
-              placeholder="{{teacherDataForm.university}}">
 
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
+          <div class="input-group row">
+            <div class="col field-label">Universidad: </div>
+            <div class="input-field-col">
+              <input formControlName="university" type="text" class="form-control input-field"
+                     placeholder="{{teacherDataForm.university}}">
+            </div>
+            <div class="col-1">
+              <button class="btn icon-btn" type="button" (click)="onEdit(4)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
+
           <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
 
             <div *ngIf="university.errors.required">
@@ -133,18 +145,21 @@
             </div>
 
           </div>
-          <div class="input-group">
-            <h5>Sede de  </h5>
-            <input formControlName="campus" type="text" class="form-control" placeholder="{{teacherDataForm.campus}}">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(5)">
+
+          <div class="input-group row">
+            <div class="col field-label">Sede:</div>
+            <div class="input-field-col">
+              <input formControlName="campus" type="text" class="form-control input-field" placeholder="{{teacherDataForm.campus}}">
+            </div>
+            <div class="col-1">
+              <button class="btn icon-btn" type="button" (click)="onEdit(5)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </button>
             </div>
           </div>
           <div *ngIf="editing==true">
-            <button type="submit" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
-            <button type="submit" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
+            <button class="btn primary-btn" (click)="onSave()">Guardar</button>
+            <button class="btn secondary-btn" (click)="onDismiss()">Descartar</button>
           </div>
         </form>
       </div>
