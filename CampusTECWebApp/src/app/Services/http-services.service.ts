@@ -85,6 +85,23 @@ export class HttpServicesService {
         ]
       }];
   }
+  getActivitiesTask() {
+    return [
+      {
+        id: '1', name: 'Hacer tutoria 1'
+      },
+      {
+        id: '2', name: 'Hacer tutoria 2'
+      },
+
+      {
+        id: '3', name: 'Hacer tutoria 3'
+      },
+      {
+        id: '4', name: 'Hacer tutoria 4'
+      },
+    ];
+  }
 
   getActivities() {
     return [{

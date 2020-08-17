@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
 import { NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TaskService } from './task.service';
+
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -11,7 +16,17 @@ export class TaskComponent implements OnInit {
 
   taskForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<TaskComponent>,) {
+  activities: Array<any>;
+
+  studentId: any;
+
+
+
+
+  constructor(private formBuilder: FormBuilder, 
+    public dialogRef: MatDialogRef<TaskComponent>,
+     private http: TaskService,
+     @Inject(MAT_DIALOG_DATA) data,) {
     let myDate = new Date();
     let hourDat = myDate.getHours();
     let periodValue: any;
@@ -23,9 +38,16 @@ export class TaskComponent implements OnInit {
       periodValue = 'AM';
     }
 
+    this.studentId = data.studentId;
+
+
+    this.activities = this.http.getActivities();
+
+    console.log(this.http.getActivities())
+
     this.taskForm = this.formBuilder.group(
       {
-        id: new FormControl(''),
+        userId: new FormControl(this.studentId),
         name: new FormControl('',
           [ Validators.required]
         ),
@@ -46,9 +68,18 @@ export class TaskComponent implements OnInit {
         period: new FormControl(periodValue,
           [Validators.required]
         ),
+        activity: new FormControl(periodValue,
+          [Validators.required]
+        ),
       });
+      this.taskForm.get('activity').setValue(this.activities[0]);
   }
-
+  setActivityValue(activity){
+    console.log(this.taskForm.get('activity').value);
+    console.log();
+    let id = this.taskForm.get('activity').value.split(')')[0];
+    this.taskForm.get('activity').setValue(Number(id));
+  }
 
 
   onClickSave() {

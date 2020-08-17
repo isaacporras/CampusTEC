@@ -61,11 +61,11 @@
                 <h3>Actividades:</h3>
             </div>
             <div class="col-7">
-                <select id="inputState" class="form-control" >
-                    <option selected disabled></option>
+                <select id="inputState" class="form-control" formControlName = "activity" (change) = "setActivityValue(activity)">
+                    
                     <ng-container *ngFor="let activity of activities">
 
-                        <option> {{activity.description}}</option>
+                        <option > {{activity.id}} ) {{activity.name}}</option>
 
                     </ng-container>
                 </select>
