@@ -101,16 +101,25 @@ export class TeacherProfileComponent implements OnInit {
     this.http.getProfile(this.teacherId).subscribe((data) => {
       console.log(data)
       this.teacherBaseData = data;
+      this.teacherDataForm.controls['name'].setValue(data['name']);
+      this.teacherDataForm.controls['lastname'].setValue(data['lastname']);
+      this.teacherDataForm.controls['id'].setValue(data['id']);
+      this.teacherDataForm.controls['status'].setValue(data['status']);
+      this.teacherDataForm.controls['ppurl'].setValue(data['ppurl']);
+      this.teacherDataForm.controls['tecolones'].setValue(data['tecolones']);
+      this.teacherDataForm.controls['email1'].setValue(data['email1']);
+      this.teacherDataForm.controls['email2'].setValue(data['email2']);
+      this.teacherDataForm.controls['telNumber'].setValue(data['telNumber']);
+      this.teacherDataForm.controls['university'].setValue(data['university']);
+      this.teacherDataForm.controls['campus'].setValue(data['campus']);
+
+
       this.teacherClasses = data["classes"];
     });
 
 
 
 
-    this.teacherDataForm.setValue({
-      email1: 'liley1@gmail.com', email2: 'liley2@gmail.com', telNumber: '88764536',
-      university: 'X-TEC', campus: 'San Jose'
-    });
 
 
     this.teacherDataForm.controls['email1'].disable();
@@ -141,7 +150,6 @@ export class TeacherProfileComponent implements OnInit {
   get telNumber() { return this.teacherDataForm.get('telNumber'); }
   get university() { return this.teacherDataForm.get('university'); }
   get campus() { return this.teacherDataForm.get('campus'); }
-
-
-
+  get name(){return  this.teacherDataForm.get('name');}
+  get lastname(){return  this.teacherDataForm.get('lastname');}
 }
