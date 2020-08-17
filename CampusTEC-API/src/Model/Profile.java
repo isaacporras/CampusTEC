@@ -30,12 +30,13 @@ public class Profile {
                 ArrayList<String> param = new ArrayList<>();
                 param.add(user.token);
                 ResultSet resultUser = ProfileSelectQueries.getProfileInfo(param, DBConnection.getConnection());
+                resultUser.next();
                 if (result.getBoolean("type")) {
                     user.rol = "administrador";
                 } else if (resultUser.getBoolean("Puesto")) {
-                    user.rol = "estudiante";
-                }else{
                     user.rol = "profesor";
+                }else{
+                    user.rol = "estudiante";
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {

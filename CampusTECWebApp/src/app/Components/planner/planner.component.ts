@@ -139,8 +139,6 @@ export class PlannerComponent implements OnInit {
     let receivedEvents;
     this.http.getAssignments(this.week).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
-      console.log(data);
-
       var event = addHours(addDays(this.weekStart, jsonResponse.days), jsonResponse.hours);
       console.log(event)
       this.events = [
