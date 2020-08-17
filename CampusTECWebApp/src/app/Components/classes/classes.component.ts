@@ -117,14 +117,26 @@ export class ClassesComponent implements OnInit {
   constructor(
     private dialog: MatDialog, private http: ClassesService, private activatedroute: ActivatedRoute, private router: Router
   ) {
-    this.TREE_DATA = this.http.getActivitiesAndChallenges(this.classId)['treeview'];
-    this.dataSource.data = this.TREE_DATA;
+
+
+    
     this.activatedroute.params.subscribe(data => {
 
-      console.log('La data que le llegó a student-profile es:' + data.id);
+      console.log('La data que le llegó a classes es:' + data.id);
       this.classId = data.id;
       this.teacherId = data.teacherId;
     })
+
+
+    console.log('Los challenges son:');
+    this.http.getActivitiesAndChallenges(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.TREE_DATA = jsonResponse.treeview;
+      this.dataSource.data = this.TREE_DATA;
+    }, (error) => {
+      console.log(error);
+    });
     
   }
 

@@ -29,7 +29,6 @@ export class ClassesService {
 
 
 
-
   getActivities() {
     return [
       {
