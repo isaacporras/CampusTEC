@@ -53,4 +53,26 @@ public class ActivitiesSelectQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+    public static ResultSet getActivitiesByPersonAndWeek(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement(" SELECT F.*,curso.Nombre FROM curso INNER JOIN ( " +
+                "    SELECT Z.* " +
+                "FROM (SELECT actividadpersona.IdActividad " +
+                "      FROM persona " +
+                "               INNER JOIN actividadpersona ON persona.IdPersona = actividadpersona.IdPersona " +
+                "      AND persona.IdPersona = ?) A " +
+                "         INNER JOIN ( " +
+                "    SELECT actividad.* " +
+                "    FROM actividad " +
+                "    WHERE actividad.IdActividad NOT IN ( " +
+                "        SELECT actividad.IdActividad " +
+                "        FROM actividad " +
+                "                 INNER JOIN actividadretoacademico a on actividad.IdActividad = a.IdActividad) " +
+                ") Z " +
+                "                    ON A.IdActividad = Z.IdActividad WHERE Z.NumSemana = ? " +
+                "    ) F ON F.IdCurso = curso.IdCurso;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setInt(2, Integer.parseInt(parameters.get(1)));
+
+        return statement.executeQuery();
+    }
 }

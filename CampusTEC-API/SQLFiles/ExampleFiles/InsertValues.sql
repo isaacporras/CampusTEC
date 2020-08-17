@@ -141,11 +141,8 @@ VALUES (2, 9, 'Trabajar', 3, 2, 'Trabajar en la actividad del simulador', FALSE,
 
 
 
-INSERT INTO actividadpersona(IDACTIVIDAD, IDPERSONA, COMPLETADO)
-VALUES (9, 2, true),
-       (9, 3, FALSE),
-       (10, 4, TRUE),
-       (10, 5, FALSE);
+
+
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
