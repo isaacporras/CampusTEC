@@ -6,5 +6,5 @@ public class Course {
     public String id = "";
     public String name = "";
     public String group = "";
-
+    public ArrayList<Challenge> challenges = new ArrayList<>();
 }
