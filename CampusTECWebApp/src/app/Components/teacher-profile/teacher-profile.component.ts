@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import {Router} from '@angular/router';
-import {HttpServicesService} from '../../Services/http-services.service';
+import { Router } from '@angular/router';
+import { HttpServicesService } from '../../Services/http-services.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class TeacherProfileComponent implements OnInit {
   universityDisable: boolean = true;
   campusDisable: boolean = true;
   editing: boolean = false;
-  teacherId:any;
+  teacherId: any;
 
   teacherBaseData: any;
 
@@ -74,7 +74,7 @@ export class TeacherProfileComponent implements OnInit {
     });
 
 
-   }
+  }
 
   ngOnInit() {
 
@@ -85,15 +85,15 @@ export class TeacherProfileComponent implements OnInit {
       status: new FormControl(''),
       ppurl: new FormControl(''),
       tecolones: new FormControl(''),
-      email1: new FormControl({value:'', disable: true},
-      [Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      email2: new FormControl({value:'', disable: true},
-      [Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      telNumber: new FormControl({value:'', disable: true}, [Validators.required, Validators.minLength(8),Validators.pattern("^[0-9]*$")]),
-      university: new FormControl({value:'', disable: true}, Validators.required),
-      campus: new FormControl({value:'', disable: true}, Validators.required),
+      email1: new FormControl({ value: '', disable: true },
+        [Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      email2: new FormControl({ value: '', disable: true },
+        [Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      telNumber: new FormControl({ value: '', disable: true }, [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$")]),
+      university: new FormControl({ value: '', disable: true }, Validators.required),
+      campus: new FormControl({ value: '', disable: true }, Validators.required),
 
     });
 
@@ -126,7 +126,7 @@ export class TeacherProfileComponent implements OnInit {
 
   }
 
-  onDismiss(){
+  onDismiss() {
     this.teacherDataForm.controls['email1'].disable();
     this.teacherDataForm.controls['email2'].disable();
     this.teacherDataForm.controls['telNumber'].disable();

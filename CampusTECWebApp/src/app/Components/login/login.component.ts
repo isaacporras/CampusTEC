@@ -17,9 +17,12 @@ export class LoginComponent implements OnInit {
   credentialsForm: FormGroup;
 
   onLogIn() {
+    console.log(this.credentialsForm.value)
     this.http.authenticate(this.credentialsForm.value).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
-      if(jsonResponse.status = 1){
+      console.log(jsonResponse.status);
+      if(jsonResponse.status == 1){
+        console.log('ENTRO')
         switch (jsonResponse.rol) {
           case "estudiante":
             this.router.navigate(['/studentProfile', jsonResponse.token]);
