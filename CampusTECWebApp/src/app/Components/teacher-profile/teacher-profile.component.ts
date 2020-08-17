@@ -26,7 +26,7 @@ export class TeacherProfileComponent implements OnInit {
 
   teacherDataForm: FormGroup;
 
-  teacherClasses: any = [];
+  teacherClasses: Array<any>;
 
 
   onEdit(id) {
@@ -120,6 +120,7 @@ export class TeacherProfileComponent implements OnInit {
       this.teacherDataForm.controls['university'].setValue(data['university']);
       this.teacherDataForm.controls['campus'].setValue(data['campus']);
 
+      console.log(data["classes"])
 
       this.teacherClasses = data["classes"];
     });
