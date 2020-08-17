@@ -52,7 +52,7 @@ export class ChallengeComponent implements OnInit {
 
   onClickSave() {
 
-    this.objectiveForm.controls.id.setValue(this.classId);
+    this.objectiveForm.controls.idClass.setValue(this.classId);
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
 
@@ -163,7 +163,7 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
     this.challengeForm = this.formBuilder.group({
-      id: new FormControl('',[Validators.required]),
+      idClass: new FormControl('',[Validators.required]),
       name: new FormControl('',[Validators.required]),
       payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),

@@ -99,8 +99,6 @@ export class ActivitiesComponent implements OnInit {
           this.activityForm.get('fileURL').setValue(url);
           console.log(this.activityForm.value);
 
-
-
           this.activityForChallenge = this.activityForm.value;
 
           this.dialogRef.close(this.activityForm.value);

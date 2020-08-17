@@ -133,7 +133,7 @@ public class Teacher {
     public static Boolean newObjective(Objective objective) {
 
         ArrayList<String> param = new ArrayList<>();
-        param.add(objective.classId);
+        param.add(objective.idClass);
         param.add(objective.description);
         try {
             AddQueries.createObjective(param, DBConnection.getConnection());
