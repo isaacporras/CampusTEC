@@ -35,7 +35,7 @@ export class TeacherProfileComponent implements OnInit {
     console.log('subir', e)
     this.fileChangedEvent = e.target.files[0];
     this.wasFileUploaded = true;
-    this.editing =  true;
+    this.editing = true;
   }
 
 
@@ -77,9 +77,9 @@ export class TeacherProfileComponent implements OnInit {
           this.teacherDataForm.get('ppurl').setValue(url);
           console.log(this.teacherBaseData.value);
 
-          
+
           console.log(JSON.stringify(this.teacherDataForm.value, null, 4));
-      
+
           this.editing = false;
 
 
@@ -88,7 +88,7 @@ export class TeacherProfileComponent implements OnInit {
         });
       });
     }
-    else{
+    else {
       this.sendNewData();
     }
   }
@@ -96,11 +96,11 @@ export class TeacherProfileComponent implements OnInit {
     this.http.postUpdateProfile(this.teacherDataForm.value).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse.status);
-      if(jsonResponse.status == 1){
+      if (jsonResponse.status == 1) {
         alert('Se actualizó correctamente la información');
         window.location.reload();
-        }
-      else{
+      }
+      else {
         console.log("Carné o contraseña incorrectos")
         alert('Ocurrio un error al actualizar la información.')
       }
@@ -111,10 +111,10 @@ export class TeacherProfileComponent implements OnInit {
 
 
   constructor(private http: HttpServicesService,
-     private formBuilder: FormBuilder, 
-     private activatedroute: ActivatedRoute,
-      private router: Router,
-      private storage: AngularFireStorage,) {
+    private formBuilder: FormBuilder,
+    private activatedroute: ActivatedRoute,
+    private router: Router,
+    private storage: AngularFireStorage,) {
     this.activatedroute.params.subscribe(data => {
 
       console.log('La data que le llegó a student-profile es:' + data.id);
@@ -151,7 +151,7 @@ export class TeacherProfileComponent implements OnInit {
       console.log(data);
       this.teacherBaseData = data;
 
-      if(this.teacherBaseData.status === '1'){
+      if (this.teacherBaseData.status === '1') {
         this.teacherBaseData.status = 'Activo';
       }
       else if (this.teacherBaseData.status === '0') {
@@ -203,7 +203,7 @@ export class TeacherProfileComponent implements OnInit {
   get telNumber() { return this.teacherDataForm.get('telNumber'); }
   get university() { return this.teacherDataForm.get('university'); }
   get campus() { return this.teacherDataForm.get('campus'); }
-  get name(){return  this.teacherDataForm.get('name');}
-  get lastname(){return  this.teacherDataForm.get('lastname');}
-  get ppurl() {return  this.teacherDataForm.get('ppurl');}
+  get name() { return this.teacherDataForm.get('name'); }
+  get lastname() { return this.teacherDataForm.get('lastname'); }
+  get ppurl() { return this.teacherDataForm.get('ppurl'); }
 }

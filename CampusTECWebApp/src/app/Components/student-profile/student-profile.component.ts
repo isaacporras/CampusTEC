@@ -78,23 +78,13 @@ export class StudentProfileComponent implements OnInit {
 
           this.studentDataForm.get('ppurl').setValue(url);
           console.log(this.studentDataForm.value);
-
-          this.http.postUpdateProfile(this.studentDataForm.value).subscribe((data) => {
-            var jsonResponse = JSON.parse(JSON.stringify(data));
-            console.log(jsonResponse.status);
-            if(jsonResponse.status == 1){
-              alert('Se actualizó correctamente la información');
-              window.location.reload();
-              }
-            else{
-              console.log("Carné o contraseña incorrectos")
-            }
-          }, (error) => {
-            console.log(error);
-          });
+          this.sendNewData();
         });
       });
       
+    }
+    else{
+      this.sendNewData();
     }
 
 
@@ -102,6 +92,23 @@ export class StudentProfileComponent implements OnInit {
     console.log(JSON.stringify(this.studentDataForm.value, null, 4));
     this.editing = false;
 
+  }
+
+
+  sendNewData() {
+    this.http.postUpdateProfile(this.studentDataForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+      if(jsonResponse.status == 1){
+        alert('Se actualizó correctamente la información');
+        window.location.reload();
+        }
+      else{
+        console.log("Carné o contraseña incorrectos")
+      }
+    }, (error) => {
+      console.log(error);
+    });
   }
   constructor(private http: HttpServicesService, 
     private formBuilder: FormBuilder,
