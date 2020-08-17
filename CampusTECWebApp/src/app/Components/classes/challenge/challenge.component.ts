@@ -7,7 +7,7 @@ import { ChallengeService } from './challenge.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivitiesComponent } from '../activities/activities.component';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -52,7 +52,7 @@ export class ChallengeComponent implements OnInit {
 
   onClickSave() {
 
-    this.objectiveForm.controls.id.setValue(this.classId);
+    this.objectiveForm.controls.idClass.setValue(this.classId);
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
 
@@ -129,14 +129,14 @@ export class ChallengeComponent implements OnInit {
 
     this.removeObjective(this.challengeForm.get('objective').value.charAt(0));
   }
-  getObjectivesLength(){
-    return this.objectives.length===0;
+  getObjectivesLength() {
+    return this.objectives.length === 0;
   }
 
   onClickCancel(): void {
     this.dialogRef.close();
   }
-  addActivity(){
+  addActivity() {
     const classData = new MatDialogConfig();
 
     classData.disableClose = true;
@@ -144,27 +144,31 @@ export class ChallengeComponent implements OnInit {
     classData.height = '700px';
     classData.width = '600px';
 
-    classData.data = {activity: this.activity, cameFrom : 'challenge'};
+    classData.data = { activity: this.activity, cameFrom: 'challenge' };
 
     this.activityDialog.open(ActivitiesComponent, classData).afterClosed().subscribe(
-      data => {console.log("La data recibida en el dialog de reto es:", data);
-      this.activities.push(data);
-      this.atLeastOnActivity = true;
-    }
-  );    
-    
+      data => {
+        console.log("La data recibida en el dialog de reto es:", data);
+        if (data.status === 0) {
+          this.activities.push(data.activity);
+        }
+
+        this.atLeastOnActivity = true;
+      }
+    );
+
 
   }
-  removeObjective(id){
-    this.objectives.forEach( (item, index) => {
-      if(item.id === id) this.objectives.splice(index,1);
+  removeObjective(id) {
+    this.objectives.forEach((item, index) => {
+      if (item.id === id) this.objectives.splice(index, 1);
     });
- }
+  }
 
   ngOnInit() {
     this.challengeForm = this.formBuilder.group({
-      id: new FormControl('',[Validators.required]),
-      name: new FormControl('',[Validators.required]),
+      idClass: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
@@ -175,7 +179,7 @@ export class ChallengeComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.maxLength(500)])
     });
 
-    
+
 
 
     this.objectives = this.http.getObjectives();
@@ -214,15 +218,15 @@ export class ChallengeComponent implements OnInit {
     }
   }
 
-  getCheckboxName(id: number){
-    return 'checkbox_'+ String(id)
+  getCheckboxName(id: number) {
+    return 'checkbox_' + String(id)
   }
 
 
 
-get description() { return this.challengeForm.get('description'); }
-get name() { return this.challengeForm.get('name'); }
-get date() { return this.challengeForm.get('date'); }
-get payment() { return this.challengeForm.get('payment'); }
+  get description() { return this.challengeForm.get('description'); }
+  get name() { return this.challengeForm.get('name'); }
+  get date() { return this.challengeForm.get('date'); }
+  get payment() { return this.challengeForm.get('payment'); }
 
 }

@@ -8,13 +8,14 @@ public class Activity {
 
     public String id = "";
     public String name = "";
+    public String idClass = "";
     public String description = "";
     public Boolean gradable = false;
     public Integer week = 1;
     public String date = "";
     public ArrayList<Objective> objectives = new ArrayList<>();
     public ArrayList<Comment> comments = new ArrayList<>();
-    public String fileurl = "";
+    public String fileurl = "null";
     public Boolean newComents = false;
 
 

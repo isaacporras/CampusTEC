@@ -13,6 +13,9 @@ import { ViewChallengeComponent } from './viewOnly/view-challenge/view-challenge
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 interface FoodNode {
   name: string;
   id: number;
@@ -82,7 +85,20 @@ export class ClassesComponent implements OnInit {
 
     classData.data = { id: this.classData.id, cameFrom: 'classes' };
 
-    this.dialog.open(ObjectiveComponent, classData);
+    this.dialog.open(ObjectiveComponent, classData).afterClosed().subscribe(
+      data => {console.log("La data recibida en el class de objetivo es:", data);
+      if (data === 0){
+        window.location.reload()
+      }
+    }
+  );    
+
+    
+  }
+
+
+  reloadPage(){
+
   }
 
   onCreateActivity() {
@@ -95,7 +111,13 @@ export class ClassesComponent implements OnInit {
 
     classData.data = this.classData.id;
 
-    this.dialog.open(ActivitiesComponent, classData);
+    this.dialog.open(ActivitiesComponent, classData).afterClosed().subscribe(
+      data => {console.log("La data recibida en el class de objetivo es:", data);
+      if (data.status === 0){
+        window.location.reload()
+      }
+    }
+  );    
   }
 
   onCreateChallenge() {
