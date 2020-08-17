@@ -3,167 +3,173 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="logo-image">
-      <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
-    </div>
-    <a class="navbar-brand" href="#"> CampusTEC</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link " [routerLink]="['/planner', studentId]" >Planificador </a>
-        <a class="nav-item nav-link active" [routerLink]="['/studentProfile', studentId]" >Mi Perfil</a>
-        <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="logo-image">
+    <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+  </div>
+  <a class="navbar-brand" href="#"> CampusTEC</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+      <a class="nav-item nav-link " [routerLink]="['/planner', studentId]">Planificador </a>
+      <a class="nav-item nav-link active" [routerLink]="['/studentProfile', studentId]">Mi Perfil</a>
+      <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
 
+    </div>
+  </div>
+</nav>
+
+
+<div class="container infoContainer">
+  <div class="row">
+    <div class="col">
+      <div class="container">
+        <div class="picture-container">
+          <div class="picture">
+            <img
+              src="{{studentBaseData.ppurl}}"
+              class="picture-src" id="wizardPicturePreview" title="">
+            <input type="file" id="wizard-picture" class="" (change)="uploadProfileFile($event)">
+          </div>
+          <h5 class="">Cambiar Imagen de Pefil</h5>
+
+        </div>
       </div>
-    </div>
-  </nav>
+
+      <h2>Estudiante</h2>
+      {{studentBaseData.value | json}}
+      <h2>{{studentBaseData.name}} {{studentBaseData.lastname}} </h2>
+      <h3>{{studentBaseData.id}} </h3>
+      <h3>{{studentBaseData.status}} </h3>
 
 
+      <form class="form-signin" [formGroup]="studentDataForm">
 
-
-
-
-
-
-
-
-  <div class="container infoContainer">
-    <div class="row">
-      <div class="col">
-        <div class="container">
-          <div class="picture-container">
-            <div class="picture">
-              <img
-                src="{{studentBaseData.ppurl}}"
-                class="picture-src" id="wizardPicturePreview" title="">
-              <input type="file" id="wizard-picture" class="" (change)="uploadProfileFile($event)">
-            </div>
-            <h6 class="">Cambiar Imagen de Pefil</h6>
-
+        <div class="input-group row">
+          <div class="col field-label">Email 1:</div>
+          <div class="input-field-col">
+            <input formControlName="email1" type="email" class="form-control input-field"
+                   placeholder="{{studentDataForm.email1}} "
+                   (input)="changeEditingStatus()">
+          </div>
+          <div class="col-1">
+            <button class="btn icon-btn" type="button" (click)="onEdit(1)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
           </div>
         </div>
 
-        <h2>Estudiante</h2>
-        {{studentBaseData.value | json}}
-        <h3>{{studentBaseData.name}} {{studentBaseData.lastname}} </h3>
-        <h3>{{studentBaseData.id}} </h3>
-        <h5>{{studentBaseData.status}} </h5>
-        <form class="form-signin" [formGroup]="studentDataForm">
 
-          <div class="input-group">
-            <h5>Email 1: </h5>
-            <input formControlName="email1" type="email" class="form-control" placeholder="{{studentDataForm.email1}} "
-              (input)="changeEditingStatus()">
+        <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
 
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(1)">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </button>
-            </div>
+          <div *ngIf="email1.errors.required">
+            Debe indicar su correo principal.
           </div>
-          <div *ngIf="email1.invalid && (email1.dirty || email1.touched)" class="alert alert-danger">
-
-            <div *ngIf="email1.errors.required">
-              Debe indicar su correo principal.
-            </div>
-            <div *ngIf="email1.errors.pattern">
-              Debe ser un email valido.
-            </div>
-
+          <div *ngIf="email1.errors.pattern">
+            Debe ser un email valido.
           </div>
 
+        </div>
 
 
-          <div class="input-group">
-            <h5>Email 2: </h5>
-            <input formControlName="email2" type="email" class="form-control" placeholder="{{studentDataForm.email2}}">
-
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(2)">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </button>
-            </div>
+        <div class="input-group row">
+          <div class="col field-label">Email 2:</div>
+          <div class="input-field-col">
+            <input formControlName="email2" type="email" class="form-control input-field"
+                   placeholder="{{studentDataForm.email2}}">
           </div>
-          <div *ngIf="email2.invalid && (email2.dirty || email2.touched)" class="alert alert-danger">
+          <div class="col-1">
+            <button class="btn icon-btn" type="button" (click)="onEdit(2)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+          </div>
+        </div>
 
-            <div *ngIf="email2.errors.required">
-              Debe indicar su correo secundario.
-            </div>
-            <div *ngIf="email2.errors.pattern">
-              Debe ser un email valido.
-            </div>
-
+        <div *ngIf="email2.invalid && (email2.dirty || email2.touched)" class="alert alert-danger">
+          <div *ngIf="email2.errors.required">
+            Debe indicar su correo secundario.
+          </div>
+          <div *ngIf="email2.errors.pattern">
+            Debe ser un email valido.
           </div>
 
-          <div class="input-group">
-            <h5>Teléfono: </h5>
-            <input formControlName="telNumber" type="tel" class="form-control"
-              placeholder="{{studentDataForm.telNumber}}">
+        </div>
 
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(3)">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </button>
-            </div>
+        <div class="input-group row">
+          <div class="col field-label">Teléfono:</div>
+          <div class="input-field-col">
+          <input formControlName="telNumber" type="tel" class="form-control input-field"
+                 placeholder="{{studentDataForm.telNumber}}">
           </div>
-          <div *ngIf="telNumber.invalid && (telNumber.dirty || telNumber.touched)" class="alert alert-danger">
-
-            <div *ngIf="telNumber.errors.required">
-              Debe ingresar un numero telefonico.
-            </div>
-            <div *ngIf="telNumber.errors.pattern && telNumber.errors.minlength ">
-              Debe ingresar dato valido.
-            </div>
-
+          <div class="col-1">
+            <button class="btn icon-btn" type="button" (click)="onEdit(3)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
           </div>
-          <div class="input-group">
-            <h5>Universidad: </h5>
-            <input formControlName="university" type="text" class="form-control"
-              placeholder="{{studentDataForm.university}}">
+        </div>
 
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(4)">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </button>
-            </div>
-          </div>
-          <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
+        <div *ngIf="telNumber.invalid && (telNumber.dirty || telNumber.touched)" class="alert alert-danger">
 
-            <div *ngIf="university.errors.required">
-              Debe ingresar una universidad.
-            </div>
+          <div *ngIf="telNumber.errors.required">
+            Debe ingresar un numero telefonico.
+          </div>
+          <div *ngIf="telNumber.errors.pattern && telNumber.errors.minlength ">
+            Debe ingresar dato valido.
+          </div>
 
-          </div>
-          <div class="input-group">
-            <h5>Sede de  </h5>
-            <input formControlName="campus" type="text" class="form-control" placeholder="{{studentDataForm.campus}}">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="onEdit(5)">
-                <i class="glyphicon glyphicon-pencil"></i>
-              </button>
-            </div>
-          </div>
-          <div *ngIf="editing==true">
-            <button type="submit" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
-            <button type="submit" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
+        </div>
 
+        <div class="input-group row">
+          <div class="col field-label">Universidad: </div>
+          <div class="input-field-col">
+          <input formControlName="university" type="text" class="form-control input-field"
+                 placeholder="{{studentDataForm.university}}">
           </div>
-        </form>
-      </div>
-      <div class="col">
-        <h1>Cursos</h1>
-        <ul class="list-group">
-          <tr *ngFor="let curso of studentClasses">
-            <li class="list-group-item">{{curso.name}} </li>
-          </tr>
-        </ul>
-      </div>
+          <div class="col-1">
+            <button class="btn icon-btn" type="button" (click)="onEdit(4)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
+
+          <div *ngIf="university.errors.required">
+            Debe ingresar una universidad.
+          </div>
+
+        </div>
+
+        <div class="input-group row">
+          <div class="col field-label">Sede:</div>
+          <div class="input-field-col">
+          <input formControlName="campus" type="text" class="form-control input-field" placeholder="{{studentDataForm.campus}}">
+          </div>
+          <div class="col-1">
+            <button class="btn icon-btn" type="button" (click)="onEdit(5)">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="editing==true">
+          <button class="btn primary-btn" (click)="onSave()">Guardar</button>
+          <button class="btn secondary-btn" (click)="onDismiss()">Descartar</button>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <h1>Cursos</h1>
+      <ul class="list-group">
+        <tr *ngFor="let curso of studentClasses">
+          <li class="list-group-item">{{curso.name}} </li>
+        </tr>
+      </ul>
     </div>
   </div>
+</div>
 
 
 </body>
