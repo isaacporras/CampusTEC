@@ -1,7 +1,13 @@
 package Model;
 
+import DatabaseManagement.DBConnection;
+import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
 import Model.Objects.User;
 import RequestObjects.Credentials;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Profile {
 
@@ -12,27 +18,36 @@ public class Profile {
     }
 
     public static User login(Credentials credentials) {
-        User user = new User();
-        user.token = "ljasdkhfas";
-        user.rol = "estudiante";
-        return user;
-
-//        ArrayList list = new ArrayList<String>();
-//        list.add(credentials.id);
-//        list.add(credentials.password);
-//        User user = null;
-//        try {
-//            ResultSet result = ProfileSelectQueries.getLoginInfo(list, null);
-//            if (result.next()) {
-////                user =
-//            } else {
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
+//        User user = new User();
+//        user.token = "ljasdkhfas";
+//        user.rol = "estudiante";
 //        return user;
+
+        ArrayList<String> list = new ArrayList<>();
+        list.add(credentials.id);
+        list.add(credentials.password);
+        User user = null;
+        try {
+            ResultSet result = ProfileSelectQueries.getLoginInfo(list, DBConnection.getConnection());
+            if (result.next()) {
+                user = new User();
+                user.token = result.getString("IdPersona");
+                ArrayList<String> param = new ArrayList<>();
+                param.add(user.token);
+                ResultSet resultUser = ProfileSelectQueries.getProfileInfo(param, DBConnection.getConnection());
+                if (result.getBoolean("type")) {
+                    user.rol = "administrador";
+                } else if (resultUser.getBoolean("Puesto")) {
+                    user.rol = "estudiante";
+                }else{
+                    user.rol = "profesor";
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
 
     }
 }
