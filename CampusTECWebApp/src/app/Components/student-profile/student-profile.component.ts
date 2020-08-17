@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs';
+import {HttpServicesService} from '../../Services/http-services.service';
 
 
 @Component({
@@ -24,18 +25,8 @@ export class StudentProfileComponent implements OnInit {
 
   studentDataForm: FormGroup;
 
-  studentClasses: any = [
-    {
-      id: '1', nombre: 'Circuitos en Corriente continua'
-    },
-    {
-      id: '2', nombre: 'Circuitos en Corriente alterna'
-    },
-    {
-      id: '3', nombre: 'Matematica'
-    }
+  studentClasses: any = [];
 
-  ];
   goToPlanner() {
     return this.router.navigate(['/planner', this.studentId]);
 
@@ -75,12 +66,12 @@ export class StudentProfileComponent implements OnInit {
     this.editing = false;
 
   }
-  constructor(private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpServicesService, private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
     this.activatedroute.params.subscribe(data => {
 
       console.log('La data que le llegó a student-profile es:' + data.id);
       this.studentId = data.id;
-    })
+    });
   }
 
   ngOnInit() {
@@ -99,11 +90,10 @@ export class StudentProfileComponent implements OnInit {
 
     });
 
-
-    this.studentBaseData = { type: 'Estudiante', nombre: 'Oscar', apellido: 'Porras', id: '2017107550', activo: 'Activo' };
-
-
-
+    this.http.getProfile(this.studentId).subscribe((data) => {
+      this.studentBaseData = data;
+      this.studentClasses = data["classes"];
+    });
 
     this.studentDataForm.setValue({
       email1: 'imanoisaaac1@gmail.com', email2: 'imanoisaaac23@gmail.com', telNumber: '82837462',

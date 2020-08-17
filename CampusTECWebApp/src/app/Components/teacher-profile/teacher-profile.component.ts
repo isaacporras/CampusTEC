@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {Router} from '@angular/router';
+import {HttpServicesService} from '../../Services/http-services.service';
 
 
 @Component({
@@ -25,21 +26,7 @@ export class TeacherProfileComponent implements OnInit {
 
   teacherDataForm: FormGroup;
 
-  teacherClasses: any = [
-    {
-      id: '1', nombre: 'Matematica General'
-    },
-    {
-      id: '2', nombre: 'Calculo diferencial'
-    },
-    {
-      id: '3', nombre: 'Matematica para administracion'
-    },
-    {
-      id: '4', nombre: 'Analisis numerico para ingeniería'
-    }
-
-  ];
+  teacherClasses: any = [];
 
 
   onEdit(id) {
@@ -79,7 +66,7 @@ export class TeacherProfileComponent implements OnInit {
     this.editing = false;
 
   }
-  constructor(private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpServicesService, private formBuilder: FormBuilder, private activatedroute: ActivatedRoute, private router: Router) {
     this.activatedroute.params.subscribe(data => {
 
       console.log('La data que le llegó a student-profile es:' + data.id);
@@ -95,17 +82,20 @@ export class TeacherProfileComponent implements OnInit {
       email1: new FormControl({value:'', disable: true},
       [Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      email2: new FormControl({value:'', disable: true}, 
-      [Validators.required, 
+      email2: new FormControl({value:'', disable: true},
+      [Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
       telNumber: new FormControl({value:'', disable: true}, [Validators.required, Validators.minLength(8),Validators.pattern("^[0-9]*$")]),
       university: new FormControl({value:'', disable: true}, Validators.required),
       campus: new FormControl({value:'', disable: true}, Validators.required),
-      
+
     });
 
 
-    this.teacherBaseData = {type: 'Teacher', nombre: 'Liley', apellido: 'Cartin', id: '201098756', activo: 'Activo'};
+    this.http.getProfile(this.teacherId).subscribe((data) => {
+      this.teacherBaseData = data;
+      this.teacherClasses = data["classes"];
+    });
 
 
 
