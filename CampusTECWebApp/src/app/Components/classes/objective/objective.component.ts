@@ -43,8 +43,8 @@ export class ObjectiveComponent implements OnInit {
       } else {
         console.log("Carné o contraseña incorrectos")
         alert('Ocurrió un error al cargar el objetivo')
-        status = 0;
-        this.dialogRef.close(1);
+        status = 1;
+        this.dialogRef.close(status);
         
       }
 

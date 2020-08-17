@@ -53,12 +53,12 @@ export class ActivitiesComponent implements OnInit {
       console.log('Viene de classes')
       this.classId = data.id;
     }
-    else if(data.cameFrom === 'challenge'){
+    else if (data.cameFrom === 'challenge') {
       console.log('Viene de challenge')
       this.classId = -1;
       this.activityForChallenge = data.activity;
     }
-    else{
+    else {
       console.log('Viene de classes')
       this.classId = data.id;
     }
@@ -85,7 +85,7 @@ export class ActivitiesComponent implements OnInit {
     this.activityForm.get('objectives').setValue(this.objectivesResponse);
 
     this.activityForm.addControl('fileURL', this.formBuilder.control(''));
-    
+
 
     if (this.wasFileUploadedAct) {
       //Se hace la carga del archivo //
@@ -101,7 +101,8 @@ export class ActivitiesComponent implements OnInit {
 
           this.activityForChallenge = this.activityForm.value;
 
-          this.dialogRef.close(this.activityForm.value);
+          let status = 0; //se completó con exito
+          this.dialogRef.close({ activity: this.activityForm.value, status: status });
 
         });
       });
@@ -112,15 +113,15 @@ export class ActivitiesComponent implements OnInit {
 
 
 
-
-      this.dialogRef.close(this.activityForm.value);
+      let status = 0; //se completó con exito
+      this.dialogRef.close({ activity: this.activityForm.value, status: status });
     }
 
 
   }
   onClickClose() {
 
-    this.dialogRef.close();
+    this.dialogRef.close({status: 1});
   }
 
 
