@@ -11,19 +11,20 @@ export class HttpServicesService {
   constructor(private http: HttpClient) {
   }
 
-  server = "http://localhost:8080";
+  server = 'http://localhost:8080/CampusTEC_API_war_exploded';
+
 
   getUserDetails() {
     //post these details to API server to return user info is correct
   }
 
   getAssignments(semana: number) {
-    return this.http.get(this.server + "/CampusTEC_API_war_exploded/login");
+    return this.http.get(this.server + '/CampusTEC_API_war_exploded/login');
   }
 
   getChallenges() {
     return [{
-      name: "Cálculo",
+      name: 'Cálculo',
       children: [
         {
           name: 'Ir a todas las tutorias',
@@ -54,7 +55,7 @@ export class HttpServicesService {
       ]
     },
       {
-        name: "Fisica",
+        name: 'Fisica',
         children: [
           {
             name: 'Ir a todas las tutorias',
@@ -105,7 +106,7 @@ export class HttpServicesService {
 
   getActivities() {
     return [{
-      name: "Señales",
+      name: 'Señales',
       activities: [
         {
           id: '1', name: 'Hacer tutoria 1', newComments: false
@@ -122,7 +123,7 @@ export class HttpServicesService {
       ]
     },
       {
-        name: "Especificacion",
+        name: 'Especificacion',
         activities: [
           {
             id: '1', name: 'Hacer tutoria 1', newComments: false
@@ -141,11 +142,13 @@ export class HttpServicesService {
     ];
   }
 
-  
+  authenticate(credentials: JSON) {
+    console.log(this.server + '/login');
+    return this.http.post(this.server + '/login', credentials);
+  }
 
-  autenticate(credentials: JSON) {
-    console.log(this.server + "/CampusTEC_API_war_exploded/login")
-    return this.http.post(this.server + "/CampusTEC_API_war_exploded/login", credentials)
+  getProfile(token: string){
+    return this.http.get(this.server + '/profile/' + token);
   }
 
 }
