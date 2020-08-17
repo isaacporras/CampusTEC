@@ -117,7 +117,7 @@ export class ClassesComponent implements OnInit {
   constructor(
     private dialog: MatDialog, private http: ClassesService, private activatedroute: ActivatedRoute, private router: Router
   ) {
-    this.TREE_DATA = this.http.getActivitiesAndChallenges();
+    this.TREE_DATA = this.http.getActivitiesAndChallenges(this.classId)['treeview'];
     this.dataSource.data = this.TREE_DATA;
     this.activatedroute.params.subscribe(data => {
 
@@ -168,7 +168,7 @@ export class ClassesComponent implements OnInit {
   ngOnInit() {
 
 
-   this.TREE_DATA = this.http.getActivitiesAndChallenges();
+   this.TREE_DATA = this.http.getActivitiesAndChallenges(this.classId)['treeview'];
 
 
     this.classData = this.http.getClassBaseData();

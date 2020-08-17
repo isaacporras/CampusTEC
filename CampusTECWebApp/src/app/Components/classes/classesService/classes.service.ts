@@ -2,44 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ClassesService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { 
 
 
+  }
+  server = 'http://localhost:8080/CampusTEC_API_war_exploded';
 
-  getActivitiesAndChallenges(){
-    return [
-      {
-        name: 'Ir a todas las tutorias',
-        id: 1,
-        children: [
-          { name: 'Hacer tutoria 1', id: 1 },
-          { name: 'Hacer tutoria 2', id: 2 },
-          { name: 'Hacer tutoria 3', id: 3 },
-        ]
-      }, {
-        name: 'Completar todas las asignaciones',
-        id: 2,
-        children: [
-          { name: 'Hacer tarea 1', id: 4 },
-          { name: 'Hacer tarea 2', id: 5 },
-          { name: 'Hacer tarea 3', id: 6 },
-        ]
-      },
-      {
-        name: 'Hacer ejercicio todos los dias',
-        id: 3,
-        children: [
-          { name: 'Hacer ejercicio el lunes', id: 7 },
-          { name: 'Hacer ejercicio el lunes', id: 8 },
-          { name: 'Hacer ejercicio el lunes', id: 9 },
-        ]
-      }
-    ];
+
+  getActivitiesAndChallenges(id){
+    return this.http.get(this.server + '/classes/challenges/' + id);
   }
 
   getClassBaseData() {
@@ -91,32 +68,5 @@ export class ClassesService {
     ];
   }
 
-  getActivitiesAndChallengesNested(){
-    return [
-      {
-        name: 'R-1',
-        children: [
-          { name: 'A-1' },
-          { name: 'A-2' },
-          { name: 'A-3' },
-        ]
-      }, {
-        name: 'R-2',
-        children: [
-          { name: 'A-4' },
-          { name: 'A-5' },
-          { name: 'A-6' },
-        ]
-      },
-      {
-        name: 'R-3',
-        children: [
-          { name: 'A-7' },
-          { name: 'A-8' },
-          { name: 'A-9' },
-        ]
-      }
-    ];
-  }
 
 }
