@@ -53,6 +53,7 @@ public class ActivitiesSelectQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet getActivitiesByPersonAndWeek(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" SELECT F.*,curso.Nombre FROM curso INNER JOIN ( " +
                 "    SELECT Z.* " +
@@ -75,4 +76,11 @@ public class ActivitiesSelectQueries {
 
         return statement.executeQuery();
     }
+
+    public static ResultSet getFileFromURL(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement(" SELECT * FROM file WHERE FileURL=?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
+
 }

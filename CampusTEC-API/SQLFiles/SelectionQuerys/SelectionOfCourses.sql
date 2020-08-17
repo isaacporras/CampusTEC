@@ -181,3 +181,5 @@ FROM (SELECT actividadpersona.IdActividad
 ) Z
                     ON A.IdActividad = Z.IdActividad WHERE Z.NumSemana = ?
     ) F ON F.IdCurso = curso.IdCurso;
+
+
