@@ -2,6 +2,7 @@ package RequestHandler;
 
 import Model.Objects.Activity;
 import Model.Objects.Course;
+import Model.Objects.Objective;
 import Model.Objects.User;
 import Model.Profile;
 import Model.Teacher;
@@ -36,6 +37,19 @@ public class ClassesHandler {
         ArrayList<Activity> activities =  Teacher.getActivities(course);
 
         return Response.ok(activities).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
+    @GET
+    @Path("/objectives/{class}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getObjectives(@PathParam("class") String course) throws Exception {
+        System.out.println(course);
+        ArrayList<Objective> objectives =  Teacher.getObjectives(course);
+
+        return Response.ok(objectives).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
