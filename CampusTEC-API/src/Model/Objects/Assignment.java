@@ -1,7 +1,7 @@
 package Model.Objects;
 
 public class Assignment {
-    public String userToken;
+    public String token;
     public Integer week;
     public String id;
     public String name;

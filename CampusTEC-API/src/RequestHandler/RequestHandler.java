@@ -1,7 +1,5 @@
 package RequestHandler;
 
-//import Model.Objects.Assignment;
-
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
@@ -15,7 +13,7 @@ public class RequestHandler extends Application {
         h.add(LoginHandler.class);
         h.add(ProfileHandler.class);
         h.add(ClassesHandler.class);
-        h.add(ClassesHandler.class);
+        h.add(PlannerHandler.class);
         return h;
     }
 

@@ -77,7 +77,7 @@ public class ClassesHandler {
 
     @GET
     @Path("/challenges/{class}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getActivitiesAndChallenges(@PathParam("class") String course) throws Exception {
         ArrayList<Challenge> challenges = Teacher.getActivitiesAndChallenges(course);
 
@@ -90,7 +90,8 @@ public class ClassesHandler {
             array.add(Json.createObjectBuilder().add("id", challenge.id).add("name", challenge.name).add("children", activityArray.build()));
         }
         JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
-        return Response.ok(root).header("Access-Control-Allow-Origin", "*")
+        System.out.println(root.toString());
+        return Response.ok(root.toString()).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
