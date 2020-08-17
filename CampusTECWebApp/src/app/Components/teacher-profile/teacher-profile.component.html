@@ -144,7 +144,6 @@
           <div *ngIf="editing==true">
             <button type="submit" class="btn btn-success" style="float: right;" (click)="onSave()">Guardar </button>
             <button type="submit" class="btn btn-danger" style="float: right;" (click)="onDismiss()">Descartar </button>
-
           </div>
         </form>
       </div>
@@ -153,7 +152,6 @@
         <ul class="list-group">
           <tr *ngFor="let curso of teacherClasses">
             <li class="list-group-item"><a [routerLink]="['/classes',curso.id, teacherId]">{{curso.name}}</a></li>
-
           </tr>
         </ul>
       </div>
