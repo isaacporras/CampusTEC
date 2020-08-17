@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class RemoveQueries {
 
-    public static ResultSet updateHomework(ArrayList<String> parameters, Connection con) throws SQLException {
+    public static ResultSet removeFileByURL(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("DELETE FROM file WHERE FileURL = ?;");
         statement.setString(1, parameters.get(1));
         statement.execute();
