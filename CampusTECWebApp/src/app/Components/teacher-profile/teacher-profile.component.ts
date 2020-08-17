@@ -55,14 +55,26 @@ export class TeacherProfileComponent implements OnInit {
 
   onSave() {
 
+
+    this.http.postUpdateProfile(this.teacherDataForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+      if(jsonResponse.status == 1){
+        alert('Se actualizó correctamente la información');
+        }
+      else{
+        console.log("Carné o contraseña incorrectos")
+      }
+    }, (error) => {
+      console.log(error);
+    });
+    console.log(JSON.stringify(this.teacherDataForm.value, null, 4));
+
     this.teacherDataForm.controls['email1'].disable();
     this.teacherDataForm.controls['email2'].disable();
     this.teacherDataForm.controls['telNumber'].disable();
     this.teacherDataForm.controls['university'].disable();
     this.teacherDataForm.controls['campus'].disable();
-
-
-    console.log(JSON.stringify(this.teacherDataForm.value, null, 4));
     this.editing = false;
 
   }
@@ -79,6 +91,7 @@ export class TeacherProfileComponent implements OnInit {
   ngOnInit() {
 
     this.teacherDataForm = this.formBuilder.group({
+      token: new FormControl(this.teacherId),
       name: new FormControl(''),
       lastname: new FormControl(''),
       id: new FormControl(''),
@@ -99,7 +112,7 @@ export class TeacherProfileComponent implements OnInit {
 
 
     this.http.getProfile(this.teacherId).subscribe((data) => {
-      console.log(data)
+      console.log(data);
       this.teacherBaseData = data;
 
       if(this.teacherBaseData.status === '1'){
@@ -130,11 +143,7 @@ export class TeacherProfileComponent implements OnInit {
 
 
 
-    this.teacherDataForm.controls['email1'].disable();
-    this.teacherDataForm.controls['email2'].disable();
-    this.teacherDataForm.controls['telNumber'].disable();
-    this.teacherDataForm.controls['university'].disable();
-    this.teacherDataForm.controls['campus'].disable();
+
 
 
   }

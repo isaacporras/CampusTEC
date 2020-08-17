@@ -55,6 +55,7 @@ export class StudentProfileComponent implements OnInit {
 
   onSave() {
 
+    this.http.postUpdateProfile(this.studentDataForm.value)
     this.studentDataForm.controls['email1'].disable();
     this.studentDataForm.controls['email2'].disable();
     this.studentDataForm.controls['telNumber'].disable();
