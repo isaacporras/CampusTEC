@@ -9,10 +9,10 @@
         <div class="row">
 
             <div class="col-4">
-                <h3>Nombre: holi</h3>
+                <h3>Nombre:</h3>
             </div>
             <div class="col-8">
-                <input type="text" class="form-control" formControlName="name">
+                <input type="text" class="form-control" formControlName="name" placeholder="taskForm.name">
             </div>
         </div>
         <div *ngIf="submitted && name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
@@ -61,14 +61,7 @@
                 <h3>Actividades:</h3>
             </div>
             <div class="col-7">
-                <select id="inputState" class="form-control" formControlName = "activity" >
-
-                    <ng-container *ngFor="let activity of activities">
-
-                        <option > {{activity.id}} ) {{activity.name}}</option>
-
-                    </ng-container>
-                </select>
+                <h3>{{taskForm.activity}}</h3>
             </div>
         </div>
 
@@ -79,7 +72,7 @@
             <div class="col-3">
                 <select id="inputState" class="form-control" formControlName="day" style="width: 120px; ">
 
-                    <option selected>Lunes</option>
+                    <option >Lunes</option>
                     <option>Martes</option>
                     <option>Miercoles</option>
                     <option>Jueves</option>

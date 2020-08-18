@@ -10,6 +10,17 @@ export class TaskService {
   constructor(private http: HttpClient) {
   }
 
+  getTaskInfo(id){
+    return {
+      name: 'Hacer actividad fisica',
+      week : 1,
+      activity: 'Ir al gym',
+      day: 4,
+      hour: 12,
+      description: 'Ir al gym para sacar musculatura'
+    };
+  }
+
 
   getActivities() {
     return [
