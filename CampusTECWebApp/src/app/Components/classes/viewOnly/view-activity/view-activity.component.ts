@@ -242,11 +242,16 @@ export class ViewActivityComponent implements OnInit {
     });
 
 
-
-
     this.comments = this.http.getComments();
+    
 
-    this.activity = this.http.getActivityInfo();
+    this.http.getActivityInfo(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('El json es:' + jsonResponse);
+      this.activity = jsonResponse;
+    }, (error) => {
+      console.log(error);
+    });
 
     this.objectivesResponse = this.http.getObjectives();
 
