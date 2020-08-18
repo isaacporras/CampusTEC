@@ -73,7 +73,7 @@ public class Profile {
         param.add(user.ppurl);
         param.add(user.token);
         try {
-            ResultSet resultEdit = UpdateQueries.updatePersonProfile(param, DBConnection.getConnection());
+            return UpdateQueries.updatePersonProfile(param, DBConnection.getConnection());
 
         } catch (SQLException e) {
             e.printStackTrace();

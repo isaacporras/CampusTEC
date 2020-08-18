@@ -10,12 +10,12 @@ public class Activity {
     public String name = "";
     public String idClass = "";
     public String description = "";
-    public Boolean gradable = false;
+    public Boolean evaluable = false;
     public Integer week = 1;
     public String date = "";
     public ArrayList<Objective> objectives = new ArrayList<>();
     public ArrayList<Comment> comments = new ArrayList<>();
-    public String fileurl = "null";
+    public String fileURL = "null";
     public Boolean newComents = false;
 
 

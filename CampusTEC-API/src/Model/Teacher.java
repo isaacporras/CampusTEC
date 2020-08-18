@@ -132,23 +132,24 @@ public class Teacher {
         return course;
     }
 
-    public static Boolean newObjective(Objective objective) {
+    public static Integer newObjective(Objective objective) {
 
         ArrayList<String> param = new ArrayList<>();
         param.add(objective.idClass);
         param.add(objective.description);
         try {
-            AddQueries.createObjective(param, DBConnection.getConnection());
-
+            ResultSet resultSet = AddQueries.createObjective(param, DBConnection.getConnection());
+            resultSet.next();
+            return resultSet.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return true;
+        return -1;
     }
 
-    public static Boolean newActivity(Activity activity) throws SQLException, ClassNotFoundException {
+    public static Integer newActivity(Activity activity) throws SQLException, ClassNotFoundException {
         String fileId = "1";
         if (!activity.fileURL.equals("null")) {
             ArrayList<String> param = new ArrayList<>();
@@ -170,14 +171,52 @@ public class Teacher {
         paramActivity.add(activity.idClass);
         paramActivity.add(activity.name);
 
-        try {
-            AddQueries.createActivity(paramActivity, DBConnection.getConnection());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        ResultSet resultSet = AddQueries.createActivity(paramActivity, DBConnection.getConnection());
+        resultSet.next();
+        Integer activityId = resultSet.getInt(1);
+        for (Objective obj : activity.objectives) {
+            ArrayList<String> paramlink = new ArrayList<>();
+            paramlink.add(activityId.toString());
+            paramlink.add(obj.id);
+            AddQueries.createActivityObjective(paramlink, DBConnection.getConnection());
         }
+
+        return activityId;
+    }
+
+    public static Boolean newChallenge(Challenge challenge) throws SQLException, ClassNotFoundException {
+        String fileId = "1";
+        if (!challenge.fileURL.equals("null")) {
+            ArrayList<String> param = new ArrayList<>();
+            param.add(challenge.fileURL);
+            param.add("archivo adjunto");
+            AddQueries.createFile(param, DBConnection.getConnection());
+            param = new ArrayList<>();
+            param.add(challenge.fileURL);
+            ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
+            result.next();
+            fileId = result.getString("IdFile");
+        }
+        ArrayList<String> paramChallenge = new ArrayList<>();
+        paramChallenge.add(challenge.description);
+        paramChallenge.add(challenge.name);
+        paramChallenge.add(challenge.payment);
+        paramChallenge.add(challenge.idClass);
+        paramChallenge.add(fileId);
+        paramChallenge.add(challenge.date);
+
+        ResultSet resultSet = AddQueries.createChallenge(paramChallenge, DBConnection.getConnection());
+        resultSet.next();
+        Integer challengeId = resultSet.getInt(1);
+
+        for (Activity activity : challenge.activities) {
+            Integer activityId = newActivity(activity);
+            ArrayList<String> paramLink = new ArrayList<>();
+            paramLink.add(challengeId.toString());
+            paramLink.add(activityId.toString());
+            AddQueries.activityChallenge(paramLink, DBConnection.getConnection());
+        }
+
         return true;
     }
 

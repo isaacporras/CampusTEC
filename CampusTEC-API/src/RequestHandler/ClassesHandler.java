@@ -114,7 +114,7 @@ public class ClassesHandler {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response newObjective(Objective obj) throws Exception {
-        Boolean result = Teacher.newObjective(obj);
+        Integer result = Teacher.newObjective(obj);
 
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
@@ -133,7 +133,26 @@ public class ClassesHandler {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response newActivity(Activity activity) throws Exception {
 
-        Boolean result = Teacher.newActivity(activity);
+        Integer result = Teacher.newActivity(activity);
+
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("status", result);
+        JsonObject resp = respBuilder.build();
+
+        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
+    @POST
+    @Path("/challenges/new")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response newChallenge(Challenge challenge) throws Exception {
+
+        Boolean result = Teacher.newChallenge(challenge);
 
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
