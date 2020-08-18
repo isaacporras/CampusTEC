@@ -126,7 +126,7 @@ export class PlannerComponent implements OnInit {
       jsonResponse.forEach(value => {
         console.log("Processing event");
         console.log(value);
-        let event = addHours(addDays(this.weekStart, value.day), value.time);
+        let event = addHours(addDays(this.weekStart, value.day), value.hour);
         let color;
         if(value.done){
           color = colors.green;

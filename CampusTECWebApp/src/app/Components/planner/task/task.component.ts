@@ -87,7 +87,9 @@ export class TaskComponent implements OnInit {
       }
       this.taskForm.get('day').setValue(dayIndex);
       console.log(this.taskForm.value);
-      console.log(this.http.createTask(this.taskForm.value));
+      this.http.createTask(this.taskForm.value).subscribe(value => {
+        console.log(value);
+      })
       this.dialogRef.close();
     }
   }
