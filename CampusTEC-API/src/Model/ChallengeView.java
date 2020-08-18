@@ -95,8 +95,8 @@ public class ChallengeView {
 
         for (int i = 0; i < students.size(); i++) {
             JsonObject student = students.getJsonObject(i);
-            String studentId = student.getString("token");
-            Boolean state = student.getBoolean("state");
+            String studentId = student.getString("id");
+            Boolean state = student.getBoolean("status");
             ArrayList<String> param = new ArrayList<>();
             param.add(state.toString());
             param.add(challengeId);
