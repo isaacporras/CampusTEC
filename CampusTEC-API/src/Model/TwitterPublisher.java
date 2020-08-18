@@ -11,22 +11,35 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class TwitterPublisher {
-    static final String CONSUMER_KEY = "Dlbo2wvekv6uwupbm2BJIW4Uj";
-    static final String CONSUMER_SECRET = "OXpqq7bqHxNVpZ3yRhe8Ryc2YgpIuNHUH1BrNJZD5s34N3UFKG";
-    static final String ACCESS_TOKEN = "1283954987790487554-iRUQZaq58WRE61lVFC7YdcUpKnmL3D";
-    static final String ACCESS_TOKEN_SECRET = "fAOqmxy96yTBkoOj4NkpSpcyYHYlcxHnT0oRJXYw8kY71";
+    private static final String CONSUMER_KEY = "Dlbo2wvekv6uwupbm2BJIW4Uj";
+    private static final String CONSUMER_SECRET = "OXpqq7bqHxNVpZ3yRhe8Ryc2YgpIuNHUH1BrNJZD5s34N3UFKG";
+    private static final String ACCESS_TOKEN = "1283954987790487554-iRUQZaq58WRE61lVFC7YdcUpKnmL3D";
+    private static final String ACCESS_TOKEN_SECRET = "fAOqmxy96yTBkoOj4NkpSpcyYHYlcxHnT0oRJXYw8kY71";
+    private static Twitter instance;
+    private static Object sync;
+
+    private TwitterPublisher(){};
 
     public static Twitter getTwitterInstance() {
-        disableCertificates();
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-                .setOAuthConsumerKey(CONSUMER_KEY)
-                .setOAuthConsumerSecret(CONSUMER_SECRET)
-                .setOAuthAccessToken(ACCESS_TOKEN)
-                .setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
+        Twitter result = instance;
+        if(result == null) {
+            synchronized (sync) {
+                disableCertificates();
+                ConfigurationBuilder cb = new ConfigurationBuilder();
+                cb.setDebugEnabled(true)
+                        .setOAuthConsumerKey(CONSUMER_KEY)
+                        .setOAuthConsumerSecret(CONSUMER_SECRET)
+                        .setOAuthAccessToken(ACCESS_TOKEN)
+                        .setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
 
-        TwitterFactory tf = new TwitterFactory(cb.build());
-        return tf.getInstance();
+                TwitterFactory tf = new TwitterFactory(cb.build());
+                result = instance;
+                if(result == null) {
+                    result = tf.getInstance();
+                }
+            }
+        }
+        return result;
     }
 
     public static void updateTweet(Twitter twitter, String tweet) throws TwitterException {
@@ -34,7 +47,7 @@ public class TwitterPublisher {
         System.out.println("Successfully updated the status to [" + status.getText() + "].");
     }
 
-    public static void disableCertificates() {
+    private static void disableCertificates() {
         TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
 
