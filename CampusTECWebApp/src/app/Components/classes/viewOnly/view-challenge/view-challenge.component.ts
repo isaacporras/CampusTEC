@@ -50,7 +50,30 @@ export class ViewChallengeComponent implements OnInit {
   onClickSave() {
 
     console.log(this.students);
+
+    let json = {
+      challengeId :this.classId,
+      students : this.students
+    }
+
+    this.http.postStudensStauts(json).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse)
+      console.log(jsonResponse.status);
+      if(jsonResponse.status === -1){
+        alert('Ocurrió un error al actualizar los estatus de los usuarios')
+      }
+    }, (error) => {
+      console.log(error);
+    });
+
+
+
+
+
     this.statusChanged = false;
+
+
 
 
     //call push students status
@@ -135,7 +158,7 @@ export class ViewChallengeComponent implements OnInit {
 
     (this.http.getChallengeInfo(this.classId)).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
-      console.log('aquiiiiiiii')
+      console.log('Los datos del reto son:');
       console.log(jsonResponse)
       console.log(jsonResponse.status);
 
