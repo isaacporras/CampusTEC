@@ -77,13 +77,13 @@ export class TaskComponent implements OnInit {
       }
       let dayIndex;
       switch (this.taskForm.get('day').value) {
-        case "Domingo": dayIndex = 0;
-        case "Lunes": dayIndex = 1;
-        case "Martes": dayIndex = 2;
-        case "Miércoles": dayIndex = 3;
-        case "Jueves": dayIndex  = 4;
-        case "Viernes": dayIndex = 5;
-        case "Sábado": dayIndex = 6;
+        case "Domingo": dayIndex = 0; break;
+        case "Lunes": dayIndex = 1; break;
+        case "Martes": dayIndex = 2; break;
+        case "Miércoles": dayIndex = 3; break;
+        case "Jueves": dayIndex  = 4; break;
+        case "Viernes": dayIndex = 5; break;
+        case "Sábado": dayIndex = 6; break;
       }
       this.taskForm.get('day').setValue(dayIndex);
       console.log(this.taskForm.value);
