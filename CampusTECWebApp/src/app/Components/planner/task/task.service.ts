@@ -18,22 +18,14 @@ export class TaskService {
   }
 
 
-  getActivities() {
-    return [
-      {
-        id: '1', name: 'Hacer tutoria 1'
-      },
-      {
-        id: '2', name: 'Hacer tutoria 2'
-      },
+  getActivities(token, week) {
+    let json = {
+      token: String(token),
+      week: String(week)
+    }
 
-      {
-        id: '3', name: 'Hacer tutoria 3'
-      },
-      {
-        id: '4', name: 'Hacer tutoria 4'
-      },
-    ];
+    console.log(json)
+    return this.http.post(this.server + '/planner/activities', json)
   }
 
 }

@@ -1,11 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { TaskService } from '../task/task.service';
+import {Component, OnInit, Inject} from '@angular/core';
+import {NgbTimepicker} from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
+import {TaskService} from '../task/task.service';
 
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -17,8 +16,6 @@ export class TaskviewComponent implements OnInit {
 
   taskForm: FormGroup;
 
-  activities: Array<any>;
-
   studentId: any;
 
   submitted: boolean = false;
@@ -26,17 +23,18 @@ export class TaskviewComponent implements OnInit {
   taskId: any;
   stringDay: any;
   taskData: any;
+  activity: String;
 
 
   constructor(private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<TaskviewComponent>,
-    private http: TaskService,
-    @Inject(MAT_DIALOG_DATA) data,) {
+              public dialogRef: MatDialogRef<TaskviewComponent>,
+              private http: TaskService,
+              @Inject(MAT_DIALOG_DATA) data,) {
 
 
     this.studentId = data.studenId;
-    console.log('El studentId es: ' + data.studentId)
-    console.log('El taskId es: ' + data.taskId)
+    console.log('El studentId es: ' + data.studentId);
+    console.log('El taskId es: ' + data.taskId);
 
     this.taskId = data.taskId;
 
@@ -58,64 +56,53 @@ export class TaskviewComponent implements OnInit {
       if (hourDat > 12) {
         hourDat -= 12;
         periodValue = 'PM';
-      }
-      else {
+      } else {
         periodValue = 'AM';
       }
-  
-  
-  
-      this.activities = this.http.getActivities();
-  
-      console.log(this.http.getActivities())
-  
-  
-  
-  
-  
-      console.log(this.taskData)
+
+      console.log(this.taskData);
       let day = this.taskData['day'];
 
-      console.log()
-      
+      console.log();
+
       switch (day) {
         case '0':
-  
+
           this.stringDay = 'Lunes';
           break;
         case '1':
-  
+
           this.stringDay = 'Martes';
           break;
         case '2':
-  
+
           this.stringDay = 'Miercoles';
           break;
         case '3':
-  
+
           this.stringDay = 'Jueves';
           break;
         case '4':
-          console.log('es 4')
+          console.log('es 4');
           this.stringDay = 'Viernes';
           break;
         case '5':
-  
+
           this.stringDay = 'Sabado';
           break;
         case '6':
-  
+
           this.stringDay = 'Domingo';
           break;
       }
 
-      console.log(this.stringDay)
-  
-  
-  
+      console.log(this.stringDay);
+
+      this.activity = this.taskData.activity;
+
       this.taskForm = this.formBuilder.group(
         {
-          userId: new FormControl(this.studentId,[Validators.required]),
+          userId: new FormControl(this.studentId, [Validators.required]),
           taskId: new FormControl(this.taskId),
           name: new FormControl(this.taskData['name'],
             [Validators.required]
@@ -129,36 +116,17 @@ export class TaskviewComponent implements OnInit {
           hour: new FormControl(this.taskData['time'],
             [Validators.required, Validators.min(1), Validators.max(12)]
           ),
-          
+
           description: new FormControl(this.taskData['description'], Validators.required
           ),
           period: new FormControl(periodValue,
             [Validators.required]
           ),
-          activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
-            [Validators.required]
-          ),
         });
-      //this.taskForm.get('activity').setValue(this.activities[0]);
-  
-      
-  
-  
-  
-  
-
-
-
-
-
-
-
 
     }, (error) => {
       console.log(error);
     });
-
-
 
 
   }
@@ -167,51 +135,50 @@ export class TaskviewComponent implements OnInit {
   onClickSave() {
     this.submitted = true;
     if (this.taskForm.valid) {
-      console.log(this.taskForm.get('activity').value);
-      console.log();
-      let id = this.taskForm.get('activity').value.split(')')[0];
-      this.taskForm.get('activity').setValue(Number(id));
-      console.log(this.taskForm);
+
+      // Falta
+
       this.dialogRef.close();
     }
   }
+
   onClickClose() {
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
-    
+
 
   }
 
 
-  setValue(controlName: string, secondControlName: string) {
-
-    this.taskForm.controls[controlName].setValue(this.taskData[secondControlName])
-
-  }
-
-
+  // setValue(controlName: string, secondControlName: string) {
+  //
+  //   this.taskForm.controls[controlName].setValue(this.taskData[secondControlName])
+  //
+  // }
 
 
   get name() {
     return this.taskForm.get('name');
   }
+
   get week() {
     return this.taskForm.get('week');
   }
+
   get day() {
     return this.taskForm.get('day');
   }
+
   get hour() {
     return this.taskForm.get('hour');
   }
-  get minute() {
-    return this.taskForm.get('minute');
-  }
+
   get period() {
     return this.taskForm.get('period');
   }
+
   get description() {
     return this.taskForm.get('description');
   }
