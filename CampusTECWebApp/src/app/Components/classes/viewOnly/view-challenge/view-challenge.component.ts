@@ -25,6 +25,8 @@ export class ViewChallengeComponent implements OnInit {
   atLeastOnObjective: boolean = false;
   objectivesResponse: Array<any>;
 
+  cameFrom: any;
+
 
 
 
