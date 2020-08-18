@@ -122,6 +122,7 @@ export class TaskviewComponent implements OnInit {
           period: new FormControl(periodValue,
             [Validators.required]
           ),
+          done: new FormControl(''),
         });
 
     }, (error) => {
@@ -181,6 +182,10 @@ export class TaskviewComponent implements OnInit {
 
   get description() {
     return this.taskForm.get('description');
+  }
+
+  get done() {
+    return this.taskForm.get('done');
   }
 
 }
