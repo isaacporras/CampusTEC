@@ -40,7 +40,8 @@ public class AdminHandler {
     public static Response setTecolones(JsonObject obj) throws SQLException, ClassNotFoundException {
 
         ArrayList<String> param = new ArrayList<>();
-        param.add(obj.getString("max"));
+        Integer max = obj.getInt("max");
+        param.add(max.toString());
         param.add("1");
         Boolean result = UpdateQueries.updatePresupuesto(param, DBConnection.getConnection());
 
