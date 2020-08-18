@@ -55,7 +55,7 @@ public class CommentHandler {
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
         respBuilder.add("user", name);
-        respBuilder.add("id", userId);
+        respBuilder.add("id", userId.getString("id"));
         JsonObject resp = respBuilder.build();
 
         return Response.ok(resp).build();
