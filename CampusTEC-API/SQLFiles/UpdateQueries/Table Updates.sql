@@ -93,3 +93,5 @@ SELECT s.*
                 FROM sedepersona
                          INNER JOIN sede s on sedepersona.IdSede = s.IdSede
                 WHERE sedepersona.IdPersona = ?;
+
+
