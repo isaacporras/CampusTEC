@@ -16,7 +16,7 @@ public class TwitterPublisher {
     private static final String ACCESS_TOKEN = "1283954987790487554-iRUQZaq58WRE61lVFC7YdcUpKnmL3D";
     private static final String ACCESS_TOKEN_SECRET = "fAOqmxy96yTBkoOj4NkpSpcyYHYlcxHnT0oRJXYw8kY71";
     private static Twitter instance;
-    private static Object sync;
+    private static Object sync = new Object();
 
     private TwitterPublisher(){};
 
