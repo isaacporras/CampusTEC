@@ -102,6 +102,16 @@ public class ChallengeView {
             param.add(challengeId);
             param.add(studentId);
             UpdateQueries.updateChallengePerson(param, DBConnection.getConnection());
+            ArrayList<String> paramTecolones = new ArrayList<>();
+            paramTecolones.add(challengeId);
+            ResultSet resultTecolones = ActivitiesSelectQueries.getChallengeInfo(paramTecolones, DBConnection.getConnection());
+            resultTecolones.next();
+            if (state) {
+                ArrayList<String> param1 = new ArrayList<>();
+                param1.add(resultTecolones.getString("TecColones"));
+                param1.add(studentId);
+                UpdateQueries.updateAccount(param1, DBConnection.getConnection());
+            }
         }
         return true;
     }

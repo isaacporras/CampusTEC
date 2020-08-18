@@ -69,8 +69,8 @@ public class UpdateQueries {
         PreparedStatement statement = con.prepareStatement("UPDATE cuenta SET " +
                 "    TecColones= ? + TecColones " +
                 "    WHERE IdPersona = ?;");
-        statement.setInt(1, Integer.parseInt(parameters.get(1)));
-        statement.setInt(2, Integer.parseInt(parameters.get(2)));
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setInt(2, Integer.parseInt(parameters.get(1)));
         int count = statement.executeUpdate();
         return count > 0;
     }
