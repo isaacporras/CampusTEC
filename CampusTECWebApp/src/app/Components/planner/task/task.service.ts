@@ -14,7 +14,7 @@ export class TaskService {
   getTaskInfo(id){
 
     return this.http.get(this.server + '/planner/assignment/' + id);
-    
+
   }
 
 

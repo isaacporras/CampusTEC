@@ -170,6 +170,19 @@ export class ViewActivityComponent implements OnInit {
       this.setCommentFormat();
     }
   }
+  postComment(){
+    this.http.postComment(this.commentForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('El json al commentar:' + jsonResponse);
+      
+    }, (error) => {
+      console.log(error);
+    });
+
+
+    this.comments.push(this.commentForm.value);
+  }
+
   setCommentFormat() {
     this.commentForm.addControl('time', this.formBuilder.control(''));
     this.commentForm.addControl('date', this.formBuilder.control(''));
@@ -187,7 +200,7 @@ export class ViewActivityComponent implements OnInit {
 
     console.log(this.commentForm.value);
     
-    this.comments.push(this.commentForm.value);
+    
     console.log(this.commentForm.value);
     //this.dialogRef.close();
 
@@ -242,9 +255,7 @@ export class ViewActivityComponent implements OnInit {
     });
 
 
-    
-    
-
+ 
     this.http.getActivityInfo(this.classId).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log('El json de actividad:' + jsonResponse);

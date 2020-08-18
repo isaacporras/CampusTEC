@@ -48,7 +48,14 @@ export class ViewActivityService {
     let url = this.server + '/comment/' + id
     console.log(url)
     return this.http.get(url);
-    
+
+  }
+
+  postComment(json){
+    let url = this.server + '/comment/'
+    console.log(url)
+    return this.http.post(url,json);
+
   }
   getUserName(id){
     return {
