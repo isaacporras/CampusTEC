@@ -5,7 +5,6 @@
 
     </div>
     <hr>
-    {{taskForm.value | json}}
     <div class="row">
 
       <div class="col-4">
@@ -27,34 +26,9 @@
       <div class="col-4">
         <h3>Semana:</h3>
       </div>
-      <div class="col-4">
-        <select id="inputState" class="form-control" formControlName="week">
-          <option selected>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-          <option>11</option>
-          <option>12</option>
-          <option>13</option>
-          <option>14</option>
-          <option>15</option>
-          <option>16</option>
-          <option>17</option>
-          <option>18</option>
-        </select>
+      <div class="col-7">
+        <h3>{{this.week}}</h3>
       </div>
-    </div>
-    <div *ngIf="week.invalid && (week.dirty || week.touched)" class="alert alert-danger">
-      <div *ngIf="week.errors.required ">
-        Debe ingresar una semana.
-      </div>
-
     </div>
     <div class="row">
       <div class="col-4">
@@ -141,10 +115,11 @@
       </div>
       <div class="col col-6 col-md-4">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="done">s
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="done">
 
         </div>
       </div>
+    </div>
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4">
@@ -153,7 +128,6 @@
         </div>
       </div>
       <div class="col4">
-
         <div>
           <button type="button" class="btn primary-btn" (click)="onClickSave()">Guardar</button>
         </div>
@@ -161,6 +135,5 @@
 
     </div>
 
-  </div>
 
-</div>
+  </div>

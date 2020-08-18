@@ -30,4 +30,8 @@ export class TaskService {
   createTask(json){
     return this.http.post(this.server + "/planner/newAssignment/", json);
   }
+
+  updateTask(json){
+    return this.http.post(this.server + "/planner/assignments/edit", json);
+  }
 }

@@ -24,6 +24,8 @@ export class TaskviewComponent implements OnInit {
   stringDay: any;
   taskData: any;
   activity: String;
+  week: number;
+  hourDat: number;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -43,18 +45,11 @@ export class TaskviewComponent implements OnInit {
 
     this.http.getTaskInfo(this.taskId).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
-      console.log(jsonResponse);
-
       this.taskData = jsonResponse;
-
-      console.log(this.taskData['day']);
-
-
-      let myDate = new Date();
-      let hourDat = myDate.getHours();
-      let periodValue: any;
-      if (hourDat > 12) {
-        hourDat -= 12;
+      this.hourDat = this.taskData["hour"];
+      let periodValue: any
+      if (this.hourDat > 12) {
+        this.hourDat -= 12;
         periodValue = 'PM';
       } else {
         periodValue = 'AM';
@@ -67,62 +62,55 @@ export class TaskviewComponent implements OnInit {
 
       switch (day) {
         case '0':
-
-          this.stringDay = 'Lunes';
+          this.stringDay = 'Domingo';
           break;
-        case '1':
 
-          this.stringDay = 'Martes';
+        case '1':
+          this.stringDay = 'Lunes';
           break;
         case '2':
 
-          this.stringDay = 'Miercoles';
+          this.stringDay = 'Martes';
           break;
         case '3':
 
-          this.stringDay = 'Jueves';
+          this.stringDay = 'Miercoles';
           break;
         case '4':
-          console.log('es 4');
-          this.stringDay = 'Viernes';
+          this.stringDay = 'Jueves';
           break;
         case '5':
-
-          this.stringDay = 'Sabado';
+          this.stringDay = 'Viernes';
           break;
         case '6':
-
-          this.stringDay = 'Domingo';
+          this.stringDay = 'Sabado';
           break;
       }
 
       console.log(this.stringDay);
 
       this.activity = this.taskData.activity;
+      this.week = this.taskData.week;
 
       this.taskForm = this.formBuilder.group(
         {
-          userId: new FormControl(this.studentId, [Validators.required]),
-          taskId: new FormControl(this.taskId),
+          token: new FormControl(this.studentId, [Validators.required]),
+          id: new FormControl(this.taskId),
           name: new FormControl(this.taskData['name'],
             [Validators.required]
-          ),
-          week: new FormControl(this.taskData['week'],
-            [Validators.required, Validators.min(1), Validators.max(18)]
           ),
           day: new FormControl(this.stringDay,
             [Validators.required]
           ),
-          hour: new FormControl(this.taskData['hour'],
+          hour: new FormControl(this.hourDat,
             [Validators.required, Validators.min(1), Validators.max(12)]
           ),
-
           description: new FormControl(this.taskData['description'], Validators.required
           ),
           period: new FormControl(periodValue,
             [Validators.required]
           ),
-          done: new FormControl(''),
+          done: new FormControl(this.taskData["done"]),
         });
 
     }, (error) => {
@@ -135,10 +123,27 @@ export class TaskviewComponent implements OnInit {
 
   onClickSave() {
     this.submitted = true;
+    console.log(this.taskForm.valid);
+    console.log(this.taskForm.value);
     if (this.taskForm.valid) {
-
-      // Falta
-
+      if(this.taskForm.get('period').value == 'PM') {
+        this.taskForm.get('hour').setValue(Number(this.taskForm.get('hour').value) + 12);
+      }
+      let dayIndex;
+      switch (this.taskForm.get('day').value) {
+        case "Domingo": dayIndex = 0; break;
+        case "Lunes": dayIndex = 1; break;
+        case "Martes": dayIndex = 2; break;
+        case "Miércoles": dayIndex = 3; break;
+        case "Jueves": dayIndex  = 4; break;
+        case "Viernes": dayIndex = 5; break;
+        case "Sábado": dayIndex = 6; break;
+      }
+      this.taskForm.get('day').setValue(dayIndex);
+      console.log(this.taskForm.value);
+      this.http.updateTask(this.taskForm.value).subscribe(value => {
+        console.log(value);
+      })
       this.dialogRef.close();
     }
   }
@@ -162,10 +167,6 @@ export class TaskviewComponent implements OnInit {
 
   get name() {
     return this.taskForm.get('name');
-  }
-
-  get week() {
-    return this.taskForm.get('week');
   }
 
   get day() {
