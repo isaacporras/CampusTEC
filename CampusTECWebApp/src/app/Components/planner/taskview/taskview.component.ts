@@ -35,10 +35,12 @@ export class TaskviewComponent implements OnInit {
 
 
     this.studentId = data.studenId;
+    console.log('El studentId es: ' + data.studentId)
+    console.log('El taskId es: ' + data.taskId)
 
     this.taskId = data.taskId;
 
-    console.log(this.taskId)
+    this.studentId = data.studentId;
 
 
     this.http.getTaskInfo(this.taskId).subscribe((data) => {
@@ -113,7 +115,8 @@ export class TaskviewComponent implements OnInit {
   
       this.taskForm = this.formBuilder.group(
         {
-          userId: new FormControl(this.studentId),
+          userId: new FormControl(this.studentId,[Validators.required]),
+          taskId: new FormControl(this.taskId),
           name: new FormControl(this.taskData['name'],
             [Validators.required]
           ),
@@ -126,9 +129,7 @@ export class TaskviewComponent implements OnInit {
           hour: new FormControl(this.taskData['time'],
             [Validators.required, Validators.min(1), Validators.max(12)]
           ),
-          minute: new FormControl(this.taskData['minute'],
-            [Validators.required, Validators.min(0), Validators.max(60)]
-          ),
+          
           description: new FormControl(this.taskData['description'], Validators.required
           ),
           period: new FormControl(periodValue,
