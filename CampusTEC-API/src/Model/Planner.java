@@ -107,6 +107,7 @@ public class Planner {
         assignment.hour = result.getString("Hora");
         assignment.description = result.getString("Descripcion");
         assignment.activity = result.getString("a.Titulo");
+        assignment.done = result.getBoolean("Completado");
 
         return assignment;
     }
