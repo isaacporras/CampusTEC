@@ -58,7 +58,7 @@ public class Planner {
                 challenge.id = resultChallenges.getString("IdRetoAcademico");
                 challenge.name = resultChallenges.getString("Titulo");
                 ArrayList<String> paramActivity = new ArrayList<>();
-                paramActivity.add(course.id);
+                paramActivity.add(challenge.id);
                 ResultSet resultActivities = ActivitiesSelectQueries.getActivitiesFromChallenge(paramActivity, DBConnection.getConnection());
                 while (resultActivities.next()) {
                     Activity activity = new Activity();
@@ -80,7 +80,6 @@ public class Planner {
         ResultSet result = ActivitiesSelectQueries.getActivitiesByPersonAndWeek(param, DBConnection.getConnection());
         ArrayList<Course> courses = new ArrayList<>();
         while (result.next()) {
-            System.out.println("ENTRÖ");
             Course course = new Course();
             course.id = result.getString("IdCurso");
             course.name = result.getString("Nombre");

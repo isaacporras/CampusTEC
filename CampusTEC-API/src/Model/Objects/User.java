@@ -18,4 +18,5 @@ public class User {
     public String ppurl = "";
     public Integer tecolones;
     public ArrayList<Course> classes = new ArrayList<>();
+    public Boolean completed;
 }
