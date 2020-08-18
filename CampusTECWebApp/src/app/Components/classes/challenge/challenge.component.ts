@@ -51,6 +51,12 @@ export class ChallengeComponent implements OnInit {
   }
 
   onClickSave() {
+    if(!this.challengeForm.valid || !this.atLeastOnObjective || !this.atLeastOnActivity){
+      alert('Datos invalidos');
+      return;
+    }
+
+    
     this.submitted = true;
 
     
@@ -84,7 +90,7 @@ export class ChallengeComponent implements OnInit {
 
           console.log('-----------------------------------------------------------------')
           console.log(this.challengeForm.value);
-          this.dialogRef.close();
+          this.postChallenge()
           console.log('-----------------------------------------------------------------')
 
         });
@@ -96,13 +102,34 @@ export class ChallengeComponent implements OnInit {
       console.log('-----------------------------------------------------------------')
       this.challengeForm.get('fileURL').setValue('Null');
       console.log(this.challengeForm.value)
-      this.dialogRef.close();
+      this.postChallenge()
       console.log('-----------------------------------------------------------------')
     }
 
   }
   onClickClose() {
     this.dialogRef.close();
+  }
+
+  postChallenge(){
+    this.http.postChallenge(this.challengeForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+      
+      if(jsonResponse.status == -1){
+        console.log("Ocurrió un error al cargar la información")
+        alert('Ocurrió un error al cargar la información');
+        let status = 1; //se completó con exito
+        this.dialogRef.close({activity: this.challengeForm.value, status: status});
+      }
+      else{
+        alert('Se actualizó correctamente la información');
+        let status = 0; //se completó con exito
+        this.dialogRef.close({activity: this.challengeForm.value, status: status});
+        }
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 
@@ -115,6 +142,7 @@ export class ChallengeComponent implements OnInit {
 
 
   addObjective() {
+    
     this.atLeastOnObjective = true;
     var id_new = Number(this.challengeForm.get('objective').value.charAt(0));
     var description_new = this.challengeForm.get('objective').value.substr(2);
