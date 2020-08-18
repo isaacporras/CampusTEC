@@ -186,3 +186,5 @@ FROM (SELECT actividadpersona.IdActividad
 
 
 SELECT  * FROM personareto INNER JOIN persona p on personareto.IdPersona = p.IdPersona WHERE personareto.IdRetoAcademico = ?;
+SELECT objetivo.* FROM objetivo INNER join objetivoreto o on objetivo.IdObjetivo = o.IdObjetivo where o.IdReto = ?;
+SELECT * FROM objetivo INNER  JOIN actividadobjetivo a on objetivo.IdObjetivo = a.IdObjetivo WHERE A.IdActividad=?;
