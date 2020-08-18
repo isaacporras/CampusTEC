@@ -81,9 +81,9 @@ VALUES ('', '', TRUE),
        ('', 'Ejemplo4.pdf', TRUE),
        ('', 'Ejemplo5.pdf', TRUE);
 
-INSERT INTO retoacademico (Descripcion, Titulo, TecColones, IdCurso,IdFile,Fecha)
-VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing', 1000, 1,2,'23/12/2020'),
-       ('Realizar pruebas en un procesador vectorial de 2.1GHz', 'Procesador Vectorial', 800, 2,3,'2/12/2020');
+INSERT INTO retoacademico (Descripcion, Titulo, TecColones, IdCurso, IdFile, Fecha)
+VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing', 1000, 1, 2, '23/12/2020'),
+       ('Realizar pruebas en un procesador vectorial de 2.1GHz', 'Procesador Vectorial', 800, 2, 3, '2/12/2020');
 
 INSERT INTO objetivoreto(IDOBJETIVO, IDRETO)
 VALUES (3, 1),
@@ -153,6 +153,18 @@ VALUES (1, 1),
        (8, 8),
        (9, 8),
        (10, 1);
+
+INSERT INTO presupuestoteccolones(IDSEMESTRE, TECCOLONES)
+VALUES (1,60000);
+
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
+
+
+SELECT persona.Nombre,persona.Apellido,A.* FROM ( SELECT A.*, F.FileURL  FROM (  SELECT comentario.* FROM comentario
+                              INNER JOIN
+                                       actividad a on comentario.IdActividad = a.IdActividad
+                                  WHERE a.IdActividad = 1) A
+                                  INNER JOIN file F ON A.IdFile = F.IdFile) A
+                         INNER JOIN persona ON persona.IdPersona = A.Idpersona;

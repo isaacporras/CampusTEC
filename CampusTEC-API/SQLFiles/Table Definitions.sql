@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Objetivo
 CREATE TABLE IF NOT EXISTS File
 (
     IdFile   INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    FileURL  CHAR(100)                          NOT NULL,
+    FileURL  TEXT(500)                          NOT NULL,
     Filename CHAR(100)                          NOT NULL,
     Valid    BOOLEAN                            NOT NULL DEFAULT TRUE
 );
@@ -146,10 +146,10 @@ CREATE TABLE IF NOT EXISTS RetoAcademico
     Titulo          CHAR(50)                           NOT NULL,
     TecColones      INTEGER DEFAULT 0,
     IdCurso         INTEGER                            NOT NULL,
-    Fecha CHAR(20) NOT NULL ,
-    IdFile INTEGER NOT NULL ,
+    Fecha           CHAR(20)                           NOT NULL,
+    IdFile          INTEGER                            NOT NULL,
     FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso),
-        FOREIGN KEY (IdFile) REFERENCES File (IdFile)
+    FOREIGN KEY (IdFile) REFERENCES File (IdFile)
 );
 
 
@@ -240,9 +240,17 @@ CREATE TABLE IF NOT EXISTS PersonaReto
     FOREIGN KEY (IdRetoAcademico) REFERENCES RetoAcademico (IdRetoAcademico),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
 );
-CREATE TABLE IF NOT EXISTS ActividadObjetivo(
+CREATE TABLE IF NOT EXISTS ActividadObjetivo
+(
     IdActividad INTEGER NOT NULL,
-    IdObjetivo       INTEGER NOT NULL,
+    IdObjetivo  INTEGER NOT NULL,
     FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad),
     FOREIGN KEY (IdObjetivo) REFERENCES Objetivo (IdObjetivo)
+);
+CREATE TABLE IF NOT EXISTS PresupuestoTecColones
+(
+    IdPresupuesto INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    IdSemestre INTEGER NOT NULL,
+    FOREIGN KEY (IdSemestre) REFERENCES Semestre(IdSemestre),
+    TecColones INTEGER NOT NULL DEFAULT 0
 );

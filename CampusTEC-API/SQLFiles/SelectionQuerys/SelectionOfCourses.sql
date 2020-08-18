@@ -154,7 +154,7 @@ SELECT Z.*
 FROM (SELECT actividadpersona.IdActividad
       FROM persona
                INNER JOIN actividadpersona ON persona.IdPersona = actividadpersona.IdPersona
-      AND persona.IdPersona = ?) A
+          AND persona.IdPersona = ?) A
          INNER JOIN (
     SELECT actividad.*
     FROM actividad
@@ -163,28 +163,56 @@ FROM (SELECT actividadpersona.IdActividad
         FROM actividad
                  INNER JOIN actividadretoacademico a on actividad.IdActividad = a.IdActividad)
 ) Z
-                    ON A.IdActividad = Z.IdActividad WHERE Z.NumSemana = ?;
+                    ON A.IdActividad = Z.IdActividad
+WHERE Z.NumSemana = ?;
 
-SELECT F.*,curso.Nombre FROM curso INNER JOIN (
+SELECT F.*, curso.Nombre
+FROM curso
+         INNER JOIN (
     SELECT Z.*
-FROM (SELECT actividadpersona.IdActividad
-      FROM persona
-               INNER JOIN actividadpersona ON persona.IdPersona = actividadpersona.IdPersona
-      AND persona.IdPersona = ?) A
-         INNER JOIN (
-    SELECT actividad.*
-    FROM actividad
-    WHERE actividad.IdActividad NOT IN (
-        SELECT actividad.IdActividad
+    FROM (SELECT actividadpersona.IdActividad
+          FROM persona
+                   INNER JOIN actividadpersona ON persona.IdPersona = actividadpersona.IdPersona
+              AND persona.IdPersona = ?) A
+             INNER JOIN (
+        SELECT actividad.*
         FROM actividad
-                 INNER JOIN actividadretoacademico a on actividad.IdActividad = a.IdActividad)
-) Z
-                    ON A.IdActividad = Z.IdActividad WHERE Z.NumSemana = ?
-    ) F ON F.IdCurso = curso.IdCurso;
+        WHERE actividad.IdActividad NOT IN (
+            SELECT actividad.IdActividad
+            FROM actividad
+                     INNER JOIN actividadretoacademico a on actividad.IdActividad = a.IdActividad)
+    ) Z
+                        ON A.IdActividad = Z.IdActividad
+    WHERE Z.NumSemana = ?
+) F ON F.IdCurso = curso.IdCurso;
 
 
 
+SELECT *
+FROM personareto
+         INNER JOIN persona p on personareto.IdPersona = p.IdPersona
+WHERE personareto.IdRetoAcademico = ?;
 
-SELECT  * FROM personareto INNER JOIN persona p on personareto.IdPersona = p.IdPersona WHERE personareto.IdRetoAcademico = ?;
-SELECT objetivo.* FROM objetivo INNER join objetivoreto o on objetivo.IdObjetivo = o.IdObjetivo where o.IdReto = ?;
-SELECT * FROM objetivo INNER  JOIN actividadobjetivo a on objetivo.IdObjetivo = a.IdObjetivo WHERE A.IdActividad=?;
+
+SELECT objetivo.*
+FROM objetivo
+         INNER join objetivoreto o on objetivo.IdObjetivo = o.IdObjetivo
+where o.IdReto = ?;
+
+
+SELECT *
+FROM objetivo
+         INNER JOIN actividadobjetivo a on objetivo.IdObjetivo = a.IdObjetivo
+WHERE A.IdActividad = ?;
+
+SELECT persona.Nombre,persona.Apellido,A.*
+FROM (
+         SELECT A.*, F.FileURL
+         FROM (
+                  SELECT comentario.*
+                  FROM comentario
+                           INNER JOIN
+                       actividad a on comentario.IdActividad = a.IdActividad
+                  WHERE a.IdActividad = ?) A
+                  INNER JOIN file F ON A.IdFile = F.IdFile) A
+         INNER JOIN persona ON persona.IdPersona = A.Idpersona;

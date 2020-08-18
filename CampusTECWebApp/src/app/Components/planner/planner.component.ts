@@ -21,6 +21,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {ViewActivityComponent} from '../classes/viewOnly/view-activity/view-activity.component';
 import {ViewChallengeComponent} from '../classes/viewOnly/view-challenge/view-challenge.component';
 import { TaskComponent } from './task/task.component';
+import { TaskviewComponent } from './taskview/taskview.component';
 
 import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -115,7 +116,7 @@ export class PlannerComponent implements OnInit {
     classData.data ={studentId: id};
     console.log('En ventana principal el id es de:')
 
-    this.dialog.open(TaskComponent, classData);
+    this.dialog.open(TaskviewComponent, classData);
   }
 
   updateAssignments(): void {

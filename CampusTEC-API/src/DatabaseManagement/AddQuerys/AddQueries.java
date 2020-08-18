@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AddQueries {
 
     public static ResultSet createComment(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement(" INSERT INTO comentaro( IdFile, IdActividad," +
+        PreparedStatement statement = con.prepareStatement(" INSERT INTO comentario( IdFile, IdActividad," +
                 " Comentario, IdPersona, Fecha, Hora ) VALUES (?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
@@ -19,7 +19,6 @@ public class AddQueries {
         statement.setInt(4, Integer.parseInt(parameters.get(3)));
         statement.setString(5, parameters.get(4));
         statement.setString(6, parameters.get(5));
-        statement.execute();
 
         long lastInsertedID = statement.executeUpdate();
         ResultSet rs= statement.getGeneratedKeys();

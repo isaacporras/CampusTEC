@@ -71,5 +71,20 @@ public class UpdateQueries {
         int count = statement.executeUpdate();
         return count > 0;
     }
-
+    public static boolean updatePresupuestoSubstract(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("UPDATE presupuestoteccolones SET " +
+                "TecColones = TecColones-? WHERE IdPresupuesto = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(1)));
+        statement.setInt(2, Integer.parseInt(parameters.get(2)));
+        int count = statement.executeUpdate();
+        return count > 0;
+    }
+    public static boolean updatePresupuesto(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("UPDATE presupuestoteccolones SET " +
+                "TecColones = ? WHERE IdPresupuesto = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(1)));
+        statement.setInt(2, Integer.parseInt(parameters.get(2)));
+        int count = statement.executeUpdate();
+        return count > 0;
+    }
 }
