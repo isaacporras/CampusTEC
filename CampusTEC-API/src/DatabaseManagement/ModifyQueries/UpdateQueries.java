@@ -87,4 +87,5 @@ public class UpdateQueries {
         int count = statement.executeUpdate();
         return count > 0;
     }
+
 }
