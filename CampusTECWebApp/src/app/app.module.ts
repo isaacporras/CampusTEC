@@ -41,6 +41,7 @@ import { ViewChallengeComponent } from './Components/classes/viewOnly/view-chall
 import { TaskComponent } from './Components/planner/task/task.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TecolonesConfigComponent } from './Components/admin/tecolones-config/tecolones-config.component';
+import { TaskviewComponent } from './Components/planner/taskview/taskview.component';
 
 
 
@@ -61,6 +62,7 @@ registerLocaleData(localeEs);
     ViewChallengeComponent,
     TaskComponent,
     TecolonesConfigComponent,
+    TaskviewComponent,
 
   ],
   imports: [
@@ -119,6 +121,6 @@ registerLocaleData(localeEs);
   ],
   providers: [AngularFireAuth, AngularFirestore],
   bootstrap: [AppComponent],
-  entryComponents: [ObjectiveComponent, ViewActivityComponent, ViewChallengeComponent]
+  entryComponents: [ObjectiveComponent, ViewActivityComponent, ViewChallengeComponent, TaskviewComponent]
 })
 export class AppModule { }

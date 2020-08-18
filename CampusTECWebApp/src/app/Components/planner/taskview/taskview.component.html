@@ -1,0 +1,168 @@
+<div [formGroup]="taskForm">
+    <div class="col">
+        <div class="row">
+            <h1>Tarea</h1>
+
+        </div>
+        <hr>
+        {{taskForm.value | json}}
+        <div class="row">
+
+            <div class="col-4">
+                <h3>Nombre: holi</h3>
+            </div>
+            <div class="col-8">
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+        </div>
+        <div *ngIf="submitted && name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+
+            <div *ngIf="name.errors.required">
+                Debe indicar un nombre para la tarea.
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Semana:</h3>
+            </div>
+            <div class="col-4">
+                <select id="inputState" class="form-control" formControlName="week">
+                    <option selected>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="week.invalid && (week.dirty || week.touched)" class="alert alert-danger">
+            <div *ngIf="week.errors.required ">
+                Debe ingresar una semana.
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Actividades:</h3>
+            </div>
+            <div class="col-7">
+                <select id="inputState" class="form-control" formControlName = "activity" >
+
+                    <ng-container *ngFor="let activity of activities">
+
+                        <option > {{activity.id}} ) {{activity.name}}</option>
+
+                    </ng-container>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1">
+                <h3>Día:</h3>
+            </div>
+            <div class="col-3">
+                <select id="inputState" class="form-control" formControlName="day" style="width: 120px; ">
+
+                    <option selected>Lunes</option>
+                    <option>Martes</option>
+                    <option>Miercoles</option>
+                    <option>Jueves</option>
+                    <option>Viernes</option>
+                    <option>Sabado</option>
+                    <option>Domingo</option>
+
+                </select>
+            </div>
+            <div *ngIf="day.invalid && (day.dirty || day.touched)" class="alert alert-danger">
+                <div *ngIf="day.errors.required ">
+                    Debe un dia de la semana.
+                </div>
+
+            </div>
+            <div class="col-1">
+                <h3>Hora:</h3>
+            </div>
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-4">
+                        <input type="number" class="form-control" min="1" max="12" formControlName="hour" style="width: 75px;  "
+                            placeholder="HH">
+
+                    </div>
+
+                    <h3> : </h3>
+
+
+                    <div class="col-4">
+                        <input type="number" class="form-control" min="0" max="60" formControlName="minute" style="width: 75px; ;"
+                            placeholder="MM">
+                    </div>
+                    <div class="col-3">
+                        <select id="inputState" class="form-control" formControlName="period" style="width: 75px; ">
+                            <option selected>AM</option>
+                            <option>PM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="hour.invalid && (hour.dirty || hour.touched) || minute.invalid && (minute.dirty || minute.touched)" class="alert alert-danger">
+
+            <div >
+                Debe ingresar una hora valida.
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <h3>Descripción:</h3>
+            </div>
+            <div class="col-8">
+                <textarea formControlName="description" placeholder="" style="height: 150px; width: 300px;"></textarea>
+            </div>
+        </div>
+        <div *ngIf="submitted && description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+            <div *ngIf="description.errors.required ">
+                Debe indicar una descripción
+            </div>
+            <div *ngIf="hour.error.min || hour.error.max">
+                Debe indicar un nombre para la tarea.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div>
+                    <button type="button" class="btn secondary-btn" (click)="onClickClose()">Cancelar</button>
+                </div>
+            </div>
+            <div class="col4">
+
+                <div>
+                    <button type="button" class="btn primary-btn" (click)="onClickSave()">Guardar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
