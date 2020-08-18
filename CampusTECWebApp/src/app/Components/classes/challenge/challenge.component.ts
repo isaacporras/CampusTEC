@@ -53,13 +53,13 @@ export class ChallengeComponent implements OnInit {
   onClickSave() {
     this.submitted = true;
 
-    this.objectiveForm.controls.idClass.setValue(this.classId);
+    
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
 
 
     console.log('Se quiere subir el archivo');
-    this.challengeForm.controls.id.setValue(this.classId);
+    
     this.challengeForm.removeControl('objective');
 
     this.challengeForm.addControl('objectives', this.formBuilder.control(''));
@@ -144,7 +144,7 @@ export class ChallengeComponent implements OnInit {
     classData.height = '700px';
     classData.width = '600px';
 
-    classData.data = { activity: this.activity, cameFrom: 'challenge' };
+    classData.data = {classid: this.classId, activity: this.activity, cameFrom: 'challenge' };
 
     this.activityDialog.open(ActivitiesComponent, classData).afterClosed().subscribe(
       data => {

@@ -50,14 +50,10 @@ export class ActivitiesComponent implements OnInit {
   ) {
 
 
-    if (data.cameFrom === 'classes') {
-      console.log('Viene de classes')
-      this.classId = data.id;
-      console.log('La classid es: ' + this.classId)
-    }
-    else if (data.cameFrom === 'challenge') {
+
+    if (data.cameFrom === 'challenge') {
       console.log('Viene de challenge')
-      this.classId = -1;
+      this.classId = data.classid;
       this.activityForChallenge = data.activity;
     }
     else {
@@ -227,7 +223,7 @@ export class ActivitiesComponent implements OnInit {
 
 
     this.activityForm = this.formBuilder.group({
-      id: new FormControl(''),
+      id: new FormControl(this.classId),
       name: new FormControl('',[Validators.required, Validators.maxLength(50)]),
       description: new FormControl('', [Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
