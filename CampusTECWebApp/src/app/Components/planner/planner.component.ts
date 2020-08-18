@@ -201,9 +201,7 @@ export class PlannerComponent implements OnInit {
 
     
     console.log('--------------------------')
-    console.log('classId'+ this.classId)
-    console.log('studentId'+ this.studentId)
-    console.log('activityId'+ this.activityId);
+
     console.log('--------------------------')
 
     classData.data = {classId: id, cameFrom: 'student'};
@@ -224,9 +222,7 @@ export class PlannerComponent implements OnInit {
 
 
     console.log('--------------------------')
-    console.log('classId'+ this.classId)
-    console.log('studentId'+ this.studentId)
-    console.log('activityId'+ this.activityId);
+
     console.log('--------------------------')
 
     classData.data = {classId: 1, userId: this.studentId, activityId: id};
