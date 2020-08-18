@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
 
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 
 
-
-import { TecolonesConfigService } from '../tecolones-config.service';
+import {TecolonesConfigService} from '../tecolones-config.service';
 
 
 @Component({
@@ -18,24 +14,39 @@ import { TecolonesConfigService } from '../tecolones-config.service';
 export class TecolonesConfigComponent implements OnInit {
 
   tecolonesForm: FormGroup;
-
+  submitted = false;
 
   constructor(
     private http: TecolonesConfigService,
-
     private formBuilder: FormBuilder,
-    ) {
+  ) {
 
-    }
-    onSaveTecolones() {
-      
+  }
 
-      this.http.postTecolones(this.tecolonesForm);
+  onSaveTecolones() {
+    this.submitted = true;
+    if (this.tecolonesForm.valid) {
+      console.log(JSON.stringify(this.tecolonesForm.value, null, 4));
+      this.http.postTecolones(this.tecolonesForm.value).subscribe((data) => {
+        var jsonResponse = JSON.parse(JSON.stringify(data));
+        console.log(jsonResponse);
+        let status;
+        if (jsonResponse.status == 1) {
+          alert('Se guardó correctamente la configuración')
+          status = 0
+        } else {
+          alert('Ocurrió un error al guardar la configuración')
+          status = 1;
+        }
+      }, (error) => {
+        console.log(error);
+      });
     }
+  }
 
   ngOnInit(): void {
     this.tecolonesForm = this.formBuilder.group({
-      tecolones: new FormControl(''),
+      max: new FormControl('', [Validators.required, Validators.min(0)]),
     });
 
   }
