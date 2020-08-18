@@ -54,42 +54,12 @@ export class HttpServicesService {
     ];
   }
 
-  getActivities() {
-    return [{
-      name: 'Señales',
-      activities: [
-        {
-          id: '1', name: 'Hacer tutoria 1', newComments: false
-        },
-        {
-          id: '2', name: 'Hacer tutoria 2', newComments: false
-        },
-        {
-          id: '3', name: 'Hacer tutoria 3', newComments: true
-        },
-        {
-          id: '4', name: 'Hacer tutoria 4', newComments: false
-        },
-      ]
-    },
-    {
-      name: 'Especificacion',
-      activities: [
-        {
-          id: '1', name: 'Hacer tutoria 1', newComments: false
-        },
-        {
-          id: '2', name: 'Hacer tutoria 2', newComments: true
-        },
-        {
-          id: '3', name: 'Hacer tutoria 3', newComments: false
-        },
-        {
-          id: '4', name: 'Hacer tutoria 4', newComments: false
-        },
-      ]
+  getActivities(token, week) {
+    let json = {
+      token: String(token),
+      week: String(week)
     }
-    ];
+    return this.http.post(this.server + '/planner/activities', json)
   }
 
   authenticate(credentials: JSON) {

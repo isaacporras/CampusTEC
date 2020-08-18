@@ -124,7 +124,7 @@
       <div *ngFor="let course of activities">
         <h3>{{course["name"]}}</h3>
         <ul>
-          <tr *ngFor="let activity of course['activities']">
+          <tr *ngFor="let activity of course['children']">
             <li class="activity-node">
               {{activity.name}}
               <button class="btn" (click)="viewActivity(activity.id)">
