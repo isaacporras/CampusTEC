@@ -199,9 +199,8 @@ export class ClassesComponent implements OnInit {
 
   }
   viewActivity(id: number) {
-    console.log('Es una actividad');
-    console.log(id);
-    console.log(id);
+    console.log('SE VA A VISUALIZAR LA TAREA:'+ id);
+    
     const classData = new MatDialogConfig();
 
     classData.disableClose = true;
