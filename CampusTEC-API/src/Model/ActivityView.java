@@ -3,10 +3,12 @@ package Model;
 import DatabaseManagement.AddQuerys.AddQueries;
 import DatabaseManagement.DBConnection;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
+import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
 import Model.Objects.Activity;
 import Model.Objects.Comment;
 import Model.Objects.Objective;
 
+import javax.json.JsonObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -83,4 +85,35 @@ public class ActivityView {
         }
         return activity;
     }
+
+    public static ArrayList<Activity> getWeekly(JsonObject obj) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(obj.getString("token"));
+        param.add(obj.getString("week"));
+        ResultSet result = ActivitiesSelectQueries.getActivitiesByPersonAndWeek(param, DBConnection.getConnection());
+        ArrayList<Activity> activities = new ArrayList<>();
+        while (result.next()) {
+            Activity activity = new Activity();
+            activity.id = result.getString("IdActividad");
+            activity.name = result.getString("Titulo");
+            activities.add(activity);
+        }
+        ResultSet resultChallenges = ActivitiesSelectQueries.getActivitiesByPersonAndWeekChallenge(param, DBConnection.getConnection());
+        while (resultChallenges.next()) {
+            Activity activity = new Activity();
+            activity.id = resultChallenges.getString("IdActividad");
+            activity.name = resultChallenges.getString("Titulo");
+            activities.add(activity);
+        }
+        return activities;
+    }
+
+    public static String getName(String token) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(token);
+        ResultSet result = ProfileSelectQueries.getProfileInfo(param, DBConnection.getConnection());
+        result.next();
+        return result.getString("Nombre") + " " + result.getString("Apellido");
+    }
 }
+

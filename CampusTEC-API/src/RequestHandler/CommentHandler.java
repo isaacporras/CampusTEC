@@ -1,5 +1,6 @@
 package RequestHandler;
 
+import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import Model.ActivityView;
 import Model.ChallengeView;
 import Model.Objects.Comment;
@@ -8,6 +9,7 @@ import Model.Objects.User;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -41,5 +43,21 @@ public class CommentHandler {
         JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
 
         return Response.ok(root).build();
+    }
+
+
+    @POST
+    @Path("/getName")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public static Response getName(JsonObject userId) throws SQLException, ClassNotFoundException {
+        String name = ActivityView.getName(userId.getString("id"));
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("user", name);
+        respBuilder.add("id", userId);
+        JsonObject resp = respBuilder.build();
+
+        return Response.ok(resp).build();
     }
 }

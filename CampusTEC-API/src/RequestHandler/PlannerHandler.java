@@ -151,4 +151,15 @@ public class PlannerHandler {
         return Response.ok(result).build();
     }
 
+
+    @POST
+    @Path("/activities/getAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getWeekly(JsonObject obj) throws Exception {
+
+        ArrayList<Activity> result = ActivityView.getWeekly(obj);
+
+        return Response.ok(result).build();
+    }
 }
