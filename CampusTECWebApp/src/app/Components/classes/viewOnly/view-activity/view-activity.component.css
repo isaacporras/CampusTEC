@@ -15,42 +15,7 @@ textarea {
     background-color: red;
     border-color: darkblue;
   }
-  .btn.btn-danger{
-    
-    color: #f0fff3;
 
-
-    font-size: 15px;
-    height: 16;
-    width: 30;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-
-    background-color: #C1272D;
-    /* Green */
-    border: none;
-    color: white;
-
-}
-.btn.btn-dark{
-    
-    color: #f0fff3;
-
-
-    font-size: 15px;
-    height: 16;
-    width: 30;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    background-color: #001636;
-
-    /* Green */
-    border: none;
-    color: white;
-
-}
 .md-dialog-container {
     background-color: #000;
     height: '1000px';
@@ -78,16 +43,29 @@ textarea {
     cursor: inherit;
     display: block;
 }
-.btn-addActivity{
-    background-color: #001636;
-    /* Green */
-    border: none;
-    color: white;
-    height: 20px;
-    width:150px ;
-    
-    /*text-align: center;*/
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-  }
+
+.icon-btn{
+  padding: 5px 5px;
+}
+
+.button-row{
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.text-area{
+  width: 100%;
+}
+
+.form-control-file{
+  margin: 1em;
+}
+
+.comment-text{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.comment{
+  /*margin-bottom: 1em;*/
+}

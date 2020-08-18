@@ -1,184 +1,174 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
-
-
 <div [formGroup]="activityForm">
 
+  <div class="row">
+    <div class="col-4">
+      <h1>Actividad</h1>
+    </div>
+
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+      <h3>Nombre:</h3>
+    </div>
+    <div class="col-8">
+      <input type="text" formControlName="name" class="form-control" placeholder="{{activity.name}}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Descripción:</h3>
+    </div>
+    <div class="col-8">
+      <textarea class="text-area" formControlName="description" placeholder="{{activity.description}}"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Evaluable:</h3>
+    </div>
+    <div class="col col-6 col-md-4">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" [checked]="activity.evaluable" id="exampleCheck1"
+               disabled>
+        <label class="form-check-label" for="exampleCheck1"></label>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Semana:</h3>
+    </div>
+    <div class="col">
+      <select id="inputState" class="form-control" formControlName="week">
+        <option selected>{{activity.week}}</option>
+
+      </select>
+    </div>
+    <div class="col-lg-auto">
+      <h3>Fecha de entrega:</h3>
+    </div>
+    <div class="col-auto">
+      <input class="form-control" type="text" placeholder="{{activity.date}}" value="{{activity.date}}"
+             id="example-date-input" formControlName="date">
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Objetivos:</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-bordered">
+
+        <tbody>
+        <tr *ngFor="let objective of objectivesResponse">
+          <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
+          <td>{{objective.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <h3>Archivo:</h3>
+    </div>
+    <div class="col-5">
+      <h3>Existe un archivo adjunto</h3>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn icon-btn" title="Edit"
+              (click)="onDownloadFile(activity.fileURL)">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor"
+             xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+                d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+          <path fill-rule="evenodd"
+                d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+  <div class="row justify-content-end button-row">
+    <div class="col-4">
+
+      <button type="button" class="btn secondary-btn" (click)="onClickClose()">Cancelar</button>
+
+
+    </div>
+    <div class="col-4">
+
+      <button type="button" class="btn primary-btn" (click)="onClickSave()">Guardar</button>
+
+    </div>
+  </div>
+
+  <div [formGroup]="commentForm">
     <div class="row">
-        <div class="col-4">
-            <h1>Actividad</h1>
-        </div>
+      <div class="col-4">
+        <h2>Comentarios</h2>
+      </div>
 
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4">
-            <h3>Nombre:</h3>
-        </div>
-        <div class="col-8">
-            <input type="text" formControlName="name" class="form-control" placeholder="{{activity.name}}">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <h3>Descripción:</h3>
-        </div>
-        <div class="col-8">
-            <textarea formControlName="description" placeholder="{{activity.description}}"></textarea>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <h3>Evaluable:</h3>
-        </div>
-        <div class="col col-6 col-md-4">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" [checked]="activity.evaluable" id="exampleCheck1"
-                    disabled>
-                <label class="form-check-label" for="exampleCheck1"></label>
-
-
-            </div>
-        </div>
-
+      {{commentForm.value | json}}
     </div>
     <div class="row">
-        <div class="col-2">
-            <h3>Semana:</h3>
-        </div>
-        <div class="col-2">
-            <select id="inputState" class="form-control" formControlName="week">
-                <option selected>{{activity.week}}</option>
+      <div class="col">
+        <textarea class="text-area" placeholder="" formControlName="description"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <input type="file" class="form-control-file" id="exampleFormControlFile1"
+             (change)="uploadCommentFile($event)">
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn primary-btn" (click)="onClickComentar()">Comentar</button>
+    </div>
+  </div>
 
-            </select>
+  <hr>
+
+  <div class="row comment" *ngFor="let comment of comments">
+    <div class="col-12">
+      <div class="row">
+        <div class="col">
+          Por: {{comment.user}}, a las: {{comment.time}} {{comment.date}}
         </div>
-        <div class="col-3">
-            <h3>Fecha de entrega:</h3>
+      </div>
+      <div class="row comment-text">
+        <div class="col">
+          {{comment.description}}
         </div>
-        <div class="col-5">
-            <input class="form-control" type="text" placeholder="{{activity.date}}" value="{{activity.date}}"
-                id="example-date-input" formControlName="date">
+      </div>
+      <div class="row">
+        <div class="col-3 comment-text">
+          Archivo adjunto
         </div>
+        <div class="col-1">
+          <button type="button" class="btn icon-btn" title="Edit"
+                  (click)="onDownloadFile(comment.fileURL)">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+              <path fill-rule="evenodd"
+                    d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <hr>
 
     </div>
 
-
-    <div class="row">
-        <div class="col-4">
-            <h3>Objetivos:</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4"></div>
-        <div class="col-8">
-            <table class="table table-bordered">
-
-                <tbody>
-                    <tr *ngFor="let objective of objectivesResponse">
-                        <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
-                        <td>{{objective.description}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <h3>Archivo:</h3>
-        </div>
-        <div class="action">
-            <span class="label label-info">Descargar archivo adjunto</span>
-            <button type="button" class="btn btn-primary btn-xs" title="Edit"
-                (click)="onDownloadFile(activity.fileURL)">
-                <span class="glyphicon glyphicon-save"></span>
-            </button>
-
-        </div>
-    </div>
-
-
-
-    <div class="row justify-content-end">
-        <div class="col-4">
-
-            <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
-
-
-        </div>
-        <div class="col-4">
-
-            <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
-
-        </div>
-    </div>
-    <div class="row" [formGroup]="commentForm">
-        <div class="panel panel-default widget">
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-comment"></span>
-                <h3 class="panel-title">
-                    Crear Comentario</h3>
-                <span class="label label-info">
-                </span>
-                {{commentForm.value | json}}
-                <div>
-                    <textarea placeholder="" formControlName="description"></textarea>
-                </div>
-                <div class="row justify-content-right">
-                    <div class="col-10">
-
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                            (change)="uploadCommentFile($event)">
-
-
-                    </div>
-                    <div class="col-2">
-
-                        <button type="button" class="btn btn-dark" (click)="onClickComentar()">Comentar</button>
-
-                    </div>
-                </div>
-                <h3 class="panel-title">
-                    Comentarios</h3>
-            </div>
-            <div class="col-12">
-                <ul class="list-group">
-                    <div class="row" *ngFor="let comment of comments">
-                        <li class="list-group-item">
-
-                            
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-
-                                    <div class="mic-info">
-                                        Por: <a href="#">{{comment.user}}</a> , A las: {{comment.time}} {{comment.date}}
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    {{comment.description}}
-                                </div>
-                                <div class="action">
-                                    <span class="label label-info">Descargar archivo adjunto</span>
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit"
-                                        (click)="onDownloadFile(comment.fileURL)">
-                                        <span class="glyphicon glyphicon-save"></span>
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </li>
-                    </div>
-
-                </ul>
-
-            </div>
-        </div>
-    </div>
+  </div>
 
 
 </div>
