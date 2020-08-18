@@ -132,4 +132,10 @@ public class ActivitiesSelectQueries {
         statement.setString(1, parameters.get(0));
         return statement.executeQuery();
     }
+
+    public static ResultSet getPresupuesto(Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT TecColones FROM presupuestoteccolones " +
+                "WHERE IdPresupuesto = 1;");
+        return statement.executeQuery();
+    }
 }
