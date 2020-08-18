@@ -17,6 +17,7 @@ public class RequestHandler extends Application {
         h.add(ChallengeHandler.class);
         h.add(CommentHandler.class);
         h.add(AdminHandler.class);
+        h.add(ActivityHandler.class);
         return h;
     }
 

@@ -138,4 +138,10 @@ public class ActivitiesSelectQueries {
                 "WHERE IdPresupuesto = 1;");
         return statement.executeQuery();
     }
+
+    public static ResultSet getActivityInfo(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement(" SELECT * FROM actividad WHERE IdActividad =?;");
+        statement.setString(1, parameters.get(0));
+        return statement.executeQuery();
+    }
 }
