@@ -10,7 +10,7 @@ export class HttpServicesService {
 
   constructor(private http: HttpClient) {
   }
-  
+
 
   server = 'http://localhost:8080/CampusTEC_API_war_exploded';
 
@@ -35,24 +35,6 @@ export class HttpServicesService {
     let url = this.server + '/profile/edit';
     console.log(url);
     return this.http.post(url, json)
-  }
-
-  getActivitiesTask() {
-    return [
-      {
-        id: '1', name: 'Hacer tutoria 1'
-      },
-      {
-        id: '2', name: 'Hacer tutoria 2'
-      },
-
-      {
-        id: '3', name: 'Hacer tutoria 3'
-      },
-      {
-        id: '4', name: 'Hacer tutoria 4'
-      },
-    ];
   }
 
   getActivities(token, week) {

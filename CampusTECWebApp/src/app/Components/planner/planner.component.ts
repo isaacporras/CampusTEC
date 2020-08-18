@@ -157,7 +157,7 @@ export class PlannerComponent implements OnInit {
     classData.height = '700px';
     classData.width = '600px';
 
-    classData.data ={studentId: this.studentId};
+    classData.data ={studentId: this.studentId, currentWeek: this.week};
     console.log('En ventana principal el id es de:')
 
     this.dialog.open(TaskComponent, classData);
