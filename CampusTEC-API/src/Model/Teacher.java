@@ -149,75 +149,89 @@ public class Teacher {
         return -1;
     }
 
-    public static Integer newActivity(Activity activity) throws SQLException, ClassNotFoundException {
-        String fileId = "1";
-        if (!activity.fileURL.equals("null")) {
-            ArrayList<String> param = new ArrayList<>();
-            param.add(activity.fileURL);
-            param.add("archivo adjunto");
-            AddQueries.createFile(param, DBConnection.getConnection());
-            param = new ArrayList<>();
-            param.add(activity.fileURL);
-            ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
-            result.next();
-            fileId = result.getString("IdFile");
-        }
-        ArrayList<String> paramActivity = new ArrayList<>();
-        paramActivity.add(fileId);
-        paramActivity.add(activity.week.toString());
-        paramActivity.add("0");
-        paramActivity.add(activity.date);
-        paramActivity.add(activity.description);
-        paramActivity.add(activity.idClass);
-        paramActivity.add(activity.name);
+    public static Integer newActivity(Activity activity) {
+        try {
+            String fileId = "1";
+            if (!activity.fileURL.equals("null")) {
+                ArrayList<String> param = new ArrayList<>();
+                param.add(activity.fileURL);
+                param.add("archivo adjunto");
+                AddQueries.createFile(param, DBConnection.getConnection());
+                param = new ArrayList<>();
+                param.add(activity.fileURL);
+                ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
+                result.next();
+                fileId = result.getString("IdFile");
+            }
+            ArrayList<String> paramActivity = new ArrayList<>();
+            paramActivity.add(fileId);
+            paramActivity.add(activity.week.toString());
+            paramActivity.add("0");
+            paramActivity.add(activity.date);
+            paramActivity.add(activity.description);
+            paramActivity.add(activity.idClass);
+            paramActivity.add(activity.name);
 
-        ResultSet resultSet = AddQueries.createActivity(paramActivity, DBConnection.getConnection());
-        resultSet.next();
-        Integer activityId = resultSet.getInt(1);
-        for (Objective obj : activity.objectives) {
-            ArrayList<String> paramlink = new ArrayList<>();
-            paramlink.add(activityId.toString());
-            paramlink.add(obj.id);
-            AddQueries.createActivityObjective(paramlink, DBConnection.getConnection());
-        }
+            ResultSet resultSet = AddQueries.createActivity(paramActivity, DBConnection.getConnection());
+            resultSet.next();
+            Integer activityId = resultSet.getInt(1);
+            for (Objective obj : activity.objectives) {
+                ArrayList<String> paramlink = new ArrayList<>();
+                paramlink.add(activityId.toString());
+                paramlink.add(obj.id);
+                AddQueries.createActivityObjective(paramlink, DBConnection.getConnection());
+            }
 
-        return activityId;
+            return activityId;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
-    public static Boolean newChallenge(Challenge challenge) throws SQLException, ClassNotFoundException {
-        String fileId = "1";
-        if (!challenge.fileURL.equals("null")) {
-            ArrayList<String> param = new ArrayList<>();
-            param.add(challenge.fileURL);
-            param.add("archivo adjunto");
-            AddQueries.createFile(param, DBConnection.getConnection());
-            param = new ArrayList<>();
-            param.add(challenge.fileURL);
-            ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
-            result.next();
-            fileId = result.getString("IdFile");
+    public static Integer newChallenge(Challenge challenge) {
+        try {
+            String fileId = "1";
+            if (!challenge.fileURL.equals("null")) {
+                ArrayList<String> param = new ArrayList<>();
+                param.add(challenge.fileURL);
+                param.add("archivo adjunto");
+                AddQueries.createFile(param, DBConnection.getConnection());
+                param = new ArrayList<>();
+                param.add(challenge.fileURL);
+                ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
+                result.next();
+                fileId = result.getString("IdFile");
+            }
+            ArrayList<String> paramChallenge = new ArrayList<>();
+            paramChallenge.add(challenge.description);
+            paramChallenge.add(challenge.name);
+            paramChallenge.add(challenge.payment);
+            paramChallenge.add(challenge.idClass);
+            paramChallenge.add(fileId);
+            paramChallenge.add(challenge.date);
+
+            ResultSet resultSet = AddQueries.createChallenge(paramChallenge, DBConnection.getConnection());
+            resultSet.next();
+            Integer challengeId = resultSet.getInt(1);
+
+            for (Activity activity : challenge.activities) {
+                Integer activityId = newActivity(activity);
+                ArrayList<String> paramLink = new ArrayList<>();
+                paramLink.add(challengeId.toString());
+                paramLink.add(activityId.toString());
+                AddQueries.activityChallenge(paramLink, DBConnection.getConnection());
+            }
+
+            return challengeId;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        ArrayList<String> paramChallenge = new ArrayList<>();
-        paramChallenge.add(challenge.description);
-        paramChallenge.add(challenge.name);
-        paramChallenge.add(challenge.payment);
-        paramChallenge.add(challenge.idClass);
-        paramChallenge.add(fileId);
-        paramChallenge.add(challenge.date);
-
-        ResultSet resultSet = AddQueries.createChallenge(paramChallenge, DBConnection.getConnection());
-        resultSet.next();
-        Integer challengeId = resultSet.getInt(1);
-
-        for (Activity activity : challenge.activities) {
-            Integer activityId = newActivity(activity);
-            ArrayList<String> paramLink = new ArrayList<>();
-            paramLink.add(challengeId.toString());
-            paramLink.add(activityId.toString());
-            AddQueries.activityChallenge(paramLink, DBConnection.getConnection());
-        }
-
-        return true;
+        return -1;
     }
 
 }
