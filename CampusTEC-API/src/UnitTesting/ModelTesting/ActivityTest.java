@@ -6,6 +6,7 @@ import Model.Objects.Activity;
 import Model.Objects.Comment;
 import org.junit.jupiter.api.Test;
 
+import javax.json.JsonObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,5 +46,21 @@ public class ActivityTest {
         assertEquals(A,x);
 
     }
+    @Test
+    public void testgetWeekly() throws SQLException, ClassNotFoundException {
+        JsonObject object = null;
+        ArrayList<Activity> x = ActivityView.getWeekly(object);
+        ArrayList<Activity> A = new ArrayList<Activity>();
+        //Tiene que hacer la lista
+        assertIterableEquals(A,x);
 
+    }
+    @Test
+    public void testgetName() throws SQLException, ClassNotFoundException {
+        String token = "";
+        String x = ActivityView.getName(token);
+        String A = "";
+        //Tiene que hacer la lista
+        assertEquals(A,x);
+    }
 }
