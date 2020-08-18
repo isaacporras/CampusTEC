@@ -9,16 +9,12 @@ export class TaskService {
 
   constructor(private http: HttpClient) {
   }
+  server = 'http://localhost:8080/CampusTEC_API_war_exploded';
 
   getTaskInfo(id){
-    return {
-      name: 'Hacer actividad fisica',
-      week : 1,
-      activity: 'Ir al gym',
-      day: 4,
-      hour: 12,
-      description: 'Ir al gym para sacar musculatura'
-    };
+
+    return this.http.get(this.server + '/planner/assignment/' + id);
+    
   }
 
 

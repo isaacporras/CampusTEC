@@ -12,7 +12,7 @@
                 <h3>Nombre:</h3>
             </div>
             <div class="col-8">
-                <input type="text" class="form-control" formControlName="name" placeholder="taskForm.name">
+                <input type="text" class="form-control" formControlName="name" placeholder="{{taskForm.name}}">
             </div>
         </div>
         <div *ngIf="submitted && name.invalid && (name.dirty || name.touched)" class="alert alert-danger">

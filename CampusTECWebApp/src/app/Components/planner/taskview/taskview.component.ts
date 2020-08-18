@@ -23,97 +23,143 @@ export class TaskviewComponent implements OnInit {
 
   submitted: boolean = false;
 
-  taskData:any;
+  taskId: any;
+  stringDay: any;
+  taskData: any;
 
 
   constructor(private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<TaskviewComponent>,
     private http: TaskService,
     @Inject(MAT_DIALOG_DATA) data,) {
-    let myDate = new Date();
-    let hourDat = myDate.getHours();
-    let periodValue: any;
-    if (hourDat > 12) {
-      hourDat -= 12;
-      periodValue = 'PM';
-    }
-    else {
-      periodValue = 'AM';
-    }
-
-    this.studentId = data.id;
-
-    this.activities = this.http.getActivities();
-
-    console.log(this.http.getActivities())
-
-    this.taskData = this.http.getTaskInfo(2)
-
-   
-
-    let day = this.http.getTaskInfo(5)['day'];
-    let stringDay;
-    switch (day) {
-      case 0:
-        
-        stringDay = 'Lunes'
-        break;
-      case 1:
-        
-        stringDay = 'Martes'
-        break;
-      case 2:
-        
-        stringDay = 'Miercoles'
-        break;
-      case 3:
-        
-        stringDay = 'Jueves'
-        break;
-      case 4:
-        console.log('es 4')
-        stringDay = 'Viernes'
-        break;
-      case 5:
-        
-        stringDay = 'Sabado'
-        break;
-      case 6:
-        
-        stringDay = 'Domingo'
-        break;
-    }
 
 
+    this.studentId = data.studenId;
 
-    this.taskForm = this.formBuilder.group(
-      {
-        userId: new FormControl(this.studentId),
-        name: new FormControl('',
-          [Validators.required]
-        ),
-        week: new FormControl(1,
-          [Validators.required, Validators.min(1), Validators.max(18)]
-        ),
-        day: new FormControl(stringDay,
-          [Validators.required]
-        ),
-        hour: new FormControl(hourDat,
-          [Validators.required, Validators.min(1), Validators.max(12)]
-        ),
-        minute: new FormControl(myDate.getMinutes(),
-          [Validators.required, Validators.min(0), Validators.max(60)]
-        ),
-        description: new FormControl('', Validators.required
-        ),
-        period: new FormControl(periodValue,
-          [Validators.required]
-        ),
-        activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
-          [Validators.required]
-        ),
-      });
-    //this.taskForm.get('activity').setValue(this.activities[0]);
+    this.taskId = data.taskId;
+
+    console.log(this.taskId)
+
+
+    this.http.getTaskInfo(this.taskId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+
+      this.taskData = jsonResponse;
+
+      console.log(this.taskData['day']);
+
+
+      let myDate = new Date();
+      let hourDat = myDate.getHours();
+      let periodValue: any;
+      if (hourDat > 12) {
+        hourDat -= 12;
+        periodValue = 'PM';
+      }
+      else {
+        periodValue = 'AM';
+      }
+  
+  
+  
+      this.activities = this.http.getActivities();
+  
+      console.log(this.http.getActivities())
+  
+  
+  
+  
+  
+      console.log(this.taskData)
+      let day = this.taskData['day'];
+
+      console.log()
+      
+      switch (day) {
+        case '0':
+  
+          this.stringDay = 'Lunes';
+          break;
+        case '1':
+  
+          this.stringDay = 'Martes';
+          break;
+        case '2':
+  
+          this.stringDay = 'Miercoles';
+          break;
+        case '3':
+  
+          this.stringDay = 'Jueves';
+          break;
+        case '4':
+          console.log('es 4')
+          this.stringDay = 'Viernes';
+          break;
+        case '5':
+  
+          this.stringDay = 'Sabado';
+          break;
+        case '6':
+  
+          this.stringDay = 'Domingo';
+          break;
+      }
+
+      console.log(this.stringDay)
+  
+  
+  
+      this.taskForm = this.formBuilder.group(
+        {
+          userId: new FormControl(this.studentId),
+          name: new FormControl(this.taskData['name'],
+            [Validators.required]
+          ),
+          week: new FormControl(this.taskData['week'],
+            [Validators.required, Validators.min(1), Validators.max(18)]
+          ),
+          day: new FormControl(this.stringDay,
+            [Validators.required]
+          ),
+          hour: new FormControl(this.taskData['time'],
+            [Validators.required, Validators.min(1), Validators.max(12)]
+          ),
+          minute: new FormControl(this.taskData['minute'],
+            [Validators.required, Validators.min(0), Validators.max(60)]
+          ),
+          description: new FormControl(this.taskData['description'], Validators.required
+          ),
+          period: new FormControl(periodValue,
+            [Validators.required]
+          ),
+          activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
+            [Validators.required]
+          ),
+        });
+      //this.taskForm.get('activity').setValue(this.activities[0]);
+  
+      
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+    }, (error) => {
+      console.log(error);
+    });
+
+
+
+
   }
 
 
@@ -133,27 +179,18 @@ export class TaskviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let id = 3
     
-    
-
-    this.setValue('name','name')
-    this.setValue('week','week')
-    this.setValue('activity','activity')
-    this.setValue('hour','hour')
-    this.setValue('description','description')
-
 
   }
 
 
-  setValue(controlName:string,secondControlName: string){
-    
+  setValue(controlName: string, secondControlName: string) {
+
     this.taskForm.controls[controlName].setValue(this.taskData[secondControlName])
 
   }
 
-  
+
 
 
   get name() {
