@@ -8,10 +8,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DatabaseManagement.SelectQuerys.*;
+
+import javax.xml.transform.Result;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SelectQueriesTesting {
     public static ArrayList<String> params1 = new ArrayList<>();
@@ -74,19 +81,67 @@ public class SelectQueriesTesting {
         params8.add("1");//        ActivitiesSelectQueries.getHomeworkFromID();
         //____________________________________
         params9.add("2");// //        ActivitiesSelectQueries.getHomeworkFromPerson();
+        //----------------------
+        params10.add("2"); //        ActivitiesSelectQueries.getActivitiesByPersonAndWeek();
+        params10.add("3");
+        //_____________________
+        params10.add("2");//        ActivitiesSelectQueries.getObjectivesActivity();
+        //___________________________
+        params11.add("2");//        ActivitiesSelectQueries.getObjectivesChallenge();
 
 
-
-
-
-
-//        ActivitiesSelectQueries.getActivitiesByPersonAndWeek();
-//        ActivitiesSelectQueries.getObjectivesActivity();
-//        ActivitiesSelectQueries.getObjectivesChallenge();
     }
 
     @Test
-    public void testQuery1() {
-
+    public void testQuery1() throws SQLException {
+        ResultSet result = ActivitiesSelectQueries.activitiesFromChallenge(params1,connection);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),5);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),6);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),7);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),8);
+        assertFalse(result.next());
     }
+    @Test
+    public void testQuery2()throws SQLException {
+        ResultSet result = ActivitiesSelectQueries.getActivitiesByPersonAndWeek(params2,connection);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),9);
+        assertFalse(result.next());
+    }
+    @Test
+    public void testQuery3()throws SQLException {
+        ResultSet result = ActivitiesSelectQueries.getActivitiesFromChallenge(params3,connection);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),5);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),6);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),7);
+        assertTrue(result.next());
+        assertEquals(result.getInt(1),8);
+        assertFalse(result.next());
+    }
+    @Test
+    public void testQuery4()throws SQLException {
+        ResultSet result = ActivitiesSelectQueries.getChallengePeople(params4,connection);
+        assertTrue(result.next());
+        assertEquals(result.getInt(2),2);
+        assertTrue(result.next());
+        assertEquals(result.getInt(2),3);
+        assertFalse(result.next());
+    }
+    @Test
+    public void testQuery5()throws SQLException {
+        ResultSet result =ActivitiesSelectQueries.getFileFromURL(params5,connection);;
+        assertTrue(result.next());
+        assertEquals(result.getInt(2),2);
+        assertTrue(result.next());
+        assertEquals(result.getInt(2),3);
+        assertFalse(result.next());
+    }
+
 }
