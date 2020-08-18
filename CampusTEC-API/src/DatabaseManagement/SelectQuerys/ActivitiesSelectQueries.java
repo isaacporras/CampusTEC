@@ -10,7 +10,7 @@ public class ActivitiesSelectQueries {
 
     public static ResultSet activitiesFromChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("SELECT L.IdActividad, l.IdFile, l.NumSemana," +
-                " l.TecColones, l.Fecha, l.Descripcionm,l.Titulo, l.IdCurso " +
+                " l.TecColones, l.Fecha, l.Descripcion,l.Titulo, l.IdCurso " +
                 "FROM " +
                 "      (SELECT a.* " +
                 "       FROM actividad a " +
@@ -130,6 +130,24 @@ public class ActivitiesSelectQueries {
                 "                  INNER JOIN file F ON A.IdFile = F.IdFile) A  " +
                 "         INNER JOIN persona ON persona.IdPersona = A.Idpersona;");
         statement.setString(1, parameters.get(0));
+        return statement.executeQuery();
+    }
+
+
+    public static ResultSet getActivitiesByPersonAndWeekChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT actividad.*  " +
+                "FROM actividad  " +
+                "         INNER JOIN (SELECT actividadretoacademico.IdActividad  " +
+                "                     FROM actividadretoacademico  " +
+                "                              INNER JOIN (SELECT retoacademicopersona.IdRetoAcademico  " +
+                "                                          FROM retoacademicopersona  " +
+                "                                                   INNER JOIN persona p on retoacademicopersona.IdPersona = p.IdPersona  " +
+                "                                          WHERE p.IdPersona = ?  " +
+                "                     ) A ON A.IdRetoAcademico = actividadretoacademico.IdRetoAcademico) Z  " +
+                "                    ON Z.IdActividad = actividad.IdActividad  " +
+                "WHERE actividad.NumSemana = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setInt(2, Integer.parseInt(parameters.get(1)));
         return statement.executeQuery();
     }
 
