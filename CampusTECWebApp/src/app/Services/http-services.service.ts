@@ -10,6 +10,7 @@ export class HttpServicesService {
 
   constructor(private http: HttpClient) {
   }
+  
 
   server = 'http://localhost:8080/CampusTEC_API_war_exploded';
 
