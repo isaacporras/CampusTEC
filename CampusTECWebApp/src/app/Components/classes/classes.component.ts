@@ -209,7 +209,8 @@ export class ClassesComponent implements OnInit {
     classData.height = '700px';
     classData.width = '650px';
 
-    classData.data = id;
+    classData.data = {classId: this.classId, userId: this.teacherId, activityId: id};
+    
     console.log('En ventana principal el id es de:')
     console.log(id);
 

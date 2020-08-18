@@ -26,6 +26,8 @@ export class ViewActivityComponent implements OnInit {
   commentForm: FormGroup;
   comments: Array<any>;
   activity: any;
+  teacherId:any;
+  activityId:any;
 
   wasFileUploadedAct: boolean;
   wasFileUploadedCom: boolean;
@@ -48,9 +50,12 @@ export class ViewActivityComponent implements OnInit {
     private downloader: GlobalService,
 
   ) {
-    console.log('El dato en vista es:');
+    console.log('El dato en vista de actividad es:');
     console.log(data);
-    this.classId = data;
+    this.classId = data.classId;
+    this.teacherId =  data.teacherId;
+    this.activityId = data.activityId;
+
   }
 
 
@@ -201,7 +206,7 @@ export class ViewActivityComponent implements OnInit {
     console.log(this.commentForm.value);
     
     
-    console.log(this.commentForm.value);
+    this.postComment();
     //this.dialogRef.close();
 
   }
@@ -238,7 +243,8 @@ export class ViewActivityComponent implements OnInit {
 
 
     this.activityForm = this.formBuilder.group({
-      id: new FormControl(''),
+      token: new FormControl(this.teacherId),
+      id: new FormControl(this.activityId),
       name: new FormControl(''),
       description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
@@ -256,7 +262,7 @@ export class ViewActivityComponent implements OnInit {
 
 
  
-    this.http.getActivityInfo(this.classId).subscribe((data) => {
+    this.http.getActivityInfo(this.activityId).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log('El json de actividad:' + jsonResponse);
       this.activity = jsonResponse;
