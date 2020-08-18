@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Objetivo
 CREATE TABLE IF NOT EXISTS File
 (
     IdFile   INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    FileURL  CHAR(100)                          NOT NULL,
+    FileURL  TEXT(500)                          NOT NULL,
     Filename CHAR(100)                          NOT NULL,
     Valid    BOOLEAN                            NOT NULL DEFAULT TRUE
 );
