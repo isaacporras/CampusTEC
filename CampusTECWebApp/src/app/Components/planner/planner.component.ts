@@ -128,10 +128,10 @@ export class PlannerComponent implements OnInit {
         console.log(value);
         let event = addHours(addDays(this.weekStart, value.day), value.time);
         let color;
-        if(value.done){
+        if(value.done == true){
           color = colors.green;
         }else{
-          color = colors.blue;
+          color = colors.green;
         }
         let newEvent = {
           id: value.id,

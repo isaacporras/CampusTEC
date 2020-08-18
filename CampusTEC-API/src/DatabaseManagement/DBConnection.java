@@ -10,7 +10,7 @@ public class DBConnection {
 
     public static Boolean setConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/campustecdb?useSSL=false&serverTimezone=UTC", "root", "qwerasdf");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/campustecdb?useSSL=false&serverTimezone=UTC", "root", "root");
         return false;
     }
 
