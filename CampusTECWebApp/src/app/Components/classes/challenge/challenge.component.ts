@@ -47,7 +47,7 @@ export class ChallengeComponent implements OnInit {
     private activityDialog: MatDialog,
   ) {
 
-    this.classId = data;
+    this.classId = data.classId;
   }
 
   onClickSave() {
