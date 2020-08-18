@@ -70,6 +70,8 @@ public class Teacher {
                 Challenge challenge = new Challenge();
                 challenge.id = result.getString("IdRetoAcademico");
                 challenge.name = result.getString("Titulo");
+                param = new ArrayList<>();
+                param.add(challenge.id);
                 ResultSet resultActivities = ActivitiesSelectQueries.getActivitiesFromChallenge(param, DBConnection.getConnection());
                 while (resultActivities.next()) {
                     Activity activity = new Activity();
@@ -148,14 +150,13 @@ public class Teacher {
 
     public static Boolean newActivity(Activity activity) throws SQLException, ClassNotFoundException {
         String fileId = "1";
-        System.out.println(activity.fileurl);
-        if (!activity.fileurl.equals("null")) {
+        if (!activity.fileURL.equals("null")) {
             ArrayList<String> param = new ArrayList<>();
-            param.add(activity.fileurl);
+            param.add(activity.fileURL);
             param.add("archivo adjunto");
             AddQueries.createFile(param, DBConnection.getConnection());
             param = new ArrayList<>();
-            param.add(activity.fileurl);
+            param.add(activity.fileURL);
             ResultSet result = ActivitiesSelectQueries.getFileFromURL(param, DBConnection.getConnection());
             result.next();
             fileId = result.getString("IdFile");
