@@ -133,6 +133,7 @@ public class ActivitiesSelectQueries {
         return statement.executeQuery();
     }
 
+
     public static ResultSet getActivitiesByPersonAndWeekChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("SELECT actividad.*  " +
                 "FROM actividad  " +
@@ -150,4 +151,15 @@ public class ActivitiesSelectQueries {
         return statement.executeQuery();
     }
 
+    public static ResultSet getPresupuesto(Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT TecColones FROM presupuestoteccolones " +
+                "WHERE IdPresupuesto = 1;");
+        return statement.executeQuery();
+    }
+
+    public static ResultSet getActivityInfo(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement(" SELECT * FROM actividad WHERE IdActividad =?;");
+        statement.setString(1, parameters.get(0));
+        return statement.executeQuery();
+    }
 }

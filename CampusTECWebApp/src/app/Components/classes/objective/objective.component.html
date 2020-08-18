@@ -2,37 +2,23 @@
 
     <h2>Nuevo Objetivo</h2>
     <h3>Descripción</h3>
-    <textarea formControlName = "description" placeholder="el objetivo del curso es..."></textarea>
-    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
-
+    <textarea formControlName = "description" placeholder="Describa lo que se quiere lograr con el curso..."></textarea>
+    <div *ngIf="submitted && description.invalid" class="alert alert-danger">
         <div *ngIf="description.errors.required">
-          Debe indicar una descripcion.
+          Debe indicar una descripción.
         </div>
-        <div *ngIf="description.errors.minlength">
-          La descripcion debe contener al menos 500 caracteres.
+        <div *ngIf="description.errors?.maxlength">
+          La descripción debe contener menos de 500 caracteres.
         </div>
-
-        <div *ngIf="description.invalid">
-            
-        </div>
-        
       </div>
     <div>
-        <div class="col-md-4 ml-auto">
-            <div class="row">
-                <div>
-                    <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
+            <div class="row justify-content-end button-row">
+                <div class="col-4">
+                    <button type="button" class="btn secondary-btn" (click)="onClickClose()">Cancelar</button>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
+                <div class="col-4">
+                    <button type="button" class="btn primary-btn" (click)="onClickSave()">Guardar</button>
                 </div>
-
-
             </div>
-
-        </div>
-
     </div>
-
-
 </div>

@@ -38,11 +38,20 @@ export class TaskComponent implements OnInit {
       periodValue = 'AM';
     }
 
-    this.studentId = data.id;
+    this.studentId = data.studentId;
 
-    this.activities = this.http.getActivities();
+    this.http.getActivities(this.studentId, data.currentWeek).subscribe(data =>{
+      this.activities = []
+      var jsonResponse = JSON.parse(JSON.stringify(data)).treeview;
+      console.log("JSON");
+      console.log(jsonResponse);
+      jsonResponse.forEach(value => {
+        this.activities = [...this.activities, value]
+      })
+      console.log(this.activities)
 
-    console.log(this.http.getActivities())
+
+    });
 
     this.taskForm = this.formBuilder.group(
       {
@@ -67,11 +76,10 @@ export class TaskComponent implements OnInit {
         period: new FormControl(periodValue,
           [Validators.required]
         ),
-        activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
-          [Validators.required]
-        ),
+        // activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
+        //   [Validators.required]
+        // ),
       });
-      //this.taskForm.get('activity').setValue(this.activities[0]);
   }
 
 
@@ -80,9 +88,9 @@ export class TaskComponent implements OnInit {
     if(this.taskForm.valid) {
       console.log(this.taskForm.get('activity').value);
       console.log();
-      let id = this.taskForm.get('activity').value.split(')')[0];
-      this.taskForm.get('activity').setValue(Number(id));
-      console.log(this.taskForm);
+      // let id = this.taskForm.get('activity').value.split(')')[0];
+      // this.taskForm.get('activity').setValue(Number(id));
+      // console.log(this.taskForm);
       this.dialogRef.close();
     }
   }
@@ -91,6 +99,8 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
   }
 
 

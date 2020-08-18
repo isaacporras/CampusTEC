@@ -168,3 +168,7 @@ SELECT persona.Nombre,persona.Apellido,A.* FROM ( SELECT A.*, F.FileURL  FROM ( 
                                   WHERE a.IdActividad = 1) A
                                   INNER JOIN file F ON A.IdFile = F.IdFile) A
                          INNER JOIN persona ON persona.IdPersona = A.Idpersona;
+
+SELECT persona.* FROM persona INNER JOIN cursopersona
+                 ON persona.IdPersona = cursopersona.IdPersona
+            WHERE persona.Puesto=FALSE AND cursopersona.IdCurso = 1

@@ -3,7 +3,9 @@ package Model;
 import DatabaseManagement.AddQuerys.AddQueries;
 import DatabaseManagement.DBConnection;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
+import Model.Objects.Activity;
 import Model.Objects.Comment;
+import Model.Objects.Objective;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,5 +57,30 @@ public class ActivityView {
             comments.add(comment);
         }
         return comments;
+    }
+
+
+    public static Activity getActivityInfo(String ActivityId) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(ActivityId);
+        ResultSet resultSet = ActivitiesSelectQueries.getActivityInfo(param, DBConnection.getConnection());
+        resultSet.next();
+        Activity activity = new Activity();
+        activity.id = resultSet.getString("IdActividad");
+        activity.name = resultSet.getString("Titulo");
+        activity.description = resultSet.getString("Descripcion");
+        activity.evaluable = resultSet.getBoolean("Evaluable");
+        activity.week = resultSet.getInt("NumSemana");
+        activity.date = resultSet.getString("Fecha");
+        param = new ArrayList<>();
+        param.add(activity.id);
+        ResultSet resultObj = ActivitiesSelectQueries.getObjectivesActivity(param, DBConnection.getConnection());
+        while (resultObj.next()) {
+            Objective objective = new Objective();
+            objective.id = resultObj.getString("IdObjetivo");
+            objective.description = resultObj.getString("Descripcion");
+            activity.objectives.add(objective);
+        }
+        return activity;
     }
 }

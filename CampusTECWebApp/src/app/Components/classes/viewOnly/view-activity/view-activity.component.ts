@@ -26,6 +26,8 @@ export class ViewActivityComponent implements OnInit {
   commentForm: FormGroup;
   comments: Array<any>;
   activity: any;
+  teacherId:any;
+  activityId:any;
 
   wasFileUploadedAct: boolean;
   wasFileUploadedCom: boolean;
@@ -48,9 +50,12 @@ export class ViewActivityComponent implements OnInit {
     private downloader: GlobalService,
 
   ) {
-    console.log('El dato en vista es:');
+    console.log('El dato en vista de actividad es:');
     console.log(data);
-    this.classId = data;
+    this.classId = data.classId;
+    this.teacherId =  data.userId;
+    this.activityId = data.activityId;
+
   }
 
 
@@ -140,7 +145,7 @@ export class ViewActivityComponent implements OnInit {
   onClickComentar() {
     console.log('Se quiere comentar')
 
-    this.commentForm.controls.id.setValue(this.classId);
+    
     this.commentForm.removeControl('objective');
 
     this.commentForm.addControl('fileURL', this.formBuilder.control(''));
@@ -160,7 +165,7 @@ export class ViewActivityComponent implements OnInit {
 
           this.setCommentFormat();
 
-
+          
         });
       });
 
@@ -170,11 +175,24 @@ export class ViewActivityComponent implements OnInit {
       this.setCommentFormat();
     }
   }
+  postComment(){
+    this.http.postComment(this.commentForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('La respuesta del servidor es:' + data);
+    }, (error) => {
+      console.log(error);
+    });
+
+
+    this.comments.push(this.commentForm.value);
+  }
+
   setCommentFormat() {
     this.commentForm.addControl('time', this.formBuilder.control(''));
     this.commentForm.addControl('date', this.formBuilder.control(''));
-    this.commentForm.addControl('activityId', this.formBuilder.control(''));
+    this.commentForm.addControl('activityId', this.formBuilder.control(this.activityId));
     this.commentForm.addControl('user', this.formBuilder.control(''));
+    this.commentForm.addControl('token', this.formBuilder.control(this.teacherId));
 
     var id = 4;//tenemos que obtener el id del usuario
     let date = new Date();
@@ -184,11 +202,12 @@ export class ViewActivityComponent implements OnInit {
     this.commentForm.get('date').setValue(currentDate);
     this.commentForm.get('user').setValue(this.http.getUserName(id).user);
     this.commentForm.get('activityId').setValue(this.classId);
+    
 
     console.log(this.commentForm.value);
     
-    this.comments.push(this.commentForm.value);
-    console.log(this.commentForm.value);
+    
+    this.postComment();
     //this.dialogRef.close();
 
   }
@@ -225,7 +244,8 @@ export class ViewActivityComponent implements OnInit {
 
 
     this.activityForm = this.formBuilder.group({
-      id: new FormControl(''),
+     
+      id: new FormControl(this.activityId),
       name: new FormControl(''),
       description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
@@ -235,25 +255,35 @@ export class ViewActivityComponent implements OnInit {
     });
 
     this.commentForm = this.formBuilder.group({
-      id: new FormControl(this.classId),
+      
       description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
-
 
     });
 
 
+ 
+    this.http.getActivityInfo(this.activityId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('El json de actividad:' + JSON.stringify(data));
+      this.activity = jsonResponse;
+    }, (error) => {
+      console.log(error);
+    });
 
+    this.http.getComments(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('El json de comentarios:' + JSON.stringify(data));
+      this.comments = jsonResponse.treeview;
+    }, (error) => {
+      console.log(error);
+    });
 
-    this.comments = this.http.getComments();
-
-    this.activity = this.http.getActivityInfo();
-
-    this.objectivesResponse = this.http.getObjectives();
+    
 
 
     this.objectivesResponse = [];
 
-    this.objectivesResponse = this.http.getObjectives();
+    
 
     this.wasFileUploadedAct = false;
 

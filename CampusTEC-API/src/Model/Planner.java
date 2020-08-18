@@ -33,7 +33,7 @@ public class Planner {
             assignment.description = result.getString("Descripcion");
             assignment.time = result.getString("Hora");
             assignment.activity = result.getString("actividad.Titulo");
-
+            assignment.done = result.getBoolean("Completado");
             assignments.add(assignment);
         }
         return assignments;

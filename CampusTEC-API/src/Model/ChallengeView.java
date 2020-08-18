@@ -1,6 +1,7 @@
 package Model;
 
 import DatabaseManagement.DBConnection;
+import DatabaseManagement.ModifyQueries.UpdateQueries;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import DatabaseManagement.SelectQuerys.GetCourseInfo;
 import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
@@ -9,6 +10,8 @@ import Model.Objects.Challenge;
 import Model.Objects.Objective;
 import Model.Objects.User;
 
+import javax.json.JsonArray;
+import javax.json.JsonObject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -86,4 +89,20 @@ public class ChallengeView {
 
     }
 
+    public static Boolean updateStudents(JsonObject request) throws SQLException, ClassNotFoundException {
+        String challengeId = request.getString("challengeId");
+        JsonArray students = request.getJsonArray("students");
+
+        for (int i = 0; i < students.size(); i++) {
+            JsonObject student = students.getJsonObject(i);
+            String studentId = student.getString("id");
+            Boolean state = student.getBoolean("status");
+            ArrayList<String> param = new ArrayList<>();
+            param.add(state.toString());
+            param.add(challengeId);
+            param.add(studentId);
+            UpdateQueries.updateChallengePerson(param, DBConnection.getConnection());
+        }
+        return true;
+    }
 }

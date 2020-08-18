@@ -1,5 +1,6 @@
 package RequestHandler;
 
+import Model.ActivityView;
 import Model.Objects.Activity;
 import Model.Objects.Assignment;
 import Model.Objects.Challenge;
@@ -135,12 +136,9 @@ public class PlannerHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getActivity(@PathParam("activity") String activity) throws Exception {
 
-        Activity result = Planner.getActivity(activity);
+        Activity result = ActivityView.getActivityInfo(activity);
 
-        return Response.ok(result).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -150,10 +148,7 @@ public class PlannerHandler {
 
         Challenge result = Planner.getChallenge(challenge);
 
-        return Response.ok(result).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(result).build();
     }
 
 }

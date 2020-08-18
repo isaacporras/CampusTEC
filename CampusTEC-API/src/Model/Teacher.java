@@ -2,6 +2,7 @@ package Model;
 
 import DatabaseManagement.AddQuerys.AddQueries;
 import DatabaseManagement.DBConnection;
+import DatabaseManagement.ModifyQueries.UpdateQueries;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import DatabaseManagement.SelectQuerys.GetCourseInfo;
 import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
@@ -182,6 +183,17 @@ public class Teacher {
                 AddQueries.createActivityObjective(paramlink, DBConnection.getConnection());
             }
 
+            ArrayList<String> paramStudents = new ArrayList<>();
+            paramStudents.add(activity.idClass);
+            ResultSet students = GetCourseInfo.getCourseStudents(paramStudents, DBConnection.getConnection());
+            while (students.next()) {
+                ArrayList<String> param = new ArrayList();
+                param.add(activityId.toString());
+                param.add(students.getString("IdPersona"));
+                param.add("false");
+                AddQueries.setActivityPerson(param, DBConnection.getConnection());
+            }
+
             return activityId;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -223,6 +235,23 @@ public class Teacher {
                 paramLink.add(challengeId.toString());
                 paramLink.add(activityId.toString());
                 AddQueries.activityChallenge(paramLink, DBConnection.getConnection());
+            }
+            for (Objective obj : challenge.objectives) {
+                ArrayList<String> paramlink = new ArrayList<>();
+                paramlink.add(challengeId.toString());
+                paramlink.add(obj.id);
+                AddQueries.createChallengeObjective(paramlink, DBConnection.getConnection());
+            }
+
+            ArrayList<String> paramStudents = new ArrayList<>();
+            paramStudents.add(challenge.idClass);
+            ResultSet students = GetCourseInfo.getCourseStudents(paramStudents, DBConnection.getConnection());
+            while (students.next()) {
+                ArrayList<String> param = new ArrayList();
+                param.add(challengeId.toString());
+                param.add(students.getString("IdPersona"));
+                param.add("false");
+                AddQueries.setChallengePerson(param, DBConnection.getConnection());
             }
 
             return challengeId;

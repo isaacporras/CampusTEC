@@ -140,10 +140,7 @@ public class ClassesHandler {
         respBuilder.add("status", result);
         JsonObject resp = respBuilder.build();
 
-        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(resp).build();
     }
 
     @POST
@@ -159,10 +156,7 @@ public class ClassesHandler {
         respBuilder.add("status", result);
         JsonObject resp = respBuilder.build();
 
-        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(resp).build();
     }
 
 

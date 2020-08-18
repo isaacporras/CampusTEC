@@ -1,56 +1,64 @@
 <body>
-    <div class="container">
-
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="logo-image">
-            <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
-        </div>
-        <a class="navbar-brand" href="#"> CampusTEC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-
-
-                <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
-
-            </div>
-        </div>
-    </nav>
-
-    
-
-        <div class="row">
-            <h1 style="margin-top: 30px;">Configuración de CampusTEC</h1>
-        </div>
-        <div class="row">
-            <div class="col-3" >
-                <h3 style="margin-top: 30px;">Cantidad de TEColones por curso:</h3>
-              </div>
-              <div class="col-4" [formGroup]="tecolonesForm">
-                {{tecolonesForm.value | json}}
-                <input type="number" id="password" class="form-control" 
-                formControlName="tecolones" style="margin-top: 15px;">
-              </div>
-              <div class="col-3">
-                <h3 style="margin-top: 30px;">TEColones</h3>
-              </div>
-
-        </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-3" x>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="button"
-                    (click)="onSaveTecolones()">
-                    Guardar Información
-                </button>
-            </div>
-        </div>
-
-
-
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="logo-image">
+    <img src="../../../assets/Files/CampusTecLogo.png" class="img-fluid">
+  </div>
+  <a class="navbar-brand" href="#"> CampusTEC</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto">
+      <a class="nav-item nav-link " href="/login">Cerrar Sesión</a>
     </div>
+  </div>
+</nav>
 
+
+<div class="container">
+  <div class="row">
+    <h1>Configuración de CampusTEC</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <h3>Cantidad de TEColones por curso:</h3>
+    </div>
+    <div class="col-4" [formGroup]="tecolonesForm">
+      <input type="number" id="password" class="form-control" placeholder="{{tecolones}}"
+             formControlName="max">
+    </div>
+    <div class="col-3">
+      <h3>TEColones</h3>
+    </div>
+  </div>
+
+  <div *ngIf="submitted && tecolonesForm.invalid" class="alert alert-danger row">
+    El valor ingresado es inválido. Recuerde que debe ser un número positivo.
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <h3>Archivo:</h3>
+    </div>
+    <div class="col-9">
+      <form>
+        <div class="form-group">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <button class="btn primary-btn" type="button"
+              (click)="onSaveTecolones()">
+        Guardar Información
+      </button>
+    </div>
+  </div>
+</div>
 </body>
