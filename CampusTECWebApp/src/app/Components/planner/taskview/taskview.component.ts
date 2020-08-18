@@ -58,22 +58,17 @@ export class TaskviewComponent implements OnInit {
       console.log(this.taskData);
       let day = this.taskData['day'];
 
-      console.log();
-
       switch (day) {
         case '0':
           this.stringDay = 'Domingo';
           break;
-
         case '1':
           this.stringDay = 'Lunes';
           break;
         case '2':
-
           this.stringDay = 'Martes';
           break;
         case '3':
-
           this.stringDay = 'Miercoles';
           break;
         case '4':
