@@ -160,3 +160,11 @@ VALUES (1,60000);
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);
+
+
+SELECT persona.Nombre,persona.Apellido,A.* FROM ( SELECT A.*, F.FileURL  FROM (  SELECT comentario.* FROM comentario
+                              INNER JOIN
+                                       actividad a on comentario.IdActividad = a.IdActividad
+                                  WHERE a.IdActividad = 1) A
+                                  INNER JOIN file F ON A.IdFile = F.IdFile) A
+                         INNER JOIN persona ON persona.IdPersona = A.Idpersona;
