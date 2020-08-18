@@ -1,184 +1,175 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
-
-
 <div [formGroup]="activityForm">
 
-    <div class="row">
-        <div class="col-4">
-            <h1>Actividad</h1>
-        </div>
-        {{activityForm.value | json}}
+  <div class="row">
+    <div class="col-4">
+      <h1>Actividad</h1>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-4">
-            <h3>Nombre:</h3>
-        </div>
-        <div class="col-8">
-            <input type="text" formControlName="name" class="form-control">
-        </div>
+    {{activityForm.value | json}}
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+      <h3>Nombre:</h3>
     </div>
-    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-
-        <div *ngIf="name.errors.required">
-            Debe ingresar un nombre para la actividad.
-        </div>
-
-
+    <div class="col-8">
+      <input type="text" formControlName="name" class="form-control">
     </div>
-    <div class="row">
-        <div class="col-4">
-            <h3>Descripción:</h3>
-        </div>
-        <div class="col-8">
-            <textarea formControlName="description" placeholder=""></textarea>
-        </div>
+  </div>
+  <div *ngIf="submitted && name.invalid" class="alert alert-danger">
+    <div *ngIf="name.errors?.maxLength">
+      El nombre no debe exceder los 50 caracteres.
     </div>
-    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
-
-        <div *ngIf="description.errors.required">
-            Debe ingresar una descripción para la actividad.
-        </div>
-        <div *ngIf="description.errors?.maxlength">
-            La descripción no puede exceder los 500 caracteres.
-        </div>
-
-
+    <div *ngIf="name.errors.required">
+      Debe ingresar un nombre para la actividad.
     </div>
-    <div class="row">
-        <div class="col-4">
-            <h3>Evaluable:</h3>
-        </div>
-        <div class="col col-6 col-md-4">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="evaluable">
-
-            </div>
-        </div>
-
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Descripción:</h3>
     </div>
-    <div class="row">
-        <div class="col-2">
-            <h3>Semana:</h3>
-        </div>
-        <div class="col-2">
-            <select id="inputState" class="form-control" formControlName="week">
-                <option selected>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-                <option>13</option>
-                <option>14</option>
-                <option>15</option>
-                <option>16</option>
-                <option>17</option>
-                <option>18</option>
-            </select>
-        </div>
-        <div class="col-3">
-            <h3>Fecha de entrega:</h3>
-        </div>
-        <div class="col-5">
-            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
-        </div>
-
+    <div class="col-8">
+      <textarea formControlName="description" placeholder=""></textarea>
     </div>
-    <div *ngIf="week.invalid && (week.dirty || week.touched)" class="alert alert-danger">
-
-        <div *ngIf="week.errors.required">
-            Debe ingresar semana para la actividad.
-        </div>
-    </div>
-    <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
-
-        <div *ngIf="week.errors.required">
-            Debe ingresar fecha para la actividad.
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            <h3>Objetivos:</h3>
-        </div>
-        <div class="col-7">
-            <select id="inputState" class="form-control" formControlName="objective">
-                <option selected disabled></option>
-                <ng-container *ngFor="let objective of objectives">
-
-                    <option>{{objective.id}}) {{objective.description}}</option>
-
-                </ng-container>
-            </select>
-        </div>
-        <div class="col-1">
-            <button class="btn" (click)="addObjective()"><i class="glyphicon glyphicon-plus"></i></button>
-        </div>
-
-    </div>
-    <div *ngIf="objective == false" class="alert alert-danger">
-
-        
-            Debe ingresar al menos un objetivo.
-        
-    </div>
-
-    <div class="row">
-        <div class="col-4"></div>
-        <div class="col-8">
-            <table class="table table-bordered">
-
-                <tbody>
-                    <tr *ngFor="let objective of objectivesResponse">
-                        <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
-                        <td>{{objective.description}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <h3>Archivo:</h3>
-        </div>
-        <div class="col-8">
-            <form>
-                <div class="form-group">
-
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                        (change)="uploadActivityFile($event)">
-
-                </div>
-
-            </form>
-        </div>
+  </div>
+  <div *ngIf="submitted && description.invalid" class="alert alert-danger">
+    <div *ngIf="description.errors?.maxlength">
+      La descripción no puede exceder los 500 caracteres.
     </div>
 
 
-
-    <div class="row justify-content-end">
-        <div class="col-4">
-
-            <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
-
-
-        </div>
-        <div class="col-4">
-
-            <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
-
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Evaluable:</h3>
     </div>
-    
+    <div class="col col-6 col-md-4">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="evaluable">
+
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Semana:</h3>
+    </div>
+    <div class="col">
+      <select id="inputState" class="form-control" formControlName="week">
+        <option selected>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+        <option>15</option>
+        <option>16</option>
+        <option>17</option>
+        <option>18</option>
+      </select>
+    </div>
+    <div class="col-lg-auto">
+      <h3>Fecha de entrega:</h3>
+    </div>
+    <div class="col-auto">
+      <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
+    </div>
+
+  </div>
+  <div *ngIf="submitted && week.invalid" class="alert alert-danger">
+
+    <div *ngIf="week.errors.required">
+      Debe ingresar semana para la actividad.
+    </div>
+  </div>
+  <div *ngIf="submitted && date.invalid" class="alert alert-danger">
+
+    <div *ngIf="week.errors.required">
+      Debe ingresar fecha para la actividad.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <h3>Objetivos:</h3>
+    </div>
+    <div class="col-6">
+      <select id="inputState" class="form-control" formControlName="objective">
+        <option selected disabled></option>
+        <ng-container *ngFor="let objective of objectives">
+
+          <option>{{objective.id}}) {{objective.description}}</option>
+
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-2">
+      <button class="btn icon-btn" (click)="addObjective()">
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+  <div *ngIf="submitted && objective == false" class="alert alert-danger">
+    Debe ingresar al menos un objetivo.
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-bordered">
+
+        <tbody>
+        <tr *ngFor="let objective of objectivesResponse">
+          <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
+          <td>{{objective.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h3>Archivo:</h3>
+    </div>
+    <div class="col-8">
+      <form>
+        <div class="form-group">
+
+          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                 (change)="uploadActivityFile($event)">
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-end">
+    <div class="col-4">
+
+      <button type="button" class="btn secondary-btn" (click)="onClickClose()">Cancelar</button>
+
+
+    </div>
+    <div class="col-4">
+
+      <button type="button" class="btn primary-btn" (click)="onClickSave()">Guardar</button>
+
+    </div>
+  </div>
 
 
 </div>

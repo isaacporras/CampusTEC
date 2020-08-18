@@ -37,6 +37,7 @@ export class ActivitiesComponent implements OnInit {
   fileChangedEventAct: Event;
   fileChangedEventComm: Event;
 
+  submitted = false;
 
   constructor(
     public dialogRef: MatDialogRef<ActivitiesComponent>,
@@ -77,47 +78,43 @@ export class ActivitiesComponent implements OnInit {
     this.wasFileUploadedCom = true;
   }
   onClickSave() {
+    this.submitted = true;
     console.log('Se quiere subir el archivo');
-    this.activityForm.controls.id.setValue(this.classId);
-    this.activityForm.removeControl('objective');
+    if(this.activityForm.valid) {
+      this.activityForm.controls.id.setValue(this.classId);
+      this.activityForm.removeControl('objective');
+      this.activityForm.addControl('objectives', this.formBuilder.control(''));
+      this.activityForm.get('objectives').setValue(this.objectivesResponse);
+      this.activityForm.addControl('fileURL', this.formBuilder.control(''));
 
-    this.activityForm.addControl('objectives', this.formBuilder.control(''));
-    this.activityForm.get('objectives').setValue(this.objectivesResponse);
+      if (this.wasFileUploadedAct) {
+        //Se hace la carga del archivo //
+        const id = Math.random().toString(36).substring(2);
+        const file = this.fileChangedEventAct;
+        const filepath = `activityImages/activity_${id}`;
+        const reference = this.storage.ref(filepath);
+        const task = this.storage.upload(filepath, file).then(rst => {
+          rst.ref.getDownloadURL().then(url => {
 
-    this.activityForm.addControl('fileURL', this.formBuilder.control(''));
+            this.activityForm.get('fileURL').setValue(url);
+            console.log(this.activityForm.value);
 
+            this.activityForChallenge = this.activityForm.value;
 
-    if (this.wasFileUploadedAct) {
-      //Se hace la carga del archivo //
-      const id = Math.random().toString(36).substring(2);
-      const file = this.fileChangedEventAct;
-      const filepath = `activityImages/activity_${id}`;
-      const reference = this.storage.ref(filepath);
-      const task = this.storage.upload(filepath, file).then(rst => {
-        rst.ref.getDownloadURL().then(url => {
+            let status = 0; //se completó con exito
+            this.dialogRef.close({activity: this.activityForm.value, status: status});
 
-          this.activityForm.get('fileURL').setValue(url);
-          console.log(this.activityForm.value);
-
-          this.activityForChallenge = this.activityForm.value;
-
-          let status = 0; //se completó con exito
-          this.dialogRef.close({ activity: this.activityForm.value, status: status });
-
+          });
         });
-      });
+      } else {
+        this.activityForm.get('fileURL').setValue('Null');
+        console.log(this.activityForm.value);
+
+
+        let status = 0; //se completó con exito
+        this.dialogRef.close({activity: this.activityForm.value, status: status});
+      }
     }
-    else {
-      this.activityForm.get('fileURL').setValue('Null');
-      console.log(this.activityForm.value);
-
-
-
-      let status = 0; //se completó con exito
-      this.dialogRef.close({ activity: this.activityForm.value, status: status });
-    }
-
-
   }
   onClickClose() {
 
@@ -229,8 +226,8 @@ export class ActivitiesComponent implements OnInit {
 
     this.activityForm = this.formBuilder.group({
       id: new FormControl(''),
-      name: new FormControl(''),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      name: new FormControl('',[Validators.required, Validators.maxLength(50)]),
+      description: new FormControl('', [Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
       week: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),

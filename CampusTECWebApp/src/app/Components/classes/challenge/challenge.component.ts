@@ -28,7 +28,7 @@ export class ChallengeComponent implements OnInit {
   atLeastOnActivity: boolean = false;
   objectivesResponse: Array<any>;
 
-
+  submitted = false;
 
 
 
@@ -51,6 +51,7 @@ export class ChallengeComponent implements OnInit {
   }
 
   onClickSave() {
+    this.submitted = true;
 
     this.objectiveForm.controls.idClass.setValue(this.classId);
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
@@ -101,7 +102,6 @@ export class ChallengeComponent implements OnInit {
 
   }
   onClickClose() {
-
     this.dialogRef.close();
   }
 

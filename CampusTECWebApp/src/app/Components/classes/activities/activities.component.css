@@ -16,7 +16,7 @@ textarea {
     border-color: darkblue;
   }
   .btn.btn-danger{
-    
+
     color: #f0fff3;
 
 
@@ -34,7 +34,7 @@ textarea {
 
 }
 .btn.btn-dark{
-    
+
     color: #f0fff3;
 
 
@@ -85,9 +85,13 @@ textarea {
     color: white;
     height: 20px;
     width:150px ;
-    
+
     /*text-align: center;*/
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
   }
+
+.icon-btn{
+  padding: 5px 5px;
+}
