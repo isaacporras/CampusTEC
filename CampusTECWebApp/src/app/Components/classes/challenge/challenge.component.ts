@@ -182,7 +182,17 @@ export class ChallengeComponent implements OnInit {
 
 
 
-    this.objectives = this.http.getObjectives();
+    this.http.getObjectives(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.objectives = data['treeview']
+      
+    }, (error) => {
+      console.log(error);
+    });
+
+
+    console.log(this.objectives)
     this.students = this.http.getStudents();
 
     console.log(this.students)

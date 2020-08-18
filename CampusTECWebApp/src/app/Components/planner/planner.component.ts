@@ -227,7 +227,9 @@ export class PlannerComponent implements OnInit {
   updateChallenges(): void {
     let challenges;
     this.http.getChallenges(this.studentId).subscribe((data) => {
-      var jsonResponse = JSON.parse(JSON.stringify(data));
+      var jsonResponse = JSON.parse(JSON.stringify(data))['treeview'][0];
+
+      console.log(jsonResponse)
       challenges = jsonResponse;
     }, (error) => {
       console.log(error);
