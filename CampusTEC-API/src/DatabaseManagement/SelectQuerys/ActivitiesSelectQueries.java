@@ -88,4 +88,11 @@ public class ActivitiesSelectQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
+    public static ResultSet getChallengePeople(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("SELECT  * FROM personareto INNER JOIN persona" +
+                " p on personareto.IdPersona = p.IdPersona WHERE personareto.IdRetoAcademico = ?; ");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
 }

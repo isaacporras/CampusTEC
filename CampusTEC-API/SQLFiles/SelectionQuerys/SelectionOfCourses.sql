@@ -183,3 +183,6 @@ FROM (SELECT actividadpersona.IdActividad
     ) F ON F.IdCurso = curso.IdCurso;
 
 
+
+
+SELECT  * FROM personareto INNER JOIN persona p on personareto.IdPersona = p.IdPersona WHERE personareto.IdRetoAcademico = ?;
