@@ -162,4 +162,21 @@ public class PlannerHandler {
 
         return Response.ok(result).build();
     }
+
+    @POST
+    @Path("/assignments/edit")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateAssignment(Assignment assignment) throws Exception {
+
+        Boolean result = Planner.updateAssignment(assignment);
+
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("status", result);
+        JsonObject resp = respBuilder.build();
+
+        return Response.ok(resp).build();
+    }
+
 }
