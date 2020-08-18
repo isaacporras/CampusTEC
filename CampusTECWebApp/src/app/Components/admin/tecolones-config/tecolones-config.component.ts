@@ -15,6 +15,7 @@ export class TecolonesConfigComponent implements OnInit {
 
   tecolonesForm: FormGroup;
   submitted = false;
+  tecolones;
 
   constructor(
     private http: TecolonesConfigService,
@@ -49,6 +50,9 @@ export class TecolonesConfigComponent implements OnInit {
       max: new FormControl('', [Validators.required, Validators.min(0)]),
     });
 
+    this.http.getTecolones().subscribe(data =>{
+      this.tecolones = JSON.parse(JSON.stringify(data))["max"];
+    });
   }
 
 }

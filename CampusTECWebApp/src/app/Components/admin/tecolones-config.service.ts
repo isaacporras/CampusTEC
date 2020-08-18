@@ -13,4 +13,8 @@ export class TecolonesConfigService {
     console.log(json)
     return this.http.post(this.server + '/admin/setTecolones', json);
   }
+
+  getTecolones(){
+    return this.http.get(this.server + '/admin/tecolones');
+  }
 }
