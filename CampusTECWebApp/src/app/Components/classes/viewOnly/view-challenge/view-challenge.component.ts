@@ -128,13 +128,15 @@ export class ViewChallengeComponent implements OnInit {
 
 
 
-    this.objectives = this.http.getObjectives();
+    //this.objectives = this.http.getObjectives();
 
 
 
 
     (this.http.getChallengeInfo(this.classId)).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('aquiiiiiiii')
+      console.log(jsonResponse)
       console.log(jsonResponse.status);
 
       this.objectives = jsonResponse['objectives'];
@@ -152,7 +154,7 @@ export class ViewChallengeComponent implements OnInit {
       this.students = jsonResponse['treeview'];
 
       console.log(this.students);
-      
+
     }, (error) => {
       console.log(error);
     });
@@ -165,7 +167,7 @@ export class ViewChallengeComponent implements OnInit {
 
   changeStudentStatus(id: number, status: boolean) {
     this.statusChanged = true;
-    console.log(id);
+    console.log('El id del estatus es:'+id);
 
     if (status === true) {
       console.log('es true y se cambiará a false')
