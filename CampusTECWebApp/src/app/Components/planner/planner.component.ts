@@ -129,20 +129,28 @@ export class PlannerComponent implements OnInit {
 
 
   updateAssignments(): void {
-    let receivedEvents;
+    this.events = [];
     this.http.getAssignments(this.studentId, this.week).subscribe((data) => {
-      var jsonResponse = JSON.parse(JSON.stringify(data))['treeview'][0];
-      console.log(jsonResponse)
-      var event = addHours(addDays(this.weekStart, jsonResponse.day), jsonResponse.time);
-
-      this.events = [
-        {
-          title: jsonResponse.name,
+      var jsonResponse = JSON.parse(JSON.stringify(data))['treeview'];
+      jsonResponse.forEach(value => {
+        console.log("Processing event");
+        console.log(value);
+        let event = addHours(addDays(this.weekStart, value.day), value.time);
+        let color;
+        if(value.done == true){
+          color = colors.green;
+        }else{
+          color = colors.blue;
+        }
+        let newEvent = {
+          title: value.name,
           start: event,
           end: addHours(event, 1),
-          color: colors.blue,
-        }
-      ];
+          color: color,
+        };
+        console.log(newEvent);
+        this.events = [...this.events, newEvent];
+      })
     }, (error) => {
       console.log(error);
     });
