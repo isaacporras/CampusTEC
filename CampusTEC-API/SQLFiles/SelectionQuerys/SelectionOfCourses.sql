@@ -205,3 +205,14 @@ FROM objetivo
          INNER JOIN actividadobjetivo a on objetivo.IdObjetivo = a.IdObjetivo
 WHERE A.IdActividad = ?;
 
+SELECT persona.Nombre,persona.Apellido,A.*
+FROM (
+         SELECT A.*, F.FileURL
+         FROM (
+                  SELECT comentario.*
+                  FROM comentario
+                           INNER JOIN
+                       actividad a on comentario.IdActividad = a.IdActividad
+                  WHERE a.IdActividad = ?) A
+                  INNER JOIN file F ON A.IdFile = F.IdFile) A
+         INNER JOIN persona ON persona.IdPersona = A.Idpersona;
