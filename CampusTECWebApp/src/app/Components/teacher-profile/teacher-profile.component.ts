@@ -51,7 +51,7 @@ export class TeacherProfileComponent implements OnInit {
     else if (id == 3) {
       this.teacherDataForm.controls['telNumber'].enable();
     }
-   
+
   }
   goToClass(id) {
     return this.router.navigate(['/classes', id, this.teacherId]);
@@ -128,7 +128,7 @@ export class TeacherProfileComponent implements OnInit {
       id: new FormControl(''),
       status: new FormControl(''),
       ppurl: new FormControl(''),
-      tecolones: new FormControl(''),
+      tecolones: new FormControl({value: '', disabled: true}),
       email1: new FormControl('',
         [Validators.required,
         Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]),
@@ -163,7 +163,7 @@ export class TeacherProfileComponent implements OnInit {
       this.teacherDataForm.controls['telNumber'].setValue(data['telNumber']);
       this.teacherDataForm.controls['university'].setValue(data['university']);
       this.teacherDataForm.controls['campus'].setValue(data['campus']);
-      
+
 
       console.log(data["classes"])
 

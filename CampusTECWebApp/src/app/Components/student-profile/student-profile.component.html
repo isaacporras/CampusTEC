@@ -38,9 +38,9 @@
 
         </div>
       </div>
-      
+
       <h2>Estudiante</h2>
-      
+
       <h2>{{studentBaseData.name}} {{studentBaseData.lastname}} </h2>
       <h3>{{studentBaseData.id}} </h3>
       <h3>{{studentBaseData.status}} </h3>
@@ -125,7 +125,8 @@
           <input formControlName="university" type="text" class="form-control input-field"
                  placeholder="{{studentDataForm.university}}">
           </div>
-          
+          <div class="col-1"></div>
+
         </div>
 
         <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
@@ -141,7 +142,8 @@
           <div class="input-field-col">
           <input formControlName="campus" type="text" class="form-control input-field" placeholder="{{studentDataForm.campus}}">
           </div>
-          
+          <div class="col-1"></div>
+
         </div>
 
 
@@ -151,7 +153,8 @@
           <input formControlName="tecolones" type="tel" class="form-control input-field"
                  placeholder="{{studentDataForm.tecolones}}">
           </div>
-          
+          <div class="col-1"></div>
+
         </div>
 
         <div *ngIf="editing==true">

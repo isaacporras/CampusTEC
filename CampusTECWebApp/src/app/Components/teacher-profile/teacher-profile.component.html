@@ -43,7 +43,7 @@
         </div>
 
         <h2>Profesor</h2>
-        
+
         <h2>{{teacherBaseData.name}} {{teacherBaseData.lastname}} </h2>
         <h3>{{teacherBaseData.id}} </h3>
         <h3>{{teacherBaseData.status}} </h3>
@@ -128,7 +128,8 @@
               <input formControlName="university" type="text" class="form-control input-field"
                      placeholder="{{teacherDataForm.university}}" disabled>
             </div>
-            
+            <div class="col-1"></div>
+
           </div>
 
           <div *ngIf="university.invalid && (university.dirty || university.touched)" class="alert alert-danger">
@@ -144,7 +145,8 @@
             <div class="input-field-col">
               <input formControlName="campus" type="text" class="form-control input-field" placeholder="{{teacherDataForm.campus}}" disabled>
             </div>
-           
+            <div class="col-1"></div>
+
           </div>
           <div class="input-group row">
             <div class="col field-label">TEColones:</div>
@@ -152,7 +154,8 @@
             <input formControlName="tecolones" type="tel" class="form-control input-field"
                    placeholder="{{teacherDataForm.tecolones}}">
             </div>
-            
+            <div class="col-1"></div>
+
           </div>
           <div *ngIf="editing==true">
             <button class="btn primary-btn" (click)="onSave()">Guardar</button>
