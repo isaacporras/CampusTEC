@@ -258,7 +258,7 @@ export class ActivitiesComponent implements OnInit {
       name: new FormControl('',[Validators.required, Validators.maxLength(50)]),
       description: new FormControl('', [Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
-      week: new FormControl('', [Validators.required]),
+      week: new FormControl(1, [Validators.required]),
       date: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
     });
@@ -282,6 +282,7 @@ export class ActivitiesComponent implements OnInit {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse);
       this.objectives = data['treeview']
+      this.activityForm.get('objective').setValue(this.objectives[0].id + ')' + this.objectives[0].description);
       
     }, (error) => {
       console.log(error);
