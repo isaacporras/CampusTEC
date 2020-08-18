@@ -16,4 +16,5 @@ public class Challenge {
     public ArrayList<Objective> objectives = new ArrayList<>();
 
     public ArrayList<Activity> children = new ArrayList<>();
+
 }

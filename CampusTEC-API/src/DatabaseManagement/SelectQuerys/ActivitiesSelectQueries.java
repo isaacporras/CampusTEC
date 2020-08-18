@@ -95,16 +95,24 @@ public class ActivitiesSelectQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet getObjectivesChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("SELECT objetivo.* FROM objetivo INNER join objetivoreto" +
                 " o on objetivo.IdObjetivo = o.IdObjetivo where o.IdReto = ?;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
+
     public static ResultSet getObjectivesActivity(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("SELECT objetivo.* FROM objetivo INNER  JOIN " +
                 "actividadobjetivo a on objetivo.IdObjetivo = a.IdObjetivo WHERE A.IdActividad=?;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        return statement.executeQuery();
+    }
+
+    public static ResultSet getChallengeInfo(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement(" SELECT ra.*, f.FileURL FROM retoacademico ra INNER JOIN file f on ra.IdFile = f.IdFile WHERE ra.IdRetoAcademico=?;");
+        statement.setString(1, parameters.get(0));
         return statement.executeQuery();
     }
 }

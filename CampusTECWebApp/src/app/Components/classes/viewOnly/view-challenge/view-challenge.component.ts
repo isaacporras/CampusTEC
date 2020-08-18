@@ -52,7 +52,7 @@ export class ViewChallengeComponent implements OnInit {
     console.log(this.students);
     this.statusChanged = false;
 
-    
+
     //call push students status
   }
   onClickClose() {
@@ -101,20 +101,20 @@ export class ViewChallengeComponent implements OnInit {
         binaryData.push(response);
         let downloadLink = document.createElement('a');
         downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, { type: dataType }));
-        
+
         downloadLink.setAttribute('download', 'messageFile');
         document.body.appendChild(downloadLink);
         downloadLink.click();
       }
     );
 
-}
+  }
 
 
 
   ngOnInit() {
     this.challengeForm = this.formBuilder.group({
-      id: new FormControl(''),
+      idClass: new FormControl(this.classId),
       name: new FormControl(''),
       payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
@@ -129,17 +129,40 @@ export class ViewChallengeComponent implements OnInit {
 
 
     this.objectives = this.http.getObjectives();
-    this.students = this.http.getStudents();
 
 
-    this.challengeInfo =this.http.getChallengeInfo();
 
-    console.log(this.students)
+
+    (this.http.getChallengeInfo(this.classId)).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+
+      this.objectives = jsonResponse['objectives'];
+      this.challengeInfo = jsonResponse;
+
+
+    }, (error) => {
+      console.log(error);
+    });
+
+    this.http.getStudentsStatus(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+
+      this.students = jsonResponse['treeview'];
+
+      console.log(this.students);
+      
+    }, (error) => {
+      console.log(error);
+    });
+
+    
 
     this.objectivesResponse = [];
 
   }
-  
+
   changeStudentStatus(id: number, status: boolean) {
     this.statusChanged = true;
     console.log(id);
@@ -168,7 +191,7 @@ export class ViewChallengeComponent implements OnInit {
   }
 
   getCheckboxName(id: number) {
-    return 'checkbox_' + String(id)
+    return 'checkbox_' + String(id);
   }
 
 

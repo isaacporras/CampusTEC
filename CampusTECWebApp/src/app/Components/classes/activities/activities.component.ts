@@ -26,6 +26,8 @@ export class ActivitiesComponent implements OnInit {
   comments: Array<any>;
   activityForChallenge: any;
 
+  camefrom: string;
+
   wasFileUploadedAct: boolean;
   wasFileUploadedCom: boolean;
   atLeastOnObjective: boolean = false;
@@ -48,11 +50,10 @@ export class ActivitiesComponent implements OnInit {
     private downloader: GlobalService,
 
   ) {
-
-
-
+    this.camefrom = data.cameFrom;
     if (data.cameFrom === 'challenge') {
       console.log('Viene de challenge')
+      
       this.classId = data.classid;
       this.activityForChallenge = data.activity;
     }
@@ -76,6 +77,10 @@ export class ActivitiesComponent implements OnInit {
     this.wasFileUploadedCom = true;
   }
   onClickSave() {
+    if(!this.activityForm.valid){
+      alert('Hay un error en los datos de la actividad')
+      return;
+    }
     this.submitted = true;
     console.log('Se quiere subir el archivo');
     if(this.activityForm.valid) {
@@ -108,12 +113,7 @@ export class ActivitiesComponent implements OnInit {
       } else {
         this.activityForm.get('fileURL').setValue('Null');
         console.log(this.activityForm.value);
-
-
-        
-
-        this.postActivity()
-        
+        this.postActivity();
       }
     }
   }
@@ -123,7 +123,12 @@ export class ActivitiesComponent implements OnInit {
   }
 
   postActivity() {
-
+    if(this.camefrom === 'challenge'){
+      let status = 0; //se completó con exito
+      alert('Se creó correctamente la actividad.');
+      this.dialogRef.close({activity: this.activityForm.value, status: status});
+      return;
+    }
 
     this.http.postActivity(this.activityForm.value).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
@@ -253,7 +258,7 @@ export class ActivitiesComponent implements OnInit {
       name: new FormControl('',[Validators.required, Validators.maxLength(50)]),
       description: new FormControl('', [Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
-      week: new FormControl('', [Validators.required]),
+      week: new FormControl(1, [Validators.required]),
       date: new FormControl('', [Validators.required]),
       objective: new FormControl('', [Validators.required]),
     });
@@ -277,6 +282,7 @@ export class ActivitiesComponent implements OnInit {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse);
       this.objectives = data['treeview']
+      this.activityForm.get('objective').setValue(this.objectives[0].id + ')' + this.objectives[0].description);
       
     }, (error) => {
       console.log(error);

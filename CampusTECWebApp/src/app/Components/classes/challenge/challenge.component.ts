@@ -214,6 +214,7 @@ export class ChallengeComponent implements OnInit {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse);
       this.objectives = data['treeview']
+      this.challengeForm.get('objective').setValue(this.objectives[0].id + ')' + this.objectives[0].description);
       
     }, (error) => {
       console.log(error);
