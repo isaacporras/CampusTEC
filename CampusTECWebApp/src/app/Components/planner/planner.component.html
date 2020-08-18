@@ -65,7 +65,7 @@
       </ng-template>
       <mwl-calendar-week-view [viewDate]="viewDate" [currentTimeMarkerTemplate]="currentTimeMarkerTemplate"
                               [events]="events" [refresh]="refresh" [locale]="locale"
-                              (eventClicked)="handleEvent('Clicked', $event.event)">
+                              (eventClicked)="viewAssignment($event.event.id)">
       </mwl-calendar-week-view>
     </div>
   </div>

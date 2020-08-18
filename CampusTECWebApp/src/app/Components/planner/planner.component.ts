@@ -27,7 +27,7 @@ import { ActivatedRoute } from '@angular/router';
 
 const colors: any = {
   green: {
-    primary: '#00b200',
+    primary: '#1e90ff',
     secondary: '#B2FFB2',
   },
   blue: {
@@ -94,24 +94,6 @@ export class PlannerComponent implements OnInit {
   treeFlattener = new MatTreeFlattener(
     this._transformer, node => node.level, node => node.expandable, node => node.children);
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [];
@@ -122,11 +104,19 @@ export class PlannerComponent implements OnInit {
     })
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
-  }
+  viewAssignment(id: number){
+    const classData = new MatDialogConfig();
 
+    classData.disableClose = true;
+    classData.autoFocus = true;
+    classData.height = '700px';
+    classData.width = '600px';
+
+    classData.data ={studentId: id};
+    console.log('En ventana principal el id es de:')
+
+    this.dialog.open(TaskComponent, classData);
+  }
 
   updateAssignments(): void {
     this.events = [];
@@ -140,9 +130,10 @@ export class PlannerComponent implements OnInit {
         if(value.done == true){
           color = colors.green;
         }else{
-          color = colors.blue;
+          color = colors.green;
         }
         let newEvent = {
+          id: value.id,
           title: value.name,
           start: event,
           end: addHours(event, 1),
@@ -155,6 +146,7 @@ export class PlannerComponent implements OnInit {
       console.log(error);
     });
   }
+
   addTask(id) {
 
     const classData = new MatDialogConfig();
