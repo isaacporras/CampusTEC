@@ -4,7 +4,7 @@
     <div class="col-4">
       <h1>Actividad</h1>
     </div>
-    
+
   </div>
   <hr>
   <div class="row">
@@ -40,13 +40,13 @@
     <div class="col">
       <h3>Semana:</h3>
     </div>
-    <div class="col">
+    <div class="col-2">
       <select id="inputState" class="form-control" formControlName="week">
         <option selected>{{activity.week}}</option>
 
       </select>
     </div>
-    <div class="col-lg-auto">
+    <div class="col-auto">
       <h3>Fecha de entrega:</h3>
     </div>
     <div class="col-auto">
@@ -62,26 +62,28 @@
   </div>
   <div class="row">
     <div class="col">
-      <table class="table table-bordered">
-
-        <tbody>
+      <ul>
         <tr *ngFor="let objective of activity.objectives">
-          <th scope="row"><span class="glyphicon glyphicon-asterisk"></span></th>
-          <td>{{objective.description}}</td>
+          <li><h3>{{objective.description}}</h3></li>
         </tr>
-        </tbody>
-      </table>
+      </ul>
     </div>
 
   </div>
   <div class="row">
-    <div class="col-2">
+    <div class="col-4">
       <h3>Archivo:</h3>
     </div>
     <div class="col-5">
-      <h3>Existe un archivo adjunto</h3>
+      <tr *ngIf="urlActivityFile != null">
+        <h3>Existe un archivo adjunto</h3>
+      </tr>
+      <tr *ngIf="urlActivityFile == null">
+        <h3>No existe archivo adjunto</h3>
+      </tr>
     </div>
     <div class="col-2">
+      <tr *ngIf="urlActivityFile != null">
       <button type="button" class="btn icon-btn" title="Edit"
               (click)="onDownloadFile(activity.fileURL)">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cloud-download" fill="currentColor"
@@ -92,7 +94,7 @@
                 d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
         </svg>
       </button>
-
+      </tr>
     </div>
   </div>
   <div class="row justify-content-end button-row">
@@ -100,7 +102,7 @@
       <button type="button" class="btn secondary-btn" (click)="onClickClose()">Salir</button>
     </div>
     <div class="col-4">
-      
+
     </div>
   </div>
 
@@ -110,7 +112,7 @@
         <h2>Comentarios</h2>
       </div>
 
-      
+
     </div>
     <div class="row">
       <div class="col">
@@ -142,7 +144,7 @@
           {{comment.description}}
         </div>
       </div>
-      <div class="row">
+      <div *ngIf="comment.fileURL != 'Null'" class="row">
         <div class="col-3 comment-text">
           Archivo adjunto
         </div>

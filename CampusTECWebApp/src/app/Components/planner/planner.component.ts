@@ -196,10 +196,10 @@ export class PlannerComponent implements OnInit {
 
     classData.disableClose = true;
     classData.autoFocus = true;
-    classData.height = '700px';
-    classData.width = '600px';
+    classData.height = '800px';
+    classData.width = '700px';
 
-    
+
     console.log('--------------------------')
 
     console.log('--------------------------')
@@ -217,17 +217,12 @@ export class PlannerComponent implements OnInit {
 
     classData.disableClose = true;
     classData.autoFocus = true;
-    classData.height = '700px';
-    classData.width = '600px';
-
-
-    console.log('--------------------------')
-
-    console.log('--------------------------')
+    classData.height = '800px';
+    classData.width = '700px';
 
     classData.data = {classId: 1, userId: this.studentId, activityId: id};
-    
-    
+
+
     console.log('En ventana principal el id es de:')
     console.log(id);
 
