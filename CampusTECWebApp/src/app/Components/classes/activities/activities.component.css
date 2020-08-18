@@ -95,3 +95,7 @@ textarea {
 .icon-btn{
   padding: 5px 5px;
 }
+
+.text-area{
+  width: 100%;
+}
