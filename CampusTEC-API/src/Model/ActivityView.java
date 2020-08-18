@@ -74,6 +74,7 @@ public class ActivityView {
         activity.evaluable = resultSet.getBoolean("Evaluable");
         activity.week = resultSet.getInt("NumSemana");
         activity.date = resultSet.getString("Fecha");
+        activity.fileURL = resultSet.getString("fileURL");
         param = new ArrayList<>();
         param.add(activity.id);
         ResultSet resultObj = ActivitiesSelectQueries.getObjectivesActivity(param, DBConnection.getConnection());

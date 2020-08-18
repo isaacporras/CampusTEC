@@ -24,7 +24,7 @@ public class Planner {
         ResultSet result = ActivitiesSelectQueries.getHomeworkFromActivitiesAndPerson(param, DBConnection.getConnection());
         ArrayList<Assignment> assignments = new ArrayList<>();
         while (result.next()) {
-            if (req.getString("semana").equals(result.getString("semana"))) {
+            if (!req.getString("semana").equals(result.getString("semana"))) {
                 continue;
             }
             Assignment assignment = new Assignment();
