@@ -21,3 +21,5 @@ WHERE tarea.IdTarea =?;
 UPDATE cuenta SET
 TecColones= ? + TecColones
 WHERE IdPersona = ?;
+
+UPDATE presupuestoteccolones SET TecColones = TecColones-? WHERE IdPresupuesto = ?;
