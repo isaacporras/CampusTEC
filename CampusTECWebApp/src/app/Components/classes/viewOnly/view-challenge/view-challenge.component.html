@@ -123,7 +123,7 @@
                         <td>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="form-check-input" [checked]="student.status"
-                                    id="exampleCheck1" (change)="changeStudentStatus(student.id,student.status)">
+                                    id="exampleCheck1" (change)="changeStudentStatus(student.id,student.status)" [disabled]="isDisabled">
                                 <label class="form-check-label" for="exampleCheck1"></label>
                             </div>
                         </td>

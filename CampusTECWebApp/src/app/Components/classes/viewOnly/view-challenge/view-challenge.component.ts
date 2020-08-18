@@ -19,6 +19,7 @@ export class ViewChallengeComponent implements OnInit {
   objectives: Array<any>;
   students: Array<any>;
   statusChanged: boolean = false;
+  isDisabled:boolean = false;
 
   classId: number;
   atLeastOnObjective: boolean = false;
@@ -43,8 +44,11 @@ export class ViewChallengeComponent implements OnInit {
     private downloader: GlobalService,
 
   ) {
+    
 
-    this.classId = data;
+    this.classId = data.classId;
+
+    this.cameFrom = data.cameFrom;
   }
 
   onClickSave() {
@@ -185,6 +189,11 @@ export class ViewChallengeComponent implements OnInit {
     
 
     this.objectivesResponse = [];
+
+
+    if(this.cameFrom == 'student'){
+      this.isDisabled = true;
+    }
 
   }
 
