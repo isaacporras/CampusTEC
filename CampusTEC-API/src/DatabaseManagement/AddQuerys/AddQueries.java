@@ -1,5 +1,7 @@
 package DatabaseManagement.AddQuerys;
 
+import com.mysql.jdbc.Statement;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +12,7 @@ public class AddQueries {
 
     public static ResultSet createComment(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO comentaro( IdFile, IdActividad," +
-                " Comentario, IdPersona, Fecha, Hora ) VALUES (?,?,?,?,?,?);");
+                " Comentario, IdPersona, Fecha, Hora ) VALUES (?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setString(3, parameters.get(2));
@@ -19,11 +21,14 @@ public class AddQueries {
         statement.setString(6, parameters.get(5));
         statement.execute();
 
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createActivity(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO actividad( IdFile, NumSemana, TecColones, " +
-                "Fecha, Descripcion, IdCurso,Titulo) VALUES (?,?,?,?,?,?,?);");
+                "Fecha, Descripcion, IdCurso,Titulo) VALUES (?,?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
@@ -32,128 +37,152 @@ public class AddQueries {
         statement.setInt(6, Integer.parseInt(parameters.get(5)));
         statement.setString(7, parameters.get(6));
 
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO retoacademico( Descripcion, Titulo," +
-                " TecColones, IdCurso) VALUES (?,?,?,?);");
-        statement.setString(1, parameters.get(3));
-        statement.setString(2, parameters.get(4));
-        statement.setInt(3, Integer.parseInt(parameters.get(1)));
-        statement.setInt(4, Integer.parseInt(parameters.get(2)));
-        statement.execute();
+                " TecColones, IdCurso,IdFile,Fecha) VALUES (?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, parameters.get(0));
+        statement.setString(2, parameters.get(1));
+        statement.setInt(3, Integer.parseInt(parameters.get(2)));
+        statement.setInt(4, Integer.parseInt(parameters.get(3)));
+        statement.setInt(5, Integer.parseInt(parameters.get(4)));
 
-        return null;    }
+        statement.setString(6, parameters.get(5));
+
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createPersonChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO retoacademicopersona(IdRetoAcademico, " +
-                "IdPersona, Completado) VALUES (?,?,?);");
+                "IdPersona, Completado) VALUES (?,?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setBoolean(3, Boolean.parseBoolean(parameters.get(2)));
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createPersonActivity(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO actividadpersona(IdActividad," +
-                " IdPersona, Completado) VALUES (?,?,?)");
+                " IdPersona, Completado) VALUES (?,?,?)",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setBoolean(3, Boolean.parseBoolean(parameters.get(2)));
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createPsicoChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO retopsicologico( TecColones, " +
-                "Titulo) VALUES (?,?);");
+                "Titulo) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setString(2, parameters.get(1));
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createPiscoQuestion(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO preguntapsico( idretopsicologico," +
-                " pregunta) VALUES (?,?);");
+                " pregunta) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setString(2, parameters.get(1));
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createPiscoAnswer(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO  respuesta(idpreguntapsico," +
-                " respuesta) VALUES (?,?);");
+                " respuesta) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setString(2, parameters.get(1));
-        statement.execute();
-
-        return null;
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
     }
 
     public static ResultSet createObjective(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO objetivo(descripcion," +
-                " idcurso) VALUES (?,?)");
+                " idcurso) VALUES (?,?)",Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, parameters.get(1));
         statement.setInt(2, Integer.parseInt(parameters.get(0)));
-        statement.execute();
-
-        return null;
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
     }
 
     public static ResultSet createHomework(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO tarea(idpersona, idactividad, " +
-                "titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?);");
+                "titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setString(3, parameters.get(2));
         statement.setInt(4, Integer.parseInt(parameters.get(3)));
-        statement.setInt(5,  Integer.parseInt(parameters.get(4)));
+        statement.setInt(5, Integer.parseInt(parameters.get(4)));
         statement.setString(6, parameters.get(5));
-        statement.setInt(7,  Integer.parseInt(parameters.get(6)));
-        statement.execute();
-        return null;
+        statement.setInt(7, Integer.parseInt(parameters.get(6)));
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
     }
 
     public static ResultSet createAnswerQuestion(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO respuestapregunta(idresultado, " +
-                "idpreguntapsico, idrespuesta) VALUES (?,?,?);");
+                "idpreguntapsico, idrespuesta) VALUES (?,?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createResult(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultado( idretopsicologico)" +
                 " VALUES (?);" +
-                "SELECT LAST_INSERT_ID();");
+                "SELECT LAST_INSERT_ID();",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
-        statement.execute();
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
-        return null;    }
-
-    public static ResultSet createResultadoPersona(ArrayList<String> parameters, Connection con) throws SQLException {
+    public static ResultSet createResultPerson(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultadopersona(idpersona, " +
-                "idresultado) VALUES (?,?);");
+                "idresultado) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
-        statement.execute();
-
-        return null;    }
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
     public static ResultSet createFile(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO file(fileurl, filename, valid) " +
-                "VALUES (?,?,TRUE)");
+                "VALUES (?,?,TRUE)",Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, parameters.get(0));
         statement.setString(2, parameters.get(1));
-        statement.execute();
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 
-        return null;    }
-
+    public static ResultSet createActivityObjective(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("    INSERT INTO actividadobjetivo(IdActividad," +
+                " IdObjetivo) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setInt(2, Integer.parseInt(parameters.get(1)));
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
 }
