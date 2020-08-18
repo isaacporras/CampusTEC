@@ -171,4 +171,12 @@ public class AddQueries {
         return null;
     }
 
+    public static ResultSet createActivityObjective(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("    INSERT INTO actividadobjetivo(IdActividad," +
+                " IdObjetivo) VALUES (?,?);");
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setInt(2, Integer.parseInt(parameters.get(1)));
+        statement.execute();
+        return null;
+    }
 }
