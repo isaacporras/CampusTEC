@@ -86,11 +86,10 @@ public class ProfileSelectQueries {
     }
 
     public static ResultSet getCampusFromPerson(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("SELECT s.*  " +
-                "SELECT s.*  " +
-                "FROM universidadpersona  " +
-                "         INNER JOIN universidad s on universidadpersona.IdUniversidad = s.IdUniversidad  " +
-                "WHERE universidadpersona.IdPersona = ?;;");
+        PreparedStatement statement = con.prepareStatement("SELECT s.*\n" +
+                "                FROM sedepersona\n" +
+                "                         INNER JOIN sede s on sedepersona.IdSede = s.IdSede\n" +
+                "                WHERE sedepersona.IdPersona = ?;");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         return statement.executeQuery();
     }
