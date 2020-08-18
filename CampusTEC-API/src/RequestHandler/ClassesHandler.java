@@ -163,6 +163,7 @@ public class ClassesHandler {
         ArrayList<String> param = new ArrayList<>();
         param.add(challenge.idClass);
         ResultSet resultCourse = GetCourseInfo.getInfo(param, DBConnection.getConnection());
+        resultCourse.next();
         String nombre = resultCourse.getString("Nombre");
         TwitterPublisher.updateTweet(TwitterPublisher.getTwitterInstance(), "Nuevo Reto:\n" + challenge.name + " Creado en el curso " + nombre + ", por " + challenge.payment + " TEColones.");
 
