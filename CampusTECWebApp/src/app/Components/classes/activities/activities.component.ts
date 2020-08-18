@@ -53,6 +53,7 @@ export class ActivitiesComponent implements OnInit {
     if (data.cameFrom === 'classes') {
       console.log('Viene de classes')
       this.classId = data.id;
+      console.log('La classid es: ' + this.classId)
     }
     else if (data.cameFrom === 'challenge') {
       console.log('Viene de challenge')
@@ -61,7 +62,8 @@ export class ActivitiesComponent implements OnInit {
     }
     else {
       console.log('Viene de classes')
-      this.classId = data.id;
+      this.classId = data;
+      console.log('La classId es: ' + data)
     }
 
   }
@@ -249,7 +251,15 @@ export class ActivitiesComponent implements OnInit {
 
     this.objectivesResponse = [];
 
-    this.objectives = this.http.getObjectives();
+    this.http.getObjectives(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.objectives = data['treeview']
+      
+    }, (error) => {
+      console.log(error);
+    });
+
 
     this.wasFileUploadedAct = false;
 

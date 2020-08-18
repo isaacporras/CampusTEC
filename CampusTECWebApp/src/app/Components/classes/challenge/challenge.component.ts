@@ -167,7 +167,7 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
     this.challengeForm = this.formBuilder.group({
-      idClass: new FormControl('', [Validators.required]),
+      idClass: new FormControl(this.classId),
       name: new FormControl('', [Validators.required]),
       payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
