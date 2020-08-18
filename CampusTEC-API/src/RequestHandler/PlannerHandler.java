@@ -33,7 +33,7 @@ public class PlannerHandler {
                     .add("name", assignment.name)
                     .add("day", assignment.day)
                     .add("description", assignment.description)
-                    .add("time", assignment.time)
+                    .add("hour", assignment.hour)
                     .add("done", assignment.done)
                     .add("activity", assignment.activity));
         }

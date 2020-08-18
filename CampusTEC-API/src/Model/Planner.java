@@ -32,7 +32,7 @@ public class Planner {
             assignment.name = result.getString("Titulo");
             assignment.day = result.getString("NumDia");
             assignment.description = result.getString("Descripcion");
-            assignment.time = result.getString("Hora");
+            assignment.hour = result.getString("Hora");
             assignment.activity = result.getString("actividad.Titulo");
             assignment.done = result.getBoolean("Completado");
             assignments.add(assignment);
@@ -104,7 +104,7 @@ public class Planner {
         assignment.name = result.getString("Titulo");
         assignment.week = result.getInt("Semana");
         assignment.day = result.getString("NumDia");
-        assignment.time = result.getString("Hora");
+        assignment.hour = result.getString("Hora");
         assignment.description = result.getString("Descripcion");
         assignment.activity = result.getString("a.Titulo");
 
@@ -119,7 +119,7 @@ public class Planner {
         params.add(assignment.week.toString());
         params.add(assignment.day);
         params.add(assignment.description);
-        params.add(assignment.time);
+        params.add(assignment.hour);
         ResultSet resultSet = AddQueries.createHomework(params, DBConnection.getConnection());
         resultSet.next();
         return resultSet.getInt(1);
@@ -139,7 +139,7 @@ public class Planner {
         ArrayList<String> param = new ArrayList<>();
         param.add(assignment.name);
         param.add(assignment.description);
-        param.add(assignment.time);
+        param.add(assignment.hour);
         param.add(assignment.day);
         Boolean done = assignment.done;
         param.add(done.toString());

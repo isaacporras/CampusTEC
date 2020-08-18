@@ -6,7 +6,7 @@ public class Assignment {
     public String id = "";
     public String name = "";
     public String day = "";
-    public String time = "";
+    public String hour = "";
     public boolean done = false;
     public String description = "";
     public String activity = "";
