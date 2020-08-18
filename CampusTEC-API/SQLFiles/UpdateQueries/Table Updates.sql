@@ -17,3 +17,7 @@ Completado = ? WHERE IdRetoAcademico = ? AND IdPersona=?;
 UPDATE tarea SET
 Hora = ?, semana = ?, NumDia = ?
 WHERE tarea.IdTarea =?;
+
+UPDATE cuenta SET
+TecColones= ? + TecColones
+WHERE IdPersona = ?;

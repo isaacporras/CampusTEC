@@ -25,19 +25,20 @@ public class UpdateQueries {
         statement.setString(6, parameters.get(5));
         statement.setInt(7, Integer.parseInt(parameters.get(6)));
         int count = statement.executeUpdate();
-        return count>0;
+        return count > 0;
     }
 
     public static boolean updateActivityPerson(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(
                 "UPDATE actividadpersona SET" +
-                "Completado = ? WHERE IdActividad = ? AND IdPersona=?;");
+                        "Completado = ? WHERE IdActividad = ? AND IdPersona=?;");
         statement.setBoolean(1, Boolean.parseBoolean(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
         int count = statement.executeUpdate();
-        return count>0;
+        return count > 0;
     }
+
     public static boolean updateChallengePerson(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("UPDATE personareto SET" +
                 "Completado = ? WHERE IdRetoAcademico = ? AND IdPersona=?;");
@@ -45,7 +46,7 @@ public class UpdateQueries {
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
         int count = statement.executeUpdate();
-        return count>0;
+        return count > 0;
     }
 
     public static boolean updateHomework(ArrayList<String> parameters, Connection con) throws SQLException {
@@ -57,8 +58,18 @@ public class UpdateQueries {
         statement.setInt(3, Integer.parseInt(parameters.get(3)));
         statement.setInt(4, Integer.parseInt(parameters.get(4)));
         int count = statement.executeUpdate();
-        return count>0;
+        return count > 0;
     }
 
-    
+
+    public static boolean updateAccount(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("UPDATE cuenta SET " +
+                "    TecColones= ? + TecColones " +
+                "    WHERE IdPersona = ?;");
+        statement.setInt(1, Integer.parseInt(parameters.get(1)));
+        statement.setInt(2, Integer.parseInt(parameters.get(2)));
+        int count = statement.executeUpdate();
+        return count > 0;
+    }
+
 }
