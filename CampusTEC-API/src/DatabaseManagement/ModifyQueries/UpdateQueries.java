@@ -50,13 +50,15 @@ public class UpdateQueries {
     }
 
     public static boolean updateHomework(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("UPDATE tarea SET  " +
-                "Hora = ?, semana = ?, NumDia = ? " +
+        PreparedStatement statement = con.prepareStatement("UPDATE tarea SET Titulo = ?, " +
+                "Descripcion = ?, Hora = ?, NumDia = ?, Completado = ? " +
                 "WHERE tarea.IdTarea =?;");
-        statement.setInt(1, Integer.parseInt(parameters.get(1)));
-        statement.setInt(2, Integer.parseInt(parameters.get(2)));
-        statement.setInt(3, Integer.parseInt(parameters.get(3)));
-        statement.setInt(4, Integer.parseInt(parameters.get(4)));
+        statement.setString(1, parameters.get(0));
+        statement.setString(2, parameters.get(1));
+        statement.setInt(3, Integer.parseInt(parameters.get(2)));
+        statement.setInt(4, Integer.parseInt(parameters.get(3)));
+        statement.setBoolean(5, Boolean.parseBoolean(parameters.get(4)));
+        statement.setInt(6, Integer.parseInt(parameters.get(5)));
         int count = statement.executeUpdate();
         return count > 0;
     }
@@ -71,6 +73,7 @@ public class UpdateQueries {
         int count = statement.executeUpdate();
         return count > 0;
     }
+
     public static boolean updatePresupuestoSubstract(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("UPDATE presupuestoteccolones SET " +
                 "TecColones = TecColones-? WHERE IdPresupuesto = ?;");
@@ -79,6 +82,7 @@ public class UpdateQueries {
         int count = statement.executeUpdate();
         return count > 0;
     }
+
     public static boolean updatePresupuesto(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("UPDATE presupuestoteccolones SET " +
                 "TecColones = ? WHERE IdPresupuesto = ?;");
