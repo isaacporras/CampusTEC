@@ -1,4 +1,3 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 
 
@@ -20,10 +19,10 @@
             <input type="text" class="form-control" formControlName="name">
         </div>
     </div>
-    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+    <div *ngIf="submitted && name.invalid" class="alert alert-danger">
 
         <div *ngIf="name.errors.required">
-            Debe un nombre para el reto.
+            Debe asignar un nombre al reto.
         </div>
     </div>
     <div class="row">
@@ -34,34 +33,34 @@
             <input class="form-control" type="date" value="2011-08-19" id="example-date-input" formControlName="date">
         </div>
     </div>
-    <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
+    <div *ngIf="submitted && date.invalid" class="alert alert-danger">
 
         <div *ngIf="date.errors.required">
-            Debe una fecha para el reto.
+            Debe asignar una fecha para el reto.
         </div>
     </div>
     <div class="row">
         <div class="col-4">
             <h3>Remuneración:</h3>
         </div>
-        <div class="col col-6 col-md-4">
+        <div class="col-md-5">
             <input type="number" class="form-control" formControlName="payment">
         </div>
-        <div class="col-6 col-md-4">
+        <div class="col-md-3">
             <h3>TEColones</h3>
         </div>
     </div>
-    <div *ngIf="payment.invalid && (payment.dirty || payment.touched)" class="alert alert-danger">
+    <div *ngIf="submitted && payment.invalid" class="alert alert-danger">
 
         <div *ngIf="payment.errors.required">
-            Debe una remuneración.
+            Debe asignar una remuneración.
         </div>
     </div>
     <div class="row">
         <div class="col-4">
             <h3>Objetivos:</h3>
         </div>
-        <div class="col-7">
+        <div class="col-6">
             <select id="inputState" class="form-control" formControlName="objective">
                 <option selected disabled></option>
                 <ng-container *ngFor="let objective of objectives">
@@ -71,21 +70,25 @@
                 </ng-container>
             </select>
         </div>
-        <div class="col-1">
-            <button class="btn" (click)="addObjective()"><i class="glyphicon glyphicon-plus"></i></button>
+        <div class="col-2">
+            <button class="btn icon-btn" (click)="addObjective()">
+              <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+              </svg>
+            </button>
         </div>
 
     </div>
-    <div *ngIf="!atLeastOnObjective" class="alert alert-danger">
+    <div *ngIf="submitted && !atLeastOnObjective" class="alert alert-danger">
 
         Debe seleccionar al menos un objetivo.
-        
+
     </div>
 
 
     <div class="row">
-        <div class="col-4"></div>
-        <div class="col-8">
+        <div class="">
             <table class="table table-bordered">
 
                 <tbody>
@@ -96,7 +99,7 @@
                 </tbody>
             </table>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-4">
@@ -123,13 +126,13 @@
 
         </div>
         <div class="col-4">
-            <button class="btn-addActivity" (click) = "addActivity()">Crear actividad</button>
+            <button class="btn primary-btn" (click) = "addActivity()">Crear actividad</button>
         </div>
     </div>
-    <div *ngIf="!atLeastOnActivity" class="alert alert-danger">
+    <div *ngIf="submitted && !atLeastOnActivity" class="alert alert-danger">
 
         Debe seleccionar al menos una actividad.
-        
+
     </div>
 
     <div class="row">
@@ -150,18 +153,18 @@
     </div>
 
 
-    
+
 
     <div class="row justify-content-end">
         <div class="col-4">
 
-            <button type="button" class="btn btn-danger" (click)="onClickClose()">Cancelar</button>
+            <button type="button" class="btn secondary-btn" (click)="onClickClose()">Cancelar</button>
 
 
         </div>
         <div class="col-4">
 
-            <button type="button" class="btn btn-dark" (click)="onClickSave()">Guardar</button>
+            <button type="button" class="btn primary-btn" (click)="onClickSave()">Guardar</button>
 
         </div>
     </div>
