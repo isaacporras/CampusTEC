@@ -54,6 +54,7 @@ export class ViewActivityService {
   postComment(json){
     let url = this.server + '/comment/'
     console.log(url)
+    console.log('Se va a comentar:' + JSON.stringify(json))
     return this.http.post(url,json);
 
   }

@@ -194,14 +194,14 @@ export class ViewActivityComponent implements OnInit {
     this.commentForm.addControl('user', this.formBuilder.control(''));
     this.commentForm.addControl('token', this.formBuilder.control(this.teacherId));
 
-    var id = 4;//tenemos que obtener el id del usuario
+    var id = 4;
     let date = new Date();
 
     this.commentForm.get('time').setValue(date.getHours() + ':' + date.getMinutes());
     let currentDate = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() ;
     this.commentForm.get('date').setValue(currentDate);
     this.commentForm.get('user').setValue(this.http.getUserName(id).user);
-    this.commentForm.get('activityId').setValue(this.classId);
+    this.commentForm.get('activityId').setValue(this.activityId);
     
 
     console.log(this.commentForm.value);
@@ -270,7 +270,7 @@ export class ViewActivityComponent implements OnInit {
       console.log(error);
     });
 
-    this.http.getComments(this.classId).subscribe((data) => {
+    this.http.getComments(this.activityId).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log('El json de comentarios:' + JSON.stringify(data));
       this.comments = jsonResponse.treeview;
