@@ -28,8 +28,8 @@
         <h3>Semana:</h3>
       </div>
       <div class="col-4">
-        <select id="inputState" class="form-control" formControlName="week">
-          <option selected>1</option>
+        <select id="inputState" class="form-control" formControlName="week" (change)="updateActivities()">
+          <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
@@ -45,27 +45,19 @@
           <option>14</option>
           <option>15</option>
           <option>16</option>
-          <option>17</option>
-          <option>18</option>
         </select>
       </div>
     </div>
-    <div *ngIf="submitted && week.invalid" class="alert alert-danger">
-      <div *ngIf="week.errors.required ">
-        Debe ingresar una semana.
-      </div>
-
-    </div>
     <div class="row">
       <div class="col-4">
-        <h3>Actividades:</h3>
+        <h3>Actividad:</h3>
       </div>
       <div class="col-7">
         <select id="inputState" class="form-control" formControlName="activity">
-
+<option> </option>
           <ng-container *ngFor="let activity of activities">
 
-            <option> {{activity.id}} ) {{activity.name}}</option>
+            <option> {{activity.id}}) {{activity.name}}</option>
 
           </ng-container>
         </select>
@@ -81,10 +73,10 @@
 
           <option>Lunes</option>
           <option>Martes</option>
-          <option>Miercoles</option>
+          <option>Miércoles</option>
           <option>Jueves</option>
           <option>Viernes</option>
-          <option>Sabado</option>
+          <option>Sábado</option>
           <option>Domingo</option>
 
         </select>
@@ -114,7 +106,7 @@
 
 
     </div>
-    <div *ngIf="submitted && (hour.invalid || minute.invalid)" class="alert alert-danger">
+    <div *ngIf="submitted && hour.invalid" class="alert alert-danger">
 
       <div>
         Debe ingresar una hora valida.

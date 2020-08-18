@@ -1,10 +1,10 @@
-import { Component, OnInit ,Inject} from '@angular/core';
-import { NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { TaskService } from './task.service';
+import {Component, OnInit, Inject} from '@angular/core';
+import {NgbTimepicker} from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
+import {TaskService} from './task.service';
 
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -24,43 +24,29 @@ export class TaskComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<TaskComponent>,
-     private http: TaskService,
-     @Inject(MAT_DIALOG_DATA) data,) {
+              public dialogRef: MatDialogRef<TaskComponent>,
+              private http: TaskService,
+              @Inject(MAT_DIALOG_DATA) data,) {
     let myDate = new Date();
     let hourDat = myDate.getHours();
     let periodValue: any;
     if (hourDat > 12) {
       hourDat -= 12;
       periodValue = 'PM';
-    }
-    else {
+    } else {
       periodValue = 'AM';
     }
 
     this.studentId = data.studentId;
 
-    this.http.getActivities(this.studentId, data.currentWeek).subscribe(data =>{
-      this.activities = []
-      var jsonResponse = JSON.parse(JSON.stringify(data)).treeview;
-      console.log("JSON");
-      console.log(jsonResponse);
-      jsonResponse.forEach(value => {
-        this.activities = [...this.activities, value]
-      })
-      console.log(this.activities)
-
-
-    });
-
     this.taskForm = this.formBuilder.group(
       {
-        userId: new FormControl(this.studentId),
+        token: new FormControl(this.studentId),
         name: new FormControl('',
-          [ Validators.required]
+          [Validators.required]
         ),
-        week: new FormControl(1,
-          [Validators.required, Validators.min(1), Validators.max(18)]
+        week: new FormControl(data.currentWeek,
+          [Validators.required, Validators.min(1), Validators.max(16)]
         ),
         day: new FormControl('Lunes',
           [Validators.required]
@@ -68,32 +54,44 @@ export class TaskComponent implements OnInit {
         hour: new FormControl(hourDat,
           [Validators.required, Validators.min(1), Validators.max(12)]
         ),
-        minute: new FormControl(myDate.getMinutes(),
-          [Validators.required, Validators.min(0), Validators.max(60)]
-        ),
         description: new FormControl('', Validators.required
         ),
         period: new FormControl(periodValue,
           [Validators.required]
         ),
-        // activity: new FormControl(this.activities[0].id + ')' + this.activities[0].name,
-        //   [Validators.required]
-        // ),
+        activity: new FormControl('', [Validators.required]
+        ),
       });
+
+    this.updateActivities();
   }
 
 
   onClickSave() {
     this.submitted = true;
-    if(this.taskForm.valid) {
-      console.log(this.taskForm.get('activity').value);
-      console.log();
-      // let id = this.taskForm.get('activity').value.split(')')[0];
-      // this.taskForm.get('activity').setValue(Number(id));
-      // console.log(this.taskForm);
+    if (this.taskForm.valid) {
+      let id = this.taskForm.get('activity').value.split(')')[0];
+      this.taskForm.get('activity').setValue(Number(id));
+      if(this.taskForm.get('period').value == 'PM') {
+        this.taskForm.get('hour').setValue(this.taskForm.get('hour').value + 12);
+      }
+      let dayIndex;
+      switch (this.taskForm.get('day').value) {
+        case "Domingo": dayIndex = 0;
+        case "Lunes": dayIndex = 1;
+        case "Martes": dayIndex = 2;
+        case "Miércoles": dayIndex = 3;
+        case "Jueves": dayIndex  = 4;
+        case "Viernes": dayIndex = 5;
+        case "Sábado": dayIndex = 6;
+      }
+      this.taskForm.get('day').setValue(dayIndex);
+      console.log(this.taskForm.value);
+      console.log(this.http.createTask(this.taskForm.value));
       this.dialogRef.close();
     }
   }
+
   onClickClose() {
     this.dialogRef.close();
   }
@@ -107,23 +105,35 @@ export class TaskComponent implements OnInit {
   get name() {
     return this.taskForm.get('name');
   }
+
   get week() {
     return this.taskForm.get('week');
   }
+
   get day() {
     return this.taskForm.get('day');
   }
+
   get hour() {
     return this.taskForm.get('hour');
   }
-  get minute() {
-    return this.taskForm.get('minute');
-  }
+
   get period() {
     return this.taskForm.get('period');
   }
+
   get description() {
     return this.taskForm.get('description');
+  }
+
+  updateActivities() {
+    this.http.getActivities(this.studentId, this.taskForm.get("week").value).subscribe(data => {
+      this.activities = [];
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      jsonResponse.forEach(value => {
+        this.activities = [...this.activities, {id: value.id, name: value.name}];
+      });
+    });
   }
 
 }

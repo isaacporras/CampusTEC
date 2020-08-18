@@ -113,7 +113,7 @@ export class TaskviewComponent implements OnInit {
           day: new FormControl(this.stringDay,
             [Validators.required]
           ),
-          hour: new FormControl(this.taskData['time'],
+          hour: new FormControl(this.taskData['hour'],
             [Validators.required, Validators.min(1), Validators.max(12)]
           ),
 

@@ -23,9 +23,11 @@ export class TaskService {
       token: String(token),
       week: String(week)
     }
-
     console.log(json)
-    return this.http.post(this.server + '/planner/activities', json)
+    return this.http.post(this.server + '/planner/activities/getAll', json)
   }
 
+  createTask(json){
+    return this.http.post(this.server + "/planner/newAssignment/", json);
+  }
 }
