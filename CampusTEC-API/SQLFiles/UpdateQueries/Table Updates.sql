@@ -59,15 +59,24 @@ FROM actividadretoacademico
                               INNER JOIN persona p on retoacademicopersona.IdPersona = p.IdPersona
                      WHERE p.IdPersona = ?
 ) A ON A.IdRetoAcademico = actividadretoacademico.IdRetoAcademico;
+SELECT tarea.*, a.Titulo FROM tarea INNER JOIN actividad a on
+                tarea.IdActividad = a.IdActividad WHERE tarea.IdTarea = ?;
 
-SELECT actividad.*
-FROM actividad
-         INNER JOIN (SELECT actividadretoacademico.IdActividad
-                     FROM actividadretoacademico
-                              INNER JOIN (SELECT retoacademicopersona.IdRetoAcademico
-                                          FROM retoacademicopersona
-                                                   INNER JOIN persona p on retoacademicopersona.IdPersona = p.IdPersona
-                                          WHERE p.IdPersona = ?
-                     ) A ON A.IdRetoAcademico = actividadretoacademico.IdRetoAcademico) Z
-                    ON Z.IdActividad = actividad.IdActividad
-WHERE actividad.NumSemana = ?;
+SELECT F.*,curso.Nombre FROM curso INNER JOIN (  
+                    SELECT Z.*  
+                FROM (SELECT actividadpersona.IdActividad  
+                      FROM persona  
+                               INNER JOIN actividadpersona ON persona.IdPersona = actividadpersona.IdPersona  
+                      AND persona.IdPersona = ?) A  
+                         INNER JOIN (  
+                    SELECT actividad.*  
+                    FROM actividad  
+                    WHERE actividad.IdActividad NOT IN (  
+                        SELECT actividad.IdActividad  
+                        FROM actividad  
+                                 INNER JOIN actividadretoacademico a on actividad.IdActividad = a.IdActividad)  
+                ) Z  
+                                    ON A.IdActividad = Z.IdActividad WHERE Z.NumSemana = ?  
+                    ) F ON F.IdCurso = curso.IdCurso;
+
+

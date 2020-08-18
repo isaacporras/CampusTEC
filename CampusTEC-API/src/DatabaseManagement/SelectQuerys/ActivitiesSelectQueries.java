@@ -158,7 +158,8 @@ public class ActivitiesSelectQueries {
     }
 
     public static ResultSet getActivityInfo(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement(" SELECT * FROM actividad WHERE IdActividad =?;");
+        PreparedStatement statement = con.prepareStatement(" SELECT actividad.*,file.FileURL,file.Filename FROM " +
+                "actividad INNER JOIN file ON actividad.IdFile = file.IdFile  WHERE IdActividad =?;");
         statement.setString(1, parameters.get(0));
         return statement.executeQuery();
     }

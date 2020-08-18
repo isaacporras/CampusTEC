@@ -75,11 +75,11 @@ VALUES ('Aprender de diseño de aplicaciones', 1),
        ('Aprender sobre niveles de cache', 2);
 
 INSERT INTO file(FileURL, Filename, Valid)
-VALUES ('', '', TRUE),
-       ('', 'Ejemplo2.pdf', TRUE),
-       ('', 'Ejemplo3.pdf', TRUE),
-       ('', 'Ejemplo4.pdf', TRUE),
-       ('', 'Ejemplo5.pdf', TRUE);
+VALUES ('test1', '', TRUE),
+       ('test2', 'Ejemplo2.pdf', TRUE),
+       ('test3', 'Ejemplo3.pdf', TRUE),
+       ('test4', 'Ejemplo4.pdf', TRUE),
+       ('test5', 'Ejemplo5.pdf', TRUE);
 
 INSERT INTO retoacademico (Descripcion, Titulo, TecColones, IdCurso, IdFile, Fecha)
 VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing', 1000, 1, 2, '23/12/2020'),
