@@ -116,7 +116,10 @@ export class PlannerComponent implements OnInit {
     classData.data ={studentId: this.studentId, taskId: id};
     console.log('En ventana principal el id es de:' + id)
 
-    this.dialog.open(TaskviewComponent, classData);
+    let dialogRef = this.dialog.open(TaskviewComponent, classData);
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateAssignments();
+    });
   }
 
   updateAssignments(): void {
@@ -124,8 +127,6 @@ export class PlannerComponent implements OnInit {
     this.http.getAssignments(this.studentId, this.week).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data))['treeview'];
       jsonResponse.forEach(value => {
-        console.log("Processing event");
-        console.log(value);
         let event = addHours(addDays(this.weekStart, value.day), value.hour);
         let color;
         if(value.done){
@@ -140,7 +141,6 @@ export class PlannerComponent implements OnInit {
           end: addHours(event, 1),
           color: color,
         };
-        console.log(newEvent);
         this.events = [...this.events, newEvent];
       })
     }, (error) => {
@@ -158,9 +158,11 @@ export class PlannerComponent implements OnInit {
     classData.width = '600px';
 
     classData.data ={studentId: this.studentId, currentWeek: this.week};
-    console.log('En ventana principal el id es de:')
 
-    this.dialog.open(TaskComponent, classData);
+    let dialogRef = this.dialog.open(TaskComponent, classData);
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateAssignments();
+    });
   }
 
   lastWeek(): void{
@@ -190,9 +192,6 @@ export class PlannerComponent implements OnInit {
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
   viewChallenge(id: number) {
-    console.log('Es un reto');
-    console.log(id);
-    console.log(id);
     const classData = new MatDialogConfig();
 
     classData.disableClose = true;
@@ -201,8 +200,6 @@ export class PlannerComponent implements OnInit {
     classData.width = '600px';
 
     classData.data = id;
-    console.log('En ventana principal el id es de:')
-    console.log(id);
 
     this.dialog.open(ViewChallengeComponent, classData);
 
