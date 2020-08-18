@@ -110,7 +110,7 @@ public class Planner {
         return assignment;
     }
 
-    public static Boolean newAssignment(Assignment assignment) throws SQLException, ClassNotFoundException {
+    public static Integer newAssignment(Assignment assignment) throws SQLException, ClassNotFoundException {
         ArrayList<String> params = new ArrayList<>();
         params.add(assignment.token);
         params.add(assignment.activity);
@@ -119,11 +119,20 @@ public class Planner {
         params.add(assignment.day);
         params.add(assignment.description);
         params.add(assignment.time);
-        AddQueries.createHomework(params, DBConnection.getConnection());
+        ResultSet resultSet = AddQueries.createHomework(params, DBConnection.getConnection());
+        resultSet.next();
+        return resultSet.getInt(1);
 
-        return true;
     }
 
+
+    public static Activity getActivity(String activity) {
+        return null;
+    }
+
+    public static Challenge getChallenge(String challenge) throws SQLException, ClassNotFoundException {
+        return ChallengeView.getChallengeInfo(challenge);
+    }
 }
 
 

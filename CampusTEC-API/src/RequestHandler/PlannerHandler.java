@@ -119,7 +119,7 @@ public class PlannerHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public Response newAssignment(Assignment assignment) throws Exception {
 
-        Boolean result = Planner.newAssignment(assignment);
+        Integer result = Planner.newAssignment(assignment);
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
         respBuilder.add("status", result);
@@ -129,4 +129,31 @@ public class PlannerHandler {
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
     }
+
+    @GET
+    @Path("/activities/{activity}}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getActivity(@PathParam("activity") String activity) throws Exception {
+
+        Activity result = Planner.getActivity(activity);
+
+        return Response.ok(result).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
+    @GET
+    @Path("/challenge/{challenge}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getChallenge(@PathParam("challenge") String challenge) throws Exception {
+
+        Challenge result = Planner.getChallenge(challenge);
+
+        return Response.ok(result).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
 }
