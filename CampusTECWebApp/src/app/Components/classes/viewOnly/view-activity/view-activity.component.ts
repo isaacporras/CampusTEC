@@ -242,23 +242,31 @@ export class ViewActivityComponent implements OnInit {
     });
 
 
-    this.comments = this.http.getComments();
+    
     
 
     this.http.getActivityInfo(this.classId).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
-      console.log('El json es:' + jsonResponse);
+      console.log('El json de actividad:' + jsonResponse);
       this.activity = jsonResponse;
     }, (error) => {
       console.log(error);
     });
 
-    this.objectivesResponse = this.http.getObjectives();
+    this.http.getComments(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('El json de comentarios:' + jsonResponse);
+      this.comments = jsonResponse.treeview;
+    }, (error) => {
+      console.log(error);
+    });
+
+    
 
 
     this.objectivesResponse = [];
 
-    this.objectivesResponse = this.http.getObjectives();
+    
 
     this.wasFileUploadedAct = false;
 
