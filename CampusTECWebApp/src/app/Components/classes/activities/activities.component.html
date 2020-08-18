@@ -4,7 +4,7 @@
     <div class="col-4">
       <h1>Actividad</h1>
     </div>
-   
+
   </div>
   <hr>
   <div class="row">
@@ -28,7 +28,7 @@
       <h3>Descripción:</h3>
     </div>
     <div class="col-8">
-      <textarea formControlName="description" placeholder=""></textarea>
+      <textarea formControlName="description" placeholder="" class="text-area"></textarea>
     </div>
   </div>
   <div *ngIf="submitted && description.invalid" class="alert alert-danger">
@@ -103,7 +103,7 @@
     </div>
     <div class="col-6">
       <select id="inputState" class="form-control" formControlName="objective">
-        <option selected disabled></option>
+        <option></option>
         <ng-container *ngFor="let objective of objectives">
 
           <option>{{objective.id}}) {{objective.description}}</option>
@@ -121,7 +121,7 @@
     </div>
 
   </div>
-  <div *ngIf="!atLeastOnObjective" class="alert alert-danger">
+  <div *ngIf="submitted && !atLeastOnObjective" class="alert alert-danger">
     Debe ingresar al menos un objetivo.
   </div>
 
