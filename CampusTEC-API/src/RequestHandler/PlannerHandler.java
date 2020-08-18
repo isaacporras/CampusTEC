@@ -132,16 +132,6 @@ public class PlannerHandler {
     }
 
     @GET
-    @Path("/activities/{activity}}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getActivity(@PathParam("activity") String activity) throws Exception {
-
-        Activity result = ActivityView.getActivityInfo(activity);
-
-        return Response.ok(result).build();
-    }
-
-    @GET
     @Path("/challenge/{challenge}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getChallenge(@PathParam("challenge") String challenge) throws Exception {
