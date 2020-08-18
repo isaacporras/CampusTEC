@@ -38,4 +38,22 @@ public class ActivityView {
         return resultSet.getInt(1);
     }
 
+    public static ArrayList<Comment> getComments(String activityId) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(activityId);
+        ResultSet resultSet = ActivitiesSelectQueries.getCommentsActivity(param, DBConnection.getConnection());
+        ArrayList<Comment> comments = new ArrayList<>();
+        while (resultSet.next()) {
+            Comment comment = new Comment();
+            comment.fileURL = resultSet.getString("FileURL");
+            comment.activityId = resultSet.getString("IdActividad");
+            comment.date = resultSet.getString("Fecha");
+            comment.description = resultSet.getString("Comentario");
+            comment.time = resultSet.getString("Hora");
+            comment.id = resultSet.getString("IdComentairo");
+            comment.user = resultSet.getString("Nombre") + " " + resultSet.getString("Apellido");
+            comments.add(comment);
+        }
+        return comments;
+    }
 }
