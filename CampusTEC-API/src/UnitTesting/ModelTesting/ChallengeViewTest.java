@@ -50,7 +50,7 @@ public class ChallengeViewTest {
     @Test
     public void testupdateStudents() throws SQLException, ClassNotFoundException {
         JsonObject request = null;
-        Boolean x = ChallengeView.updateStudents(request =);
+        Boolean x = ChallengeView.updateStudents(request );
         //Tiene que hacer la lista
         assertTrue(x);
     }
