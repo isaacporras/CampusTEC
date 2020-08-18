@@ -135,15 +135,17 @@ export class PlannerComponent implements OnInit {
     // this.modal.open(this.modalContent, { size: 'lg' });
   }
 
+
   updateAssignments(): void {
     let receivedEvents;
-    this.http.getAssignments(this.week).subscribe((data) => {
-      var jsonResponse = JSON.parse(JSON.stringify(data));
-      var event = addHours(addDays(this.weekStart, jsonResponse.days), jsonResponse.hours);
-      console.log(event)
+    this.http.getAssignments(this.studentId, this.week).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data))['treeview'][0];
+      console.log(jsonResponse)
+      var event = addHours(addDays(this.weekStart, jsonResponse.day), jsonResponse.time);
+      
       this.events = [
         {
-          title: jsonResponse.title,
+          title: jsonResponse.name,
           start: event,
           end: addHours(event, 1),
           color: colors.blue,
@@ -223,7 +225,13 @@ export class PlannerComponent implements OnInit {
   }
 
   updateChallenges(): void {
-    let challenges = this.http.getChallenges();
+    let challenges;
+    this.http.getChallenges(this.studentId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      challenges = jsonResponse;
+    }, (error) => {
+      console.log(error);
+    });
     challenges.forEach((value) => {
         let course = Array<any>();
         course["name"] = value["name"];
@@ -233,7 +241,7 @@ export class PlannerComponent implements OnInit {
     })
   }
 
-  updateActivities(): void{
+  updateActivities(): void {
     this.activities = this.http.getActivities();
     console.log(this.activities);
   }
