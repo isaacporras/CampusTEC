@@ -80,3 +80,16 @@ SELECT F.*,curso.Nombre FROM curso INNER JOIN (
                     ) F ON F.IdCurso = curso.IdCurso;
 
 
+SELECT objetivo.* FROM objetivo INNER join objetivoreto
+             o on objetivo.IdObjetivo = o.IdObjetivo where o.IdReto = ?;
+
+SELECT * FROM logininfo c WHERE c.Carne=? AND c.Pin = ?;
+
+SELECT * FROM persona WHERE persona.IdPersona = ?;
+
+SELECT * FROM cuenta where cuenta.IdPersona = ?;
+
+SELECT s.*
+                FROM sedepersona
+                         INNER JOIN sede s on sedepersona.IdSede = s.IdSede
+                WHERE sedepersona.IdPersona = ?;
