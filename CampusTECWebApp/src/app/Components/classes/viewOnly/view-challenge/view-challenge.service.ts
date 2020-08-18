@@ -17,6 +17,10 @@ export class ViewChallengeService {
     return this.http.get(this.server + '/challenge/info/' + id);
   }
 
+  getStudentsStatus(id) {
+    return this.http.get(this.server + '/challenge/students/' + id);
+  }
+
 
   getObjectives() {
 

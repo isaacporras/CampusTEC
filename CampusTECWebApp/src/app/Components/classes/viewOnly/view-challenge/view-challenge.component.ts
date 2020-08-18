@@ -129,10 +129,10 @@ export class ViewChallengeComponent implements OnInit {
 
 
     this.objectives = this.http.getObjectives();
-    this.students = this.http.getStudents();
 
 
-    
+
+
     (this.http.getChallengeInfo(this.classId)).subscribe((data) => {
       var jsonResponse = JSON.parse(JSON.stringify(data));
       console.log(jsonResponse.status);
@@ -140,12 +140,24 @@ export class ViewChallengeComponent implements OnInit {
       this.objectives = jsonResponse['objectives'];
       this.challengeInfo = jsonResponse;
 
+
+    }, (error) => {
+      console.log(error);
+    });
+
+    this.http.getStudentsStatus(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+
+      this.students = jsonResponse['treeview'];
+
+      console.log(this.students);
       
     }, (error) => {
       console.log(error);
     });
 
-    console.log(this.students)
+    
 
     this.objectivesResponse = [];
 
