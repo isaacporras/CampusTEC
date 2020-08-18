@@ -79,7 +79,7 @@ export class ActivitiesComponent implements OnInit {
     this.submitted = true;
     console.log('Se quiere subir el archivo');
     if(this.activityForm.valid) {
-      this.activityForm.controls.id.setValue(this.classId);
+      this.activityForm.controls.idClass.setValue(this.classId);
       this.activityForm.removeControl('objective');
       this.activityForm.addControl('objectives', this.formBuilder.control(''));
       this.activityForm.get('objectives').setValue(this.objectivesResponse);
@@ -100,7 +100,8 @@ export class ActivitiesComponent implements OnInit {
             this.activityForChallenge = this.activityForm.value;
 
             let status = 0; //se completó con exito
-            this.dialogRef.close({activity: this.activityForm.value, status: status});
+
+            this.postActivity();
 
           });
         });
@@ -109,14 +110,39 @@ export class ActivitiesComponent implements OnInit {
         console.log(this.activityForm.value);
 
 
-        let status = 0; //se completó con exito
-        this.dialogRef.close({activity: this.activityForm.value, status: status});
+        
+
+        this.postActivity()
+        
       }
     }
   }
   onClickClose() {
 
     this.dialogRef.close({status: 1});
+  }
+
+  postActivity() {
+
+
+    this.http.postActivity(this.activityForm.value).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse.status);
+      
+      if(jsonResponse.status == -1){
+        console.log("Ocurrió un error al cargar la información")
+        alert('Ocurrió un error al cargar la información');
+        let status = 1; //se completó con exito
+        this.dialogRef.close({activity: this.activityForm.value, status: status});
+      }
+      else{
+        alert('Se actualizó correctamente la información');
+        let status = 0; //se completó con exito
+        this.dialogRef.close({activity: this.activityForm.value, status: status});
+        }
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 
@@ -223,7 +249,7 @@ export class ActivitiesComponent implements OnInit {
 
 
     this.activityForm = this.formBuilder.group({
-      id: new FormControl(this.classId),
+      idClass: new FormControl(this.classId),
       name: new FormControl('',[Validators.required, Validators.maxLength(50)]),
       description: new FormControl('', [Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),

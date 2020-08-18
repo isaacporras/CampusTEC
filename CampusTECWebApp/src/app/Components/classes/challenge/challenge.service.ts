@@ -18,6 +18,10 @@ server = 'http://localhost:8080/CampusTEC_API_war_exploded/';
     return this.http.get(this.server + 'classes/objectives/' +  id);
   }
 
+  postChallenge(json){
+    return this.http.post(this.server + 'classes/challenges/new',json);
+  }
+
 
   getStudents(){
     return [
