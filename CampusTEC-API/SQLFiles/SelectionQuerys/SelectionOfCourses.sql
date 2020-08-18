@@ -204,3 +204,4 @@ SELECT *
 FROM objetivo
          INNER JOIN actividadobjetivo a on objetivo.IdObjetivo = a.IdObjetivo
 WHERE A.IdActividad = ?;
+

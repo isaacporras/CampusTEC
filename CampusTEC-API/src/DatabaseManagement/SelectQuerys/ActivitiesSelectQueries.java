@@ -115,4 +115,16 @@ public class ActivitiesSelectQueries {
         statement.setString(1, parameters.get(0));
         return statement.executeQuery();
     }
+
+
+    public static ResultSet getCommentsActivity(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("     SELECT A.*, F.FileURL FROM (  " +
+                "SELECT comentario.*  " +
+                "FROM comentario  " +
+                "         INNER JOIN  " +
+                "     actividad a on comentario.IdActividad = a.IdActividad  " +
+                "WHERE a.IdActividad = ?) A INNER JOIN file F ON A.IdFile = F.IdFile;");
+        statement.setString(1, parameters.get(0));
+        return statement.executeQuery();
+    }
 }
