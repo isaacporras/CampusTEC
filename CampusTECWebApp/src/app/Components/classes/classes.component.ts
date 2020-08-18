@@ -130,7 +130,13 @@ export class ClassesComponent implements OnInit {
 
     classData.data = this.classData.id;
 
-    this.dialog.open(ChallengeComponent, classData);
+    this.dialog.open(ChallengeComponent, classData).afterClosed().subscribe(
+      data => {console.log("La data recibida en el class despues de crear reto es:", data);
+      if (data.status === 0){
+        window.location.reload()
+      }
+    }
+  );    
   }
 
 
