@@ -1,5 +1,6 @@
 package RequestHandler;
 
+import Model.ActivityView;
 import Model.Objects.Activity;
 import Model.Objects.Assignment;
 import Model.Objects.Challenge;
@@ -135,7 +136,7 @@ public class PlannerHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getActivity(@PathParam("activity") String activity) throws Exception {
 
-        Activity result = Planner.getActivity(activity);
+        Activity result = ActivityView.getActivityInfo(activity);
 
         return Response.ok(result).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
