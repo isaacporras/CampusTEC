@@ -37,14 +37,17 @@ export class ObjectiveComponent implements OnInit {
         var jsonResponse = JSON.parse(JSON.stringify(data));
         console.log(jsonResponse);
         let status;
-        if (jsonResponse.status == 1) {
-          alert('Se creó correctamente el objetivo')
-          status = 0
-          this.dialogRef.close(status);
-        } else {
+        if (jsonResponse.status == -1) {
           console.log("Carné o contraseña incorrectos")
           alert('Ocurrió un error al cargar el objetivo')
           status = 1;
+          this.dialogRef.close(status);
+
+
+          
+        } else {
+          alert('Se creó correctamente el objetivo')
+          status = 0
           this.dialogRef.close(status);
         }
       }, (error) => {
