@@ -64,7 +64,7 @@ export class ActivitiesComponent implements OnInit {
     }
 
   }
-
+  
 
   uploadActivityFile(e) {
     console.log('subir', e)
@@ -77,7 +77,7 @@ export class ActivitiesComponent implements OnInit {
     this.wasFileUploadedCom = true;
   }
   onClickSave() {
-    if(!this.activityForm.valid){
+    if(!this.activityForm.valid || !this.atLeastOnObjective){
       alert('Hay un error en los datos de la actividad')
       return;
     }

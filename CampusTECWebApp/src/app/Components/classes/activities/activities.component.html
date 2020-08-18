@@ -121,7 +121,7 @@
     </div>
 
   </div>
-  <div *ngIf="submitted && objective == false" class="alert alert-danger">
+  <div *ngIf="!atLeastOnObjective" class="alert alert-danger">
     Debe ingresar al menos un objetivo.
   </div>
 
