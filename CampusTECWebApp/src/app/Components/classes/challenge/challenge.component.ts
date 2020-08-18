@@ -53,13 +53,13 @@ export class ChallengeComponent implements OnInit {
   onClickSave() {
     this.submitted = true;
 
-    this.objectiveForm.controls.idClass.setValue(this.classId);
+    
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
     this.dialogRef.close();
 
 
     console.log('Se quiere subir el archivo');
-    this.challengeForm.controls.id.setValue(this.classId);
+    
     this.challengeForm.removeControl('objective');
 
     this.challengeForm.addControl('objectives', this.formBuilder.control(''));
@@ -144,7 +144,7 @@ export class ChallengeComponent implements OnInit {
     classData.height = '700px';
     classData.width = '600px';
 
-    classData.data = { activity: this.activity, cameFrom: 'challenge' };
+    classData.data = {classid: this.classId, activity: this.activity, cameFrom: 'challenge' };
 
     this.activityDialog.open(ActivitiesComponent, classData).afterClosed().subscribe(
       data => {
@@ -167,7 +167,7 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
     this.challengeForm = this.formBuilder.group({
-      idClass: new FormControl('', [Validators.required]),
+      idClass: new FormControl(this.classId),
       name: new FormControl('', [Validators.required]),
       payment: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
@@ -182,7 +182,17 @@ export class ChallengeComponent implements OnInit {
 
 
 
-    this.objectives = this.http.getObjectives();
+    this.http.getObjectives(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.objectives = data['treeview']
+      
+    }, (error) => {
+      console.log(error);
+    });
+
+
+    console.log(this.objectives)
     this.students = this.http.getStudents();
 
     console.log(this.students)

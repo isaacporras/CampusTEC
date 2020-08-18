@@ -134,7 +134,7 @@ export class PlannerComponent implements OnInit {
       var jsonResponse = JSON.parse(JSON.stringify(data))['treeview'][0];
       console.log(jsonResponse)
       var event = addHours(addDays(this.weekStart, jsonResponse.day), jsonResponse.time);
-      
+
       this.events = [
         {
           title: jsonResponse.name,

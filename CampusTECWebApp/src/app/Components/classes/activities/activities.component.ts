@@ -50,18 +50,16 @@ export class ActivitiesComponent implements OnInit {
   ) {
 
 
-    if (data.cameFrom === 'classes') {
-      console.log('Viene de classes')
-      this.classId = data.id;
-    }
-    else if (data.cameFrom === 'challenge') {
+
+    if (data.cameFrom === 'challenge') {
       console.log('Viene de challenge')
-      this.classId = -1;
+      this.classId = data.classid;
       this.activityForChallenge = data.activity;
     }
     else {
       console.log('Viene de classes')
-      this.classId = data.id;
+      this.classId = data;
+      console.log('La classId es: ' + data)
     }
 
   }
@@ -225,7 +223,7 @@ export class ActivitiesComponent implements OnInit {
 
 
     this.activityForm = this.formBuilder.group({
-      id: new FormControl(''),
+      id: new FormControl(this.classId),
       name: new FormControl('',[Validators.required, Validators.maxLength(50)]),
       description: new FormControl('', [Validators.maxLength(500)]),
       evaluable: new FormControl(false, [Validators.required]),
@@ -249,7 +247,15 @@ export class ActivitiesComponent implements OnInit {
 
     this.objectivesResponse = [];
 
-    this.objectives = this.http.getObjectives();
+    this.http.getObjectives(this.classId).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log(jsonResponse);
+      this.objectives = data['treeview']
+      
+    }, (error) => {
+      console.log(error);
+    });
+
 
     this.wasFileUploadedAct = false;
 

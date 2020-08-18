@@ -100,7 +100,7 @@ public class ClassesHandler {
     @GET
     @Path("/info/{class}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getInfo(@PathParam("class") String id) throws Exception {
+    public Response getInfo(@PathParam("class") String id) {
         Course course = Teacher.getCourse(id);
 
         return Response.ok(course).header("Access-Control-Allow-Origin", "*")
@@ -113,7 +113,7 @@ public class ClassesHandler {
     @Path("/objectives/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response newObjective(Objective obj) throws Exception {
+    public Response newObjective(Objective obj) {
         Integer result = Teacher.newObjective(obj);
 
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
@@ -131,7 +131,7 @@ public class ClassesHandler {
     @Path("/activities/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response newActivity(Activity activity) throws Exception {
+    public Response newActivity(Activity activity) {
 
         Integer result = Teacher.newActivity(activity);
 
@@ -150,9 +150,9 @@ public class ClassesHandler {
     @Path("/challenges/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response newChallenge(Challenge challenge) throws Exception {
+    public Response newChallenge(Challenge challenge) {
 
-        Boolean result = Teacher.newChallenge(challenge);
+        Integer result = Teacher.newChallenge(challenge);
 
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
