@@ -15,3 +15,4 @@ INSERT INTO resultadopersona(idpersona, idresultado) VALUES (?,?);
 INSERT INTO file(fileurl, filename, valid) VALUES (?,?,?);
 INSERT INTO actividadretoacademico(idretoacademico, idactividad) VALUES (?,?);
 SELECT * FROM cuenta where cuenta.IdPersona = ?;
+INSERT INTO actividadretoacademico(IDRETOACADEMICO, IDACTIVIDAD) VALUES (?,?);

@@ -1,6 +1,6 @@
 package DatabaseManagement.AddQuerys;
 
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -179,6 +179,16 @@ public class AddQueries {
     public static ResultSet createActivityObjective(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("    INSERT INTO actividadobjetivo(IdActividad," +
                 " IdObjetivo) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, Integer.parseInt(parameters.get(0)));
+        statement.setInt(2, Integer.parseInt(parameters.get(1)));
+        long lastInsertedID = statement.executeUpdate();
+        ResultSet rs= statement.getGeneratedKeys();
+        return rs;
+    }
+
+    public static ResultSet activityChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
+        PreparedStatement statement = con.prepareStatement("INSERT INTO actividadretoacademico(IDRETOACADEMICO, " +
+                "IDACTIVIDAD) VALUES (?,?);",Statement.RETURN_GENERATED_KEYS);
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         long lastInsertedID = statement.executeUpdate();
