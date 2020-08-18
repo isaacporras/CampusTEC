@@ -7,9 +7,7 @@ import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
@@ -28,6 +26,27 @@ public class AdminHandler {
         JsonObjectBuilder respBuilder = Json.createObjectBuilder();
 
         respBuilder.add("max", resultSet.getString(1));
+        JsonObject resp = respBuilder.build();
+        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+    }
+
+    @POST
+    @Path("/setTecolones")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public static Response setTecolones(JsonObject obj) throws SQLException, ClassNotFoundException {
+
+        ArrayList<String> param = new ArrayList<>();
+        param.add(obj.getString("max"));
+        param.add("1");
+        Boolean result = UpdateQueries.updatePresupuesto(param, DBConnection.getConnection());
+
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("status", result);
         JsonObject resp = respBuilder.build();
         return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
