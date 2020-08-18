@@ -1,8 +1,12 @@
 package RequestHandler;
 
+import DatabaseManagement.DBConnection;
+import DatabaseManagement.SelectQuerys.GetCourseInfo;
 import Model.Objects.*;
 import Model.Profile;
 import Model.Teacher;
+import Model.TwitterPublisher;
+import twitter4j.TwitterException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -12,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Path("/classes")
@@ -147,7 +152,7 @@ public class ClassesHandler {
     @Path("/challenges/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response newChallenge(Challenge challenge) {
+    public Response newChallenge(Challenge challenge) throws SQLException, ClassNotFoundException, TwitterException {
 
         Integer result = Teacher.newChallenge(challenge);
 
@@ -155,6 +160,11 @@ public class ClassesHandler {
 
         respBuilder.add("status", result);
         JsonObject resp = respBuilder.build();
+        ArrayList<String> param = new ArrayList<>();
+        param.add(challenge.idClass);
+        ResultSet resultCourse = GetCourseInfo.getInfo(param, DBConnection.getConnection());
+        String nombre = resultCourse.getString("Nombre");
+        TwitterPublisher.updateTweet(TwitterPublisher.getTwitterInstance(), "Nuevo Reto:\n" + challenge.name + " Creado en el curso " + nombre + ", por " + challenge.payment + " TEColones.");
 
         return Response.ok(resp).build();
     }
