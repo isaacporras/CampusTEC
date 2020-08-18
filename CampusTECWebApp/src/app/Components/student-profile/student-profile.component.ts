@@ -131,7 +131,7 @@ export class StudentProfileComponent implements OnInit {
       id: new FormControl(''),
       status: new FormControl(''),
       ppurl: new FormControl(''),
-      tecolones: new FormControl(''),
+      tecolones: new FormControl({value: '', disabled: true}),
       email1: new FormControl('',
         [Validators.required,
         Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]),
@@ -167,6 +167,7 @@ export class StudentProfileComponent implements OnInit {
       this.studentDataForm.controls['telNumber'].setValue(data['telNumber']);
       this.studentDataForm.controls['university'].setValue(data['university']);
       this.studentDataForm.controls['campus'].setValue(data['campus']);
+      this.studentDataForm.controls['tecolones'].setValue(data['tecolones']);
 
 
 

@@ -163,6 +163,7 @@ export class TeacherProfileComponent implements OnInit {
       this.teacherDataForm.controls['telNumber'].setValue(data['telNumber']);
       this.teacherDataForm.controls['university'].setValue(data['university']);
       this.teacherDataForm.controls['campus'].setValue(data['campus']);
+      
 
       console.log(data["classes"])
 

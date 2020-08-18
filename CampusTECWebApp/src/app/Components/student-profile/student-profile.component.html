@@ -38,7 +38,7 @@
 
         </div>
       </div>
-      {{studentDataForm.value | json}}
+      
       <h2>Estudiante</h2>
       
       <h2>{{studentBaseData.name}} {{studentBaseData.lastname}} </h2>
@@ -143,6 +143,17 @@
           </div>
           
         </div>
+
+
+        <div class="input-group row">
+          <div class="col field-label">TEColones:</div>
+          <div class="input-field-col">
+          <input formControlName="tecolones" type="tel" class="form-control input-field"
+                 placeholder="{{studentDataForm.tecolones}}">
+          </div>
+          
+        </div>
+
         <div *ngIf="editing==true">
           <button class="btn primary-btn" (click)="onSave()">Guardar</button>
           <button class="btn secondary-btn" (click)="onDismiss()">Descartar</button>

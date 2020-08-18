@@ -43,7 +43,7 @@
         </div>
 
         <h2>Profesor</h2>
-        {{teacherBaseData.value | json}}
+        
         <h2>{{teacherBaseData.name}} {{teacherBaseData.lastname}} </h2>
         <h3>{{teacherBaseData.id}} </h3>
         <h3>{{teacherBaseData.status}} </h3>
@@ -145,6 +145,14 @@
               <input formControlName="campus" type="text" class="form-control input-field" placeholder="{{teacherDataForm.campus}}" disabled>
             </div>
            
+          </div>
+          <div class="input-group row">
+            <div class="col field-label">TEColones:</div>
+            <div class="input-field-col">
+            <input formControlName="tecolones" type="tel" class="form-control input-field"
+                   placeholder="{{teacherDataForm.tecolones}}">
+            </div>
+            
           </div>
           <div *ngIf="editing==true">
             <button class="btn primary-btn" (click)="onSave()">Guardar</button>

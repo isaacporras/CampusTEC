@@ -128,7 +128,7 @@ export class ClassesComponent implements OnInit {
     classData.height = '500px';
     classData.width = '600px';
 
-    classData.data = this.classData.id;
+    classData.data = {classId: this.classData.id, cameFrom : 'teacher'};
 
     this.dialog.open(ChallengeComponent, classData).afterClosed().subscribe(
       data => {console.log("La data recibida en el class despues de crear reto es:", data);
@@ -197,7 +197,7 @@ export class ClassesComponent implements OnInit {
     classData.height = '700px';
     classData.width = '600px';
 
-    classData.data = id;
+    classData.data = { classId: id, cameFrom: 'classes' }
     console.log('En ventana principal el id es de:')
     console.log(id);
 
