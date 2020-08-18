@@ -132,15 +132,6 @@ CREATE TABLE IF NOT EXISTS Objetivo
     IdCurso     INTEGER                            NOT NULL,
     FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso)
 );
-CREATE TABLE IF NOT EXISTS RetoAcademico
-(
-    IdRetoAcademico INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    Descripcion     TEXT(500)                          NOT NULL,
-    Titulo          CHAR(50)                           NOT NULL,
-    TecColones      INTEGER DEFAULT 0,
-    IdCurso         INTEGER                            NOT NULL,
-    FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso)
-);
 CREATE TABLE IF NOT EXISTS File
 (
     IdFile   INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -148,6 +139,19 @@ CREATE TABLE IF NOT EXISTS File
     Filename CHAR(100)                          NOT NULL,
     Valid    BOOLEAN                            NOT NULL DEFAULT TRUE
 );
+CREATE TABLE IF NOT EXISTS RetoAcademico
+(
+    IdRetoAcademico INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Descripcion     TEXT(500)                          NOT NULL,
+    Titulo          CHAR(50)                           NOT NULL,
+    TecColones      INTEGER DEFAULT 0,
+    IdCurso         INTEGER                            NOT NULL,
+    Fecha CHAR(20) NOT NULL ,
+    IdFile INTEGER NOT NULL ,
+    FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso),
+        FOREIGN KEY (IdFile) REFERENCES File (IdFile)
+);
+
 
 CREATE TABLE IF NOT EXISTS ObjetivoReto
 (
@@ -168,6 +172,7 @@ CREATE TABLE IF NOT EXISTS Actividad
     Titulo      CHAR(100)                          not null,
     Descripcion TEXT(500)                          NOT NULL,
     IdCurso     INTEGER                            NOT NULL,
+    Evaluable   BOOLEAN                            NOT NULL DEFAULT TRUE,
     FOREIGN KEY (IdCurso) REFERENCES Curso (IdCurso),
     FOREIGN KEY (IdFile) REFERENCES File (IdFile)
 );
@@ -234,4 +239,10 @@ CREATE TABLE IF NOT EXISTS PersonaReto
     Completado      BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (IdRetoAcademico) REFERENCES RetoAcademico (IdRetoAcademico),
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona)
+);
+CREATE TABLE IF NOT EXISTS ActividadObjetivo(
+    IdActividad INTEGER NOT NULL,
+    IdObjetivo       INTEGER NOT NULL,
+    FOREIGN KEY (IdActividad) REFERENCES Actividad (IdActividad),
+    FOREIGN KEY (IdObjetivo) REFERENCES Objetivo (IdObjetivo)
 );

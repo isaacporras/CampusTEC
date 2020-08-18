@@ -74,10 +74,16 @@ VALUES ('Aprender de diseño de aplicaciones', 1),
        ('Aprender sobre MIMD', 2),
        ('Aprender sobre niveles de cache', 2);
 
+INSERT INTO file(FileURL, Filename, Valid)
+VALUES ('', '', TRUE),
+       ('', 'Ejemplo2.pdf', TRUE),
+       ('', 'Ejemplo3.pdf', TRUE),
+       ('', 'Ejemplo4.pdf', TRUE),
+       ('', 'Ejemplo5.pdf', TRUE);
 
-INSERT INTO retoacademico (Descripcion, Titulo, TecColones, IdCurso)
-VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing', 1000, 1),
-       ('Realizar pruebas en un procesador vectorial de 2.1GHz', 'Procesador Vectorial', 800, 2);
+INSERT INTO retoacademico (Descripcion, Titulo, TecColones, IdCurso,IdFile,Fecha)
+VALUES ('Realizar trabajos de pruebas unitarias sobre Java y C++', 'Unit testing', 1000, 1,2,'23/12/2020'),
+       ('Realizar pruebas en un procesador vectorial de 2.1GHz', 'Procesador Vectorial', 800, 2,3,'2/12/2020');
 
 INSERT INTO objetivoreto(IDOBJETIVO, IDRETO)
 VALUES (3, 1),
@@ -86,12 +92,7 @@ VALUES (3, 1),
        (7, 2),
        (5, 2);
 
-INSERT INTO file(FileURL, Filename, Valid)
-VALUES ('', '', TRUE),
-       ('', 'Ejemplo2.pdf', TRUE),
-       ('', 'Ejemplo3.pdf', TRUE),
-       ('', 'Ejemplo4.pdf', TRUE),
-       ('', 'Ejemplo5.pdf', TRUE);
+
 
 INSERT INTO actividad(IDFILE, NUMSEMANA, TECCOLONES, FECHA, DESCRIPCION, IDCURSO, Titulo)
 VALUES (1, 4, 0, '5/12/2020', 'Realizar simulacion de procesador GENU5', 2, 'Actividad1'),
@@ -127,11 +128,11 @@ VALUES (1, 2, FALSE),
        (2, 5, FALSE);
 
 INSERT INTO comentario(IDFILE, IDACTIVIDAD, COMENTARIO, IDPERSONA, FECHA, HORA)
-VALUES (1, 1, 'Hola encontre algo muy lindo', 2,'22/1/2020','9:00'),
-       (2, 1, 'Buenas me ha costado mucho esto', 2,'9/05/2020','7:00'),
-       (3, 2, 'Me costo mucho hacer esto', 3,'12/12/2020','2:00'),
-       (4, 2, 'Miren este ejemplo en el documento', 3,'10/10/2020','3:50'),
-       (5, 2, 'Que saico, encontre este documento', 3,'8/8/2020','2:30');
+VALUES (1, 1, 'Hola encontre algo muy lindo', 2, '22/1/2020', '9:00'),
+       (2, 1, 'Buenas me ha costado mucho esto', 2, '9/05/2020', '7:00'),
+       (3, 2, 'Me costo mucho hacer esto', 3, '12/12/2020', '2:00'),
+       (4, 2, 'Miren este ejemplo en el documento', 3, '10/10/2020', '3:50'),
+       (5, 2, 'Que saico, encontre este documento', 3, '8/8/2020', '2:30');
 
 INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, completado, hora)
 VALUES (2, 9, 'Trabajar', 3, 2, 'Trabajar en la actividad del simulador', FALSE, 4),
@@ -141,8 +142,17 @@ VALUES (2, 9, 'Trabajar', 3, 2, 'Trabajar en la actividad del simulador', FALSE,
 
 
 
-
-
+INSERT INTO actividadobjetivo(IDACTIVIDAD, IDOBJETIVO)
+VALUES (1, 1),
+       (2, 2),
+       (3, 3),
+       (4, 4),
+       (5, 5),
+       (6, 6),
+       (7, 7),
+       (8, 8),
+       (9, 8),
+       (10, 1);
 # INSERT INTO tarea(IDPERSONA, IDACTIVIDAD, TITULO, SEMANA, NUMDIA, DESCRIPCION, HORA)
 # VALUES (2);
 # INSERT INTO tarea(idpersona, idactividad, titulo, semana, numdia, descripcion, hora) VALUES (?,?,?,?,?,?,?,?);

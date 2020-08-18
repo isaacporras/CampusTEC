@@ -19,7 +19,8 @@ public class AddQueries {
         statement.setString(6, parameters.get(5));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createActivity(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO actividad( IdFile, NumSemana, TecColones, " +
@@ -34,18 +35,24 @@ public class AddQueries {
 
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement(" INSERT INTO retoacademico( Descripcion, Titulo," +
-                " TecColones, IdCurso) VALUES (?,?,?,?);");
-        statement.setString(1, parameters.get(3));
-        statement.setString(2, parameters.get(4));
-        statement.setInt(3, Integer.parseInt(parameters.get(1)));
-        statement.setInt(4, Integer.parseInt(parameters.get(2)));
+                " TecColones, IdCurso,IdFile,Fecha) VALUES (?,?,?,?,?,?);");
+        statement.setString(1, parameters.get(0));
+        statement.setString(2, parameters.get(1));
+        statement.setInt(3, Integer.parseInt(parameters.get(2)));
+        statement.setInt(4, Integer.parseInt(parameters.get(3)));
+        statement.setInt(5, Integer.parseInt(parameters.get(4)));
+
+        statement.setString(6, parameters.get(5));
+
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createPersonChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO retoacademicopersona(IdRetoAcademico, " +
@@ -55,7 +62,8 @@ public class AddQueries {
         statement.setBoolean(3, Boolean.parseBoolean(parameters.get(2)));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createPersonActivity(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO actividadpersona(IdActividad," +
@@ -65,7 +73,8 @@ public class AddQueries {
         statement.setBoolean(3, Boolean.parseBoolean(parameters.get(2)));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createPsicoChallenge(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO retopsicologico( TecColones, " +
@@ -74,7 +83,8 @@ public class AddQueries {
         statement.setString(2, parameters.get(1));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createPiscoQuestion(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO preguntapsico( idretopsicologico," +
@@ -83,7 +93,8 @@ public class AddQueries {
         statement.setString(2, parameters.get(1));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createPiscoAnswer(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO  respuesta(idpreguntapsico," +
@@ -112,9 +123,9 @@ public class AddQueries {
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.setString(3, parameters.get(2));
         statement.setInt(4, Integer.parseInt(parameters.get(3)));
-        statement.setInt(5,  Integer.parseInt(parameters.get(4)));
+        statement.setInt(5, Integer.parseInt(parameters.get(4)));
         statement.setString(6, parameters.get(5));
-        statement.setInt(7,  Integer.parseInt(parameters.get(6)));
+        statement.setInt(7, Integer.parseInt(parameters.get(6)));
         statement.execute();
         return null;
     }
@@ -127,7 +138,8 @@ public class AddQueries {
         statement.setInt(3, Integer.parseInt(parameters.get(2)));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createResult(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultado( idretopsicologico)" +
@@ -136,16 +148,18 @@ public class AddQueries {
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
-    public static ResultSet createResultadoPersona(ArrayList<String> parameters, Connection con) throws SQLException {
+    public static ResultSet createResultPerson(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO resultadopersona(idpersona, " +
                 "idresultado) VALUES (?,?);");
         statement.setInt(1, Integer.parseInt(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
     public static ResultSet createFile(ArrayList<String> parameters, Connection con) throws SQLException {
         PreparedStatement statement = con.prepareStatement("INSERT INTO file(fileurl, filename, valid) " +
@@ -154,6 +168,7 @@ public class AddQueries {
         statement.setString(2, parameters.get(1));
         statement.execute();
 
-        return null;    }
+        return null;
+    }
 
 }
