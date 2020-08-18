@@ -40,7 +40,7 @@ public class UpdateQueries {
     }
 
     public static boolean updateChallengePerson(ArrayList<String> parameters, Connection con) throws SQLException {
-        PreparedStatement statement = con.prepareStatement("UPDATE personareto SET" +
+        PreparedStatement statement = con.prepareStatement("UPDATE personareto SET " +
                 "Completado = ? WHERE IdRetoAcademico = ? AND IdPersona=?;");
         statement.setBoolean(1, Boolean.parseBoolean(parameters.get(0)));
         statement.setInt(2, Integer.parseInt(parameters.get(1)));

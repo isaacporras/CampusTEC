@@ -23,10 +23,7 @@ public class CommentHandler {
     public static Response newComment(Comment comment) throws SQLException, ClassNotFoundException {
         Integer result = ActivityView.newComment(comment);
 
-        return Response.ok(result).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -43,9 +40,6 @@ public class CommentHandler {
 
         JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
 
-        return Response.ok(root).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(root).build();
     }
 }

@@ -21,10 +21,7 @@ public class ProfileHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(JsonObject token) throws Exception {
         User user = Profile.getUser(token.getString("token"));
-        return Response.ok(user).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(user).build();
     }
 
     @POST
@@ -39,10 +36,7 @@ public class ProfileHandler {
         respBuilder.add("status", result);
         JsonObject resp = respBuilder.build();
 
-        return Response.ok(resp).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(resp).build();
     }
 
 }

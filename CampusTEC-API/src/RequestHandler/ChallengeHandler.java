@@ -4,11 +4,11 @@ import Model.ChallengeView;
 import Model.Objects.Challenge;
 import Model.Objects.Objective;
 import Model.Objects.User;
-import Model.Teacher;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,10 +24,7 @@ public class ChallengeHandler {
     public Response getChallengeInfo(@PathParam("challenge") String challengeId) throws SQLException, ClassNotFoundException {
         Challenge challenge = ChallengeView.getChallengeInfo(challengeId);
 
-        return Response.ok(challenge).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(challenge).build();
     }
 
     @GET
@@ -43,10 +40,7 @@ public class ChallengeHandler {
         }
         JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
 
-        return Response.ok(root).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(root).build();
     }
 
     @GET
@@ -62,10 +56,20 @@ public class ChallengeHandler {
 
         JsonObject root = Json.createObjectBuilder().add("treeview", array).build();
 
-        return Response.ok(root).header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build();
+        return Response.ok(root).build();
+    }
+
+    @POST
+    @Path("/complete")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response completeChallenge(JsonObject request) throws SQLException, ClassNotFoundException {
+        Boolean result = ChallengeView.updateStudents(request);
+        JsonObjectBuilder respBuilder = Json.createObjectBuilder();
+
+        respBuilder.add("status", result);
+        JsonObject resp = respBuilder.build();
+        return Response.ok(resp).build();
     }
 
 
