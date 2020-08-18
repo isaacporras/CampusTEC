@@ -2,6 +2,7 @@ package Model;
 
 import DatabaseManagement.AddQuerys.AddQueries;
 import DatabaseManagement.DBConnection;
+import DatabaseManagement.ModifyQueries.UpdateQueries;
 import DatabaseManagement.SelectQuerys.ActivitiesSelectQueries;
 import DatabaseManagement.SelectQuerys.GetCourseInfo;
 import DatabaseManagement.SelectQuerys.ProfileSelectQueries;
@@ -132,6 +133,20 @@ public class Planner {
 
     public static Challenge getChallenge(String challenge) throws SQLException, ClassNotFoundException {
         return ChallengeView.getChallengeInfo(challenge);
+    }
+
+    public static Boolean updateAssignment(Assignment assignment) throws SQLException, ClassNotFoundException {
+        ArrayList<String> param = new ArrayList<>();
+        param.add(assignment.name);
+        param.add(assignment.description);
+        param.add(assignment.time);
+        param.add(assignment.day);
+        Boolean done = assignment.done;
+        param.add(done.toString());
+        param.add(assignment.id);
+        return UpdateQueries.updateHomework(param, DBConnection.getConnection());
+
+
     }
 }
 

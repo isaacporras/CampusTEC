@@ -200,14 +200,28 @@ export class ViewActivityComponent implements OnInit {
     this.commentForm.get('time').setValue(date.getHours() + ':' + date.getMinutes());
     let currentDate = ('0' + date.getDate()).slice(-2) + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() ;
     this.commentForm.get('date').setValue(currentDate);
-    this.commentForm.get('user').setValue(this.http.getUserName(id).user);
-    this.commentForm.get('activityId').setValue(this.activityId);
+
+
+
+
+    this.http.getUserName({id: this.teacherId}).subscribe((data) => {
+      var jsonResponse = JSON.parse(JSON.stringify(data));
+      console.log('La respuesta del servidor es:' + data);
+      this.commentForm.get('user').setValue(jsonResponse.user);
+      this.commentForm.get('activityId').setValue(this.activityId);
+      console.log(this.commentForm.value);
+      this.postComment();
+    }, (error) => {
+      console.log(error);
+    });
+    
+    
     
 
-    console.log(this.commentForm.value);
     
     
-    this.postComment();
+    
+    
     //this.dialogRef.close();
 
   }

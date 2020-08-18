@@ -132,15 +132,15 @@ export class StudentProfileComponent implements OnInit {
       status: new FormControl(''),
       ppurl: new FormControl(''),
       tecolones: new FormControl(''),
-      email1: new FormControl({ value: '', disable: true },
+      email1: new FormControl('',
         [Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      email2: new FormControl({ value: '', disable: true },
+        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]),
+      email2: new FormControl('',
         [Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-      telNumber: new FormControl({ value: '', disable: true }, [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$")]),
-      university: new FormControl({ value: '', disable: true }, Validators.required),
-      campus: new FormControl({ value: '', disable: true }, Validators.required),
+        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]),
+      telNumber: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern("^[0-9]*$"),Validators.maxLength(8)]),
+      university: new FormControl({value: '', disabled: true}, Validators.required),
+      campus: new FormControl({value: '', disabled: true}, Validators.required),
 
     });
 

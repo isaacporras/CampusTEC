@@ -58,11 +58,11 @@ export class ViewActivityService {
     return this.http.post(url,json);
 
   }
-  getUserName(id){
-    return {
-      id:1,
-      user:'Pamela Jimenez'
-    }
+  getUserName(json){
+    let url = this.server + '/comment/getName'
+    console.log(url)
+    console.log('Se va a obtener el nombre de:' + JSON.stringify(json))
+    return this.http.post(url, json);
   }
 
   downloadFile(id){

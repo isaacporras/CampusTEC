@@ -61,7 +61,7 @@ export class ChallengeComponent implements OnInit {
 
     
     console.log(JSON.stringify(this.objectiveForm.value, null, 4));
-    this.dialogRef.close();
+    //this.dialogRef.close();
 
 
     console.log('Se quiere subir el archivo');
@@ -108,7 +108,7 @@ export class ChallengeComponent implements OnInit {
 
   }
   onClickClose() {
-    this.dialogRef.close();
+    this.dialogRef.close({status: 1});
   }
 
   postChallenge(){
@@ -120,12 +120,16 @@ export class ChallengeComponent implements OnInit {
         console.log("Ocurrió un error al cargar la información")
         alert('Ocurrió un error al cargar la información');
         let status = 1; //se completó con exito
-        this.dialogRef.close({activity: this.challengeForm.value, status: status});
+        let dat = {activity: this.challengeForm.value, status: status}
+        console.log(dat);
+        this.dialogRef.close(dat);
       }
       else{
         alert('Se actualizó correctamente la información');
         let status = 0; //se completó con exito
-        this.dialogRef.close({activity: this.challengeForm.value, status: status});
+        let dat = {activity: this.challengeForm.value, status: status}
+        console.log(dat);
+        this.dialogRef.close(dat);
         }
     }, (error) => {
       console.log(error);

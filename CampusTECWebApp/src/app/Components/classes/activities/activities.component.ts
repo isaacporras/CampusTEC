@@ -273,7 +273,7 @@ export class ActivitiesComponent implements OnInit {
 
 
 
-    this.comments = this.http.getComments();
+    
 
 
     this.objectivesResponse = [];
